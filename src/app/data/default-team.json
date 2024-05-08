@@ -1,0 +1,99 @@
+[
+    {
+        "Team": [
+            {
+                "pokemon": "Blastoise",
+                "ability": "Torrent",
+                "nature": "Timid",
+                "evs": [
+                    {
+                        "attack": "252",
+                        "defense": "4",
+                        "hp": "'252",
+                        "specialAttack": "''",
+                        "specialDefense": "''",
+                        "speed": "''"
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": "31",
+                        "defense": "31",
+                        "hp": "31",
+                        "specialAttack": "31",
+                        "specialDefense": "31",
+                        "speed": "31"
+                    }
+                ],
+                "attack": [
+                    "Hydro Pump",
+                    "Surf",
+                    "Water Spout",
+                    "Ice beam"
+                ]
+            },
+            {
+                "pokemon": "Charizard",
+                "ability": "Torrent",
+                "nature": "Timid",
+                "evs": [
+                    {
+                        "attack": "252",
+                        "defense": "4",
+                        "hp": "'252",
+                        "specialAttack": "''",
+                        "specialDefense": "''",
+                        "speed": "''"
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": "31",
+                        "defense": "31",
+                        "hp": "31",
+                        "specialAttack": "31",
+                        "specialDefense": "31",
+                        "speed": "31"
+                    }
+                ],
+                "attack": [
+                    "Hydro Pump",
+                    "Surf",
+                    "Water Spout",
+                    "Ice beam"
+                ]
+            },
+            {
+                "pokemon": "Venusaur",
+                "ability": "Torrent",
+                "nature": "Timid",
+                "evs": [
+                    {
+                        "attack": "252",
+                        "defense": "4",
+                        "hp": "'252",
+                        "specialAttack": "''",
+                        "specialDefense": "''",
+                        "speed": "''"
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": "31",
+                        "defense": "31",
+                        "hp": "31",
+                        "specialAttack": "31",
+                        "specialDefense": "31",
+                        "speed": "31"
+                    }
+                ],
+                "attack": [
+                    "Hydro Pump",
+                    "Surf",
+                    "Water Spout",
+                    "Ice beam"
+                ]
+            }
+        ]
+    }
+]

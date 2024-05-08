@@ -1,0 +1,254 @@
+[
+    {
+        "gym": "Pewter City",
+        "gymtype": "Rock",
+        "id": 1,
+        "region": "Kanto",
+        "variations": [
+            {
+                "pokemons": [
+                    "Golem",
+                    "Toxicroak",
+                    "Pinsir",
+                    "Rampardos",
+                    "Sudowoodo",
+                    "Steelix"
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    "Golem",
+                    "Tyranitar",
+                    "Sandlash",
+                    "Shuckle",
+                    "Chansey",
+                    "Steelix"
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    "Aeorodactyl",
+                    "Slowbro",
+                    "Ninetales",
+                    "Rampardos",
+                    "Heracross",
+                    "Steelix"
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    "Tyranitar",
+                    "Swampert",
+                    "Crobat",
+                    "Forretress",
+                    "Rhyperior",
+                    "Steelix"
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    "Aeorodactyl",
+                    "Ludicolo",
+                    "Kabutops",
+                    "Relicanth",
+                    "Omastar",
+                    "Steelix"
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Cinnabar Island",
+        "gymtype": "Fire",
+        "id": 2,
+        "region": "Kanto",
+        "variations": [
+            {
+                "pokemons": [
+                    "Ninetales",
+                    "Flareon",
+                    "Tauros",
+                    "Dodrio",
+                    "Camerupt",
+                    "Arcanine"
+                ],
+                "variation": 1
+            },
+            {
+                "pokemons": [
+                    "Torkoal",
+                    "Moltres",
+                    "Houndoom",
+                    "Electrode",
+                    "Blissey",
+                    "Arcanine"
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    "Arcanine",
+                    "Ninetales",
+                    "Vileplume",
+                    "Rapidash",
+                    "Articuno",
+                    "Magcargo"
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    "Torkoal",
+                    "Charizard",
+                    "Kangaskhan",
+                    "Golem",
+                    "Magmortar",
+                    "Arcanine"
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    "Torkoal",
+                    "Typhlosion",
+                    "Rotom-Heat",
+                    "Tangrowth",
+                    "Rhyperior",
+                    "Arcanine"
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Violet City",
+        "gymtype": "Flying",
+        "id": 3,
+        "region": "Johto",
+        "variations": [
+            {
+                "pokemons": [
+                    "Farfetch'd",
+                    "Articuno",
+                    "Fearow",
+                    "Xatu",
+                    "Swellow",
+                    "Pidgeot"
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    "Gliscor",
+                    "Staraptor",
+                    "Charizard",
+                    "Togekiss",
+                    "Crobat",
+                    "Pidgeot"
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    "Xatu",
+                    "Skarmory",
+                    "Charizard",
+                    "Togekiss",
+                    "Crobat",
+                    "Pidgeot"
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    "Pidgeot",
+                    "Honchkrow",
+                    "Noctowl",
+                    "Aeorodactyl",
+                    "Staraptor",
+                    "Skarmory"
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    "Pelipper",
+                    "Zapdos",
+                    "Pidgeot",
+                    "Dodrio",
+                    "Honchkrow",
+                    "Fearow"
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Goldenrod City",
+        "gymtype": "Normal",
+        "id": 1,
+        "region": "Johto",
+        "variations": [
+            {
+                "pokemons": [
+                    "Stantler",
+                    "Ursaring",
+                    "Clefable",
+                    "Nidoqueen",
+                    "Bellossom",
+                    "Miltank"
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    "Miltank",
+                    "Cinccino",
+                    "Ditto",
+                    "Blissey",
+                    "Bibarel",
+                    "Mr.Mime"
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    "Miltank",
+                    "Dodrio",
+                    "Persian",
+                    "Lopunny",
+                    "Lickilicky",
+                    "Donphan"
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    "Wigglytuff",
+                    "Tauros",
+                    "Girafarig",
+                    "Furret",
+                    "Golduck",
+                    "Miltank"
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    "Delcatty",
+                    "Ambipom",
+                    "Watchog",
+                    "Smeargle",
+                    "Vileplume",
+                    "Miltank"
+                ],
+                "variationid": 5
+            }
+        ]
+    }
+]
