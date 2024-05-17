@@ -1,97 +1,390 @@
 [
-    {
-        "Team": [
+    {   
+        "teamname": "default team",
+        "team": [
             {
                 "pokemon": "Blastoise",
                 "ability": "Torrent",
-                "nature": "Timid",
+                "nature": "Mild",
+                "item": "Choice Scarf",
                 "evs": [
                     {
-                        "attack": "252",
-                        "defense": "4",
-                        "hp": "'252",
-                        "specialAttack": "''",
-                        "specialDefense": "''",
-                        "speed": "''"
+                        "attack": 0,
+                        "defense": 0,
+                        "hp": 0,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
                     }
                 ],
                 "ivs": [
                     {
-                        "attack": "31",
-                        "defense": "31",
-                        "hp": "31",
-                        "specialAttack": "31",
-                        "specialDefense": "31",
-                        "speed": "31"
+                        "attack": 20,
+                        "defense": 26,
+                        "hp": 26,
+                        "specialAttack": 31,
+                        "specialDefense": 31,
+                        "speed": 31
                     }
                 ],
-                "attack": [
-                    "Hydro Pump",
-                    "Surf",
+                "moveset": [
                     "Water Spout",
-                    "Ice beam"
+                    "Blizzard",
+                    "Helping Hand",
+                    "Fake Out"
                 ]
             },
             {
-                "pokemon": "Charizard",
-                "ability": "Torrent",
-                "nature": "Timid",
+                "pokemon": "Typhlosion",
+                "ability": "Blaze",
+                "nature": "Modest",
+                "item": "Choice Specs",
                 "evs": [
                     {
-                        "attack": "252",
-                        "defense": "4",
-                        "hp": "'252",
-                        "specialAttack": "''",
-                        "specialDefense": "''",
-                        "speed": "''"
+                        "attack": 4,
+                        "defense": 0,
+                        "hp": 0,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
                     }
                 ],
                 "ivs": [
                     {
-                        "attack": "31",
-                        "defense": "31",
-                        "hp": "31",
-                        "specialAttack": "31",
-                        "specialDefense": "31",
-                        "speed": "31"
+                        "attack": 31,
+                        "defense": 31,
+                        "hp": 31,
+                        "specialAttack": 31,
+                        "specialDefense": 31,
+                        "speed": 31
                     }
                 ],
-                "attack": [
-                    "Hydro Pump",
-                    "Surf",
-                    "Water Spout",
-                    "Ice beam"
+                "moveset": [
+                    "Eruption",
+                    "Swift",
+                    "Hidden Power Ice",
+                    "Helping Hand"
                 ]
             },
             {
-                "pokemon": "Venusaur",
-                "ability": "Torrent",
-                "nature": "Timid",
+                "pokemon": "Weezing",
+                "ability": "Neutralizing Gas",
+                "nature": "Adamant",
                 "evs": [
                     {
-                        "attack": "252",
-                        "defense": "4",
-                        "hp": "'252",
-                        "specialAttack": "''",
-                        "specialDefense": "''",
-                        "speed": "''"
+                        "attack": 252,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 0,
+                        "specialDefense": 0,
+                        "speed": 252
                     }
                 ],
                 "ivs": [
                     {
-                        "attack": "31",
-                        "defense": "31",
-                        "hp": "31",
-                        "specialAttack": "31",
-                        "specialDefense": "31",
-                        "speed": "31"
+                        "attack": 31,
+                        "defense": 20,
+                        "hp": 20,
+                        "specialAttack": 31,
+                        "specialDefense": 20,
+                        "speed": 31
                     }
                 ],
-                "attack": [
-                    "Hydro Pump",
-                    "Surf",
+                "moveset": [
+                    "Explosion",
+                    "Assurance",
+                    "Incinerate",
+                    "Rain Dance"
+                ]
+            },
+            {
+                "pokemon": "Togekiss",
+                "ability": "Hustle",
+                "nature": "Modest",
+                "item": "Choice Specs",
+                "evs": [
+                    {
+                        "attack": 0,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 31,
+                        "defense": 31,
+                        "hp": 31,
+                        "specialAttack": 31,
+                        "specialDefense": 31,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Hyper Voice",
+                    "Helping Hand",
+                    "Fly",
+                    "Shock Wave"
+                ]
+            },
+            {
+                "pokemon": "Vanilluxe",
+                "ability": "Snow Warning",
+                "nature": "Modest",
+                "item": "Choice Scarf",
+                "evs": [
+                    {
+                        "attack": 0,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 20,
+                        "defense": 27,
+                        "hp": 27,
+                        "specialAttack": 31,
+                        "specialDefense": 20,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Blizzard",
+                    "Ice Beam",
+                    "",
+                    ""
+                ]
+            },
+            {
+                "pokemon": "Garchomp",
+                "ability": "Sand Veil",
+                "nature": "Lonely",
+                "evs": [
+                    {
+                        "attack": 252,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 0,
+                        "specialDefense": 24,
+                        "speed": 232
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 31,
+                        "defense": 9,
+                        "hp": 9,
+                        "specialAttack": 31,
+                        "specialDefense": 25,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Earthquake",
+                    "Dragon Claw",
+                    "Sunny Day",
+                    "Cut"
+                ]
+            }
+        ]
+    },
+    {   
+        "teamname": "default team2",
+        "team": [
+            {
+                "pokemon": "Blastoise",
+                "ability": "Torrent",
+                "nature": "Mild",
+                "item": "Choice Scarf",
+                "evs": [
+                    {
+                        "attack": 0,
+                        "defense": 0,
+                        "hp": 0,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 20,
+                        "defense": 26,
+                        "hp": 26,
+                        "specialAttack": 31,
+                        "specialDefense": 31,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
                     "Water Spout",
-                    "Ice beam"
+                    "Blizzard",
+                    "Helping Hand",
+                    "Fake Out"
+                ]
+            },
+            {
+                "pokemon": "Typhlosion",
+                "ability": "Blaze",
+                "nature": "Modest",
+                "item": "Choice Specs",
+                "evs": [
+                    {
+                        "attack": 4,
+                        "defense": 0,
+                        "hp": 0,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 31,
+                        "defense": 31,
+                        "hp": 31,
+                        "specialAttack": 31,
+                        "specialDefense": 31,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Eruption",
+                    "Swift",
+                    "Hidden Power Ice",
+                    "Helping Hand"
+                ]
+            },
+            {
+                "pokemon": "Weezing",
+                "ability": "Neutralizing Gas",
+                "nature": "Adamant",
+                "evs": [
+                    {
+                        "attack": 252,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 0,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 31,
+                        "defense": 20,
+                        "hp": 20,
+                        "specialAttack": 31,
+                        "specialDefense": 20,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Explosion",
+                    "Assurance",
+                    "Incinerate",
+                    "Rain Dance"
+                ]
+            },
+            {
+                "pokemon": "Togekiss",
+                "ability": "Hustle",
+                "nature": "Modest",
+                "item": "Choice Specs",
+                "evs": [
+                    {
+                        "attack": 0,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 31,
+                        "defense": 31,
+                        "hp": 31,
+                        "specialAttack": 31,
+                        "specialDefense": 31,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Hyper Voice",
+                    "Helping Hand",
+                    "Fly",
+                    "Shock Wave"
+                ]
+            },
+            {
+                "pokemon": "Vanilluxe",
+                "ability": "Snow Warning",
+                "nature": "Modest",
+                "item": "Choice Scarf",
+                "evs": [
+                    {
+                        "attack": 0,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 252,
+                        "specialDefense": 0,
+                        "speed": 252
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 20,
+                        "defense": 27,
+                        "hp": 27,
+                        "specialAttack": 31,
+                        "specialDefense": 20,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Blizzard",
+                    "Ice Beam",
+                    "",
+                    ""
+                ]
+            },
+            {
+                "pokemon": "Garchomp",
+                "ability": "Sand Veil",
+                "nature": "Lonely",
+                "evs": [
+                    {
+                        "attack": 252,
+                        "defense": 0,
+                        "hp": 4,
+                        "specialAttack": 0,
+                        "specialDefense": 24,
+                        "speed": 232
+                    }
+                ],
+                "ivs": [
+                    {
+                        "attack": 31,
+                        "defense": 9,
+                        "hp": 9,
+                        "specialAttack": 31,
+                        "specialDefense": 25,
+                        "speed": 31
+                    }
+                ],
+                "moveset": [
+                    "Earthquake",
+                    "Dragon Claw",
+                    "Sunny Day",
+                    "Cut"
                 ]
             }
         ]

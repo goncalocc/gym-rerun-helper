@@ -3,10 +3,6 @@ export const Navbar = ({ navItems, onTabChange }) => {
     window.history.back();
   };
 
-  const handleTabClick = (tab) => {
-    console.log('return ' + tab);
-    onTabChange(tab);
-  };
 
   return (
     <div className="mx-auto flex  max-w-[120] items-center justify-between bg-black px-4 text-white">
@@ -18,9 +14,9 @@ export const Navbar = ({ navItems, onTabChange }) => {
         >
           Back
         </li>
-        {navItems.map((item) => (
+        {navItems && navItems.map((item, index) => (
           <li
-            onClick={() => handleTabClick(item.id)}
+            onClick={() => onTabChange(index)}
             key={item.id}
             className="float-left
               m-2 cursor-pointer rounded-xl p-4 duration-300 hover:bg-[#00df9a] hover:text-black"

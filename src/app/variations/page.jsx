@@ -1,49 +1,29 @@
 'use client';
 
-import { KantoTab } from './components/KantoTab';
-import { JohtoTab } from './components/JohtoTab';
-import { HoennTab } from './components/HoennTab';
-import { SinnohTab } from './components/SinnohTab';
-import { UnovaTab } from './components/UnovaTab';
-
 import React, { useState } from 'react';
 import Navbar from '../components/NavBar';
+import GeneralTab from './components/GeneralTab';
 
 export const ViewGyms = () => {
 
   const navItems = [
-    { id: 1, text: 'Kanto Gym' },
-    { id: 2, text: 'Johto Gym' },
-    { id: 3, text: 'Hoenn Gym' },
-    { id: 4, text: 'Sinnoh Gym' },
-    { id: 5, text: 'Unova Gym' },
+    { id: 1, text: 'Kanto' },
+    { id: 2, text: 'Johto' },
+    { id: 3, text: 'Hoenn' },
+    { id: 4, text: 'Sinnoh' },
+    { id: 5, text: 'Unova' },
   ];
 
-  const [selectedTab, setSelectedTab] = useState(1);
+  const [selectedTab, setSelectedTab] = useState(navItems[0]);
 
-  const handleTabClick = (tab) => {
-    setSelectedTab(tab);
-  };
-
-  const renderSwitch = (tab) => {
-    switch (tab) {
-      case 1:
-        return <KantoTab />;
-      case 2:
-        return <JohtoTab />;
-      case 3:
-        return <HoennTab />;
-      case 4:
-        return <SinnohTab />;
-      case 5:
-        return <UnovaTab />;
-    }
-  };
+  const handleRenderSwitch = (tab) => {
+    setSelectedTab(navItems[tab]);
+  }
 
   return (
     <main>
-      <Navbar navItems={navItems} onTabChange={handleTabClick} />
-      <div>{renderSwitch(selectedTab)}</div>
+      <Navbar navItems={navItems} onTabChange={handleRenderSwitch} />
+      <GeneralTab navItems={selectedTab.text} />
     </main>
   );
 };

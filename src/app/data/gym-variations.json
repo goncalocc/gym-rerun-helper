@@ -7,56 +7,56 @@
         "variations": [
             {
                 "pokemons": [
-                    "Golem",
-                    "Toxicroak",
-                    "Pinsir",
-                    "Rampardos",
-                    "Sudowoodo",
-                    "Steelix"
+                    {"name":"Golem", "pokemonid": 1},
+                    {"name":"Toxicroak", "pokemonid": 2},
+                    {"name":"Pinsir", "pokemonid": 3},
+                    {"name":"Rampardos", "pokemonid": 4},
+                    {"name":"Sudowoodo", "pokemonid": 5},
+                    {"name":"Steelix", "pokemonid": 6}
                 ],
                 "variationid": 1
             },
             {
                 "pokemons": [
-                    "Golem",
-                    "Tyranitar",
-                    "Sandlash",
-                    "Shuckle",
-                    "Chansey",
-                    "Steelix"
+                    {"name":"Golem", "pokemonid": 1},
+                    {"name":"Tyranitar", "pokemonid": 2},
+                    {"name":"Sandlash", "pokemonid": 3},
+                    {"name":"Shuckle", "pokemonid": 4},
+                    {"name":"Chansey", "pokemonid": 5},
+                    {"name":"Steelix", "pokemonid": 6}
                 ],
                 "variationid": 2
             },
             {
                 "pokemons": [
-                    "Aeorodactyl",
-                    "Slowbro",
-                    "Ninetales",
-                    "Rampardos",
-                    "Heracross",
-                    "Steelix"
+                    {"name":"Aerodactyl", "pokemonid": 1},
+                    {"name":"Slowbro", "pokemonid": 2},
+                    {"name":"Ninetales", "pokemonid": 3},
+                    {"name":"Rampardos", "pokemonid": 4},
+                    {"name":"Heracross", "pokemonid": 5},
+                    {"name":"Steelix", "pokemonid": 6}
                 ],
                 "variationid": 3
             },
             {
                 "pokemons": [
-                    "Tyranitar",
-                    "Swampert",
-                    "Crobat",
-                    "Forretress",
-                    "Rhyperior",
-                    "Steelix"
+                    {"name":"Tyranitar", "pokemonid": 1},
+                    {"name":"Swampert", "pokemonid": 2},
+                    {"name":"Crobat", "pokemonid": 3},
+                    {"name":"Forretress", "pokemonid": 4},
+                    {"name":"Rhyperior", "pokemonid": 5},
+                    {"name":"Steelix", "pokemonid": 6}
                 ],
                 "variationid": 4
             },
             {
                 "pokemons": [
-                    "Aeorodactyl",
-                    "Ludicolo",
-                    "Kabutops",
-                    "Relicanth",
-                    "Omastar",
-                    "Steelix"
+                    {"name":"Aerodactyl", "pokemonid": 1},
+                    {"name":"Ludicolo", "pokemonid": 2},
+                    {"name":"Kabutops", "pokemonid": 3},
+                    {"name":"Relicanth", "pokemonid": 4},
+                    {"name":"Omastar", "pokemonid": 5},
+                    {"name":"Steelix", "pokemonid": 6}
                 ],
                 "variationid": 5
             }
@@ -70,56 +70,308 @@
         "variations": [
             {
                 "pokemons": [
-                    "Ninetales",
-                    "Flareon",
-                    "Tauros",
-                    "Dodrio",
-                    "Camerupt",
-                    "Arcanine"
+                    {"name":"Ninetales", "pokemonid": 1},
+                    {"name":"Flareon", "pokemonid": 2},
+                    {"name":"Tauros", "pokemonid": 3},
+                    {"name":"Dodrio", "pokemonid": 4},
+                    {"name":"Camerupt", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
                 ],
-                "variation": 1
+                "variationid": 1
             },
             {
                 "pokemons": [
-                    "Torkoal",
-                    "Moltres",
-                    "Houndoom",
-                    "Electrode",
-                    "Blissey",
-                    "Arcanine"
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Moltres", "pokemonid": 2},
+                    {"name":"Houndoom", "pokemonid": 3},
+                    {"name":"Blissey", "pokemonid": 4},
+                    {"name":"Arcanine", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
                 ],
                 "variationid": 2
             },
             {
                 "pokemons": [
-                    "Arcanine",
-                    "Ninetales",
-                    "Vileplume",
-                    "Rapidash",
-                    "Articuno",
-                    "Magcargo"
+                    {"name":"Arcanine", "pokemonid": 1},
+                    {"name":"Ninetales", "pokemonid": 2},
+                    {"name":"Vileplume", "pokemonid": 3},
+                    {"name":"Rapidash", "pokemonid": 4},
+                    {"name":"Articuno", "pokemonid": 5},
+                    {"name":"Magcargo", "pokemonid": 6}
                 ],
                 "variationid": 3
             },
             {
                 "pokemons": [
-                    "Torkoal",
-                    "Charizard",
-                    "Kangaskhan",
-                    "Golem",
-                    "Magmortar",
-                    "Arcanine"
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Charizard", "pokemonid": 2},
+                    {"name":"Kangaskhan", "pokemonid": 3} ,
+                    {"name":"Golem", "pokemonid": 4},
+                    {"name":"Magmortar", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
                 ],
                 "variationid": 4
             },
             {
                 "pokemons": [
-                    "Torkoal",
-                    "Typhlosion",
-                    "Rotom-Heat",
-                    "Tangrowth",
-                    "Rhyperior",
-                    "Arcanine"
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Typhlosion", "pokemonid": 2},
+                    {"name":"Rotom-Heat", "pokemonid": 3},
+                    {"name":"Tangrowth", "pokemonid": 4},
+                    {"name":"Rhyperior", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Cinnabar Island",
+        "gymtype": "Fire",
+        "id": 3,
+        "region": "Kanto",
+        "variations": [
+            {
+                "pokemons": [
+                    {"name":"Ninetales", "pokemonid": 1},
+                    {"name":"Flareon", "pokemonid": 2},
+                    {"name":"Tauros", "pokemonid": 3},
+                    {"name":"Dodrio", "pokemonid": 4},
+                    {"name":"Camerupt", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Moltres", "pokemonid": 2},
+                    {"name":"Houndoom", "pokemonid": 3},
+                    {"name":"Blissey", "pokemonid": 4},
+                    {"name":"Arcanine", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    {"name":"Arcanine", "pokemonid": 1},
+                    {"name":"Ninetales", "pokemonid": 2},
+                    {"name":"Vileplume", "pokemonid": 3},
+                    {"name":"Rapidash", "pokemonid": 4},
+                    {"name":"Articuno", "pokemonid": 5},
+                    {"name":"Magcargo", "pokemonid": 6}
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Charizard", "pokemonid": 2},
+                    {"name":"Kangaskhan", "pokemonid": 3} ,
+                    {"name":"Golem", "pokemonid": 4},
+                    {"name":"Magmortar", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Typhlosion", "pokemonid": 2},
+                    {"name":"Rotom-Heat", "pokemonid": 3},
+                    {"name":"Tangrowth", "pokemonid": 4},
+                    {"name":"Rhyperior", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Cinnabar Island",
+        "gymtype": "Fire",
+        "id": 4,
+        "region": "Kanto",
+        "variations": [
+            {
+                "pokemons": [
+                    {"name":"Ninetales", "pokemonid": 1},
+                    {"name":"Flareon", "pokemonid": 2},
+                    {"name":"Tauros", "pokemonid": 3},
+                    {"name":"Dodrio", "pokemonid": 4},
+                    {"name":"Camerupt", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Moltres", "pokemonid": 2},
+                    {"name":"Houndoom", "pokemonid": 3},
+                    {"name":"Blissey", "pokemonid": 4},
+                    {"name":"Arcanine", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    {"name":"Arcanine", "pokemonid": 1},
+                    {"name":"Ninetales", "pokemonid": 2},
+                    {"name":"Vileplume", "pokemonid": 3},
+                    {"name":"Rapidash", "pokemonid": 4},
+                    {"name":"Articuno", "pokemonid": 5},
+                    {"name":"Magcargo", "pokemonid": 6}
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Charizard", "pokemonid": 2},
+                    {"name":"Kangaskhan", "pokemonid": 3} ,
+                    {"name":"Golem", "pokemonid": 4},
+                    {"name":"Magmortar", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Typhlosion", "pokemonid": 2},
+                    {"name":"Rotom-Heat", "pokemonid": 3},
+                    {"name":"Tangrowth", "pokemonid": 4},
+                    {"name":"Rhyperior", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Cinnabar Island",
+        "gymtype": "Fire",
+        "id": 5,
+        "region": "Kanto",
+        "variations": [
+            {
+                "pokemons": [
+                    {"name":"Ninetales", "pokemonid": 1},
+                    {"name":"Flareon", "pokemonid": 2},
+                    {"name":"Tauros", "pokemonid": 3},
+                    {"name":"Dodrio", "pokemonid": 4},
+                    {"name":"Camerupt", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Moltres", "pokemonid": 2},
+                    {"name":"Houndoom", "pokemonid": 3},
+                    {"name":"Blissey", "pokemonid": 4},
+                    {"name":"Arcanine", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    {"name":"Arcanine", "pokemonid": 1},
+                    {"name":"Ninetales", "pokemonid": 2},
+                    {"name":"Vileplume", "pokemonid": 3},
+                    {"name":"Rapidash", "pokemonid": 4},
+                    {"name":"Articuno", "pokemonid": 5},
+                    {"name":"Magcargo", "pokemonid": 6}
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Charizard", "pokemonid": 2},
+                    {"name":"Kangaskhan", "pokemonid": 3} ,
+                    {"name":"Golem", "pokemonid": 4},
+                    {"name":"Magmortar", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Typhlosion", "pokemonid": 2},
+                    {"name":"Rotom-Heat", "pokemonid": 3},
+                    {"name":"Tangrowth", "pokemonid": 4},
+                    {"name":"Rhyperior", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 5
+            }
+        ]
+    },
+    {
+        "gym": "Cinnabar Island",
+        "gymtype": "Fire",
+        "id": 6,
+        "region": "Kanto",
+        "variations": [
+            {
+                "pokemons": [
+                    {"name":"Ninetales", "pokemonid": 1},
+                    {"name":"Flareon", "pokemonid": 2},
+                    {"name":"Tauros", "pokemonid": 3},
+                    {"name":"Dodrio", "pokemonid": 4},
+                    {"name":"Camerupt", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 1
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Moltres", "pokemonid": 2},
+                    {"name":"Houndoom", "pokemonid": 3},
+                    {"name":"Blissey", "pokemonid": 4},
+                    {"name":"Arcanine", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 2
+            },
+            {
+                "pokemons": [
+                    {"name":"Arcanine", "pokemonid": 1},
+                    {"name":"Ninetales", "pokemonid": 2},
+                    {"name":"Vileplume", "pokemonid": 3},
+                    {"name":"Rapidash", "pokemonid": 4},
+                    {"name":"Articuno", "pokemonid": 5},
+                    {"name":"Magcargo", "pokemonid": 6}
+                ],
+                "variationid": 3
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Charizard", "pokemonid": 2},
+                    {"name":"Kangaskhan", "pokemonid": 3} ,
+                    {"name":"Golem", "pokemonid": 4},
+                    {"name":"Magmortar", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
+                ],
+                "variationid": 4
+            },
+            {
+                "pokemons": [
+                    {"name":"Torkoal", "pokemonid": 1},
+                    {"name":"Typhlosion", "pokemonid": 2},
+                    {"name":"Rotom-Heat", "pokemonid": 3},
+                    {"name":"Tangrowth", "pokemonid": 4},
+                    {"name":"Rhyperior", "pokemonid": 5},
+                    {"name":"Arcanine", "pokemonid": 6}
                 ],
                 "variationid": 5
             }
@@ -128,61 +380,61 @@
     {
         "gym": "Violet City",
         "gymtype": "Flying",
-        "id": 3,
+        "id": 7,
         "region": "Johto",
         "variations": [
             {
                 "pokemons": [
-                    "Farfetch'd",
-                    "Articuno",
-                    "Fearow",
-                    "Xatu",
-                    "Swellow",
-                    "Pidgeot"
+                    {"name":"Farfetch'd", "pokemonid": 1},
+                    {"name":"Articuno", "pokemonid": 2},
+                    {"name":"Fearow", "pokemonid": 3},
+                    {"name":"Xatu", "pokemonid": 4},
+                    {"name":"Swellow", "pokemonid": 5},
+                    {"name":"Pidgeot", "pokemonid": 6}
                 ],
                 "variationid": 1
             },
             {
                 "pokemons": [
-                    "Gliscor",
-                    "Staraptor",
-                    "Charizard",
-                    "Togekiss",
-                    "Crobat",
-                    "Pidgeot"
+                    {"name":"Gliscor", "pokemonid": 1},
+                    {"name":"Staraptor", "pokemonid": 2},
+                    {"name":"Charizard", "pokemonid": 3},
+                    {"name":"Togekiss", "pokemonid": 4},
+                    {"name":"Crobat", "pokemonid": 5},
+                    {"name":"Pidgeot", "pokemonid": 6}
                 ],
                 "variationid": 2
             },
             {
                 "pokemons": [
-                    "Xatu",
-                    "Skarmory",
-                    "Charizard",
-                    "Togekiss",
-                    "Crobat",
-                    "Pidgeot"
+                    {"name":"Xatu", "pokemonid": 1},
+                    {"name":"Skarmory", "pokemonid": 2},
+                    {"name":"Charizard", "pokemonid": 3},
+                    {"name":"Togekiss", "pokemonid": 4},
+                    {"name":"Crobat", "pokemonid": 5},
+                    {"name":"Pidgeot", "pokemonid": 6}
                 ],
                 "variationid": 3
             },
             {
                 "pokemons": [
-                    "Pidgeot",
-                    "Honchkrow",
-                    "Noctowl",
-                    "Aeorodactyl",
-                    "Staraptor",
-                    "Skarmory"
+                    {"name":"Pidgeot", "pokemonid": 1},
+                    {"name":"Honchkrow", "pokemonid": 2},
+                    {"name":"Noctowl", "pokemonid": 3},
+                    {"name":"Aeorodactyl", "pokemonid": 4},
+                    {"name":"Staraptor", "pokemonid": 5},
+                    {"name":"Skarmory", "pokemonid": 6}
                 ],
                 "variationid": 4
             },
             {
                 "pokemons": [
-                    "Pelipper",
-                    "Zapdos",
-                    "Pidgeot",
-                    "Dodrio",
-                    "Honchkrow",
-                    "Fearow"
+                    {"name":"Pelipper", "pokemonid": 1},
+                    {"name":"Zapdos", "pokemonid": 2},
+                    {"name":"Pidgeot", "pokemonid": 3},
+                    {"name":"Dodrio", "pokemonid": 4},
+                    {"name":"Honchkrow", "pokemonid": 5},
+                    {"name":"Fearow", "pokemonid": 6}
                 ],
                 "variationid": 5
             }
@@ -191,64 +443,64 @@
     {
         "gym": "Goldenrod City",
         "gymtype": "Normal",
-        "id": 1,
+        "id": 8,
         "region": "Johto",
         "variations": [
             {
                 "pokemons": [
-                    "Stantler",
-                    "Ursaring",
-                    "Clefable",
-                    "Nidoqueen",
-                    "Bellossom",
-                    "Miltank"
+                    {"name":"Stantler", "pokemonid": 1},
+                    {"name":"Ursaring", "pokemonid": 2},
+                    {"name":"Clefable", "pokemonid": 3},
+                    {"name":"Nidoqueen", "pokemonid": 4},
+                    {"name":"Bellossom", "pokemonid": 5},
+                    {"name":"Miltank", "pokemonid": 6}
                 ],
                 "variationid": 1
             },
             {
                 "pokemons": [
-                    "Miltank",
-                    "Cinccino",
-                    "Ditto",
-                    "Blissey",
-                    "Bibarel",
-                    "Mr.Mime"
+                    {"name":"Miltank", "pokemonid": 1},
+                    {"name":"Cinccino", "pokemonid": 2},
+                    {"name":"Ditto", "pokemonid": 3},
+                    {"name":"Blissey", "pokemonid": 4},
+                    {"name":"Bibarel", "pokemonid": 5},
+                    {"name":"Mr.Mime", "pokemonid": 6}
                 ],
                 "variationid": 2
             },
             {
                 "pokemons": [
-                    "Miltank",
-                    "Dodrio",
-                    "Persian",
-                    "Lopunny",
-                    "Lickilicky",
-                    "Donphan"
+                    {"name":"Miltank", "pokemonid": 1},
+                    {"name":"Dodrio", "pokemonid": 2},
+                    {"name":"Persian", "pokemonid": 3},
+                    {"name":"Lopunny", "pokemonid": 4},
+                    {"name":"Lickilicky", "pokemonid": 5},
+                    {"name":"Donphan", "pokemonid": 6}
                 ],
                 "variationid": 3
             },
             {
                 "pokemons": [
-                    "Wigglytuff",
-                    "Tauros",
-                    "Girafarig",
-                    "Furret",
-                    "Golduck",
-                    "Miltank"
+                    {"name":"Wigglytuff", "pokemonid": 1},
+                    {"name":"Tauros", "pokemonid": 2},
+                    {"name":"Girafarig", "pokemonid": 3},
+                    {"name":"Furret", "pokemonid": 4},
+                    {"name":"Golduck", "pokemonid": 5},
+                    {"name":"Miltank", "pokemonid": 6}
                 ],
                 "variationid": 4
             },
             {
                 "pokemons": [
-                    "Delcatty",
-                    "Ambipom",
-                    "Watchog",
-                    "Smeargle",
-                    "Vileplume",
-                    "Miltank"
+                    {"name":"Delcatty", "pokemonid": 1},
+                    {"name":"Ambipom", "pokemonid": 2},
+                    {"name":"Watchog", "pokemonid": 3},
+                    {"name":"Smeargle", "pokemonid": 4},
+                    {"name":"Vileplume", "pokemonid": 5},
+                    {"name":"Miltank", "pokemonid": 6}
                 ],
                 "variationid": 5
             }
         ]
     }
-]
+ ]
