@@ -1,6 +1,8 @@
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-     reactStrictMode: true // Change this to false to stop re-renders
+  reactStrictMode: true,
+  images: {
+    disableStaticImages: false, // Use Next.js's built-in image handling
+  },
 };
 
 export default nextConfig;
