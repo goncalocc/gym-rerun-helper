@@ -10,6 +10,15 @@
             "name": "Launch Chrome against localhost",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
-        }
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Opera",
+            "url": "http://localhost:3000",
+            "webRoot": "${workspaceFolder}",
+            "runtimeExecutable":" C:\\Users\\User\\AppData\\Local\\Programs\\Opera\\opera.exe"// Specify the path to Opera
+          }
+
     ]
 }
