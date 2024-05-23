@@ -5,7 +5,6 @@ import Navbar from '../components/NavBar';
 import GeneralTab from './components/GeneralTab';
 
 export const ViewGyms = () => {
-
   const navItems = [
     { id: 1, text: 'Kanto' },
     { id: 2, text: 'Johto' },
@@ -18,7 +17,7 @@ export const ViewGyms = () => {
 
   const handleRenderSwitch = (tab) => {
     setSelectedTab(navItems[tab]);
-  }
+  };
 
   return (
     <main>
