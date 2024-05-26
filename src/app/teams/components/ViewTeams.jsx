@@ -1,6 +1,7 @@
 import Icon from '../../components/Icon';
 import React, { useState } from 'react';
 import ViewTeamDetails from './ViewTeamDetails';
+import Svg from '@/app/components/Svg';
 
 export const ViewTeams = ({ localStorageData: teamsData }) => {
   const [selectedTeam, setSelectedTeam] = useState(null);
@@ -22,6 +23,7 @@ export const ViewTeams = ({ localStorageData: teamsData }) => {
           >
             <div className="text-center">{team.teamname}</div>
             <div className="flex flex-col items-center">
+              <div className="mb-4 flex justify-center">
               <button
                 className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 
                     px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 
@@ -37,7 +39,9 @@ export const ViewTeams = ({ localStorageData: teamsData }) => {
                   />
                 ))}
               </button>
-              {selectedTeam === index && <ViewTeamDetails details={team} />}
+              <Svg key={index} name="trash-grey" size={40} color="brown" />
+              </div>
+              {selectedTeam === index && <ViewTeamDetails details={team} index={index} />}
             </div>
           </div>
         ))}

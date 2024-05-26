@@ -2,7 +2,7 @@
     {   
         "teamname": "default team",
         "team": [
-            {
+            {   
                 "pokemon": "Blastoise",
                 "ability": "Torrent",
                 "nature": "Mild",
@@ -186,7 +186,7 @@
         ]
     },
     {   
-        "teamname": "default team",
+        "teamname": "default team2",
         "team": [
             {
                 "pokemon": "Blastoise",
