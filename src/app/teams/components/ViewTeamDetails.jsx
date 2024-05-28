@@ -3,7 +3,7 @@ import ViewTeamDetailsInfo from './ViewTeamDetailsInfo';
 import ViewTeamDetailOptions from './ViewTeamDetailOptions';
 import ViewTeamEditInfo from './ViewTeamEditInfo';
 
-const ViewTeamDetails = ({ details: team, index: index }) => {
+const ViewTeamDetails = ({ details: team, index: index, teams: teams}) => {
   const [editMode, setEditMode] = useState(false);
 
   const closeEdit = () => {
@@ -22,12 +22,13 @@ const ViewTeamDetails = ({ details: team, index: index }) => {
             details={team}
             index={index}
             onClose={closeEdit}
+            teams={teams}
           />
         </>
       ) : (
         <>
           <ViewTeamDetailOptions handleClick={handleClickEdit} />
-          <ViewTeamDetailsInfo details={team} />
+          <ViewTeamDetailsInfo details={team}/>
         </>
       )}
     </div>

@@ -41,7 +41,7 @@ export const ViewTeams = ({ localStorageData: teamsData }) => {
               </button>
               <Svg key={index} name="trash-grey" size={40} color="brown" />
               </div>
-              {selectedTeam === index && <ViewTeamDetails details={team} index={index} />}
+              {selectedTeam === index && <ViewTeamDetails details={team} index={index} teams={teamsData} />}
             </div>
           </div>
         ))}

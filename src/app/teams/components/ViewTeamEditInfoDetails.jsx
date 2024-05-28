@@ -1,38 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const ViewTeamEditInfoDetails = ({ index: pokeIndex, teamIndex: teamIndex, member: props, onFormChange: onFormChange }) => {
+const ViewTeamEditInfoDetails = ({
+  index: pokeIndex,
+  teamIndex: teamIndex,
+  member: props,
+  onFormChange: onFormChange,
+  enable: handleEnableButton,
+}) => {
   const [formData, setFormData] = useState(props);
 
-  const handleChange = (event, arrayName) => {
+  const handleChange = (event, arrayName, index) => {
     const { name, value } = event.target;
     const [field, subfield] = name.split('.');
 
-    if (arrayName && typeof index === 'number') {
-      // Update a specific item within an array in formData
-      setFormData((prevData) => ({
-        ...prevData,
-        [arrayName]: prevData[arrayName].map((item, i) =>
-          i === index ? value : item
-        ),
-      }));
-    } else if (subfield) {
-      // Update an object in formData
-      setFormData((prevData) => ({
-        ...prevData,
-        [field]: {
-          ...prevData[field],
-          [subfield]: value,
-        },
-      }));
-    }
-    // Update state based on the name of the field
-    else {
-      setFormData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
-    onFormChange(formData, teamIndex, pokeIndex);
+    setFormData((prevData) => {
+      let newData;
+      if (arrayName && typeof index === 'number') {
+        // Update a specific item within an array in formData
+        newData = {
+          ...prevData,
+          [arrayName]: prevData[arrayName].map((item, i) =>
+            i === index ? value : item,
+          ),
+        };
+      } else if (subfield) {
+        // Update an object in formData
+        newData = {
+          ...prevData,
+          [field]: {
+            ...prevData[field],
+            [subfield]: value,
+          },
+        };
+      } else {
+        // Update state based on the name of the field
+        newData = {
+          ...prevData,
+          [name]: value,
+        };
+      }
+
+      // Call onFormChange with the updated state
+      onFormChange(newData, teamIndex, pokeIndex);
+
+      return newData;
+    });
+
+    handleEnableButton();
   };
 
   return (
