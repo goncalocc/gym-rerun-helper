@@ -1,5 +1,6 @@
-import React, { useState, useTransition } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import ViewTeamEditInfoDetails from './ViewTeamEditInfoDetails';
+import { validateTeams } from './ValidateTeams';
 import Svg from '../../components/Svg';
 
 const ViewTeamEditInfo = ({
@@ -12,9 +13,22 @@ const ViewTeamEditInfo = ({
   const [teamData, setTeamData] = useState(props);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [copyTeamData, setCopyTeamData] = useState(teamData);
-  const [copyTeamsData, setCopyTeamsData] = useState(teamsData);
   const [indexCopiedTeam, setIndexCopiedTeam] = useState(0);
+  const [errorMessage, setErrorMessage] = useState([]);
+  const [fieldErrors, setfieldErrors] = useState({
+    abilityErrors: [],
+    evsErrors: [],
+    ivsErrors: [],
+    itemErrors: [],
+    moveErrors: [],
+    natureErrors: [],
+    pokemonErrors: [],
+  });
+
+  useEffect(() => {
+    console.log('warnings:', fieldErrors);
+    console.log('messages from the errors:', errorMessage);
+  }, [errorMessage, fieldErrors]);
 
   const handleMemberDetails = (index) => {
     if (selectedMembers.includes(index)) {
@@ -30,66 +44,79 @@ const ViewTeamEditInfo = ({
     setIsDisabled(false);
   };
 
-  const onFormChange = (updatedForm, teamIndex, pokemonIndex) => {
-    console.log(
-      'see updatedForm: ',
-      updatedForm,
-      ' and teamid: ',
-      teamIndex,
-      ' and id: ',
-      pokemonIndex,
-    );
-    setCopyTeamData((prevData) => {
-      // Create a shallow copy of the team object
-      const updatedTeamObject = { ...prevData };
-      // Create a shallow copy of the team array
-      const updatedTeam = [...updatedTeamObject.team];
+  const onFormChange = (teamIndex, pokeIndex, name, value) => {
+    const [field, subfield] = name.split('.');
 
-      // Ensure the pokemon at pokemonIndex exists
-      if (!updatedTeam[pokemonIndex]) {
-        console.error('Invalid pokemon index:', pokemonIndex);
-        return prevData;
+    setTeamData((prevData) => {
+      // Update state based on the name of the field
+      const updatedTeam = { ...prevData };
+      const updatedMembers = [...updatedTeam.team];
+      const updatedMember = { ...updatedMembers[pokeIndex] };
+
+      if (field.startsWith('moveset')) {
+        const movesetIndex = parseInt(name.split('.')[1]);
+        updatedMember.moveset = [...updatedMember.moveset];
+        updatedMember.moveset[movesetIndex] = value;
+      } else if (subfield) {
+        updatedMember[field] = {
+          ...updatedMember[field],
+          [subfield]: value,
+        };
+      } else {
+        updatedMember[name] = value;
       }
 
-      // Create a copy of the member to be updated and update with updatedForm
-      const updatedMember = { ...updatedTeam[pokemonIndex], ...updatedForm };
+      updatedMembers[pokeIndex] = updatedMember;
+      updatedTeam.team = updatedMembers;
 
-      // Update the specific member in the copied team array
-      updatedTeam[pokemonIndex] = { ...updatedMember };
-      //update to the whole object (put in the specific team part)
-      updatedTeamObject.team = [...updatedTeam];
-      //deep copy
-      // updatedTeamObject.team = updatedTeam.map(item=> ({...item}));
-      setIndexCopiedTeam(teamIndex);
-      return updatedTeamObject;
+      return updatedTeam;
     });
+    setIndexCopiedTeam(teamIndex);
   };
 
-  const submitForm = () => {
-    // Ensure the team at teamIndex exists
-    setCopyTeamsData((prevTeams) => {
-      // Make a shallow copy of the previous state
-      const updatedTeams = [...prevTeams];
-
-      // Check if the teamIndex is valid
-      if (
-        !updatedTeams[indexCopiedTeam] ||
-        !Array.isArray(updatedTeams[indexCopiedTeam].team)
-      ) {
-        console.error('Invalid team structure at teamIndex:', indexCopiedTeam);
-        throw new Error('Invalid team structure');
+  const submitForm = async () => {
+    try {
+      //first, makes validations
+      validateTeams(teamData);
+      if (!(errorMessage.length === 0)) {
+        // Prevent form submission
+        alert(errorMessage);
+        return false;
+      } else {
+        // Ensure the team at teamIndex exists
+        setTeamsData((prevTeams) => {
+          // Make a shallow copy of the previous state
+          const updatedTeams = [...prevTeams];
+          // Check if the teamIndex is valid
+          if (
+            !updatedTeams[indexCopiedTeam] ||
+            !Array.isArray(updatedTeams[indexCopiedTeam].team)
+          ) {
+            console.error(
+              'Invalid team structure at teamIndex:',
+              indexCopiedTeam,
+            );
+            throw new Error('Invalid team structure');
+          }
+          // Set the updated team array back to the updatedTeams object
+          updatedTeams[indexCopiedTeam] = {
+            ...updatedTeams[indexCopiedTeam],
+            team: teamData.team,
+          };
+          console.log('updatedTeams: ', updatedTeams);
+          // Return the updated state
+          return updatedTeams;
+        });
+        localStorage.setItem('gymRerunTeam', JSON.stringify(teamsData));
       }
+    } catch (error) {
+      // Handle validation errors
+      setErrorMessage(error.message);
+      alert(error.message);
 
-      // Set the updated team array back to the updatedTeams object
-      updatedTeams[indexCopiedTeam] = {
-        ...updatedTeams[indexCopiedTeam],
-        team: copyTeamData.team,
-      };
-      console.log('updated: ', updatedTeams);
-      // Return the updated state
-      localStorage.setItem('gymRerunTeam', JSON.stringify(updatedTeams));
-      return updatedTeams;
-    });
+      const fieldsWithError = error.errorsIndex;
+      setfieldErrors(fieldsWithError);
+    }
   };
 
   //created modal to perform edits on pokemon
@@ -129,6 +156,7 @@ const ViewTeamEditInfo = ({
                     member={member}
                     onFormChange={onFormChange}
                     enable={handleEnableButton}
+                    fieldErrors={fieldErrors}
                   />
                 )}
               </div>

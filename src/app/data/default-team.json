@@ -58,7 +58,7 @@
                 "moveset": [
                     "Eruption",
                     "Swift",
-                    "Hidden Power Ice",
+                    "Hidden Power (Ice)",
                     "Helping Hand"
                 ]
             },
@@ -162,7 +162,7 @@
                     {
                         "attack": 252,
                         "defense": 0,
-                        "hp": 4,
+                        "hp": 0,
                         "specialAttack": 0,
                         "specialDefense": 24,
                         "speed": 232
@@ -244,7 +244,7 @@
                 "moveset": [
                     "Eruption",
                     "Swift",
-                    "Hidden Power Ice",
+                    "Hidden Power (Ice)",
                     "Helping Hand"
                 ]
             },
@@ -348,7 +348,7 @@
                     {
                         "attack": 252,
                         "defense": 0,
-                        "hp": 4,
+                        "hp": 0,
                         "specialAttack": 0,
                         "specialDefense": 24,
                         "speed": 232

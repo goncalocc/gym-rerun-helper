@@ -6,48 +6,21 @@ const ViewTeamEditInfoDetails = ({
   member: props,
   onFormChange: onFormChange,
   enable: handleEnableButton,
+  fieldErrors: fieldErrors
 }) => {
-  const [formData, setFormData] = useState(props);
 
-  const handleChange = (event, arrayName, index) => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
-    const [field, subfield] = name.split('.');
 
-    setFormData((prevData) => {
-      let newData;
-      if (arrayName && typeof index === 'number') {
-        // Update a specific item within an array in formData
-        newData = {
-          ...prevData,
-          [arrayName]: prevData[arrayName].map((item, i) =>
-            i === index ? value : item,
-          ),
-        };
-      } else if (subfield) {
-        // Update an object in formData
-        newData = {
-          ...prevData,
-          [field]: {
-            ...prevData[field],
-            [subfield]: value,
-          },
-        };
-      } else {
-        // Update state based on the name of the field
-        newData = {
-          ...prevData,
-          [name]: value,
-        };
-      }
-
-      // Call onFormChange with the updated state
-      onFormChange(newData, teamIndex, pokeIndex);
-
-      return newData;
-    });
-
+    // Call onFormChange with the updated state
+    onFormChange(teamIndex, pokeIndex, name, value);
     handleEnableButton();
   };
+
+  const hasError = (errorType, index) => {
+    const error = fieldErrors[errorType];
+    return errorType in fieldErrors && error.includes(index);
+  }
 
   return (
     <form>
@@ -58,11 +31,11 @@ const ViewTeamEditInfoDetails = ({
           </label>
           <input
             type="text"
-            value={formData.pokemon}
-            className="rounded border border-gray-300 p-2 text-center text-black"
+            value={props.pokemon}
+            className={`rounded border border-gray-300 ${hasError('pokemonErrors', pokeIndex) ? 'bg-red-300' : ''} p-2 text-center text-black`}
             style={{ width: '160px', height: '35px' }}
             name="pokemon"
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             id="pokemon"
           />
         </div>
@@ -72,11 +45,11 @@ const ViewTeamEditInfoDetails = ({
           </label>
           <input
             type="text"
-            value={formData.item}
+            value={props.item}
             className="rounded border border-gray-300 p-2 text-center text-black"
             style={{ width: '160px', height: '35px' }}
             name="item"
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             id="item"
           />
         </div>
@@ -88,11 +61,11 @@ const ViewTeamEditInfoDetails = ({
           </label>
           <input
             type="text"
-            value={formData.nature}
+            value={props.nature}
             className="rounded border border-gray-300 p-2 text-center text-black"
             style={{ width: '160px', height: '35px' }}
             name="nature"
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             id="nature"
           />
         </div>
@@ -102,11 +75,11 @@ const ViewTeamEditInfoDetails = ({
           </label>
           <input
             type="text"
-            value={formData.ability}
+            value={props.ability}
             className="rounded border border-gray-300 p-2 text-center text-black"
             style={{ width: '160px', height: '35px' }}
             name="ability"
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             id="ability"
           />
         </div>
@@ -121,11 +94,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="number"
-              value={formData.ivs.hp}
+              value={props.ivs.hp}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="ivs.hp"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               max="31"
               min="0"
               id="ivs.hp"
@@ -135,11 +108,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="number"
-              value={formData.ivs.attack}
+              value={props.ivs.attack}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="ivs.attack"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               max="31"
               min="0"
               id="ivs.attack"
@@ -149,11 +122,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="number"
-              value={formData.ivs.defense}
+              value={props.ivs.defense}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="ivs.defense"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               max="31"
               min="0"
               id="ivs.defense"
@@ -163,11 +136,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="number"
-              value={formData.ivs.specialAttack}
+              value={props.ivs.specialAttack}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="ivs.specialAttack"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               max="31"
               min="0"
               id="ivs.specialAttack"
@@ -177,25 +150,25 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="number"
-              value={formData.ivs.specialDefense}
+              value={props.ivs.specialDefense}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="ivs.specialDefense"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               max="31"
               min="0"
               id="ivs.specialDefense"
             />
             <p>
-              <label htmlFor="ivs.speed">Atk</label>
+              <label htmlFor="ivs.speed">Spd</label>
             </p>
             <input
               type="number"
-              value={formData.ivs.speed}
+              value={props.ivs.speed}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="ivs.speed"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               max="31"
               min="0"
               id="ivs.speed"
@@ -211,11 +184,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="text"
-              value={formData.evs.hp}
+              value={props.evs.hp}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="evs.hp"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               id="evs.hp"
             />
             <p>
@@ -223,11 +196,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="text"
-              value={formData.evs.attack}
+              value={props.evs.attack}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="evs.attack"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               id="evs.hp"
             />
             <p>
@@ -235,11 +208,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="text"
-              value={formData.evs.defense}
+              value={props.evs.defense}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="evs.defense"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               id="evs.defense"
             />
             <p>
@@ -247,11 +220,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="text"
-              value={formData.evs.specialAttack}
+              value={props.evs.specialAttack}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="evs.specialAttack"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               id="evs.specialAttack"
             />
             <p>
@@ -259,11 +232,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="text"
-              value={formData.evs.specialDefense}
+              value={props.evs.specialDefense}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="evs.specialDefense"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               id="evs.specialDefense"
             />
             <p>
@@ -271,11 +244,11 @@ const ViewTeamEditInfoDetails = ({
             </p>
             <input
               type="text"
-              value={formData.evs.speed}
+              value={props.evs.speed}
               className="rounded border border-gray-300 p-2 text-center text-black"
               style={{ width: '60px', height: '35px' }}
               name="evs.speed"
-              onChange={handleChange}
+              onChange={(e) => handleChange(e)}
               id="evs.speed"
             />
           </div>
@@ -284,8 +257,8 @@ const ViewTeamEditInfoDetails = ({
       <div>
         Moves:
         <ul className="grid grid-cols-2 gap-4">
-          {Array.isArray(formData.moveset) &&
-            formData.moveset.map((move, moveIndex) => (
+          {Array.isArray(props.moveset) &&
+            props.moveset.map((move, moveIndex) => (
               <li key={moveIndex}>
                 <div>
                   <label
@@ -301,7 +274,7 @@ const ViewTeamEditInfoDetails = ({
                     style={{ width: '160px', height: '35px' }}
                     name={`moveset.${moveIndex}`}
                     id={`move-${moveIndex}`}
-                    onChange={(e) => handleChange(e, 'moveset', moveIndex)}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
               </li>
