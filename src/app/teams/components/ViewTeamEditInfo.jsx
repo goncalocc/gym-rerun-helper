@@ -17,10 +17,29 @@ const ViewTeamEditInfo = ({
   const [errorMessage, setErrorMessage] = useState([]);
   const [fieldErrors, setfieldErrors] = useState({
     abilityErrors: [],
-    evsErrors: [],
-    ivsErrors: [],
+    evsErrors:{
+      hp: [],
+      attack: [],
+      defense: [],
+      specialAttack: [],
+      specialDefense: [],
+      speed: []
+    },
+    ivsErrors:{
+      hp: [],
+      attack: [],
+      defense: [],
+      specialAttack: [],
+      specialDefense: [],
+      speed: []
+    },
     itemErrors: [],
-    moveErrors: [],
+    moveErrors: {
+      0: [],
+      1: [],
+      2: [],
+      3: []
+    },
     natureErrors: [],
     pokemonErrors: [],
   });
@@ -77,7 +96,7 @@ const ViewTeamEditInfo = ({
   const submitForm = async () => {
     try {
       //first, makes validations
-      validateTeams(teamData);
+      validateTeams(teamData, fieldErrors);
       if (!(errorMessage.length === 0)) {
         // Prevent form submission
         alert(errorMessage);
@@ -114,7 +133,7 @@ const ViewTeamEditInfo = ({
       setErrorMessage(error.message);
       alert(error.message);
 
-      const fieldsWithError = error.errorsIndex;
+      const fieldsWithError = error.fieldErrors;
       setfieldErrors(fieldsWithError);
     }
   };

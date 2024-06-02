@@ -4,16 +4,17 @@ import movesData from '../../data/MovesDictionary';
 import abilitiesData from '../../data/AbilityDictionary';
 import naturesData from '../../data/NatureDictionary';
 
-export const validateTeams = (teamData) => {
-  const errorsIndex = {
-    abilityErrors: [],
-    evsErrors: [],
-    ivsErrors: [],
-    itemErrors: [],
-    moveErrors: [],
-    natureErrors: [],
-    pokemonErrors: []
+export const validateTeams = (teamData, fieldErrors) => {
+
+  const dictionary = {
+    0: 'hp',
+    1: 'attack',
+    2: 'defense',
+    3: 'specialAttack',
+    4: 'specialDefense',
+    5: 'speed',
   };
+
   const errorMessage = [];
 
   const data = teamData;
@@ -28,39 +29,66 @@ export const validateTeams = (teamData) => {
   };
 
   const validateEvs = (dataDetails, input) => {
-    const sumValues = Object.values(input.evs).reduce((a, b) => a + b, 0);
+    const sumValues = Object.values(input.evs).reduce(
+      (a, b) => parseInt(a) + parseInt(b),
+      0,
+    );
     if (sumValues > 510) {
       console.log('sumvalues : ', sumValues);
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.evsErrors);
+      Object.keys(dictionary).forEach((key) => {
+        const attributeName = dictionary[key];
+        if (input.evs.hasOwnProperty(attributeName)) {
+          updateDetectionError(
+            dataDetails.indexOf(input),
+            fieldErrors.evsErrors[attributeName],
+          );
+        }
+      });
       updateErrorMessage(
         `The total number of EVS of a pokemon cannot be superior than 510. Error at entry #${dataDetails.indexOf(input) + 1}`,
       );
-    }
-    if (
-      Object.values(input.evs).some((element) => element > 252 || element < 0)
-    ) {
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.evsErrors);
-      updateErrorMessage(
-        `EVs must be between 0 and 252. Error at entry #${dataDetails.indexOf(input) + 1}`,
-      );
+    } else {
+      Object.keys(dictionary).forEach((key) => {
+        const attributeName = dictionary[key];
+        if (input.evs.hasOwnProperty(attributeName)) {
+          if (input.evs[attributeName] > 252 || input.evs[attributeName] < 0) {
+            updateDetectionError(
+              dataDetails.indexOf(input),
+              fieldErrors.evsErrors[attributeName],
+            );
+            updateErrorMessage(
+              `EVs must be between 0 and 252. Error at entry #${dataDetails.indexOf(input) + 1}`,
+            );
+          }
+        }
+      });
     }
   };
 
   const validateIvs = (dataDetails, input) => {
-    if (
-      Object.values(input.ivs).some((element) => element > 31 || element < 0)
-    ) {
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.ivsErrors);
-      updateErrorMessage(
-        `IVs must be between 0 and 31. Error at entry #${dataDetails.indexOf(input) + 1}`,
-      );
-    }
+    Object.keys(dictionary).forEach((key) => {
+      const attributeName = dictionary[key];
+      if (input.ivs.hasOwnProperty(attributeName)) {
+        if (input.ivs[attributeName] > 31 || input.ivs[attributeName] < 0) {
+          updateDetectionError(
+            dataDetails.indexOf(input),
+            fieldErrors.ivsErrors[attributeName],
+          );
+          updateErrorMessage(
+            `IVs must be between 0 and 31. Error at entry #${dataDetails.indexOf(input) + 1}`,
+          );
+        }
+      }
+    });
   };
 
   const validateMoveset = (dataDetails, input) => {
-    input.moveset.forEach((move) => {
+    input.moveset.forEach((move, index) => {
       if (!movesData.some((element) => element === move || move === '')) {
-        updateDetectionError(dataDetails.indexOf(input), errorsIndex.moveErrors);
+        updateDetectionError(
+          dataDetails.indexOf(input),
+          fieldErrors.moveErrors[index],
+        );
         updateErrorMessage(
           `Move does not exist. Error at entry #${dataDetails.indexOf(input) + 1}`,
         );
@@ -70,25 +98,34 @@ export const validateTeams = (teamData) => {
 
   dataDetails.forEach((input) => {
     if (!pokemonData.some((element) => element === input.pokemon)) {
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.pokemonErrors);
+      updateDetectionError(
+        dataDetails.indexOf(input),
+        fieldErrors.pokemonErrors,
+      );
       updateErrorMessage(
         `Pokemon does not exist. Error at entry #${dataDetails.indexOf(input) + 1}`,
       );
     }
     if (!naturesData.some((element) => element === input.nature)) {
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.natureErrors);
+      updateDetectionError(
+        dataDetails.indexOf(input),
+        fieldErrors.natureErrors,
+      );
       updateErrorMessage(
         `Nature does not exist. Error at entry #${dataDetails.indexOf(input) + 1}`,
       );
     }
     if (!itemsData.some((element) => element === input.item)) {
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.itemErrors);
+      updateDetectionError(dataDetails.indexOf(input), fieldErrors.itemErrors);
       updateErrorMessage(
         `Item does not exist. Error at entry #${dataDetails.indexOf(input) + 1}`,
       );
     }
     if (!abilitiesData.some((element) => element === input.ability)) {
-      updateDetectionError(dataDetails.indexOf(input), errorsIndex.abilityErrors);
+      updateDetectionError(
+        dataDetails.indexOf(input),
+        fieldErrors.abilityErrors,
+      );
       updateErrorMessage(
         `Ability does not exist. Error at entry #${dataDetails.indexOf(input) + 1}`,
       );
@@ -98,6 +135,6 @@ export const validateTeams = (teamData) => {
     validateMoveset(dataDetails, input);
   });
   if (errorMessage.length > 0) {
-    throw { message: errorMessage.join('\n'), errorsIndex };
+    throw { message: errorMessage.join('\n'), fieldErrors };
   }
 };
