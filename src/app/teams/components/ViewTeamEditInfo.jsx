@@ -7,47 +7,21 @@ const ViewTeamEditInfo = ({
   details: props,
   index: teamIndex,
   onClose: closeEdit,
-  teams: teams,
+  handleTeamsUpdate: handleTeamsUpdate,
 }) => {
-  const [teamsData, setTeamsData] = useState(teams);
   const [teamData, setTeamData] = useState(props);
   const [selectedMembers, setSelectedMembers] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
-  const [indexCopiedTeam, setIndexCopiedTeam] = useState(0);
-  const [errorMessage, setErrorMessage] = useState([]);
-  const [fieldErrors, setfieldErrors] = useState({
-    abilityErrors: [],
-    evsErrors:{
-      hp: [],
-      attack: [],
-      defense: [],
-      specialAttack: [],
-      specialDefense: [],
-      speed: []
-    },
-    ivsErrors:{
-      hp: [],
-      attack: [],
-      defense: [],
-      specialAttack: [],
-      specialDefense: [],
-      speed: []
-    },
-    itemErrors: [],
-    moveErrors: {
-      0: [],
-      1: [],
-      2: [],
-      3: []
-    },
-    natureErrors: [],
-    pokemonErrors: [],
-  });
+  const [indexUpdatedTeam, setIndexUpdatedTeam] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
+  const [errorData, setErrorData] = useState([]);
 
   useEffect(() => {
-    console.log('warnings:', fieldErrors);
-    console.log('messages from the errors:', errorMessage);
-  }, [errorMessage, fieldErrors]);
+    if (isSaved) {
+      console.log('teste saved true');
+      closeEdit();
+    }
+  }, [isSaved, errorData]);
 
   const handleMemberDetails = (index) => {
     if (selectedMembers.includes(index)) {
@@ -65,7 +39,7 @@ const ViewTeamEditInfo = ({
 
   const onFormChange = (teamIndex, pokeIndex, name, value) => {
     const [field, subfield] = name.split('.');
-
+    setErrorData([]);
     setTeamData((prevData) => {
       // Update state based on the name of the field
       const updatedTeam = { ...prevData };
@@ -79,7 +53,7 @@ const ViewTeamEditInfo = ({
       } else if (subfield) {
         updatedMember[field] = {
           ...updatedMember[field],
-          [subfield]: value,
+          [subfield]: isNaN(parseInt(value)) ? 0 : parseInt(value),
         };
       } else {
         updatedMember[name] = value;
@@ -90,51 +64,23 @@ const ViewTeamEditInfo = ({
 
       return updatedTeam;
     });
-    setIndexCopiedTeam(teamIndex);
+    setIndexUpdatedTeam(teamIndex);
   };
 
-  const submitForm = async () => {
+  const submitForm = (event) => {
+    setErrorData([]);
+    event.preventDefault();
     try {
       //first, makes validations
-      validateTeams(teamData, fieldErrors);
-      if (!(errorMessage.length === 0)) {
-        // Prevent form submission
-        alert(errorMessage);
-        return false;
-      } else {
-        // Ensure the team at teamIndex exists
-        setTeamsData((prevTeams) => {
-          // Make a shallow copy of the previous state
-          const updatedTeams = [...prevTeams];
-          // Check if the teamIndex is valid
-          if (
-            !updatedTeams[indexCopiedTeam] ||
-            !Array.isArray(updatedTeams[indexCopiedTeam].team)
-          ) {
-            console.error(
-              'Invalid team structure at teamIndex:',
-              indexCopiedTeam,
-            );
-            throw new Error('Invalid team structure');
-          }
-          // Set the updated team array back to the updatedTeams object
-          updatedTeams[indexCopiedTeam] = {
-            ...updatedTeams[indexCopiedTeam],
-            team: teamData.team,
-          };
-          console.log('updatedTeams: ', updatedTeams);
-          // Return the updated state
-          return updatedTeams;
-        });
-        localStorage.setItem('gymRerunTeam', JSON.stringify(teamsData));
-      }
+      validateTeams(teamData, errorData);
+      handleTeamsUpdate(teamData, indexUpdatedTeam);
+      setIsSaved(true);
+      // }
     } catch (error) {
       // Handle validation errors
-      setErrorMessage(error.message);
       alert(error.message);
-
-      const fieldsWithError = error.fieldErrors;
-      setfieldErrors(fieldsWithError);
+      const fieldsWithError = error.newErrors;
+      setErrorData(fieldsWithError);
     }
   };
 
@@ -175,7 +121,7 @@ const ViewTeamEditInfo = ({
                     member={member}
                     onFormChange={onFormChange}
                     enable={handleEnableButton}
-                    fieldErrors={fieldErrors}
+                    errorData={errorData}
                   />
                 )}
               </div>

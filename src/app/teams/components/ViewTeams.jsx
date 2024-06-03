@@ -3,7 +3,10 @@ import React, { useState } from 'react';
 import ViewTeamDetails from './ViewTeamDetails';
 import Svg from '@/app/components/Svg';
 
-export const ViewTeams = ({ localStorageData: teamsData }) => {
+export const ViewTeams = ({
+  localStorageData: teamsData,
+  handleTeamsUpdate: handleTeamsUpdate,
+}) => {
   const [selectedTeam, setSelectedTeam] = useState(null);
 
   const handleClickDetails = (index) => {
@@ -24,24 +27,31 @@ export const ViewTeams = ({ localStorageData: teamsData }) => {
             <div className="text-center">{team.teamname}</div>
             <div className="flex flex-col items-center">
               <div className="mb-4 flex justify-center">
-              <button
-                className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 
+                <button
+                  className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 
                     px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 
                     focus:ring-blue-500 focus:ring-offset-2"
-                onClick={() => handleClickDetails(index)}
-              >
-                {team.team.map((members, index) => (
-                  <Icon
-                    key={index}
-                    name={members.pokemon.toLowerCase()}
-                    size={70}
-                    color="brown"
-                  />
-                ))}
-              </button>
-              <Svg key={index} name="trash-grey" size={40} color="brown" />
+                  onClick={() => handleClickDetails(index)}
+                >
+                  {team.team.map((members, index) => (
+                    <Icon
+                      key={index}
+                      name={members.pokemon.toLowerCase()}
+                      size={70}
+                      color="brown"
+                    />
+                  ))}
+                </button>
+                <Svg key={index} name="trash-grey" size={40} color="brown" />
               </div>
-              {selectedTeam === index && <ViewTeamDetails details={team} index={index} teams={teamsData} />}
+              {selectedTeam === index && (
+                <ViewTeamDetails
+                  details={team}
+                  index={index}
+                  teams={teamsData}
+                  handleTeamsUpdate={handleTeamsUpdate}
+                />
+              )}
             </div>
           </div>
         ))}

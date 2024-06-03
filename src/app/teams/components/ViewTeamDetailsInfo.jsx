@@ -1,4 +1,4 @@
-const ViewTeamDetailsInfo = ({ details: team, index: index }) => {
+const ViewTeamDetailsInfo = ({ details: team }) => {
   return (
     <main>
       <div className="grid grid-cols-2 gap-4 rounded-md bg-zinc-600 p-4">

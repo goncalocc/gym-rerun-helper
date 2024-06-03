@@ -6,8 +6,11 @@ const ViewTeamEditInfoDetails = ({
   member: props,
   onFormChange: onFormChange,
   enable: handleEnableButton,
-  fieldErrors: fieldErrors,
+  errorData: errorData,
 }) => {
+
+  const moveset = [...props.moveset, '', '', '', ''].slice(0,4);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -16,13 +19,14 @@ const ViewTeamEditInfoDetails = ({
     handleEnableButton();
   };
 
-  const hasError = (errorType, index, subType = null) => {
-    if (subType || typeof subType === 'number') {
-      const error = fieldErrors[errorType][subType];
-      return errorType in fieldErrors && error.includes(index);
+  const hasError = (field, index) => {
+    if (
+      errorData.some(
+        (element) => element.pokemon === index && field.includes(element.field),
+      )
+    ) {
+      return true;
     }
-    const error = fieldErrors[errorType];
-    return errorType in fieldErrors && error.includes(index);
   };
 
   return (
@@ -35,7 +39,7 @@ const ViewTeamEditInfoDetails = ({
           <input
             type="text"
             value={props.pokemon}
-            className={`rounded border ${hasError('pokemonErrors', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+            className={`rounded border ${hasError('pokemon', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
             style={{ width: '160px', height: '35px' }}
             name="pokemon"
             onChange={(e) => handleChange(e)}
@@ -49,7 +53,7 @@ const ViewTeamEditInfoDetails = ({
           <input
             type="text"
             value={props.item}
-            className={`rounded border ${hasError('itemErrors', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+            className={`rounded border ${hasError('item', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
             style={{ width: '160px', height: '35px' }}
             name="item"
             onChange={(e) => handleChange(e)}
@@ -65,7 +69,7 @@ const ViewTeamEditInfoDetails = ({
           <input
             type="text"
             value={props.nature}
-            className={`rounded border ${hasError('natureErrors', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+            className={`rounded border ${hasError('nature', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
             style={{ width: '160px', height: '35px' }}
             name="nature"
             onChange={(e) => handleChange(e)}
@@ -79,7 +83,7 @@ const ViewTeamEditInfoDetails = ({
           <input
             type="text"
             value={props.ability}
-            className={`rounded border ${hasError('abilityErrors', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+            className={`rounded border ${hasError('ability', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
             style={{ width: '160px', height: '35px' }}
             name="ability"
             onChange={(e) => handleChange(e)}
@@ -98,7 +102,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.ivs.hp}
-              className={`rounded border ${hasError('ivsErrors', pokeIndex, 'hp') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+              className={`rounded border ${hasError('ivs-hp', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '60px', height: '35px' }}
               name="ivs.hp"
               onChange={(e) => handleChange(e)}
@@ -112,7 +116,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.ivs.attack}
-              className={`rounded border ${hasError('ivsErrors', pokeIndex, 'attack') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+              className={`rounded border ${hasError('ivs-attack', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '60px', height: '35px' }}
               name="ivs.attack"
               onChange={(e) => handleChange(e)}
@@ -126,7 +130,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.ivs.defense}
-              className={`rounded border ${hasError('ivsErrors', pokeIndex, 'defense') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+              className={`rounded border ${hasError('ivs-defense', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '60px', height: '35px' }}
               name="ivs.defense"
               onChange={(e) => handleChange(e)}
@@ -140,7 +144,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.ivs.specialAttack}
-              className={`rounded border ${hasError('ivsErrors', pokeIndex, 'specialAttack') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+              className={`rounded border ${hasError('ivs-specialAttack', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '60px', height: '35px' }}
               name="ivs.specialAttack"
               onChange={(e) => handleChange(e)}
@@ -154,7 +158,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.ivs.specialDefense}
-              className={`rounded border ${hasError('ivsErrors', pokeIndex, 'specialDefense') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+              className={`rounded border ${hasError('ivs-specialDefense', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '60px', height: '35px' }}
               name="ivs.specialDefense"
               onChange={(e) => handleChange(e)}
@@ -168,7 +172,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.ivs.speed}
-              className={`rounded border ${hasError('ivsErrors', pokeIndex, 'speed') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+              className={`rounded border ${hasError('ivs-speed', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '60px', height: '35px' }}
               name="ivs.speed"
               onChange={(e) => handleChange(e)}
@@ -188,7 +192,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.evs.hp}
-              className={`rounded border ${hasError('evsErrors', pokeIndex, 'hp') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
+              className={`rounded border ${hasError('evs-hp', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
               [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
               `}
               style={{ width: '60px', height: '35px' }}
@@ -202,7 +206,7 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.evs.attack}
-              className={`rounded border ${hasError('evsErrors', pokeIndex, 'attack') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
+              className={`rounded border ${hasError('evs-attack', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
               [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
               `}
               style={{ width: '60px', height: '35px' }}
@@ -216,8 +220,8 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.evs.defense}
-              className={`rounded border ${hasError('evsErrors', pokeIndex, 'defense') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
-              [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+              className={`rounded border ${hasError('evs-defense', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
+              [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
               `}
               style={{ width: '60px', height: '35px' }}
               name="evs.defense"
@@ -230,8 +234,8 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.evs.specialAttack}
-              className={`rounded border ${hasError('evsErrors', pokeIndex, 'specialAttack') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
-              [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+              className={`rounded border ${hasError('evs-specialAttack', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
+              [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
               `}
               style={{ width: '60px', height: '35px' }}
               name="evs.specialAttack"
@@ -244,8 +248,8 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.evs.specialDefense}
-              className={`rounded border ${hasError('evsErrors', pokeIndex, 'specialDefense') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
-              [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+              className={`rounded border ${hasError('evs-specialDefense', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
+              [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
               `}
               style={{ width: '60px', height: '35px' }}
               name="evs.specialDefense"
@@ -258,8 +262,8 @@ const ViewTeamEditInfoDetails = ({
             <input
               type="number"
               value={props.evs.speed}
-              className={`rounded border ${hasError('evsErrors', pokeIndex, 'speed') ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
-              [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none
+              className={`rounded border ${hasError('evs-speed', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black
+              [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none
               `}
               style={{ width: '60px', height: '35px' }}
               name="evs.speed"
@@ -272,8 +276,7 @@ const ViewTeamEditInfoDetails = ({
       <div>
         Moves:
         <ul className="grid grid-cols-2 gap-4">
-          {Array.isArray(props.moveset) &&
-            props.moveset.map((move, moveIndex) => (
+          {props.moveset.map((move, moveIndex) => (
               <li key={moveIndex}>
                 <div>
                   <label
@@ -285,7 +288,7 @@ const ViewTeamEditInfoDetails = ({
                   <input
                     type="text"
                     value={move}
-                    className={`col-span-1 rounded border ${hasError('moveErrors', pokeIndex, moveIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
+                    className={`col-span-1 rounded border ${hasError(`move-${moveIndex}`, pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
                     style={{ width: '160px', height: '35px' }}
                     name={`moveset.${moveIndex}`}
                     id={`move-${moveIndex}`}
