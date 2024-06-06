@@ -4,7 +4,7 @@ import movesData from '../../data/MovesDictionary';
 import abilitiesData from '../../data/AbilityDictionary';
 import naturesData from '../../data/NatureDictionary';
 
-export const validateTeams = (teamData, fieldErrors) => {
+export const validateTeams = (teamData) => {
   const dictionary = {
     0: 'hp',
     1: 'attack',
@@ -23,9 +23,6 @@ export const validateTeams = (teamData, fieldErrors) => {
     const sumValues = Object.values(input.evs).reduce(
       (accumulator, currentValue) => {
         const parsedValue = parseInt(currentValue, 10);
-        console.log(
-          `Current Value: ${currentValue}, Parsed Value: ${parsedValue}, Accumulator: ${accumulator}`,
-        );
         if (isNaN(parsedValue)) {
           return accumulator;
         }
@@ -89,7 +86,7 @@ export const validateTeams = (teamData, fieldErrors) => {
   dataDetails.forEach((input) => {
     if (
       !pokemonData.some(
-        (element) => element === input.pokemon || input.nature === '',
+        (element) => element === input.pokemon,
       )
     ) {
       newErrors.push({
@@ -120,7 +117,7 @@ export const validateTeams = (teamData, fieldErrors) => {
     }
     if (
       !abilitiesData.some(
-        (element) => element === input.ability || input.nature === '',
+        (element) => element === input.ability || input.ability === '',
       )
     ) {
       newErrors.push({

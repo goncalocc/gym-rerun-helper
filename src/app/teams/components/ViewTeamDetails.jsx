@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ViewTeamDetailsInfo from './ViewTeamDetailsInfo';
 import ViewTeamDetailOptions from './ViewTeamDetailOptions';
-import ViewTeamEditInfo from './ViewTeamEditInfo';
+import ViewTeamEditMain from './ViewTeamEditMain';
 
 const ViewTeamDetails = ({
   details: team,
@@ -23,7 +23,7 @@ const ViewTeamDetails = ({
     <div className="container mx-auto mt-4 px-4">
       {editMode ? (
         <>
-          <ViewTeamEditInfo
+          <ViewTeamEditMain
             details={team}
             index={index}
             onClose={closeEdit}

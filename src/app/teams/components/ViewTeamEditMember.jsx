@@ -8,7 +8,7 @@ import naturesData from '../../data/NatureDictionary';
 import EvsForm from './form/EvsForms';
 import IvsForm from './form/IvsForm';
 
-const ViewTeamEditInfoDetails = ({
+const ViewTeamEditMember = ({
   index: pokeIndex,
   teamIndex: teamIndex,
   member: props,
@@ -366,6 +366,7 @@ const ViewTeamEditInfoDetails = ({
           </div>
         </div>
       </div>
+        {/* ------------------------------------------------------------------------------------------MOVES------------------------------------------------------------------------------------------ */}
       <div>
         Moves:
         <ul className="grid grid-cols-2 gap-4">
@@ -412,4 +413,4 @@ const ViewTeamEditInfoDetails = ({
     </form>
   );
 };
-export default ViewTeamEditInfoDetails;
+export default ViewTeamEditMember;

@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useTransition } from 'react';
-import ViewTeamEditInfoDetails from './ViewTeamEditInfoDetails';
+import ViewTeamEditMember from './ViewTeamEditMember';
 import { validateTeams } from './ValidateTeams';
+import AddMember from './AddMember';
 import Svg from '../../components/Svg';
 
-const ViewTeamEditInfo = ({
+const ViewTeamEditMain = ({
   details: props,
   index: teamIndex,
   onClose: closeEdit,
@@ -71,7 +72,7 @@ const ViewTeamEditInfo = ({
     event.preventDefault();
     try {
       //first, makes validations
-      validateTeams(teamData, errorData);
+      validateTeams(teamData);
       handleTeamsUpdate(teamData, indexUpdatedTeam);
       setIsSaved(true);
       // }
@@ -114,7 +115,7 @@ const ViewTeamEditInfo = ({
                   </div>
                 </div>
                 {selectedMembers.includes(index) && (
-                  <ViewTeamEditInfoDetails
+                  <ViewTeamEditMember
                     index={index}
                     teamIndex={teamIndex}
                     member={member}
@@ -123,9 +124,13 @@ const ViewTeamEditInfo = ({
                     errorData={errorData}
                   />
                 )}
+                
               </div>
             ))}
           </ul>
+          <div className="mb-4 flex justify-center space-x-4">
+            <AddMember teamData={teamData} setTeamData={setTeamData}/>
+          </div>
           <div className="mb-4 flex justify-center space-x-4">
             <button
               className={`rounded px-4 py-2 font-semibold text-white 
@@ -136,10 +141,11 @@ const ViewTeamEditInfo = ({
               Save
             </button>
           </div>
+
         </div>
       </div>
     </div>
   );
 };
 
-export default ViewTeamEditInfo;
+export default ViewTeamEditMain;
