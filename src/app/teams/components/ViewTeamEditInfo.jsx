@@ -18,7 +18,6 @@ const ViewTeamEditInfo = ({
 
   useEffect(() => {
     if (isSaved) {
-      console.log('teste saved true');
       closeEdit();
     }
   }, [isSaved, errorData]);
@@ -53,7 +52,7 @@ const ViewTeamEditInfo = ({
       } else if (subfield) {
         updatedMember[field] = {
           ...updatedMember[field],
-          [subfield]: isNaN(parseInt(value)) ? 0 : parseInt(value),
+          [subfield]: isNaN(parseInt(value)) ? '' : parseInt(value),
         };
       } else {
         updatedMember[name] = value;

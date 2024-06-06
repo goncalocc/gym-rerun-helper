@@ -21,9 +21,16 @@ export const validateTeams = (teamData, fieldErrors) => {
 
   const validateEvs = (dataDetails, input) => {
     const sumValues = Object.values(input.evs).reduce(
-      (a, b) => parseInt(a) + parseInt(b),
-      0,
-    );
+      (accumulator, currentValue) => {
+        const parsedValue = parseInt(currentValue, 10);
+        console.log(
+          `Current Value: ${currentValue}, Parsed Value: ${parsedValue}, Accumulator: ${accumulator}`,
+        );
+        if (isNaN(parsedValue)) {
+          return accumulator;
+        }
+        return accumulator + parsedValue;
+      }, 0);
     if (sumValues > 510) {
       newErrors.push({
         pokemon: dataDetails.indexOf(input),
@@ -40,7 +47,7 @@ export const validateTeams = (teamData, fieldErrors) => {
           ) {
             newErrors.push({
               pokemon: dataDetails.indexOf(input),
-              field: `evs-${attributeName}`,
+              field: `evs.${attributeName}`,
               message: `EVs must be between 0 and 252. Error at entry #${dataDetails.indexOf(input) + 1}`,
             });
           }
@@ -59,7 +66,7 @@ export const validateTeams = (teamData, fieldErrors) => {
         ) {
           newErrors.push({
             pokemon: dataDetails.indexOf(input),
-            field: `ivs-${attributeName}`,
+            field: `ivs.${attributeName}`,
             message: `IVs must be between 0 and 31. Error at entry #${dataDetails.indexOf(input) + 1}`,
           });
         }
