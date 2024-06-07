@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useTransition } from 'react';
 import ViewTeamEditMember from './ViewTeamEditMember';
 import { validateTeams } from './ValidateTeams';
+import { deleteMember } from './DeleteMember';
 import AddMember from './AddMember';
 import Svg from '../../components/Svg';
 
@@ -105,14 +106,14 @@ const ViewTeamEditMain = ({
                   >
                     {member.pokemon}
                   </button>
-                  <div>
+                  <button onClick={() => deleteMember(teamData.team, setTeamData, index, handleEnableButton)}>
                     <Svg
                       key={index}
                       name="trash-grey"
                       size={40}
                       color="brown"
                     />
-                  </div>
+                  </button>
                 </div>
                 {selectedMembers.includes(index) && (
                   <ViewTeamEditMember
@@ -124,12 +125,11 @@ const ViewTeamEditMain = ({
                     errorData={errorData}
                   />
                 )}
-                
               </div>
             ))}
           </ul>
           <div className="mb-4 flex justify-center space-x-4">
-            <AddMember teamData={teamData} setTeamData={setTeamData}/>
+            <AddMember setTeamData={setTeamData} />
           </div>
           <div className="mb-4 flex justify-center space-x-4">
             <button
@@ -141,7 +141,6 @@ const ViewTeamEditMain = ({
               Save
             </button>
           </div>
-
         </div>
       </div>
     </div>

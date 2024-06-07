@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-const AddMember = ({ teamData, setTeamData }) => {
-  const [newMember, setNewMember] = useState({
+const AddMember = ({ setTeamData }) => {
+  const [newMember] = useState({
     pokemon: '',
     ability: '',
     nature: '',
@@ -26,7 +26,6 @@ const AddMember = ({ teamData, setTeamData }) => {
   });
 
   const handleAddMember = () => {
-    console.log('team data ao inicio ', teamData);
     setTeamData((prevData) => {
       const currentTeam = { ...prevData };
       const currentMembers = [...currentTeam.team];

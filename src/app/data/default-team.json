@@ -183,7 +183,8 @@
                     "Cut"
                 ]
             }
-        ]
+        ],
+        "subteam":[]
     },
     {   
         "teamname": "default team2",
@@ -369,6 +370,7 @@
                     "Cut"
                 ]
             }
-        ]
+        ],
+        "subteam":[]
     }
 ]
