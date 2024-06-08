@@ -4,7 +4,7 @@ import ViewTeamDetailOptions from './ViewTeamDetailOptions';
 import ViewTeamEditMain from './ViewTeamEditMain';
 
 const ViewTeamDetails = ({
-  details: team,
+  team: team,
   index: index,
   teams: teams,
   handleTeamsUpdate: handleTeamsUpdate,
@@ -34,7 +34,7 @@ const ViewTeamDetails = ({
       ) : (
         <>
           <ViewTeamDetailOptions handleClick={handleClickEdit} />
-          <ViewTeamDetailsInfo details={team} />
+          <ViewTeamDetailsInfo team={team}/>
         </>
       )}
     </div>

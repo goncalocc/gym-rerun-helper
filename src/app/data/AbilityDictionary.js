@@ -168,6 +168,7 @@ const abilitiesData = [
   'Regenerator',
   'Ripen',
   'Rivalry',
+  'Rock Head',
   'RKS System',
   'Sand Force',
   'Sand Rush',

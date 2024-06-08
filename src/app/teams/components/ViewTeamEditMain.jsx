@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useTransition } from 'react';
 import ViewTeamEditMember from './ViewTeamEditMember';
 import { validateTeams } from './ValidateTeams';
-import { deleteMember } from './DeleteMember';
+import deleteMember  from './DeleteMember';
 import AddMember from './AddMember';
 import Svg from '../../components/Svg';
 
@@ -11,12 +11,14 @@ const ViewTeamEditMain = ({
   onClose: closeEdit,
   handleTeamsUpdate: handleTeamsUpdate,
 }) => {
-  const [teamData, setTeamData] = useState(props);
-  const [selectedMembers, setSelectedMembers] = useState([]);
+  const [teamData, setTeamData] = useState(props.team);
+  const [subteamData, setSubteamData] = useState(props.subteam);
+  const [selectedTeam, setSelectedTeam] = useState([]);
+  const [selectedSubteam, setSelectedSubteam] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const [indexUpdatedTeam, setIndexUpdatedTeam] = useState(0);
   const [isSaved, setIsSaved] = useState(false);
-  const [errorData, setErrorData] = useState([]);
+  const [errorData, setErrorData] = useState({});
 
   useEffect(() => {
     if (isSaved) {
@@ -24,7 +26,7 @@ const ViewTeamEditMain = ({
     }
   }, [isSaved, errorData]);
 
-  const handleMemberDetails = (index) => {
+  const handleMemberDetails = (selectedMembers, setSelectedMembers, index) => {
     if (selectedMembers.includes(index)) {
       setSelectedMembers(
         selectedMembers.filter((selectedIndex) => selectedIndex !== index),
@@ -38,14 +40,13 @@ const ViewTeamEditMain = ({
     setIsDisabled(false);
   };
 
-  const onFormChange = (teamIndex, pokeIndex, name, value) => {
+  const onFormChange = (teamIndex, pokeIndex, name, value, setTeamData) => {
     const [field, subfield] = name.split('.');
-    setErrorData([]);
+    setErrorData({});
     setTeamData((prevData) => {
       // Update state based on the name of the field
-      const updatedTeam = { ...prevData };
-      const updatedMembers = [...updatedTeam.team];
-      const updatedMember = { ...updatedMembers[pokeIndex] };
+      const updatedTeam = [...prevData ];
+      const updatedMember = { ...updatedTeam[pokeIndex] };
 
       if (field.startsWith('moveset')) {
         const movesetIndex = parseInt(name.split('.')[1]);
@@ -60,8 +61,7 @@ const ViewTeamEditMain = ({
         updatedMember[name] = value;
       }
 
-      updatedMembers[pokeIndex] = updatedMember;
-      updatedTeam.team = updatedMembers;
+      updatedTeam[pokeIndex] = updatedMember;
 
       return updatedTeam;
     });
@@ -69,19 +69,22 @@ const ViewTeamEditMain = ({
   };
 
   const submitForm = (event) => {
-    setErrorData([]);
+    setErrorData({});
     event.preventDefault();
     try {
       //first, makes validations
-      validateTeams(teamData);
-      handleTeamsUpdate(teamData, indexUpdatedTeam);
+      validateTeams(teamData, subteamData);;
+      handleTeamsUpdate(teamData, subteamData, indexUpdatedTeam);
       setIsSaved(true);
       // }
     } catch (error) {
       // Handle validation errors
       alert(error.message);
-      const fieldsWithError = error.newErrors;
-      setErrorData(fieldsWithError);
+      setErrorData(prevState => ({
+        ...prevState,
+        team: error.newErrorsTeam,
+        subteam: error.newErrorsSubteam
+      }));
     }
   };
 
@@ -97,16 +100,27 @@ const ViewTeamEditMain = ({
         </button>
         <div className="max-h-[70vh] overflow-y-auto">
           <ul>
-            {teamData.team.map((member, index) => (
+            {teamData.map((member, index) => (
               <div key={index}>
                 <div className="mb-4 flex justify-center">
                   <button
                     className="w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
-                    onClick={() => handleMemberDetails(index)}
+                    onClick={() =>
+                      handleMemberDetails(selectedTeam, setSelectedTeam, index)
+                    }
                   >
                     {member.pokemon}
                   </button>
-                  <button onClick={() => deleteMember(teamData.team, setTeamData, index, handleEnableButton)}>
+                  <button
+                    onClick={() =>
+                      deleteMember(
+                        setTeamData,
+                        index,
+                        handleEnableButton,
+                        false,
+                      )
+                    }
+                  >
                     <Svg
                       key={index}
                       name="trash-grey"
@@ -115,21 +129,80 @@ const ViewTeamEditMain = ({
                     />
                   </button>
                 </div>
-                {selectedMembers.includes(index) && (
+                {selectedTeam.includes(index) && (
                   <ViewTeamEditMember
                     index={index}
                     teamIndex={teamIndex}
                     member={member}
                     onFormChange={onFormChange}
                     enable={handleEnableButton}
-                    errorData={errorData}
+                    errorData={errorData.team}
+                    setTeamData={setTeamData}
                   />
                 )}
               </div>
             ))}
           </ul>
           <div className="mb-4 flex justify-center space-x-4">
-            <AddMember setTeamData={setTeamData} />
+            <AddMember teamData={teamData} setTeamData={setTeamData} />
+          </div>
+          {/* SUBTEAM ARRAY */}
+          <div className="mb-4 flex justify-center space-x-4">
+            <p>Sub-Team:</p>
+          </div>
+          {Array.isArray(subteamData) && subteamData.length ? (
+            <ul>
+              {subteamData.map((member, index) => (
+                <div key={index}>
+                  <div className="mb-4 flex justify-center">
+                    <button
+                      className="w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
+                      onClick={() =>
+                        handleMemberDetails(
+                          selectedSubteam,
+                          setSelectedSubteam,
+                          index,
+                        )
+                      }
+                    >
+                      {member.pokemon}
+                    </button>
+                    <button
+                      onClick={() =>
+                        deleteMember(
+                          subteamData,
+                          setSubteamData,
+                          index,
+                          handleEnableButton,
+                          true,
+                        )
+                      }
+                    >
+                      <Svg
+                        key={index}
+                        name="trash-grey"
+                        size={40}
+                        color="brown"
+                      />
+                    </button>
+                  </div>
+                  {selectedSubteam.includes(index) && (
+                    <ViewTeamEditMember
+                      index={index}
+                      teamIndex={teamIndex}
+                      member={member}
+                      onFormChange={onFormChange}
+                      enable={handleEnableButton}
+                      errorData={errorData.subteam}
+                      setTeamData={setSubteamData}
+                    />
+                  )}
+                </div>
+              ))}
+            </ul>
+          ) : null}
+           <div className="mb-4 flex justify-center space-x-4">
+            <AddMember teamData={subteamData} setTeamData={setSubteamData} />
           </div>
           <div className="mb-4 flex justify-center space-x-4">
             <button

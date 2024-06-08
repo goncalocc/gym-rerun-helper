@@ -1,16 +1,13 @@
-const deleteMember = (teamData, setTeamData, index, handleEnableButton) => {
-  if (teamData.length > 1) {
+const deleteMember = (setTeamData, index, handleEnableButton, isSubteam) => {
     setTeamData((prevData) => {
-      const currentTeam = { ...prevData };
-      const currentMembers = [...currentTeam.team];
-      if (currentMembers.length > 1) {
-        currentMembers.splice(index, 1);
-        currentTeam.team = currentMembers;
+      const currentTeam = [ ...prevData ];
+      if (currentTeam.length > 1 || isSubteam) {
+        currentTeam.splice(index, 1);
         handleEnableButton();
+        console.log('deleted member in ', currentTeam);
         return currentTeam;
       }
     });
-  }
 };
 
 export default deleteMember;

@@ -46,7 +46,7 @@ export const ViewTeams = ({
               </div>
               {selectedTeam === index && (
                 <ViewTeamDetails
-                  details={team}
+                  team={team}
                   index={index}
                   teams={teamsData}
                   handleTeamsUpdate={handleTeamsUpdate}

@@ -15,6 +15,7 @@ const ViewTeamEditMember = ({
   onFormChange: onFormChange,
   enable: handleEnableButton,
   errorData: errorData,
+  setTeamData: setTeamData,
 }) => {
   const dictionaries = {
     pokemon: pokemonData,
@@ -108,7 +109,7 @@ const ViewTeamEditMember = ({
     }));
 
     // Call onFormChange with the updated state
-    onFormChange(teamIndex, pokeIndex, name, value);
+    onFormChange(teamIndex, pokeIndex, name, value, setTeamData);
     handleEnableButton();
   };
 
@@ -120,7 +121,7 @@ const ViewTeamEditMember = ({
       displayItems: false,
     });
 
-    onFormChange(teamIndex, pokeIndex, state.inputName, value);
+    onFormChange(teamIndex, pokeIndex, state.inputName, value, setTeamData);
   };
 
   const handleKeyDown = (e) => {
@@ -136,7 +137,13 @@ const ViewTeamEditMember = ({
         displayItems: false,
         inputName: name,
       }));
-      onFormChange(teamIndex, pokeIndex, name, filteredItems[activeItem]);
+      onFormChange(
+        teamIndex,
+        pokeIndex,
+        name,
+        filteredItems[activeItem],
+        setTeamData,
+      );
     } else if (e.keyCode === 27) {
       // if press "esc" key
       setState((prevState) => ({
@@ -186,11 +193,12 @@ const ViewTeamEditMember = ({
       displayItems: false,
     }));
 
-    onFormChange(teamIndex, pokeIndex, name, trimmedValue);
+    onFormChange(teamIndex, pokeIndex, name, trimmedValue, setTeamData);
   };
 
   const hasError = (field, index) => {
     if (
+      errorData &&
       errorData.some(
         (element) => element.pokemon === index && field.includes(element.field),
       )
@@ -366,7 +374,7 @@ const ViewTeamEditMember = ({
           </div>
         </div>
       </div>
-        {/* ------------------------------------------------------------------------------------------MOVES------------------------------------------------------------------------------------------ */}
+      {/* ------------------------------------------------------------------------------------------MOVES------------------------------------------------------------------------------------------ */}
       <div>
         Moves:
         <ul className="grid grid-cols-2 gap-4">

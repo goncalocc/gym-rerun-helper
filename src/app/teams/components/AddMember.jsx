@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const AddMember = ({ setTeamData }) => {
+const AddMember = ({ teamData, setTeamData }) => {
   const [newMember] = useState({
     pokemon: '',
     ability: '',
@@ -27,18 +27,18 @@ const AddMember = ({ setTeamData }) => {
 
   const handleAddMember = () => {
     setTeamData((prevData) => {
-      const currentTeam = { ...prevData };
-      const currentMembers = [...currentTeam.team];
-      currentMembers.push(newMember);
-      console.log('Adding member ', currentMembers);
-      currentTeam.team = currentMembers;
+      const currentTeam = [...prevData ];
+      currentTeam.push(newMember);
+      console.log('Adding member ', currentTeam);
       return currentTeam;
     });
   };
 
   return (
     <div>
+      {teamData && teamData.length <6 ?
       <button onClick={handleAddMember}>+</button>
+      : <></>}
     </div>
   );
 };

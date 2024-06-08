@@ -26,14 +26,15 @@ const ViewTeamsPreRenderData = () => {
     setIsLoading(false);
   }, []);
 
-  const handleTeamsUpdate = (newData, indexUpdatedTeam) => {
+  const handleTeamsUpdate = (newTeam, newSubteam, indexUpdatedTeam) => {
     setTeamsData((prevTeams) => {
       // Make a shallow copy of the previous state
       const updatedTeams = [...prevTeams];
       // Check if the teamIndex is valid
       if (
         !updatedTeams[indexUpdatedTeam] ||
-        !Array.isArray(updatedTeams[indexUpdatedTeam].team)
+        !Array.isArray(updatedTeams[indexUpdatedTeam].team) ||
+        !Array.isArray(updatedTeams[indexUpdatedTeam].subteam)
       ) {
         console.error(
           'Invalid team structure at teamIndex:',
@@ -44,7 +45,8 @@ const ViewTeamsPreRenderData = () => {
       // Set the updated team array back to the updatedTeams object
       updatedTeams[indexUpdatedTeam] = {
         ...updatedTeams[indexUpdatedTeam],
-        team: newData.team,
+        team: newTeam,
+        subteam: newSubteam,
       };
       console.log('updatedTeams: ', updatedTeams);
       // Return the updated state
