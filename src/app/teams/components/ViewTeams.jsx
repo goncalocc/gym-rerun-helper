@@ -1,13 +1,24 @@
 import Icon from '../../components/Icon';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ViewTeamDetails from './ViewTeamDetails';
 import Svg from '@/app/components/Svg';
+import deleteTeam from './DeleteTeam';
+import AddTeam from './AddTeam';
 
 export const ViewTeams = ({
   localStorageData: teamsData,
-  handleTeamsUpdate: handleTeamsUpdate,
+  handleTeamsUpdate,
+  setTeamsData: externalSetTeamsData,
 }) => {
+  // const [teamsData, setTeamsData] = useState(initialTeamsData);
   const [selectedTeam, setSelectedTeam] = useState(null);
+
+  // useEffect(() => {
+  //   // Sync state with local storage updates
+  //   if (teamsData !== initialTeamsData) {
+  //     handleTeamsUpdate('teams', '', teamsData);
+  //   }
+  // }, [teamsData, initialTeamsData, handleTeamsUpdate]);
 
   const handleClickDetails = (index) => {
     setSelectedTeam(selectedTeam === index ? null : index);
@@ -16,6 +27,14 @@ export const ViewTeams = ({
   if (!Array.isArray(teamsData) || teamsData.length === 0) {
     return <p>No teams data available.</p>;
   }
+
+  const handleAddTeam = (teamsData, setTeamsData) => {
+    AddTeam(setTeamsData);
+    console.log('teams data, ', teamsData);
+    //add logic here with handle update
+    handleTeamsUpdate('', '', '', teamsData);
+  }
+
   return (
     <main>
       <div>
@@ -42,7 +61,9 @@ export const ViewTeams = ({
                     />
                   ))}
                 </button>
-                <Svg key={index} name="trash-grey" size={40} color="brown" />
+                <button onClick={() => deleteTeam(teamsData, externalSetTeamsData, index, handleTeamsUpdate)}>
+                  <Svg key={index} name="trash-grey" size={40} color="brown" />
+                </button>
               </div>
               {selectedTeam === index && (
                 <ViewTeamDetails
@@ -55,6 +76,14 @@ export const ViewTeams = ({
             </div>
           </div>
         ))}
+        {/* <div className="mb-4 flex justify-center space-x-4">
+          <AddTeam teamsData={teamsData} externalSetTeamsData={externalSetTeamsData} handleTeamsUpdate={handleTeamsUpdate}/>
+        </div> */}
+        <div className="mb-4 flex justify-center space-x-4">
+          {teamsData.length < 10 ?
+            <button onClick={() => handleAddTeam(teamsData, externalSetTeamsData)}>+</button>
+            : <></>}
+        </div>
       </div>
     </main>
   );

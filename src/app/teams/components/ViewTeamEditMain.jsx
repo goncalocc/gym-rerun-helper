@@ -40,6 +40,17 @@ const ViewTeamEditMain = ({
     setIsDisabled(false);
   };
 
+  const hasErrorMain = (errorData, index) => {
+    if (
+      errorData &&
+      errorData.some(
+        (element) => element.pokemon === index
+      )
+    ) {
+      return true;
+    }
+  };
+
   const onFormChange = (teamIndex, pokeIndex, name, value, setTeamData) => {
     const [field, subfield] = name.split('.');
     setErrorData({});
@@ -74,7 +85,7 @@ const ViewTeamEditMain = ({
     try {
       //first, makes validations
       validateTeams(teamData, subteamData);;
-      handleTeamsUpdate(teamData, subteamData, indexUpdatedTeam);
+      handleTeamsUpdate(teamData, subteamData, indexUpdatedTeam, null);
       setIsSaved(true);
       // }
     } catch (error) {
@@ -104,7 +115,7 @@ const ViewTeamEditMain = ({
               <div key={index}>
                 <div className="mb-4 flex justify-center">
                   <button
-                    className="w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
+                    className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain(errorData.team, index) ? 'border-2 border-red-600' : ''}`}
                     onClick={() =>
                       handleMemberDetails(selectedTeam, setSelectedTeam, index)
                     }
@@ -156,7 +167,7 @@ const ViewTeamEditMain = ({
                 <div key={index}>
                   <div className="mb-4 flex justify-center">
                     <button
-                      className="w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700"
+                      className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain(errorData.subteam, index) ? 'border-2 border-red-600' : ''}`}
                       onClick={() =>
                         handleMemberDetails(
                           selectedSubteam,

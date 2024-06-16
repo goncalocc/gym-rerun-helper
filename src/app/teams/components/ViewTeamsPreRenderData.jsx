@@ -26,8 +26,14 @@ const ViewTeamsPreRenderData = () => {
     setIsLoading(false);
   }, []);
 
-  const handleTeamsUpdate = (newTeam, newSubteam, indexUpdatedTeam) => {
+  const handleTeamsUpdate = (newTeam, newSubteam, indexUpdatedTeam, newTeams) => {
     setTeamsData((prevTeams) => {
+      if(newTeams){
+        console.log('updatedTeams: ', newTeams);
+      // Return the updated state
+      localStorage.setItem('gymRerunTeam', JSON.stringify(newTeams));
+        return newTeams;
+      }
       // Make a shallow copy of the previous state
       const updatedTeams = [...prevTeams];
       // Check if the teamIndex is valid
@@ -61,7 +67,7 @@ const ViewTeamsPreRenderData = () => {
 
   return (
     <main>
-      <ViewTeams localStorageData={teamsData} handleTeamsUpdate={handleTeamsUpdate} />
+      <ViewTeams localStorageData={teamsData} setTeamsData={setTeamsData} handleTeamsUpdate={handleTeamsUpdate} />
     </main>
   );
 };
