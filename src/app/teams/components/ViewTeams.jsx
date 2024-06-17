@@ -10,15 +10,7 @@ export const ViewTeams = ({
   handleTeamsUpdate,
   setTeamsData: externalSetTeamsData,
 }) => {
-  // const [teamsData, setTeamsData] = useState(initialTeamsData);
   const [selectedTeam, setSelectedTeam] = useState(null);
-
-  // useEffect(() => {
-  //   // Sync state with local storage updates
-  //   if (teamsData !== initialTeamsData) {
-  //     handleTeamsUpdate('teams', '', teamsData);
-  //   }
-  // }, [teamsData, initialTeamsData, handleTeamsUpdate]);
 
   const handleClickDetails = (index) => {
     setSelectedTeam(selectedTeam === index ? null : index);
@@ -29,11 +21,11 @@ export const ViewTeams = ({
   }
 
   const handleAddTeam = (teamsData, setTeamsData) => {
-    AddTeam(setTeamsData);
+    addTeam(setTeamsData);
     console.log('teams data, ', teamsData);
     //add logic here with handle update
     handleTeamsUpdate('', '', '', teamsData);
-  }
+  };
 
   return (
     <main>
@@ -61,7 +53,16 @@ export const ViewTeams = ({
                     />
                   ))}
                 </button>
-                <button onClick={() => deleteTeam(teamsData, externalSetTeamsData, index, handleTeamsUpdate)}>
+                <button
+                  onClick={() =>
+                    deleteTeam(
+                      teamsData,
+                      externalSetTeamsData,
+                      index,
+                      handleTeamsUpdate,
+                    )
+                  }
+                >
                   <Svg key={index} name="trash-grey" size={40} color="brown" />
                 </button>
               </div>
@@ -76,13 +77,12 @@ export const ViewTeams = ({
             </div>
           </div>
         ))}
-        {/* <div className="mb-4 flex justify-center space-x-4">
-          <AddTeam teamsData={teamsData} externalSetTeamsData={externalSetTeamsData} handleTeamsUpdate={handleTeamsUpdate}/>
-        </div> */}
         <div className="mb-4 flex justify-center space-x-4">
-          {teamsData.length < 10 ?
-            <button onClick={() => handleAddTeam(teamsData, externalSetTeamsData)}>+</button>
-            : <></>}
+          <AddTeam
+            teamsData={teamsData}
+            externalSetTeamsData={externalSetTeamsData}
+            handleTeamsUpdate={handleTeamsUpdate}
+          />
         </div>
       </div>
     </main>

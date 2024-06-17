@@ -1,47 +1,71 @@
-import { useState, useEffect } from 'react';
+import React, { useRef } from 'react';
 
-const [newTeam] = useState(
-    {
-        teamname: 'testing',
-        team: [
+export const AddTeam = ({
+  teamsData,
+  externalSetTeamsData,
+  handleTeamsUpdate,
+}) => {
+  const newTeam = {
+    teamname: 'testing',
+    team: [
+      {
+        pokemon: 'Abra',
+        ability: '',
+        nature: '',
+        item: '',
+        evs: {
+          attack: '',
+          defense: '',
+          hp: '',
+          specialAttack: '',
+          specialDefense: '',
+          speed: '',
+        },
+        ivs: {
+          attack: '',
+          defense: '',
+          hp: '',
+          specialAttack: '',
+          specialDefense: '',
+          speed: '',
+        },
+        moveset: ['', '', '', ''],
+      },
+    ],
+    subteam: [],
+  };
 
-            {
-                pokemon: 'Abra',
-                ability: '',
-                nature: '',
-                item: '',
-                evs: {
-                    attack: '',
-                    defense: '',
-                    hp: '',
-                    specialAttack: '',
-                    specialDefense: '',
-                    speed: '',
-                },
-                ivs: {
-                    attack: '',
-                    defense: '',
-                    hp: '',
-                    specialAttack: '',
-                    specialDefense: '',
-                    speed: '',
-                },
-                moveset: ['', '', '', ''],
-            }
-        ]
-    }
-);
+//   const isAddingTeamRef = useRef(false); // To prevent double addition in Strict Mode
 
-function AddTeam({ externalSetTeamsData }) {
-    console.log('Add Team button clicked');
+  const handleAddTeam = (
+    teamsData,
+    externalSetTeamsData,
+    handleTeamsUpdate,
+  ) => {
+    const currentTeams = [...teamsData];
+    const teamToAdd = structuredClone(newTeam);
+    currentTeams.push(teamToAdd);
     externalSetTeamsData((prevData) => {
-        console.log('Updating teams data...');
-        const currentTeams = [...prevData];
-        const teamToAdd = structuredClone(newTeam);
-        currentTeams.push(teamToAdd);
-        console.log('Adding member ', currentTeams);
-        return currentTeams;
+      const newArray = [...prevData, currentTeams];
+      console.log('Adding team ', newArray);
+      return newArray;
     });
+    handleTeamsUpdate('', '', '', currentTeams);
+  };
+
+  return (
+    <div>
+      {teamsData.length < 10 ? (
+        <button
+          onClick={() => handleAddTeam(teamsData, externalSetTeamsData, handleTeamsUpdate)}
+        >
+          +
+        </button>
+      ) : (
+        <></>
+      )}
+    </div>
+  );
 };
 
 export default AddTeam;
