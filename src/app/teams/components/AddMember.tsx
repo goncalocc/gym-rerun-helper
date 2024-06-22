@@ -1,26 +1,32 @@
 import { useState } from 'react';
+import { Team } from '../../types/types';
 
-const AddMember = ({ teamData, setTeamData }) => {
+interface AddMemberProps {
+  teamData: Team[];
+  setTeamData: React.Dispatch<React.SetStateAction<Team[]>>;
+}
+
+const AddMember = ({ teamData, setTeamData }: AddMemberProps) => {
   const [newMember] = useState({
     pokemon: '',
     ability: '',
     nature: '',
     item: '',
     evs: {
-      attack: '',
-      defense: '',
-      hp: '',
-      specialAttack: '',
-      specialDefense: '',
-      speed: '',
+      attack: 0,
+      defense: 0,
+      hp: 0,
+      specialAttack: 0,
+      specialDefense: 0,
+      speed: 0,
     },
     ivs: {
-      attack: '',
-      defense: '',
-      hp: '',
-      specialAttack: '',
-      specialDefense: '',
-      speed: '',
+      attack: 0,
+      defense: 0,
+      hp: 0,
+      specialAttack: 0,
+      specialDefense: 0,
+      speed: 0,
     },
     moveset: ['', '', '', ''],
   });

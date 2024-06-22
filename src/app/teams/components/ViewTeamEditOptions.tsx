@@ -1,4 +1,8 @@
-const ViewTeamEditOptions = ({handleClick: handleClickSave}) => {
+interface ViewTeamEditOptionsProps {
+    handleClick: () => void;
+}
+
+const ViewTeamEditOptions: React.FC<ViewTeamEditOptionsProps> = ({handleClick: handleClickSave}) => {
     return (
         <main>
             <div className="flex justify-center mb-4 space-x-4">

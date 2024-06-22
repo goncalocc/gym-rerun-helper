@@ -1,24 +1,64 @@
-import React, { useEffect, useState, useTransition } from 'react';
+import React, { useEffect, useState, FormEvent } from 'react';
 import ViewTeamEditMember from './ViewTeamEditMember';
 import { validateTeams } from './ValidateTeams';
-import deleteMember  from './DeleteMember';
+import deleteMember from './DeleteMember';
 import AddMember from './AddMember';
 import Svg from '../../components/Svg';
+import { Teams, Team, EVs, IVs } from '../../types/types';
+import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 
-const ViewTeamEditMain = ({
+interface ViewTeamEditMainProps {
+  details: Teams;
+  index: number;
+  onClose: () => void;
+  handleTeamsUpdate: HandleTeamsUpdate;
+}
+
+export interface ErrorData {
+  pokemon: number;
+  field: string;
+  message: string;
+}
+
+interface Error {
+  message: string;
+  team: ErrorData[];
+  subteam: ErrorData[];
+}
+
+const initialErrorState: Error = {
+  message: '',
+  team: [],
+  subteam: [],
+};
+
+export interface OnFormChangeProps {
+  teamIndex: number;
+  pokeIndex: number;
+  name: string;
+  value: string;
+  setTeamData: React.Dispatch<React.SetStateAction<Team[]>>;
+}
+
+export type OnFormChange = (params: OnFormChangeProps) => void;
+
+type TeamField = keyof Team;
+type NestedField = keyof EVs | keyof IVs;
+
+const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
   details: props,
   index: teamIndex,
   onClose: closeEdit,
   handleTeamsUpdate: handleTeamsUpdate,
 }) => {
-  const [teamData, setTeamData] = useState(props.team);
-  const [subteamData, setSubteamData] = useState(props.subteam);
-  const [selectedTeam, setSelectedTeam] = useState([]);
-  const [selectedSubteam, setSelectedSubteam] = useState([]);
-  const [isDisabled, setIsDisabled] = useState(true);
-  const [indexUpdatedTeam, setIndexUpdatedTeam] = useState(0);
-  const [isSaved, setIsSaved] = useState(false);
-  const [errorData, setErrorData] = useState({});
+  const [teamData, setTeamData] = useState<Team[]>(props.team);
+  const [subteamData, setSubteamData] = useState<Team[]>(props.subteam);
+  const [selectedTeam, setSelectedTeam] = useState<number[]>([]);
+  const [selectedSubteam, setSelectedSubteam] = useState<number[]>([]);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [indexUpdatedTeam, setIndexUpdatedTeam] = useState<number>(0);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [errorData, setErrorData] = useState<Error>(initialErrorState);
 
   useEffect(() => {
     if (isSaved) {
@@ -26,7 +66,15 @@ const ViewTeamEditMain = ({
     }
   }, [isSaved, errorData]);
 
-  const handleMemberDetails = (selectedMembers, setSelectedMembers, index) => {
+  const handleMemberDetails = ({
+    selectedMembers,
+    setSelectedMembers,
+    index,
+  }: {
+    selectedMembers: number[];
+    setSelectedMembers: (members: number[]) => void;
+    index: number;
+  }) => {
     if (selectedMembers.includes(index)) {
       setSelectedMembers(
         selectedMembers.filter((selectedIndex) => selectedIndex !== index),
@@ -40,36 +88,57 @@ const ViewTeamEditMain = ({
     setIsDisabled(false);
   };
 
-  const hasErrorMain = (errorData, index) => {
+  const hasErrorMain = ({
+    errorData,
+    index,
+  }: {
+    errorData: ErrorData[];
+    index: number;
+  }): boolean => {
     if (
       errorData &&
-      errorData.some(
-        (element) => element.pokemon === index
-      )
+      errorData.some((element: ErrorData) => element.pokemon === index)
     ) {
       return true;
     }
+    return false;
   };
 
-  const onFormChange = (teamIndex, pokeIndex, name, value, setTeamData) => {
+  const onFormChange: OnFormChange = ({
+    teamIndex,
+    pokeIndex,
+    name,
+    value,
+    setTeamData,
+  }) => {
     const [field, subfield] = name.split('.');
-    setErrorData({});
+    setErrorData(initialErrorState);
     setTeamData((prevData) => {
       // Update state based on the name of the field
-      const updatedTeam = [...prevData ];
+      const updatedTeam = [...prevData];
       const updatedMember = { ...updatedTeam[pokeIndex] };
 
-      if (field.startsWith('moveset')) {
-        const movesetIndex = parseInt(name.split('.')[1]);
+      if (field === 'moveset') {
+        const movesetIndex = parseInt(subfield);
         updatedMember.moveset = [...updatedMember.moveset];
         updatedMember.moveset[movesetIndex] = value;
       } else if (subfield) {
-        updatedMember[field] = {
-          ...updatedMember[field],
-          [subfield]: isNaN(parseInt(value)) ? '' : parseInt(value),
-        };
+        const mainField = field as TeamField;
+        if (mainField === 'evs' || mainField === 'ivs') {
+          // Type assertion to make TypeScript happy
+          const nestedObject = updatedMember[mainField] as EVs | IVs;
+          const parsedValue = isNaN(parseInt(value)) ? 0 : parseInt(value);
+          nestedObject[subfield as NestedField] = parsedValue as any;
+          updatedMember[mainField] = nestedObject;
+        } else {
+          updatedMember[mainField] = {
+            ...(updatedMember[mainField] as any),
+            [subfield]: value,
+          };
+        }
       } else {
-        updatedMember[name] = value;
+        const mainField = name as TeamField;
+        updatedMember[mainField] = value as any;
       }
 
       updatedTeam[pokeIndex] = updatedMember;
@@ -79,22 +148,24 @@ const ViewTeamEditMain = ({
     setIndexUpdatedTeam(teamIndex);
   };
 
-  const submitForm = (event) => {
-    setErrorData({});
+  const submitForm = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    setErrorData(initialErrorState);
     event.preventDefault();
     try {
       //first, makes validations
-      validateTeams(teamData, subteamData);;
+      validateTeams({ teamData, subteamData });
       handleTeamsUpdate(teamData, subteamData, indexUpdatedTeam, null);
       setIsSaved(true);
       // }
-    } catch (error) {
+    } catch (error: any) {
       // Handle validation errors
       alert(error.message);
-      setErrorData(prevState => ({
+      setErrorData((prevState) => ({
         ...prevState,
         team: error.newErrorsTeam,
-        subteam: error.newErrorsSubteam
+        subteam: error.newErrorsSubteam,
       }));
     }
   };
@@ -115,21 +186,25 @@ const ViewTeamEditMain = ({
               <div key={index}>
                 <div className="mb-4 flex justify-center">
                   <button
-                    className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain(errorData.team, index) ? 'border-2 border-red-600' : ''}`}
+                    className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain({ errorData: errorData.subteam, index }) ? 'border-2 border-red-600' : ''}`}
                     onClick={() =>
-                      handleMemberDetails(selectedTeam, setSelectedTeam, index)
+                      handleMemberDetails({
+                        selectedMembers: selectedTeam,
+                        setSelectedMembers: setSelectedTeam,
+                        index: index,
+                      })
                     }
                   >
                     {member.pokemon}
                   </button>
                   <button
                     onClick={() =>
-                      deleteMember(
+                      deleteMember({
                         setTeamData,
                         index,
                         handleEnableButton,
-                        false,
-                      )
+                        isSubteam: false,
+                      })
                     }
                   >
                     <Svg
@@ -167,26 +242,25 @@ const ViewTeamEditMain = ({
                 <div key={index}>
                   <div className="mb-4 flex justify-center">
                     <button
-                      className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain(errorData.subteam, index) ? 'border-2 border-red-600' : ''}`}
+                      className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain({ errorData: errorData.subteam, index }) ? 'border-2 border-red-600' : ''}`}
                       onClick={() =>
-                        handleMemberDetails(
-                          selectedSubteam,
-                          setSelectedSubteam,
-                          index,
-                        )
+                        handleMemberDetails({
+                          selectedMembers: selectedSubteam,
+                          setSelectedMembers: setSelectedTeam,
+                          index: index,
+                        })
                       }
                     >
                       {member.pokemon}
                     </button>
                     <button
                       onClick={() =>
-                        deleteMember(
-                          subteamData,
-                          setSubteamData,
+                        deleteMember({
+                          setTeamData:setSubteamData,
                           index,
                           handleEnableButton,
-                          true,
-                        )
+                          isSubteam: false,
+                        })
                       }
                     >
                       <Svg
@@ -212,7 +286,7 @@ const ViewTeamEditMain = ({
               ))}
             </ul>
           ) : null}
-           <div className="mb-4 flex justify-center space-x-4">
+          <div className="mb-4 flex justify-center space-x-4">
             <AddMember teamData={subteamData} setTeamData={setSubteamData} />
           </div>
           <div className="mb-4 flex justify-center space-x-4">

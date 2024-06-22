@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent, FocusEvent } from 'react';
 import SuggestionBox from './form/SuggestionBox';
 import pokemonData from '../../data/PokemonDictionary';
 import itemsData from '../../data/ItemsDictionary';
@@ -7,8 +7,30 @@ import abilitiesData from '../../data/AbilityDictionary';
 import naturesData from '../../data/NatureDictionary';
 import EvsForm from './form/EvsForms';
 import IvsForm from './form/IvsForm';
+import {OnFormChange, ErrorData} from './ViewTeamEditMain';
+import {Team} from '../../types/types';
 
-const ViewTeamEditMember = ({
+
+interface ViewTeamEditMemberProps {
+  index: number;
+  teamIndex: number;
+  member: Team;
+  onFormChange: OnFormChange;
+  enable: () => void;
+  errorData: ErrorData[];
+  setTeamData: React.Dispatch<React.SetStateAction<Team[]>>;
+}
+
+interface State {
+  activeItem: number;
+  filteredItems: string[];
+  displayItems: boolean;
+  inputName: string;
+}
+
+type DictionaryKeys = 'pokemon' | 'item' | 'move' | 'ability' | 'nature';
+
+const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
   index: pokeIndex,
   teamIndex: teamIndex,
   member: props,
@@ -17,7 +39,7 @@ const ViewTeamEditMember = ({
   errorData: errorData,
   setTeamData: setTeamData,
 }) => {
-  const dictionaries = {
+  const dictionaries: Record<DictionaryKeys, string[]> = {
     pokemon: pokemonData,
     item: itemsData,
     move: movesData,
@@ -63,30 +85,33 @@ const ViewTeamEditMember = ({
       type2: 'ivs',
     },
   ];
-  const itemRefs = useRef([]);
 
-  const [state, setState] = useState({
+
+  const [state, setState] = useState<State>({
     activeItem: 0,
     filteredItems: [],
     displayItems: false,
     inputName: '',
   });
 
+  const itemRefs = useRef<(HTMLLIElement | null)[]>(Array(state.filteredItems.length).fill(null));
+
   useEffect(() => {
     // Scroll the active item into view
-    if (itemRefs.current[state.activeItem]) {
-      itemRefs.current[state.activeItem].scrollIntoView({
+    const activeRef = itemRefs.current[state.activeItem]
+    if (activeRef) {
+      activeRef.scrollIntoView({
         behavior: 'smooth',
         block: 'nearest',
       });
     }
   }, [state.activeItem]);
 
-  const handleChange = (event) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
 
     //Filter the suggestions while changing the form
-    let filteredItems = [];
+    let filteredItems: string[] = [];
     if (name.startsWith('moveset')) {
       //for the 4 moves of a pokemon
       filteredItems = dictionaries['move'].filter(
@@ -94,7 +119,8 @@ const ViewTeamEditMember = ({
           optionName.toLowerCase().indexOf(value.toLowerCase()) > -1,
       );
     } else if (!(name.startsWith('evs') || name.startsWith('ivs'))) {
-      (filteredItems = dictionaries[name].filter(
+      const dictKey = name as DictionaryKeys;
+      (filteredItems = dictionaries[dictKey].filter(
         (optionName) =>
           optionName.toLowerCase().indexOf(value.toLowerCase()) > -1,
       )) || [];
@@ -109,26 +135,27 @@ const ViewTeamEditMember = ({
     }));
 
     // Call onFormChange with the updated state
-    onFormChange(teamIndex, pokeIndex, name, value, setTeamData);
+    onFormChange({teamIndex, pokeIndex, name, value, setTeamData});
     handleEnableButton();
   };
 
-  const handleClick = (event) => {
-    const value = event.target.innerText;
-    setState({
+  const handleClick = (event: React.MouseEvent<HTMLLIElement>): void => {
+    const value = event.currentTarget.innerText;
+    setState((prevState) =>({
       activeItem: 0,
       filteredItems: [],
+      inputName: prevState.inputName,
       displayItems: false,
-    });
+    }));
 
-    onFormChange(teamIndex, pokeIndex, state.inputName, value, setTeamData);
+    onFormChange({teamIndex, pokeIndex, name: state.inputName, value, setTeamData});
   };
 
-  const handleKeyDown = (e) => {
-    const { name } = e.target;
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const { name } = e.currentTarget;
     const { activeItem, filteredItems } = state;
 
-    if (e.keyCode === 13) {
+    if (e.key === 'Enter') {
       // if press "enter" key
       setState((prevState) => ({
         ...prevState,
@@ -138,13 +165,13 @@ const ViewTeamEditMember = ({
         inputName: name,
       }));
       onFormChange(
-        teamIndex,
+        {teamIndex,
         pokeIndex,
         name,
-        filteredItems[activeItem],
-        setTeamData,
+        value: filteredItems[activeItem],
+        setTeamData}
       );
-    } else if (e.keyCode === 27) {
+    } else if (e.key === 'Esc') {
       // if press "esc" key
       setState((prevState) => ({
         ...prevState,
@@ -182,7 +209,7 @@ const ViewTeamEditMember = ({
     }
   };
 
-  const handleBlur = (event) => {
+  const handleBlur = (event: FocusEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     const trimmedValue = value.trim();
 
@@ -193,10 +220,10 @@ const ViewTeamEditMember = ({
       displayItems: false,
     }));
 
-    onFormChange(teamIndex, pokeIndex, name, trimmedValue, setTeamData);
+    onFormChange({teamIndex, pokeIndex, name, value:trimmedValue, setTeamData});
   };
 
-  const hasError = (field, index) => {
+  const hasError = (field: string, index: number) : boolean => {
     if (
       errorData &&
       errorData.some(
@@ -205,6 +232,7 @@ const ViewTeamEditMember = ({
     ) {
       return true;
     }
+    else return false;
   };
 
   return (

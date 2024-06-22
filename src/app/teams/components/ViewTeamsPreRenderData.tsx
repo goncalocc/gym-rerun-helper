@@ -1,37 +1,50 @@
-'use client';
-
 import React, { useState, useEffect } from 'react';
 import ViewTeams from './ViewTeams';
+import { Teams, Team } from '../../types/types';
 
-const fetchLocalStorageTeams = () => {
+export type HandleTeamsUpdate = (
+  newTeam: Team[],
+  newSubteam: Team[],
+  indexUpdatedTeam: number,
+  newTeams: Teams[] | null,
+) => void;
+
+const fetchLocalStorageTeams = (): Teams[] | null => {
   try {
     const data = localStorage.getItem('gymRerunTeam');
     if (!data) {
       throw new Error('Data not found in localStorage');
     }
     return JSON.parse(data);
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error fetching data from localStorage:', error.message);
     return null;
   }
 };
 
-const ViewTeamsPreRenderData = () => {
-  const [teamsData, setTeamsData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+const ViewTeamsPreRenderData: React.FC = () => {
+  const [teamsData, setTeamsData] = useState<Teams[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const localStorageData = fetchLocalStorageTeams();
-    setTeamsData(localStorageData);
+    if (localStorageData) {
+      setTeamsData(localStorageData);
+    }
     setIsLoading(false);
   }, []);
 
-  const handleTeamsUpdate = (newTeam, newSubteam, indexUpdatedTeam, newTeams) => {
+  const handleTeamsUpdate: HandleTeamsUpdate = (
+    newTeam,
+    newSubteam,
+    indexUpdatedTeam,
+    newTeams,
+  ) => {
     setTeamsData((prevTeams) => {
-      if(newTeams){
+      if (newTeams) {
         console.log('updatedTeams: ', newTeams);
-      // Return the updated state
-      localStorage.setItem('gymRerunTeam', JSON.stringify(newTeams));
+        // Return the updated state
+        localStorage.setItem('gymRerunTeam', JSON.stringify(newTeams));
         return newTeams;
       }
       // Make a shallow copy of the previous state
@@ -42,10 +55,7 @@ const ViewTeamsPreRenderData = () => {
         !Array.isArray(updatedTeams[indexUpdatedTeam].team) ||
         !Array.isArray(updatedTeams[indexUpdatedTeam].subteam)
       ) {
-        console.error(
-          'Invalid team structure at teamIndex:',
-          indexUpdatedTeam,
-        );
+        console.error('Invalid team structure at teamIndex:', indexUpdatedTeam);
         throw new Error('Invalid team structure');
       }
       // Set the updated team array back to the updatedTeams object
@@ -59,7 +69,7 @@ const ViewTeamsPreRenderData = () => {
       localStorage.setItem('gymRerunTeam', JSON.stringify(updatedTeams));
       return updatedTeams;
     });
-  }
+  };
 
   if (isLoading) {
     return <p>Loading teams data...</p>;
@@ -67,7 +77,11 @@ const ViewTeamsPreRenderData = () => {
 
   return (
     <main>
-      <ViewTeams localStorageData={teamsData} setTeamsData={setTeamsData} handleTeamsUpdate={handleTeamsUpdate} />
+      <ViewTeams
+        localStorageData={teamsData}
+        setTeamsData={setTeamsData}
+        handleTeamsUpdate={handleTeamsUpdate}
+      />
     </main>
   );
 };

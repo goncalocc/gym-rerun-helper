@@ -1,31 +1,33 @@
 import Icon from '../../components/Icon';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import ViewTeamDetails from './ViewTeamDetails';
 import Svg from '@/app/components/Svg';
 import deleteTeam from './DeleteTeam';
 import AddTeam from './AddTeam';
+import { Teams, SetTeamsData } from '../../types/types';
+import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 
-export const ViewTeams = ({
+interface ViewTeamsProps {
+  localStorageData: Teams[];
+  setTeamsData: SetTeamsData;
+  handleTeamsUpdate: HandleTeamsUpdate;
+}
+
+
+export const ViewTeams: React.FC<ViewTeamsProps> = ({
   localStorageData: teamsData,
-  handleTeamsUpdate,
   setTeamsData: externalSetTeamsData,
+  handleTeamsUpdate,
 }) => {
-  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [selectedTeam, setSelectedTeam] = useState<number | null>(null);
 
-  const handleClickDetails = (index) => {
+  const handleClickDetails = (index: number) => {
     setSelectedTeam(selectedTeam === index ? null : index);
   };
 
   if (!Array.isArray(teamsData) || teamsData.length === 0) {
     return <p>No teams data available.</p>;
   }
-
-  const handleAddTeam = (teamsData, setTeamsData) => {
-    addTeam(setTeamsData);
-    console.log('teams data, ', teamsData);
-    //add logic here with handle update
-    handleTeamsUpdate('', '', '', teamsData);
-  };
 
   return (
     <main>
@@ -55,12 +57,12 @@ export const ViewTeams = ({
                 </button>
                 <button
                   onClick={() =>
-                    deleteTeam(
+                    deleteTeam({
                       teamsData,
-                      externalSetTeamsData,
+                      setTeamsData: externalSetTeamsData,
                       index,
                       handleTeamsUpdate,
-                    )
+                    })
                   }
                 >
                   <Svg key={index} name="trash-grey" size={40} color="brown" />

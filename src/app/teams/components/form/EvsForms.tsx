@@ -1,4 +1,14 @@
-const EvsForm = ({
+interface EvsFormProps {
+  title: string;
+  value: number;
+  nameId: string;
+  pokeIndex: number;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+  hasError: (field: string, index: number) => boolean;
+}
+
+const EvsForm: React.FC<EvsFormProps> = ({
   title,
   value,
   nameId,

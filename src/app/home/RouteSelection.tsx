@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export const RouteSelection = () => {
+export const RouteSelection: React.FC = () => {
   const routes = ['Route 1', 'Route 2', 'Route 3'];
 
-  const [selectedRoute, setSelectedRoute] = useState('Choose Route');
+  const [selectedRoute, setSelectedRoute] = useState<string>('Choose Route');
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleRouteChange = (route) => {
+  const handleRouteChange = (route: string) => {
     setSelectedRoute(route);
     setOpen(false);
   };

@@ -1,6 +1,10 @@
 import gyms from '../../data/gym-variations.json';
 
-export const GeneralTab = (props) => {
+type GeneralTabProps = {
+  navItems: string;
+};
+
+export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
   const { navItems } = props;
 
   return (

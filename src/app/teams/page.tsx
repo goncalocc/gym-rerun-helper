@@ -3,10 +3,10 @@
 import Navbar from '../components/NavBar';
 import ViewTeamsPreRenderData from './components/ViewTeamsPreRenderData';
 
-const ViewTeamsPage = () => {
+const ViewTeamsPage: React.FC = () => {
     return (
         <main>
-            <Navbar />
+            {/* <Navbar /> */}
             <ViewTeamsPreRenderData />
         </main>
     );

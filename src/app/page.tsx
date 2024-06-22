@@ -1,13 +1,13 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from 'react';
-
 import { MainView } from '@/app/home/MainView';
 import { Selection } from '@/app/home/Selection';
-
 import jsonTeams from './data/default-team.json';
+import { Teams } from './types/types'; 
 
-export default function Home() {
+const Home: React.FC = () => {
+  const [teams, setTeams] = useState<Teams[]>([]); 
 
   const createTeamToLocalStorage = () => {
     localStorage.setItem('gymRerunTeam', JSON.stringify(jsonTeams));
@@ -16,16 +16,20 @@ export default function Home() {
   const loadTeamsFromLocalStorage = () => {
     const storedTeams = localStorage.getItem('gymRerunTeam');
     if (storedTeams) {
-      setTeams(storedTeams);
+      try {
+        setTeams(JSON.parse(storedTeams) as Teams[]); 
+      } catch (error) {
+        console.error('Error parsing stored teams:', error);
+        createTeamToLocalStorage();
+      }
+    } else {
+      createTeamToLocalStorage();
     }
-    else createTeamToLocalStorage();
   };
 
   useEffect(() => {
     loadTeamsFromLocalStorage();
   }, []);
-
-  const [teams, setTeams] = useState([]);
 
   return (
     <main className="flex flex-col items-center">
@@ -34,4 +38,6 @@ export default function Home() {
       <MainView />
     </main>
   );
-}
+};
+
+export default Home;

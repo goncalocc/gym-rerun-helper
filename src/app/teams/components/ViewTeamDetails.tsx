@@ -2,20 +2,29 @@ import { useState } from 'react';
 import ViewTeamDetailsInfo from './ViewTeamDetailsInfo';
 import ViewTeamDetailOptions from './ViewTeamDetailOptions';
 import ViewTeamEditMain from './ViewTeamEditMain';
+import { Teams, Team } from '../../types/types';
+import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 
-const ViewTeamDetails = ({
+interface ViewTeamDetailsProps {
+  team: Teams;
+  index: number;
+  teams: Teams[];
+  handleTeamsUpdate: HandleTeamsUpdate;
+}
+
+const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
   team: team,
   index: index,
   teams: teams,
   handleTeamsUpdate: handleTeamsUpdate,
 }) => {
-  const [editMode, setEditMode] = useState(false);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
-  const closeEdit = () => {
+  const closeEdit: () => void = () => {
     setEditMode(false);
   };
 
-  const handleClickEdit = () => {
+  const handleClickEdit: () => void = () => {
     setEditMode(true);
   };
 
@@ -27,14 +36,13 @@ const ViewTeamDetails = ({
             details={team}
             index={index}
             onClose={closeEdit}
-            teams={teams}
             handleTeamsUpdate={handleTeamsUpdate}
           />
         </>
       ) : (
         <>
           <ViewTeamDetailOptions handleClick={handleClickEdit} />
-          <ViewTeamDetailsInfo team={team}/>
+          <ViewTeamDetailsInfo team={team} />
         </>
       )}
     </div>

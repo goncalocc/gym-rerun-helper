@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
-export const TeamSelection = () => {
+export const TeamSelection: React.FC = () => {
   const teams = ['Team 4', 'Team 2', 'Team 3'];
 
-  const [selectedTeam, setSelectedTeam] = useState('Choose Team');
+  const [selectedTeam, setSelectedTeam] = useState<string>('Choose Team');
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleTeamChange = (team) => {
+  const handleTeamChange = (team: string) => {
     setSelectedTeam(team);
     setOpen(false);
   };

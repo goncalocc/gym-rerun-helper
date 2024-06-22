@@ -1,4 +1,10 @@
-const ViewTeamDetailsInfo = ({ team: team }) => {
+import { Teams } from '../../types/types';
+
+interface ViewTeamDetailsInfoProps {
+  team: Teams
+}
+
+const ViewTeamDetailsInfo: React.FC<ViewTeamDetailsInfoProps> = ({ team: team }) => {
   return (
     <main>
       <div className="grid grid-cols-2 gap-4 rounded-md bg-zinc-600 p-4">

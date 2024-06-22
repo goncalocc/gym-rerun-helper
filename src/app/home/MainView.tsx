@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export const MainView = () => {
+export const MainView: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <Link

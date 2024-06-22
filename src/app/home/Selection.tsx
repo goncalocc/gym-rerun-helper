@@ -2,7 +2,7 @@
 import { TeamSelection } from './TeamSelection';
 import { RouteSelection } from './RouteSelection';
 
-export const Selection = () => {
+export const Selection: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <TeamSelection />

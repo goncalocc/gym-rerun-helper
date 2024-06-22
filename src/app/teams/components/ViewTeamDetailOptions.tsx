@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 
-const ViewTeamDetailOptions = ({ handleClick: handleClickEdit }) => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+interface ViewTeamDetailOptionsProps {
+  handleClick: () => void;
+}
+
+const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
+  handleClick: handleClickEdit,
+}) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);

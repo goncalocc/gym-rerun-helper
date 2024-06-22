@@ -1,11 +1,13 @@
 // components/Icon.js
 import React, { Suspense } from 'react';
 
-// const Icon = ({ name, size = 24, color = 'black' }) => {
-//     // Dynamic import based on the name
-//     const IconComponent = React.lazy(async () => (await import(`../../../public/icons/${name}.png`)));
+interface IconProps {
+  name: string;
+  size: number;
+  color: string;
+}
 
-const Icon = React.memo(({ name, size = 24 }) => {
+const Icon: React.FC<IconProps> = React.memo(({ name, size = 24 }) => {
   const IconComponent = React.lazy(async () => {
     const src = `/icons/${name}.png`;
     return {
@@ -15,7 +17,7 @@ const Icon = React.memo(({ name, size = 24 }) => {
 
   return (
     <Suspense fallback={<div> </div>}>
-      <IconComponent width={size} height={size} />
+      <IconComponent />
     </Suspense>
   );
 });
