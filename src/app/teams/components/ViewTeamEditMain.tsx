@@ -6,12 +6,14 @@ import AddMember from './AddMember';
 import Svg from '../../components/Svg';
 import { Teams, Team, EVs, IVs } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
+import { NotificationParams } from './ViewTeams';
 
 interface ViewTeamEditMainProps {
   details: Teams;
   index: number;
   onClose: () => void;
   handleTeamsUpdate: HandleTeamsUpdate;
+  setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 }
 
 export interface ErrorData {
@@ -40,6 +42,15 @@ export interface OnFormChangeProps {
   setTeamData: React.Dispatch<React.SetStateAction<Team[]>>;
 }
 
+interface OnTitleChange {
+  (
+    params: {
+      teamIndex: number;
+    },
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void;
+}
+
 export type OnFormChange = (params: OnFormChangeProps) => void;
 
 type TeamField = keyof Team;
@@ -50,7 +61,9 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
   index: teamIndex,
   onClose: closeEdit,
   handleTeamsUpdate: handleTeamsUpdate,
+  setNotification: setNotification,
 }) => {
+  const [teamName, setTeamName] = useState<string>(props.teamname);
   const [teamData, setTeamData] = useState<Team[]>(props.team);
   const [subteamData, setSubteamData] = useState<Team[]>(props.subteam);
   const [selectedTeam, setSelectedTeam] = useState<number[]>([]);
@@ -102,6 +115,13 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
       return true;
     }
     return false;
+  };
+
+  const onTitleChange: OnTitleChange = ({ teamIndex }, event) => {
+    const { name, value } = event.target;
+    setTeamName(value);
+    setIndexUpdatedTeam(teamIndex);
+    handleEnableButton();
   };
 
   const onFormChange: OnFormChange = ({
@@ -156,8 +176,26 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
     try {
       //first, makes validations
       validateTeams({ teamData, subteamData });
-      handleTeamsUpdate(teamData, subteamData, indexUpdatedTeam, null);
+      handleTeamsUpdate(
+        teamData,
+        subteamData,
+        teamName,
+        indexUpdatedTeam,
+        null,
+      );
+
+      setNotification({
+        message: 'Team edited successfully',
+        type: 'success',
+        visible: true,
+      });
+
+      setTimeout(() => {
+        setNotification({ message: '', type: '', visible: false });
+      }, 3000);
+
       setIsSaved(true);
+
       // }
     } catch (error: any) {
       // Handle validation errors
@@ -181,12 +219,24 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
           X
         </button>
         <div className="max-h-[70vh] overflow-y-auto">
+          <div className="mb-4 flex justify-center">
+            <input
+              className="rounded border border-gray-300 p-2 text-center text-black"
+              type="text"
+              value={teamName}
+              style={{ width: '160px', height: '35px' }}
+              name="teamname"
+              id="teamname"
+              onChange={(e) => onTitleChange({ teamIndex }, e)}
+              autoComplete="off"
+            />
+          </div>
           <ul>
             {teamData.map((member, index) => (
               <div key={index}>
                 <div className="mb-4 flex justify-center">
                   <button
-                    className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain({ errorData: errorData.subteam, index }) ? 'border-2 border-red-600' : ''}`}
+                    className={`w-56 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700 ${hasErrorMain({ errorData: errorData.team, index }) ? 'border-2 border-red-600' : ''}`}
                     onClick={() =>
                       handleMemberDetails({
                         selectedMembers: selectedTeam,
@@ -246,7 +296,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                       onClick={() =>
                         handleMemberDetails({
                           selectedMembers: selectedSubteam,
-                          setSelectedMembers: setSelectedTeam,
+                          setSelectedMembers: setSelectedSubteam,
                           index: index,
                         })
                       }
@@ -256,7 +306,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                     <button
                       onClick={() =>
                         deleteMember({
-                          setTeamData:setSubteamData,
+                          setTeamData: setSubteamData,
                           index,
                           handleEnableButton,
                           isSubteam: false,

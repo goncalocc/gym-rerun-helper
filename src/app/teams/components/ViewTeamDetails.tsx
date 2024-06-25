@@ -2,14 +2,17 @@ import { useState } from 'react';
 import ViewTeamDetailsInfo from './ViewTeamDetailsInfo';
 import ViewTeamDetailOptions from './ViewTeamDetailOptions';
 import ViewTeamEditMain from './ViewTeamEditMain';
-import { Teams, Team } from '../../types/types';
+import { Teams } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
+import { NotificationParams } from './ViewTeams';
 
 interface ViewTeamDetailsProps {
   team: Teams;
   index: number;
   teams: Teams[];
   handleTeamsUpdate: HandleTeamsUpdate;
+  setSelectedTeam: React.Dispatch<React.SetStateAction<number | null>>;
+  setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 }
 
 const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
@@ -17,8 +20,11 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
   index: index,
   teams: teams,
   handleTeamsUpdate: handleTeamsUpdate,
+  setSelectedTeam: setSelectedTeam,
+  setNotification: setNotification,
 }) => {
   const [editMode, setEditMode] = useState<boolean>(false);
+  const [teamsData, setTeamsData] = useState<Teams[]>(teams);
 
   const closeEdit: () => void = () => {
     setEditMode(false);
@@ -37,11 +43,20 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
             index={index}
             onClose={closeEdit}
             handleTeamsUpdate={handleTeamsUpdate}
+            setNotification={setNotification}
           />
         </>
       ) : (
         <>
-          <ViewTeamDetailOptions handleClick={handleClickEdit} />
+          <ViewTeamDetailOptions
+            handleClick={handleClickEdit}
+            teamsData={teams}
+            clonedTeam={team}
+            externalSetTeamsData={setTeamsData}
+            handleTeamsUpdate={handleTeamsUpdate}
+            setSelectedTeam={setSelectedTeam}
+            setNotification={setNotification}
+          />
           <ViewTeamDetailsInfo team={team} />
         </>
       )}

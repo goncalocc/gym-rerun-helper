@@ -6,6 +6,7 @@ import deleteTeam from './DeleteTeam';
 import AddTeam from './AddTeam';
 import { Teams, SetTeamsData } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
+import NotificationBar from './NotificationBar';
 
 interface ViewTeamsProps {
   localStorageData: Teams[];
@@ -13,12 +14,22 @@ interface ViewTeamsProps {
   handleTeamsUpdate: HandleTeamsUpdate;
 }
 
+export interface NotificationParams {
+  message: string;
+  type: string;
+  visible: boolean;
+}
 
 export const ViewTeams: React.FC<ViewTeamsProps> = ({
   localStorageData: teamsData,
   setTeamsData: externalSetTeamsData,
   handleTeamsUpdate,
 }) => {
+  const [notification, setNotification] = useState<NotificationParams>({
+    message: '',
+    type: '',
+    visible: false,
+  });
   const [selectedTeam, setSelectedTeam] = useState<number | null>(null);
 
   const handleClickDetails = (index: number) => {
@@ -29,9 +40,22 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
     return <p>No teams data available.</p>;
   }
 
+  const closeNotification = () => {
+    setNotification({ message: '', type: '', visible: false });
+  };
+
   return (
     <main>
       <div>
+        <div className="relative">
+          {notification.visible && (
+            <NotificationBar
+              message={notification.message}
+              type={notification.type}
+              onClose={closeNotification}
+            />
+          )}
+        </div>
         {teamsData.map((team, index) => (
           <div
             key={index}
@@ -62,6 +86,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                       setTeamsData: externalSetTeamsData,
                       index,
                       handleTeamsUpdate,
+                      setNotification
                     })
                   }
                 >
@@ -74,6 +99,8 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                   index={index}
                   teams={teamsData}
                   handleTeamsUpdate={handleTeamsUpdate}
+                  setSelectedTeam={setSelectedTeam}
+                  setNotification={setNotification}
                 />
               )}
             </div>
@@ -84,6 +111,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
             teamsData={teamsData}
             externalSetTeamsData={externalSetTeamsData}
             handleTeamsUpdate={handleTeamsUpdate}
+            setNotification={setNotification}
           />
         </div>
       </div>

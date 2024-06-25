@@ -1,4 +1,11 @@
-import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent, FocusEvent } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  ChangeEvent,
+  KeyboardEvent,
+  FocusEvent,
+} from 'react';
 import SuggestionBox from './form/SuggestionBox';
 import pokemonData from '../../data/PokemonDictionary';
 import itemsData from '../../data/ItemsDictionary';
@@ -7,9 +14,8 @@ import abilitiesData from '../../data/AbilityDictionary';
 import naturesData from '../../data/NatureDictionary';
 import EvsForm from './form/EvsForms';
 import IvsForm from './form/IvsForm';
-import {OnFormChange, ErrorData} from './ViewTeamEditMain';
-import {Team} from '../../types/types';
-
+import { OnFormChange, ErrorData } from './ViewTeamEditMain';
+import { Team } from '../../types/types';
 
 interface ViewTeamEditMemberProps {
   index: number;
@@ -86,7 +92,6 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
     },
   ];
 
-
   const [state, setState] = useState<State>({
     activeItem: 0,
     filteredItems: [],
@@ -94,11 +99,13 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
     inputName: '',
   });
 
-  const itemRefs = useRef<(HTMLLIElement | null)[]>(Array(state.filteredItems.length).fill(null));
+  const itemRefs = useRef<(HTMLLIElement | null)[]>(
+    Array(state.filteredItems.length).fill(null),
+  );
 
   useEffect(() => {
     // Scroll the active item into view
-    const activeRef = itemRefs.current[state.activeItem]
+    const activeRef = itemRefs.current[state.activeItem];
     if (activeRef) {
       activeRef.scrollIntoView({
         behavior: 'smooth',
@@ -135,20 +142,26 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
     }));
 
     // Call onFormChange with the updated state
-    onFormChange({teamIndex, pokeIndex, name, value, setTeamData});
+    onFormChange({ teamIndex, pokeIndex, name, value, setTeamData });
     handleEnableButton();
   };
 
   const handleClick = (event: React.MouseEvent<HTMLLIElement>): void => {
     const value = event.currentTarget.innerText;
-    setState((prevState) =>({
+    setState((prevState) => ({
       activeItem: 0,
       filteredItems: [],
       inputName: prevState.inputName,
       displayItems: false,
     }));
 
-    onFormChange({teamIndex, pokeIndex, name: state.inputName, value, setTeamData});
+    onFormChange({
+      teamIndex,
+      pokeIndex,
+      name: state.inputName,
+      value,
+      setTeamData,
+    });
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -164,13 +177,13 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
         displayItems: false,
         inputName: name,
       }));
-      onFormChange(
-        {teamIndex,
+      onFormChange({
+        teamIndex,
         pokeIndex,
         name,
         value: filteredItems[activeItem],
-        setTeamData}
-      );
+        setTeamData,
+      });
     } else if (e.key === 'Esc') {
       // if press "esc" key
       setState((prevState) => ({
@@ -220,10 +233,16 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
       displayItems: false,
     }));
 
-    onFormChange({teamIndex, pokeIndex, name, value:trimmedValue, setTeamData});
+    onFormChange({
+      teamIndex,
+      pokeIndex,
+      name,
+      value: trimmedValue,
+      setTeamData,
+    });
   };
 
-  const hasError = (field: string, index: number) : boolean => {
+  const hasError = (field: string, index: number): boolean => {
     if (
       errorData &&
       errorData.some(
@@ -231,8 +250,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
       )
     ) {
       return true;
-    }
-    else return false;
+    } else return false;
   };
 
   return (

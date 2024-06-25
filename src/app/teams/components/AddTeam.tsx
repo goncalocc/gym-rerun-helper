@@ -1,19 +1,22 @@
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { Teams, Team, SetTeamsData } from '../../types/types';
+import { NotificationParams } from './ViewTeams';
 
 interface AddTeamProps {
   teamsData: Teams[];
   externalSetTeamsData: SetTeamsData;
   handleTeamsUpdate: HandleTeamsUpdate;
+  setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 }
 
 export const AddTeam: React.FC<AddTeamProps> = ({
   teamsData,
   externalSetTeamsData,
   handleTeamsUpdate,
+  setNotification,
 }) => {
   const newTeam = {
-    teamname: 'testing',
+    teamname: `Team #${teamsData.length +1}`,
     team: [
       {
         pokemon: 'Abra',
@@ -55,12 +58,23 @@ export const AddTeam: React.FC<AddTeamProps> = ({
     const defaultNewTeam: Team[] = [];
     const defaultNewSubteam: Team[] = [];
     const defaultIndexUpdatedTeam = -1;
+    const defaultTeamName = "placeholder string";
     handleTeamsUpdate(
       defaultNewTeam,
       defaultNewSubteam,
+      defaultTeamName,
       defaultIndexUpdatedTeam,
       currentTeams,
     );
+    setNotification({
+      message: 'New Team Added successfully',
+      type: 'success',
+      visible: true,
+    });
+
+    setTimeout(() => {
+      setNotification({ message: '', type: '', visible: false });
+    }, 3000);
   };
 
   return (

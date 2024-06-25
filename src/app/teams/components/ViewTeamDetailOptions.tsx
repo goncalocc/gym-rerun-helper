@@ -1,16 +1,78 @@
 import React, { useState } from 'react';
+import { Teams, Team, SetTeamsData } from '../../types/types';
+import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
+import { NotificationParams } from './ViewTeams';
 
 interface ViewTeamDetailOptionsProps {
   handleClick: () => void;
+  teamsData: Teams[];
+  clonedTeam: Teams;
+  externalSetTeamsData: SetTeamsData;
+  handleTeamsUpdate: HandleTeamsUpdate;
+  setSelectedTeam: React.Dispatch<React.SetStateAction<number | null>>;
+  setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
+}
+
+interface HandleDuplicateTeamParams {
+  (params: {
+    teamsData: Teams[];
+    externalSetTeamsData: SetTeamsData;
+    handleTeamsUpdate: HandleTeamsUpdate;
+    teamData: Teams;
+  }): void;
 }
 
 const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
   handleClick: handleClickEdit,
+  teamsData: teamsData,
+  clonedTeam: teamData,
+  externalSetTeamsData: setTeamsData,
+  handleTeamsUpdate: handleTeamsUpdate,
+  setSelectedTeam: setSelectedTeam,
+  setNotification: setNotification,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleDuplicateTeam: HandleDuplicateTeamParams = ({
+    teamsData,
+    externalSetTeamsData,
+    handleTeamsUpdate,
+    teamData,
+  }) => {
+    const currentTeams = [...teamsData];
+    currentTeams.push(teamData);
+    externalSetTeamsData((prevData) => {
+      const newArray = [...prevData, teamData];
+      console.log('Adding team ', newArray);
+      return newArray;
+    });
+    // Default placeholder values to satisfy the function signature
+    const defaultNewTeam: Team[] = [];
+    const defaultNewSubteam: Team[] = [];
+    const defaultIndexUpdatedTeam = -1;
+    const defaultTeamName = 'placeholder string';
+    handleTeamsUpdate(
+      defaultNewTeam,
+      defaultNewSubteam,
+      defaultTeamName,
+      defaultIndexUpdatedTeam,
+      currentTeams,
+    );
+    setSelectedTeam(null);
+    
+    setNotification({
+      message: 'Team copied successfully',
+      type: 'success',
+      visible: true,
+    });
+
+    setTimeout(() => {
+      setNotification({ message: '', type: '', visible: false });
+    }, 3000);
   };
 
   return (
@@ -57,6 +119,19 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
         </button>
         <button className="btn-import rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700">
           Copy Team
+        </button>
+        <button
+          onClick={() =>
+            handleDuplicateTeam({
+              teamsData,
+              externalSetTeamsData: setTeamsData,
+              handleTeamsUpdate,
+              teamData,
+            })
+          }
+          className="btn-duplicate rounded bg-red-500 px-4 py-2 text-white hover:bg-red-700"
+        >
+          Duplicate Team
         </button>
       </div>
     </main>

@@ -3,8 +3,9 @@ import ViewTeams from './ViewTeams';
 import { Teams, Team } from '../../types/types';
 
 export type HandleTeamsUpdate = (
-  newTeam: Team[],
-  newSubteam: Team[],
+  updatedTeam: Team[],
+  updatedSubteam: Team[],
+  updatedTeamname: string,
   indexUpdatedTeam: number,
   newTeams: Teams[] | null,
 ) => void;
@@ -35,8 +36,9 @@ const ViewTeamsPreRenderData: React.FC = () => {
   }, []);
 
   const handleTeamsUpdate: HandleTeamsUpdate = (
-    newTeam,
-    newSubteam,
+    updatedTeam,
+    updatedSubteam,
+    updatedTeamname,
     indexUpdatedTeam,
     newTeams,
   ) => {
@@ -61,8 +63,9 @@ const ViewTeamsPreRenderData: React.FC = () => {
       // Set the updated team array back to the updatedTeams object
       updatedTeams[indexUpdatedTeam] = {
         ...updatedTeams[indexUpdatedTeam],
-        team: newTeam,
-        subteam: newSubteam,
+        team: updatedTeam,
+        subteam: updatedSubteam,
+        teamname: updatedTeamname,
       };
       console.log('updatedTeams: ', updatedTeams);
       // Return the updated state
