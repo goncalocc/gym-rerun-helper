@@ -7,6 +7,7 @@ import AddTeam from './AddTeam';
 import { Teams, SetTeamsData } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import NotificationBar from './NotificationBar';
+import { useRouter } from 'next/navigation';
 
 interface ViewTeamsProps {
   localStorageData: Teams[];
@@ -31,6 +32,11 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
     visible: false,
   });
   const [selectedTeam, setSelectedTeam] = useState<number | null>(null);
+  const router = useRouter();
+
+  const handleNavigation = (path: string) => {
+    router.push(path);
+  };
 
   const handleClickDetails = (index: number) => {
     setSelectedTeam(selectedTeam === index ? null : index);
@@ -55,6 +61,11 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
               onClose={closeNotification}
             />
           )}
+        </div>
+        <div className= "mt-12 mb-4 ml-80 flex justify-left space-x-4">
+          <button className="btn-backup rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700"
+          onClick={()=> handleNavigation('/backup')}
+          >Import/Export Teams</button>
         </div>
         {teamsData.map((team, index) => (
           <div

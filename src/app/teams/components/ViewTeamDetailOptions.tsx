@@ -63,7 +63,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
       currentTeams,
     );
     setSelectedTeam(null);
-    
+
     setNotification({
       message: 'Team copied successfully',
       type: 'success',
@@ -117,10 +117,8 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
         >
           Edit
         </button>
-        <button className="btn-import rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700">
-          Copy Team
-        </button>
         <button
+          className="btn-copyteam rounded bg-green-500 px-4 py-2 text-white hover:bg-green-700"
           onClick={() =>
             handleDuplicateTeam({
               teamsData,
@@ -129,9 +127,8 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
               teamData,
             })
           }
-          className="btn-duplicate rounded bg-red-500 px-4 py-2 text-white hover:bg-red-700"
         >
-          Duplicate Team
+          Copy Team
         </button>
       </div>
     </main>
