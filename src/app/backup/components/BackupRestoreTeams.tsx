@@ -16,67 +16,106 @@ const fetchLocalStorageTeams = (): Teams[] | null => {
   }
 };
 
-const convertStringToObject = (stringData: string[], teamsData: Teams[]) =>{
-  //desconstruir o Teams Data e usar regex para fazer set em cada campo específico
-  return teamsData;
-}
-
-const convertObjectToString = (localStorageData: Teams[]) =>{
- let stringData
-  const objectData = [...localStorageData];
- for(let i=0; i < objectData.length; i++) {
-
- }
-}
-
 const BackupRestoreTeams: React.FC = () => {
-  const [text, setText] = useState<string>('Hello World'); //all teams object in string
-  const [teamsData, setTeamsData] = useState<Teams[]>(); 
+  const [teamsData, setTeamsData] = useState<Teams[]>();
+  const [setText] = useState<string>(''); //all teams object in string
+  const [formattedText, setFormattedText] = useState<string>(''); //all teams object in string
 
   useEffect(() => {
     const localStorageData = fetchLocalStorageTeams();
     if (localStorageData) {
       setTeamsData(localStorageData);
+      //format evs and ivs
+      const formatStats = (stats: { [key: string]: number }) => {
+        return Object.entries(stats)
+          .map(([key, value]) => `${key}: ${value}`)
+          .join(', ');
+      };
+
+      // Format the data for display
+    // Format the data for display
+    const text = localStorageData.map((team, index) => {
+      // Convert each team object to a formatted string
+      const teamInfo = [
+        `Team Name: ${team.teamname}`,
+        `Team: ${team.team.map(t => `
+  Pokemon: ${t.pokemon}
+  Ability: ${t.ability}
+  Nature: ${t.nature}
+  Item: ${t.item}
+  EVs: ${formatStats(t.evs)}
+  IVs: ${formatStats(t.ivs)}
+  Moveset: ${t.moveset.join(', ')}`).join('\n')}`,
+        `Subteam: ${team.subteam.map(t => `
+  Pokemon: ${t.pokemon}
+  Ability: ${t.ability}
+  Nature: ${t.nature}
+  Item: ${t.item}
+  EVs: ${formatStats(t.evs)}
+  IVs: ${formatStats(t.ivs)}
+  Moveset: ${t.moveset.join(', ')}`).join('\n')}`
+      ].join('\n\n');
+      
+      return `Team ${index + 1}:\n${teamInfo}`;
+    }).join('\n\n---------------------------------------------------------------------------------\n\n'); // Add separators between teams
+      setFormattedText(text);
     }
-    // const stringTeamsData = convertObjectToString(localStorageData);
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(event.target.value);
-  }
+    setFormattedText(event.target.value);
+  };
 
-  const handleSave = () => {
-    console.log("teams object gets updated in the string here")
+  const handleSave = (e: React.FormEvent) => {
+    e.preventDefault();
+    const entryToObject = (entry: string): Teams => {
+      const obj: any = {};
+      const properties = entry.split(', ').map((prop) => prop.trim());
+
+      properties.forEach((prop) => {
+        const [key, value] = prop.split(':').map((part) => part.trim());
+
+        if (key === 'team' || key === 'subteam') {
+          obj[key] = JSON.parse(value.replace(/'/g, '"'));
+        } else {
+          obj[key] = value;
+        }
+      });
+
+      return obj as Teams;
+    };
+    return entryToObject;
     //localstorage update
-    // teamsData = convertStringToObject(); 
-    localStorage.setItem('gymRerunTeam', JSON.stringify(teamsData));
-  }
+    // localStorage.setItem('gymRerunTeam', JSON.stringify(teamsData));
+  };
 
-  const handleCancel = () => {
-    setText('');
-  }
+  // const handleCancel = () => {
+  //   setText('');
+  // };
 
   return (
     <div className="flex h-screen flex-col p-4">
-      <textarea
-        className="w-full flex-grow resize-none rounded border p-2 text-lg text-black"
-        value={text}
-        onChange={(e) => handleChange(e)}
-      />
-      <div className="mt-4 flex justify-end space-x-4">
-        <button
-          className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-          //   onClick={handleSave}
-        >
-          Save
-        </button>
-        <button
-          className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
-          //   onClick={handleCancel}
-        >
-          Cancel
-        </button>
-      </div>
+      <form onSubmit={handleSave} className="flex flex-grow flex-col">
+        <textarea
+          className="w-full flex-grow resize-none rounded border p-2 text-lg text-black"
+          value={formattedText}
+          onChange={(e) => handleChange(e)}
+        />
+        <div className="mt-4 flex justify-end space-x-4">
+          <button
+            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            type="submit"
+          >
+            Save
+          </button>
+          <button
+            className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
+            //   onClick={handleCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
