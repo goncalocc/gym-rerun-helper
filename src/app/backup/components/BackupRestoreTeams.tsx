@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Teams, Team } from '../../types/types';
+import { validateTeams } from '@/app/teams/components/ValidateTeams';
 
 const fetchLocalStorageTeams = (): Teams[] | null => {
   try {
@@ -13,6 +14,119 @@ const fetchLocalStorageTeams = (): Teams[] | null => {
   } catch (error: any) {
     console.error('Error fetching data from localStorage:', error.message);
     return null;
+  }
+};
+
+const parseTeams = (textareaValue: string): Teams[] => {
+  try {
+    const teams: Teams[] = [];
+    const teamStrings = textareaValue
+      .split(
+        '---------------------------------------------------------------------------------',
+      )
+      .map((teamString) => teamString.trim());
+
+    teamStrings.forEach((teamString) => {
+      const lines = teamString
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line);
+      if (lines.length > 0) {
+        const details = lines.slice(1);
+        const obj: Teams = {
+          teamname: '',
+          team: [],
+          subteam: [],
+        };
+        let currentSection: 'team' | 'subteam' | null = null;
+        let currentPokemon: Team | null = null;
+
+        details.forEach((field) => {
+          if (field.startsWith('Team Name:')) {
+            obj.teamname = field.split(':')[1].trim();
+          } else if (field === 'Team:' || field === 'Subteam:') {
+            if (currentPokemon && currentSection) {
+              obj[currentSection].push(currentPokemon);
+            }
+            currentSection = field === 'Team:' ? 'team' : 'subteam';
+            currentPokemon = null;
+          } else if (field.startsWith('Pokemon:')) {
+            if (currentPokemon && currentSection) {
+              obj[currentSection].push(currentPokemon);
+            }
+            currentPokemon = {
+              pokemon: field.split(':')[1].trim(),
+              ability: '',
+              nature: '',
+              item: '',
+              evs: {
+                attack: 0,
+                defense: 0,
+                hp: 0,
+                specialAttack: 0,
+                specialDefense: 0,
+                speed: 0,
+              },
+              ivs: {
+                attack: 0,
+                defense: 0,
+                hp: 0,
+                specialAttack: 0,
+                specialDefense: 0,
+                speed: 0,
+              },
+              moveset: [],
+            };
+          } else if (currentPokemon) {
+            if (field.startsWith('Ability:')) {
+              currentPokemon.ability = field.split(':')[1].trim();
+            } else if (field.startsWith('Nature:')) {
+              currentPokemon.nature = field.split(':')[1].trim();
+            } else if (field.startsWith('Item:')) {
+              currentPokemon.item = field.split(':')[1].trim();
+            } else if (field.startsWith('EVs:')) {
+              const evsString = field.slice(field.indexOf(':') + 1).trim();
+              const evsArray = evsString
+                .split(',')
+                .map((ev) => ev.split(':').map((part) => part.trim()));
+              evsArray.forEach((ev) => {
+                if (currentPokemon) {
+                  const value = ev[1] ? parseInt(ev[1]) : 0;
+                  currentPokemon.evs[ev[0]] = value;
+                }
+              });
+            } else if (field.startsWith('IVs:')) {
+              const ivsString = field.slice(field.indexOf(':') + 1).trim();
+              const ivsArray = ivsString
+                .split(',')
+                .map((iv) => iv.split(':').map((part) => part.trim()));
+              ivsArray.forEach((iv) => {
+                if (currentPokemon) {
+                  const value = iv[1] ? parseInt(iv[1]) : 0;
+                  currentPokemon.ivs[iv[0]] = value;
+                }
+              });
+            } else if (field.startsWith('Moveset:')) {
+              currentPokemon.moveset = field
+                .split(':')[1]
+                .split(',')
+                .map((move) => move.trim());
+            }
+          }
+        });
+
+        if (currentPokemon && currentSection) {
+          (obj[currentSection] as Team[]).push(currentPokemon);
+        }
+        // Pass the object to the function
+        validateTeams({ teamData: obj.team, subteamData: obj.subteam });
+        teams.push(obj);
+      }
+    });
+
+    return teams;
+  } catch (error: any) {
+    throw new Error('Invalid team data');
   }
 };
 
@@ -33,31 +147,43 @@ const BackupRestoreTeams: React.FC = () => {
       };
 
       // Format the data for display
-    // Format the data for display
-    const text = localStorageData.map((team, index) => {
-      // Convert each team object to a formatted string
-      const teamInfo = [
-        `Team Name: ${team.teamname}`,
-        `Team: ${team.team.map(t => `
+      // Format the data for display
+      const text = localStorageData
+        .map((team, index) => {
+          // Convert each team object to a formatted string
+          const teamInfo = [
+            `Team Name: ${team.teamname}`,
+            `Team: ${team.team
+              .map(
+                (t) => `
   Pokemon: ${t.pokemon}
   Ability: ${t.ability}
   Nature: ${t.nature}
   Item: ${t.item}
   EVs: ${formatStats(t.evs)}
   IVs: ${formatStats(t.ivs)}
-  Moveset: ${t.moveset.join(', ')}`).join('\n')}`,
-        `Subteam: ${team.subteam.map(t => `
+  Moveset: ${t.moveset.join(', ')}`,
+              )
+              .join('\n')}`,
+            `Subteam: ${team.subteam
+              .map(
+                (t) => `
   Pokemon: ${t.pokemon}
   Ability: ${t.ability}
   Nature: ${t.nature}
   Item: ${t.item}
   EVs: ${formatStats(t.evs)}
   IVs: ${formatStats(t.ivs)}
-  Moveset: ${t.moveset.join(', ')}`).join('\n')}`
-      ].join('\n\n');
-      
-      return `Team ${index + 1}:\n${teamInfo}`;
-    }).join('\n\n---------------------------------------------------------------------------------\n\n'); // Add separators between teams
+  Moveset: ${t.moveset.join(', ')}`,
+              )
+              .join('\n')}`,
+          ].join('\n\n');
+
+          return `Team ${index + 1}:\n${teamInfo}`;
+        })
+        .join(
+          '\n\n---------------------------------------------------------------------------------\n\n',
+        ); // Add separators between teams
       setFormattedText(text);
     }
   }, []);
@@ -68,30 +194,14 @@ const BackupRestoreTeams: React.FC = () => {
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    const entryToObject = (entry: string): Teams => {
-      const obj: any = {};
-      const properties = entry.split(', ').map((prop) => prop.trim());
-
-      properties.forEach((prop) => {
-        const [key, value] = prop.split(':').map((part) => part.trim());
-
-        if (key === 'team' || key === 'subteam') {
-          obj[key] = JSON.parse(value.replace(/'/g, '"'));
-        } else {
-          obj[key] = value;
-        }
-      });
-
-      return obj as Teams;
-    };
-    return entryToObject;
-    //localstorage update
-    // localStorage.setItem('gymRerunTeam', JSON.stringify(teamsData));
+    try {
+      const strToObj = parseTeams(formattedText);
+      setTeamsData(strToObj);
+      localStorage.setItem('gymRerunTeam', JSON.stringify(strToObj));
+    } catch (error: any) {
+      alert('Invalid Team Data');
+    }
   };
-
-  // const handleCancel = () => {
-  //   setText('');
-  // };
 
   return (
     <div className="flex h-screen flex-col p-4">
