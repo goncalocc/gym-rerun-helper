@@ -1,8 +1,7 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { Teams, Team } from '../../types/types';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
+import { Teams, Team, SetTeamsData } from '../../types/types';
 import { validateTeams } from '@/app/teams/components/ValidateTeams';
+import { NotificationParams } from '../../teams/components/ViewTeams';
 
 const fetchLocalStorageTeams = (): Teams[] | null => {
   try {
@@ -130,15 +129,19 @@ const parseTeams = (textareaValue: string): Teams[] => {
   }
 };
 
-const BackupRestoreTeams: React.FC = () => {
-  const [teamsData, setTeamsData] = useState<Teams[]>();
-  const [setText] = useState<string>(''); //all teams object in string
+interface BackupRestoreTeamsProps {
+  setNotification: Dispatch<SetStateAction<NotificationParams>>;
+  handleClose: () => void;
+  teamsData: Teams[];
+  setTeamsData: SetTeamsData;
+}
+
+
+const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({ setNotification, handleClose, teamsData, setTeamsData }) => {
   const [formattedText, setFormattedText] = useState<string>(''); //all teams object in string
 
   useEffect(() => {
-    const localStorageData = fetchLocalStorageTeams();
-    if (localStorageData) {
-      setTeamsData(localStorageData);
+    if (teamsData) {
       //format evs and ivs
       const formatStats = (stats: { [key: string]: number }) => {
         return Object.entries(stats)
@@ -148,7 +151,7 @@ const BackupRestoreTeams: React.FC = () => {
 
       // Format the data for display
       // Format the data for display
-      const text = localStorageData
+      const text = teamsData
         .map((team, index) => {
           // Convert each team object to a formatted string
           const teamInfo = [
@@ -198,34 +201,56 @@ const BackupRestoreTeams: React.FC = () => {
       const strToObj = parseTeams(formattedText);
       setTeamsData(strToObj);
       localStorage.setItem('gymRerunTeam', JSON.stringify(strToObj));
+      setNotification({
+        message: 'Teams successfully imported',
+        type: 'success',
+        visible: true,
+      });
+  
+      setTimeout(() => {
+        setNotification({ message: '', type: '', visible: false });
+      }, 3000);
+      handleClose();
     } catch (error: any) {
+      setNotification({
+        message: 'Error while importing ',
+        type: 'error',
+        visible: true,
+      });
+      setTimeout(() => {
+        setNotification({ message: '', type: '', visible: false });
+      }, 3000);
       alert('Invalid Team Data');
+      handleClose();
     }
   };
 
   return (
-    <div className="flex h-screen flex-col p-4">
-      <form onSubmit={handleSave} className="flex flex-grow flex-col">
-        <textarea
-          className="w-full flex-grow resize-none rounded border p-2 text-lg text-black"
-          value={formattedText}
-          onChange={(e) => handleChange(e)}
-        />
-        <div className="mt-4 flex justify-end space-x-4">
-          <button
-            className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-            type="submit"
-          >
-            Save
-          </button>
-          <button
-            className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
-            //   onClick={handleCancel}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="h-3/4 w-full max-w-5xl overflow-auto rounded bg-white p-8 shadow-lg">
+        <form onSubmit={handleSave} className="flex h-full flex-col">
+          <textarea
+            className="mb-4 w-full flex-grow resize-none rounded border p-2 text-lg text-black"
+            value={formattedText}
+            onChange={(e) => handleChange(e)}
+          />
+          <div className="mt-4 flex justify-end space-x-4">
+            <button
+              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              type="submit"
+            >
+              Save
+            </button>
+            <button
+              className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
+              type="button"
+              onClick={handleClose}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
