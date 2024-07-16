@@ -31,6 +31,7 @@ export type IVs = {
 // Define the Team type
 export type Team = {
   pokemon: string;
+  nickname: string;
   ability: string;
   nature: string;
   item: string;

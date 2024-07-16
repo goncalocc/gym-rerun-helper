@@ -115,7 +115,8 @@ export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
 
   for (const [key, value] of Object.entries(data)) {
     value.forEach((input: Team, index: number) => {
-      if (!pokemonData.some((element) => element === input.pokemon)) {
+      const pokemonNames = pokemonData.map(p=>p.pokemon);
+      if (!pokemonNames.some((element) => element === input.pokemon)) {
         newErrors[key].push({
           pokemon: index,
           field: 'pokemon',

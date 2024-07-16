@@ -9,6 +9,7 @@ interface AddMemberProps {
 const AddMember = ({ teamData, setTeamData }: AddMemberProps) => {
   const [newMember] = useState({
     pokemon: '',
+    nickname: '',
     ability: '',
     nature: '',
     item: '',

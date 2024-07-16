@@ -1,0 +1,52 @@
+.container {
+  display: flex;
+  margin-left: -1rem;
+}
+
+.variation-container {
+  display: flex;
+  flex-wrap: nowrap; /* Ensure items don't wrap to the next line */
+  justify-content: center; /* Center the team of 6 Pokémon */
+  margin-bottom: 0px; /* Space between variations */
+}
+
+.pokemon-bg {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0; /* You can change the background color as needed */
+}
+
+.pokemon-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.pokemon-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center; /* Center text within each container */
+  margin: 0 10px; /* Adjust margin as needed to space out Pokémon */
+}
+
+.pokemon-stats {
+  margin-top: 1px;
+  background-color: white;
+  padding: 0.125rem 0.25rem;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 0.25rem; /* equivalent to rounded */
+}
+
+
+.text-sm {
+  margin-top: 1px;
+}

@@ -46,7 +46,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
   setTeamData: setTeamData,
 }) => {
   const dictionaries: Record<DictionaryKeys, string[]> = {
-    pokemon: pokemonData,
+    pokemon: pokemonData.map(p=>p.pokemon),
     item: itemsData,
     move: movesData,
     ability: abilitiesData,
@@ -125,7 +125,8 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
         (optionName) =>
           optionName.toLowerCase().indexOf(value.toLowerCase()) > -1,
       );
-    } else if (!(name.startsWith('evs') || name.startsWith('ivs'))) {
+      //Validations that don't require Dictionary to help fill
+    } else if (!(name.startsWith('evs') || name.startsWith('ivs') || name.startsWith('nickname'))) {
       const dictKey = name as DictionaryKeys;
       (filteredItems = dictionaries[dictKey].filter(
         (optionName) =>
@@ -255,9 +256,9 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
 
   return (
     <form>
-      <div className="mb-2 grid grid-cols-2 gap-4">
+      <div className="mb-2 grid grid-cols-2">
         <div className="flex items-center">
-          <label htmlFor="pokemon" className="mr-4 w-24 text-right">
+          <label htmlFor="pokemon" className="mr-4 w-28 text-right">
             Name:
           </label>
           <div className="relative">
@@ -265,7 +266,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
               type="text"
               value={props.pokemon}
               className={`rounded border ${hasError('pokemon', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
-              style={{ width: '160px', height: '35px' }}
+              style={{ width: '80%', height: '35px' }}
               name="pokemon"
               onChange={(e) => handleChange(e)}
               onBlur={handleBlur}
@@ -287,7 +288,27 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
           </div>
         </div>
         <div className="flex items-center">
-          <label htmlFor="item" className="mr-4 w-24 text-right">
+          <label htmlFor="item" className="mr-4 w-28 text-right">
+            Nickname:
+          </label>
+          <div className="relative">
+            <input
+              type="text"
+              value={props.nickname}
+              className={`rounded border p-2 text-center text-black`}
+              style={{ width: '80%', height: '35px' }}
+              name="nickname"
+              onChange={(e) => handleChange(e)}
+              onBlur={handleBlur}
+              id="nickname"
+              autoComplete="off"
+            />
+          </div>
+        </div>
+      </div>
+      <div className="mb-2 grid grid-cols-2">
+      <div className="flex items-center">
+          <label htmlFor="item" className="mr-4 w-28 text-right">
             Item:
           </label>
           <div className="relative">
@@ -295,7 +316,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
               type="text"
               value={props.item}
               className={`rounded border ${hasError('item', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
-              style={{ width: '160px', height: '35px' }}
+              style={{ width: '80%', height: '35px' }}
               name="item"
               onChange={(e) => handleChange(e)}
               onBlur={handleBlur}
@@ -317,10 +338,8 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
             ) : null}
           </div>
         </div>
-      </div>
-      <div className="mb-4 grid grid-cols-2 gap-4">
         <div className="flex items-center">
-          <label htmlFor="nature" className="mr-4 w-24 text-right">
+          <label htmlFor="nature" className="mr-4 w-28 text-right">
             Nature:
           </label>
           <div className="relative">
@@ -328,7 +347,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
               type="text"
               value={props.nature}
               className={`rounded border ${hasError('nature', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
-              style={{ width: '160px', height: '35px' }}
+              style={{ width: '80%', height: '35px' }}
               name="nature"
               onChange={(e) => handleChange(e)}
               onBlur={handleBlur}
@@ -349,8 +368,10 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
             ) : null}
           </div>
         </div>
-        <div className="flex items-center">
-          <label htmlFor="ability" className="mr-4 w-24 text-right">
+      </div>
+      <div className="mb-4 grid grid-cols-2 gap-4">
+      <div className="flex items-center">
+          <label htmlFor="ability" className="mr-4 w-28 text-right">
             Ability:
           </label>
           <div className="relative">
@@ -358,7 +379,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
               type="text"
               value={props.ability}
               className={`rounded border ${hasError('ability', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
-              style={{ width: '160px', height: '35px' }}
+              style={{ width: '80%', height: '35px' }}
               name="ability"
               onChange={(e) => handleChange(e)}
               onBlur={handleBlur}

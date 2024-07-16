@@ -69,7 +69,7 @@
             "pokemonid": 2
           },
           {
-            "name": "Sandlash",
+            "name": "Sandslash",
             "item": "Bright Powder",
             "ability": "Sand Veil",
             "moveset": ["Earthquake", "Stone Edge", "X-Scissor", "Protect"],
@@ -2578,7 +2578,7 @@
             "pokemonid": 3
           },
           {
-            "name": "Vespiqueen",
+            "name": "Vespiquen",
             "level": "",
             "item": "",
             "ability": "",
@@ -2798,7 +2798,7 @@
             "pokemonid": 4
           },
           {
-            "name": "Vespiqueen",
+            "name": "Vespiquen",
             "level": "",
             "item": "",
             "ability": "",
@@ -3458,7 +3458,7 @@
             "pokemonid": 4
           },
           {
-            "name": "Sandlash",
+              "name": "Sandslash",
             "level": "",
             "item": "",
             "ability": "",
@@ -7671,7 +7671,7 @@
             "pokemonid": 4
           },
           {
-            "name": "Vespiqueen",
+            "name": "Vespiquen",
             "level": "",
             "item": "",
             "ability": "",
@@ -9405,17 +9405,6 @@
       },
       {
         "pokemons": [
-          { "name": "Simisage", "pokemonid": 1 },
-          { "name": "Leavanny", "pokemonid": 2 },
-          { "name": "Stoutland", "pokemonid": 3 },
-          { "name": "Sceptile", "pokemonid": 4 },
-          { "name": "Ferrothorn", "pokemonid": 5 },
-          { "name": "Breloom", "pokemonid": 6 }
-        ],
-        "variationid": 2
-      },
-      {
-        "pokemons": [
           {
             "name": "Simisage",
             "level": "83",
@@ -9477,6 +9466,74 @@
             "item": "--",
             "ability": "Technician",
             "moveset": ["Mach Punch", "Bullet Seed", "Rock Slide", "Spore"],
+            "pokemonid": 6
+          }
+        ],
+        "variationid": 2
+      },
+      {
+        "pokemons": [
+          {
+            "name": "Serperior",
+            "level": "82",
+            "item": "Occa Berry",
+            "ability": "Contrary",
+            "moveset": ["Leaf Storm", "Dragon Pulse", "Hidden Power (Fire)", "Glare"],
+            "pokemonid": 1
+          },
+          {
+            "name": "Amoonguss",
+            "level": "81",
+            "item": "Coba Berry",
+            "ability": "Effect Spore",
+            "moveset": [
+              "Giga Drain",
+              "Foul Play",
+              "Spore",
+              "Rage Powder"
+            ],
+            "pokemonid": 2
+          },
+          {
+            "name": "Stoutland",
+            "level": "80",
+            "item": "Chople Berry",
+            "ability": "Intimidate",
+            "moveset": ["Return", "Crunch", "Ice Fang", "Aerial Ace"],
+            "pokemonid": 3
+          },
+          {
+            "name": "Lilligant",
+            "level": "81",
+            "item": "Lum Berry",
+            "ability": "Chlorophyll",
+            "moveset": [
+              "Petal Dance",
+              "Quiver Dance",
+              "Sleep Powder",
+              "Hidden Power (Rock)"
+            ],
+            "pokemonid": 4
+          },
+          {
+            "name": "Carnivine",
+            "level": "80",
+            "item": "",
+            "ability": "Levitate",
+            "moveset": [
+              "Power Whip",
+              "Crunch",
+              "Return",
+              "Sleep Powder"
+            ],
+            "pokemonid": 5
+          },
+          {
+            "name": "Simisage",
+            "level": "83",
+            "item": "Kebia Berry",
+            "ability": "Overgrow",
+            "moveset": ["Rock Slide", "Seed Bomb", "Low Kick", "Crunch"],
             "pokemonid": 6
           }
         ],
@@ -10738,17 +10795,6 @@
       },
       {
         "pokemons": [
-          { "name": "Smeargle", "pokemonid": 1 },
-          { "name": "Heracross", "pokemonid": 2 },
-          { "name": "Crustle", "pokemonid": 3 },
-          { "name": "Flygon", "pokemonid": 4 },
-          { "name": "Ariados", "pokemonid": 5 },
-          { "name": "Leavanny", "pokemonid": 6 }
-        ],
-        "variationid": 3
-      },
-      {
-        "pokemons": [
           {
             "name": "Smeargle",
             "level": "82",
@@ -10810,6 +10856,74 @@
             "item": "Choice Scarf",
             "ability": "Swarm",
             "moveset": ["Leaf Blade", "X-Scissor", "Aerial Ace", "Me First"],
+            "pokemonid": 6
+          }
+        ],
+        "variationid": 3
+      },
+      {
+        "pokemons": [
+          {
+            "name": "Galvantula",
+            "level": "82",
+            "item": "Focus Sash",
+            "ability": "Compound Eyes",
+            "moveset": ["Thunder", "Bug Buzz", "Giga Drain", "Struggle Bug"],
+            "pokemonid": 1
+          },
+          {
+            "name": "Volcarona",
+            "level": "83",
+            "item": "Focus Sash",
+            "ability": "Flame Body",
+            "moveset": [
+              "Fire Blast",
+              "Bug Buzz",
+              "Hurricane",
+              "Hidden Power (Rock)"
+            ],
+            "pokemonid": 2
+          },
+          {
+            "name": "Gliscor",
+            "level": "82",
+            "item": "Toxic Orb",
+            "ability": "Poison Heal",
+            "moveset": [
+              "Dig",
+              "U-Turn",
+              "Stone Edge",
+              "Roost"
+            ],
+            "pokemonid": 3
+          },
+          {
+            "name": "Durant",
+            "level": "84",
+            "item": "Choice Scarf",
+            "ability": "Hustle",
+            "moveset": [
+              "Stone Edge",
+              "Iron Head",
+              "Superpower",
+              "X-Scissor"
+            ],
+            "pokemonid": 4
+          },
+          {
+            "name": "Vespiquen",
+            "level": "83",
+            "item": "Leftovers",
+            "ability": "Pressure",
+            "moveset": ["Attack Order", "Toxic", "Defend Order", "Heal Order"],
+            "pokemonid": 5
+          },
+          {
+            "name": "Leavanny",
+            "level": "85",
+            "item": "Focus Sash",
+            "ability": "Overcoat",
+            "moveset": ["Leaf Blade", "X-Scissor", "Retaliate", "Struggle Bug"],
             "pokemonid": 6
           }
         ],
@@ -12321,7 +12435,7 @@
             "pokemonid": 4
           },
           {
-            "name": "Serperpior",
+            "name": "Serperior",
             "level": 88,
             "item": "Life Orb",
             "ability": "Contrary",

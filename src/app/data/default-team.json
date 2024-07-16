@@ -5,6 +5,7 @@
     "team": [
       {
         "pokemon": "Blastoise",
+        "nickname": "",
         "ability": "Torrent",
         "nature": "Mild",
         "item": "Choice Scarf",
@@ -28,6 +29,7 @@
       },
       {
         "pokemon": "Typhlosion",
+        "nickname": "",
         "ability": "Blaze",
         "nature": "Modest",
         "item": "Choice Specs",
@@ -51,6 +53,7 @@
       },
       {
         "pokemon": "Weezing",
+        "nickname": "",
         "ability": "Neutralizing Gas",
         "nature": "Adamant",
         "item": "Choice Band",
@@ -74,6 +77,7 @@
       },
       {
         "pokemon": "Togekiss",
+        "nickname": "",
         "ability": "Hustle",
         "nature": "Modest",
         "item": "Choice Specs",
@@ -97,6 +101,7 @@
       },
       {
         "pokemon": "Vanilluxe",
+        "nickname": "",
         "ability": "Snow Warning",
         "nature": "Modest",
         "item": "Choice Scarf",
@@ -120,6 +125,7 @@
       },
       {
         "pokemon": "Garchomp",
+        "nickname": "",
         "ability": "Sand Veil",
         "nature": "Lonely",
         "item": "Choice Band",
@@ -8561,6 +8567,7 @@
       },
       {
         "pokemon": "Weezing",
+        "nickname": "WZ",
         "ability": "Neutralizing Gas",
         "nature": "Adamant",
         "item": "Choice Band",
@@ -10033,6 +10040,7 @@
       },
       {
         "pokemon": "Weezing",
+        "nickname": "WZ",
         "ability": "Neutralizing Gas",
         "nature": "Adamant",
         "item": "Choice Band",
