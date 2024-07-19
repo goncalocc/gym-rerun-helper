@@ -1,6 +1,6 @@
 "use client";
 
-import Navbar from '../components/NavBar';
+import Navbar from '../utils/NavBar';
 import ViewTeamsPreRenderData from './components/ViewTeamsPreRenderData';
 
 const ViewTeamsPage: React.FC = () => {

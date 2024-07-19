@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ViewTeams from './ViewTeams';
-import { Teams, Team } from '../../types/types';
+import { Teams, Team, Routes } from '../../types/types';
 
 export type HandleTeamsUpdate = (
   updatedTeam: Team[],
@@ -14,23 +14,41 @@ const fetchLocalStorageTeams = (): Teams[] | null => {
   try {
     const data = localStorage.getItem('gymRerunTeam');
     if (!data) {
-      throw new Error('Data not found in localStorage');
+      throw new Error('Teams not found in localStorage');
     }
     return JSON.parse(data);
   } catch (error: any) {
-    console.error('Error fetching data from localStorage:', error.message);
+    console.error('Error fetching Teams from localStorage:', error.message);
+    return null;
+  }
+};
+
+const fetchLocalStorageRoutes = (): Routes[] | null => {
+  try {
+    const data = localStorage.getItem('gymRerunRoutes');
+    if (!data) {
+      throw new Error('Routes not found in localStorage');
+    }
+    return JSON.parse(data);
+  } catch (error: any) {
+    console.error('Error fetching Routes from localStorage:', error.message);
     return null;
   }
 };
 
 const ViewTeamsPreRenderData: React.FC = () => {
   const [teamsData, setTeamsData] = useState<Teams[]>([]);
+  const [routesData, setRoutesData] = useState<Routes[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const localStorageData = fetchLocalStorageTeams();
-    if (localStorageData) {
-      setTeamsData(localStorageData);
+    const localStorageTeams = fetchLocalStorageTeams();
+    if (localStorageTeams) {
+      setTeamsData(localStorageTeams);
+    }
+    const localStorageRoutes = fetchLocalStorageRoutes();
+    if (localStorageRoutes) {
+      setRoutesData(localStorageRoutes);
     }
     setIsLoading(false);
   }, []);
@@ -81,8 +99,10 @@ const ViewTeamsPreRenderData: React.FC = () => {
   return (
     <main>
       <ViewTeams
-        localStorageData={teamsData}
+        localStorageTeams={teamsData}
         setTeamsData={setTeamsData}
+        localStorageRoutes={routesData}
+        setRoutesData={setRoutesData}
         handleTeamsUpdate={handleTeamsUpdate}
       />
     </main>

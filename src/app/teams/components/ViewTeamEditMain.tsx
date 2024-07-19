@@ -3,7 +3,7 @@ import ViewTeamEditMember from './ViewTeamEditMember';
 import { validateTeams } from './ValidateTeams';
 import deleteMember from './DeleteMember';
 import AddMember from './AddMember';
-import Svg from '../../components/Svg';
+import Svg from '../../utils/Svg';
 import { Teams, Team, EVs, IVs } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';

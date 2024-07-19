@@ -4,13 +4,33 @@ import React, { useState, useEffect } from 'react';
 import { MainView } from '@/app/home/MainView';
 import { Selection } from '@/app/home/Selection';
 import jsonTeams from './data/default-team.json';
-import { Teams } from './types/types';
+import jsonRoutes from './data/default-routes.json';
+import { Teams, Routes } from './types/types';
 
 const Home: React.FC = () => {
   const [teams, setTeams] = useState<Teams[]>([]);
+  const [routes, setRoutes] = useState<Routes[]>([]);
 
   const createTeamToLocalStorage = () => {
     localStorage.setItem('gymRerunTeam', JSON.stringify(jsonTeams));
+  };
+
+  const createRoutesToLocalStorage = () => {
+    localStorage.setItem('gymRerunRoutes', JSON.stringify(jsonRoutes));
+  };
+
+  const loadRoutesFromLocalStorage = () => {
+    const storedRoutes = localStorage.getItem('gymRerunRoutes');
+    if (storedRoutes) {
+      try {
+        setRoutes(JSON.parse(storedRoutes) as Routes[]);
+      } catch (error) {
+        console.error('Error parsing stored teams:', error);
+        createRoutesToLocalStorage();
+      }
+    } else {
+      createRoutesToLocalStorage();
+    }
   };
 
   const loadTeamsFromLocalStorage = () => {
@@ -29,6 +49,7 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     loadTeamsFromLocalStorage();
+    loadRoutesFromLocalStorage();
   }, []);
 
   return (

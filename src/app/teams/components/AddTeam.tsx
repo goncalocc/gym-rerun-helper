@@ -15,11 +15,17 @@ export const AddTeam: React.FC<AddTeamProps> = ({
   handleTeamsUpdate,
   setNotification,
 }) => {
+  const generateUniqueId = () => {
+    return Date.now() + Math.random().toString(36).substring(2);
+  };
+
   const newTeam = {
-    teamname: `Team #${teamsData.length +1}`,
+    teamid: generateUniqueId(),
+    teamname: `Team #${teamsData.length + 1}`,
     team: [
       {
         pokemon: 'Abra',
+        nickname: '',
         ability: '',
         nature: '',
         item: '',
@@ -58,7 +64,7 @@ export const AddTeam: React.FC<AddTeamProps> = ({
     const defaultNewTeam: Team[] = [];
     const defaultNewSubteam: Team[] = [];
     const defaultIndexUpdatedTeam = -1;
-    const defaultTeamName = "placeholder string";
+    const defaultTeamName = 'placeholder string';
     handleTeamsUpdate(
       defaultNewTeam,
       defaultNewSubteam,

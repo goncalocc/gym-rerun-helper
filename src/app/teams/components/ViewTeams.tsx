@@ -1,17 +1,19 @@
-import Icon from '../../components/Icon';
+import Icon from '../../utils/Icon';
 import React, { useState } from 'react';
 import ViewTeamDetails from './ViewTeamDetails';
-import Svg from '@/app/components/Svg';
+import Svg from '@/app/utils/Svg';
 import deleteTeam from './DeleteTeam';
 import AddTeam from './AddTeam';
-import { Teams, SetTeamsData } from '../../types/types';
+import { Teams, SetTeamsData, Routes, SetRoutesData } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
-import NotificationBar from '../../components/NotificationBar';
+import NotificationBar from '../../utils/NotificationBar';
 import BackupRestoreTeams from '@/app/backup/components/BackupRestoreTeams';
 
 interface ViewTeamsProps {
-  localStorageData: Teams[];
+  localStorageTeams: Teams[];
   setTeamsData: SetTeamsData;
+  localStorageRoutes: Routes[];
+  setRoutesData: SetRoutesData;
   handleTeamsUpdate: HandleTeamsUpdate;
 }
 
@@ -22,8 +24,10 @@ export interface NotificationParams {
 }
 
 export const ViewTeams: React.FC<ViewTeamsProps> = ({
-  localStorageData: teamsData,
+  localStorageTeams: teamsData,
   setTeamsData: externalSetTeamsData,
+  localStorageRoutes: routesData,
+  setRoutesData: externalSetRoutesData,
   handleTeamsUpdate,
 }) => {
   const [notification, setNotification] = useState<NotificationParams>({
@@ -116,6 +120,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                   team={team}
                   index={index}
                   teams={teamsData}
+                  routes={routesData}
                   handleTeamsUpdate={handleTeamsUpdate}
                   setSelectedTeam={setSelectedTeam}
                   setNotification={setNotification}

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import Navbar from '../components/NavBar';
+import Navbar from '../utils/NavBar';
 import GeneralTab from './components/GeneralTab';
 
 type navItems = {

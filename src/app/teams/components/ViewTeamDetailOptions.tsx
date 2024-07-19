@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Teams, Team, SetTeamsData } from '../../types/types';
+import { Teams, Team, SetTeamsData, Routes } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
 
 interface ViewTeamDetailOptionsProps {
   handleClick: () => void;
   teamsData: Teams[];
+  routesData: Routes[];
   clonedTeam: Teams;
   externalSetTeamsData: SetTeamsData;
   handleTeamsUpdate: HandleTeamsUpdate;

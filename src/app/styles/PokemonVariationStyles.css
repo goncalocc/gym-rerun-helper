@@ -1,4 +1,4 @@
-.container {
+.variations-container {
   display: flex;
   margin-left: -1rem;
 }
@@ -11,14 +11,14 @@
 }
 
 .pokemon-bg {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f0f0f0; /* You can change the background color as needed */
+  background-color:  rgb(193, 199, 212);; /* You can change the background color as needed */
 }
 
 .pokemon-img {
@@ -37,7 +37,6 @@
 
 .pokemon-stats {
   margin-top: 1px;
-  background-color: white;
   padding: 0.125rem 0.25rem;
   color: black;
   overflow: hidden;

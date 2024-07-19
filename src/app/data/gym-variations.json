@@ -254,7 +254,7 @@
             "name": "Politoed",
             "item": "Damp Rock",
             "ability": "Drizzle",
-            "moveset": ["Scald, Ice Beam, Focus Blast, Lovely Kiss"],
+            "moveset": ["Scald", "Ice Beam", "Focus Blast", "Lovely Kiss"],
             "pokemonid": 1
           },
           {
@@ -306,7 +306,7 @@
             "name": "Politoed",
             "item": "Damp Rock",
             "ability": "Drizzle",
-            "moveset": ["Scald, Ice Beam, Focus Blast, Psychic"],
+            "moveset": ["Scald", "Ice Beam", "Focus Blast", "Psychic"],
             "pokemonid": 1
           },
           {
@@ -1856,7 +1856,7 @@
             "pokemonid": 3
           },
           {
-            "name": "Mr. Mime",
+            "name": "Mr.Mime",
             "level": 86,
             "item": "Light Clay",
             "ability": "Soundproof",

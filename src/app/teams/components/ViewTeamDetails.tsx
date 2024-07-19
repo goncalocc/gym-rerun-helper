@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ViewTeamDetailsInfo from './ViewTeamDetailsInfo';
 import ViewTeamDetailOptions from './ViewTeamDetailOptions';
 import ViewTeamEditMain from './ViewTeamEditMain';
-import { Teams } from '../../types/types';
+import { Teams, Routes } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
 
@@ -10,6 +10,7 @@ interface ViewTeamDetailsProps {
   team: Teams;
   index: number;
   teams: Teams[];
+  routes: Routes[];
   handleTeamsUpdate: HandleTeamsUpdate;
   setSelectedTeam: React.Dispatch<React.SetStateAction<number | null>>;
   setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
@@ -19,6 +20,7 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
   team: team,
   index: index,
   teams: teams,
+  routes: routes,
   handleTeamsUpdate: handleTeamsUpdate,
   setSelectedTeam: setSelectedTeam,
   setNotification: setNotification,
@@ -35,7 +37,7 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
   };
 
   return (
-    <div className="container mx-auto mt-4 px-4">
+    <div className="mx-auto mt-4 px-4">
       {editMode ? (
         <>
           <ViewTeamEditMain
@@ -51,6 +53,7 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
           <ViewTeamDetailOptions
             handleClick={handleClickEdit}
             teamsData={teams}
+            routesData={routes}
             clonedTeam={team}
             externalSetTeamsData={setTeamsData}
             handleTeamsUpdate={handleTeamsUpdate}
