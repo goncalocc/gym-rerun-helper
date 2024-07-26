@@ -51,13 +51,13 @@ export type Gym = {
 }
 
 export type Variation = {
-pokemon: gymPokemon[];
-variationid: number;
+pokemons: gymPokemon[];
+variationId: number;
 }
 
 export type gymPokemon = {
   name: string;
-  level: number;
+  level: number | string;
   item: string;
   ability: string;
   moveset: string[];
@@ -66,8 +66,9 @@ export type gymPokemon = {
 
 //for the Gym Routes
 export type Routes = {
-  teamid: number;
+  teamid: string;
   routename: string;
+  routeid: string;
   route: Route[];
 }
 
@@ -76,19 +77,19 @@ export type Route = {
   region: string;
   type: string;
   observations: string;
-  lead: Lead[];
-  swapitems: string;
+  leads: Leads[];
+  swapItems: string;
   heal: boolean;
-  provisionalheal: boolean;
-  swapteams: boolean
+  provisionalHeal: boolean;
+  swapTeams: boolean
   channelTP: boolean;
 }
 
-export type Lead = {
+export type Leads = {
   pokemon: string[];
   attacks: string;
   isOrderMandatory: boolean;
-  variationid: number;
+  variationId: number;
 }
 
 export type SetTeamsData = Dispatch<SetStateAction<Teams[]>>;

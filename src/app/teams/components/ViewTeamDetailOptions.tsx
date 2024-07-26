@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Teams, Team, SetTeamsData, Routes } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
+import Link from 'next/link';
 
 interface ViewTeamDetailOptionsProps {
   handleClick: () => void;
@@ -26,6 +27,7 @@ interface HandleDuplicateTeamParams {
 const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
   handleClick: handleClickEdit,
   teamsData: teamsData,
+  routesData: routesData,
   clonedTeam: teamData,
   externalSetTeamsData: setTeamsData,
   handleTeamsUpdate: handleTeamsUpdate,
@@ -76,6 +78,10 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
     }, 3000);
   };
 
+  const filteredRoutes = routesData.filter(
+    (routes) => routes.teamid === teamData.teamid,
+  );
+
   return (
     <main>
       <div className="mb-4 flex justify-center">
@@ -89,24 +95,18 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
 
           {isDropdownOpen && (
             <div className="absolute left-1/2 z-10 mt-2 w-48 -translate-x-1/2 transform rounded-md bg-white shadow-lg">
-              <a
-                href="#"
-                className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-              >
-                Route 1
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-              >
-                Route 2
-              </a>
-              <a
-                href="#"
-                className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-              >
-                Route 3
-              </a>
+              {filteredRoutes.map((route, index) => (
+                <Link
+                  className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                  key={index}
+                  href={{
+                    pathname: '/routes',
+                    query: { idProps: route.routeid },
+                  }}
+                >
+                    {route.routename}
+                </Link>
+              ))}
             </div>
           )}
         </div>

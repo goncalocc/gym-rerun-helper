@@ -9,6 +9,7 @@
         "pokemons": [
           {
             "name": "Golem",
+            "level": "--",
             "item": "Liechi Berry",
             "ability": "Sturdy",
             "moveset": ["Rock Slide", "Earthquake", "Hammer Arm", "Wide Guard"],
@@ -16,6 +17,7 @@
           },
           {
             "name": "Toxicroak",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Dry Skin",
             "moveset": ["Gunk Shot", "Cross Chop", "Sucker Punch", "Protect"],
@@ -23,6 +25,7 @@
           },
           {
             "name": "Pinsir",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Moxie",
             "moveset": ["X-Scissor", "Stone Edge", "Close Combat", "Protect"],
@@ -30,6 +33,7 @@
           },
           {
             "name": "Rampardos",
+            "level": "--",
             "item": "Rock Gem",
             "ability": "Mold Breaker",
             "moveset": ["Earthquake", "Head Smash", "Crunch", "Protect"],
@@ -37,6 +41,7 @@
           },
           {
             "name": "Sudowoodo",
+            "level": "--",
             "item": "Sitrus Berry",
             "ability": "Sturdy",
             "moveset": ["Wood Hammer", "Head Smash", "Sucker Punch", "Protect"],
@@ -44,18 +49,20 @@
           },
           {
             "name": "Steelix",
+            "level": "--",
             "item": "Normal Gem",
             "ability": "Sturdy",
             "moveset": ["Explosion", "Earthquake", "Iron Tail", "Protect"],
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
           {
             "name": "Golem",
+            "level": "--",
             "item": "Ground Gem",
             "ability": "Sturdy",
             "moveset": ["Earthquake", "Stone Edge", "Hammer Arm", "Wide Guard"],
@@ -63,6 +70,7 @@
           },
           {
             "name": "Tyranitar",
+            "level": "--",
             "item": "Smooth Rock",
             "ability": "Sand Stream",
             "moveset": ["Rock Slide", "Earthquake", "Crunch", "Protect"],
@@ -70,6 +78,7 @@
           },
           {
             "name": "Sandslash",
+            "level": "--",
             "item": "Bright Powder",
             "ability": "Sand Veil",
             "moveset": ["Earthquake", "Stone Edge", "X-Scissor", "Protect"],
@@ -77,6 +86,7 @@
           },
           {
             "name": "Shuckle",
+            "level": "--",
             "item": "Leftovers",
             "ability": "Contrary",
             "moveset": ["Shell Smash", "Helping Hand", "Rest", "Protect"],
@@ -84,6 +94,7 @@
           },
           {
             "name": "Chansey",
+            "level": "--",
             "item": "Eviolite",
             "ability": "Healer",
             "moveset": ["Seismic Toss", "Toxic", "Wish", "Protect"],
@@ -91,18 +102,20 @@
           },
           {
             "name": "Steelix",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Sheer Force",
             "moveset": ["Rock Slide", "Earthquake", "Iron Tail", "Protect"],
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
           {
             "name": "Aerodactyl",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Pressure",
             "moveset": ["Earthquake", "Crunch", "Stone Edge", "Wide Guard"],
@@ -110,6 +123,7 @@
           },
           {
             "name": "Slowbro",
+            "level": "--",
             "item": "Sitrus Berry",
             "ability": "Regenerator",
             "moveset": ["Surf", "Psychic", "Ice Beam", "Protect"],
@@ -117,6 +131,7 @@
           },
           {
             "name": "Ninetales",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Flash Fire",
             "moveset": ["Foul Play", "Heat Wave", "Energy Ball", "Protect"],
@@ -124,6 +139,7 @@
           },
           {
             "name": "Rampardos",
+            "level": "--",
             "item": "Rock Gem",
             "ability": "Mold Breaker",
             "moveset": ["Earthquake", "Head Smash", "Superpower", "Protect"],
@@ -131,6 +147,7 @@
           },
           {
             "name": "Heracross",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Moxie",
             "moveset": ["Close Combat", "Megahorn", "Bullet Seed", "Protect"],
@@ -138,18 +155,20 @@
           },
           {
             "name": "Steelix",
+            "level": "--",
             "item": "Normal Gem",
             "ability": "Sturdy",
             "moveset": ["Explosion", "Earthquake", "Iron Tail", "Protect"],
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
           {
             "name": "Tyranitar",
+            "level": "--",
             "item": "Smooth Rock",
             "ability": "Sand Stream",
             "moveset": ["Earthquake", "Stone Edge", "Crunch", "Protect"],
@@ -157,6 +176,7 @@
           },
           {
             "name": "Swampert",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Torrent",
             "moveset": ["Earthquake", "Aqua Tail", "Ice Punch", "Wide Guard"],
@@ -164,6 +184,7 @@
           },
           {
             "name": "Crobat",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Infiltrator",
             "moveset": ["Brave Bird", "Heat Wave", "Sludge Bomb", "Giga Drain"],
@@ -171,6 +192,7 @@
           },
           {
             "name": "Forretress",
+            "level": "--",
             "item": "Lum Berry",
             "ability": "Sturdy",
             "moveset": ["Pin Missile", "Gyro Ball", "Rest", "Protect"],
@@ -178,6 +200,7 @@
           },
           {
             "name": "Rhyperior",
+            "level": "--",
             "item": "Passho Berry",
             "ability": "Solid Rock",
             "moveset": ["Earthquake", "Rock Wrecker", "Megahorn", "Protect"],
@@ -185,18 +208,20 @@
           },
           {
             "name": "Steelix",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Sheer Force",
             "moveset": ["Earthquake", "Rock Slide", "Iron Tail", "Protect"],
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
           {
             "name": "Aerodactyl",
+            "level": "--",
             "item": "Power Herb",
             "ability": "Pressure",
             "moveset": ["Aqua Tail", "Stone Edge", "Sky Attack", "Wide Guard"],
@@ -204,6 +229,7 @@
           },
           {
             "name": "Ludicolo",
+            "level": "--",
             "item": "Grass Gem",
             "ability": "Swift Swim",
             "moveset": ["Surf", "Giga Drain", "Ice Beam", "Rain Dance"],
@@ -211,6 +237,7 @@
           },
           {
             "name": "Kabutops",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Swift Swim",
             "moveset": ["Stone Edge", "Aqua Tail", "Superpower", "Protect"],
@@ -218,6 +245,7 @@
           },
           {
             "name": "Relicanth",
+            "level": "--",
             "item": "Rock Gem",
             "ability": "Swift Swim",
             "moveset": ["Head Smash", "Aqua Tail", "Zen Headbutt", "Protect"],
@@ -225,6 +253,7 @@
           },
           {
             "name": "Omastar",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Swift Swim",
             "moveset": ["Muddy Water", "Ice Beam", "Earth Power", "Protect"],
@@ -232,13 +261,14 @@
           },
           {
             "name": "Steelix",
+            "level": "--",
             "item": "Ground Gem",
             "ability": "Sturdy",
             "moveset": ["Earthquake", "Aqua Tail", "Iron Tail", "Protect"],
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -252,6 +282,7 @@
         "pokemons": [
           {
             "name": "Politoed",
+            "level": "--",
             "item": "Damp Rock",
             "ability": "Drizzle",
             "moveset": ["Scald", "Ice Beam", "Focus Blast", "Lovely Kiss"],
@@ -259,6 +290,7 @@
           },
           {
             "name": "Poliwrath",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Swift Swim",
             "moveset": ["Waterfall", "Brick Break", "Ice Punch", "Lovely Kiss"],
@@ -266,6 +298,7 @@
           },
           {
             "name": "Cloyster",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Skill Link",
             "moveset": [
@@ -278,6 +311,7 @@
           },
           {
             "name": "Lapras",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Hydration",
             "moveset": ["Hydro Pump", "Thunder", "Ice Beam", "Rest"],
@@ -285,6 +319,7 @@
           },
           {
             "name": "Togekiss",
+            "level": "--",
             "item": "Red Card",
             "ability": "Serene Grace",
             "moveset": ["Tri Attack", "Air Slash", "Aura Sphere", "Roost"],
@@ -292,18 +327,20 @@
           },
           {
             "name": "Starmie",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Analytic",
             "moveset": ["Thunder", "Psyshock", "Scald", "Ice Beam"],
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
           {
             "name": "Politoed",
+            "level": "--",
             "item": "Damp Rock",
             "ability": "Drizzle",
             "moveset": ["Scald", "Ice Beam", "Focus Blast", "Psychic"],
@@ -311,6 +348,7 @@
           },
           {
             "name": "Golduck",
+            "level": "--",
             "item": "Choice Specs",
             "ability": "Swift Swim",
             "moveset": ["Hydro Pump", "Petal Dance", "Psyshock", "Ice Beam"],
@@ -318,6 +356,7 @@
           },
           {
             "name": "Quagsire",
+            "level": "--",
             "item": "Leftovers",
             "ability": "Water Absorb",
             "moveset": ["Stone Edge", "Muddy Water", "Earth Power", "Recover"],
@@ -325,6 +364,7 @@
           },
           {
             "name": "Tentacruel",
+            "level": "--",
             "item": "Lum Berry",
             "ability": "Rain Dish",
             "moveset": ["Muddy Water", "Ice Beam", "Giga Drain", "Rest"],
@@ -332,6 +372,7 @@
           },
           {
             "name": "Azumarill",
+            "level": "--",
             "item": "Choice Band",
             "ability": "Huge Power",
             "moveset": ["Aqua Tail", "Aqua Jet", "Superpower", "Ice Punch"],
@@ -339,18 +380,20 @@
           },
           {
             "name": "Starmie",
+            "level": "--",
             "item": "Choice Scarf",
             "ability": "Analytic",
             "moveset": ["Thunder", "Psyshock", "Ice Beam", "Hydro Pump"],
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
           {
             "name": "Pelipper",
+            "level": "--",
             "item": "Damp Rock",
             "ability": "Drizzle",
             "moveset": ["U-Turn", "Scald", "Hurricane", "Roost"],
@@ -358,6 +401,7 @@
           },
           {
             "name": "Floatzel",
+            "level": "--",
             "item": "Choice Band",
             "ability": "Swift Swim",
             "moveset": ["Aqua Tail", "Crunch", "Ice Punch", "Low Kick"],
@@ -365,6 +409,7 @@
           },
           {
             "name": "Ampharos",
+            "level": "--",
             "item": "Choice Specs",
             "ability": "Static",
             "moveset": [
@@ -377,6 +422,7 @@
           },
           {
             "name": "Milotic",
+            "level": "--",
             "item": "Wacan Berry",
             "ability": "Marvel Scale",
             "moveset": ["Ice Beam", "Scald", "Mirror Coat", "Recover"],
@@ -384,6 +430,7 @@
           },
           {
             "name": "Starmie",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Analytic",
             "moveset": ["Thunder", "Psyshock", "Hydro Pump", "Ice Beam"],
@@ -391,18 +438,20 @@
           },
           {
             "name": "Gyarados",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Intimidate",
             "moveset": ["Waterfall", "Crunch", "Bounce", "Dragon Dance"],
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
           {
             "name": "Pelipper",
+            "level": "--",
             "item": "Damp Rock",
             "ability": "Drizzle",
             "moveset": ["Scald", "Ice Beam", "Hurricane", "Tailwind"],
@@ -410,6 +459,7 @@
           },
           {
             "name": "Carracosta",
+            "level": "--",
             "item": "Choice Scarf",
             "ability": "Swift Swim",
             "moveset": ["Earthquake", "Stone Edge", "Aqua Tail", "Superpower"],
@@ -417,6 +467,7 @@
           },
           {
             "name": "Swanna",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Hydration",
             "moveset": ["Endeavor", "Ice Beam", "Hurricane", "Scald"],
@@ -424,6 +475,7 @@
           },
           {
             "name": "Lanturn",
+            "level": "--",
             "item": "Rindo Berry",
             "ability": "Volt Absorb",
             "moveset": ["Thunder", "Hydro Pump", "Ice Beam", "Thunder Wave"],
@@ -431,6 +483,7 @@
           },
           {
             "name": "Jellicent",
+            "level": "--",
             "item": "Wacan Berry",
             "ability": "Water Absorb",
             "moveset": ["Shadow Ball", "Scald", "Giga Drain", "Recover"],
@@ -438,18 +491,20 @@
           },
           {
             "name": "Starmie",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Analytic",
             "moveset": ["Thunder", "Psyshock", "Scald", "Ice Beam"],
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
           {
             "name": "Politoed",
+            "level": "--",
             "item": "Damp Rock",
             "ability": "Drizzle",
             "moveset": ["Hyper Voice", "Hydro Pump", "Ice Beam", "Focus Blast"],
@@ -457,6 +512,7 @@
           },
           {
             "name": "Kingdra",
+            "level": "--",
             "item": "Choice Specs",
             "ability": "Swift Swim",
             "moveset": [
@@ -469,6 +525,7 @@
           },
           {
             "name": "Seaking",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Lightning Rod",
             "moveset": ["Megahorn", "Aqua Tail", "Drill Run", "Bounce"],
@@ -476,6 +533,7 @@
           },
           {
             "name": "Dragonite",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Multiscale",
             "moveset": ["Dragon Claw", "Extreme Speed", "Thunder", "Hurricane"],
@@ -483,6 +541,7 @@
           },
           {
             "name": "Blastoise",
+            "level": "--",
             "item": "Choice Scarf",
             "ability": "Rain Dish",
             "moveset": ["Water Spout", "Zap Cannon", "Ice Beam", "Aura Sphere"],
@@ -490,13 +549,14 @@
           },
           {
             "name": "Starmie",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Analytic",
             "moveset": ["Thunder", "Psyshock", "Hydro Pump", "Ice Beam"],
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -510,6 +570,7 @@
         "pokemons": [
           {
             "name": "Manectric",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": [
@@ -522,6 +583,7 @@
           },
           {
             "name": "Electrode",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Aftermath",
             "moveset": ["Foul Play", "Thunderbolt", "Light Screen", "Reflect"],
@@ -529,6 +591,7 @@
           },
           {
             "name": "Lickilicky",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Cloud Nine",
             "moveset": ["Hammer Arm", "Return", "Power Whip", "Ice Beam"],
@@ -536,6 +599,7 @@
           },
           {
             "name": "Fearow",
+            "level": "--",
             "item": "Power Herb",
             "ability": "Sniper",
             "moveset": ["Sky Attack", "Double-Edge", "Drill Run", "U-Turn"],
@@ -543,6 +607,7 @@
           },
           {
             "name": "Electivire",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Vital Spirit",
             "moveset": ["Wild Charge", "Cross Chop", "Dig", "Ice Punch"],
@@ -550,6 +615,7 @@
           },
           {
             "name": "Raichu",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": [
@@ -561,12 +627,13 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
           {
             "name": "Jolteon",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Volt Absorb",
             "moveset": [
@@ -579,6 +646,7 @@
           },
           {
             "name": "Dodrio",
+            "level": "--",
             "item": "Choice Band",
             "ability": "Early Bird",
             "moveset": ["Brave Bird", "Jump Kick", " Double-Edge", "Payback"],
@@ -586,6 +654,7 @@
           },
           {
             "name": "Ampharos",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": [
@@ -598,6 +667,7 @@
           },
           {
             "name": "Victreebel",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Chlorophyll",
             "moveset": [
@@ -610,6 +680,7 @@
           },
           {
             "name": "Magnezone",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Sturdy",
             "moveset": [
@@ -622,18 +693,20 @@
           },
           {
             "name": "Raichu",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": ["Volt Tackle", "Brick Break", "Fly", "Extreme Speed"],
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
           {
             "name": "Raichu",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Lightning Rod",
             "moveset": [
@@ -646,6 +719,7 @@
           },
           {
             "name": "Pikachu",
+            "level": "--",
             "item": "Light Ball",
             "ability": "Lightning Rod",
             "moveset": [
@@ -658,6 +732,7 @@
           },
           {
             "name": "Electivire",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Motor Drive",
             "moveset": [
@@ -670,6 +745,7 @@
           },
           {
             "name": "Pachirisu",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Volt Absorb",
             "moveset": [
@@ -682,6 +758,7 @@
           },
           {
             "name": "Quagsire",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Water Absorb",
             "moveset": ["Earthquake", "Ice Punch", "Aqua Tail", "Counter"],
@@ -689,6 +766,7 @@
           },
           {
             "name": "Manectric",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Lightning Rod",
             "moveset": [
@@ -700,12 +778,13 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
           {
             "name": "Electivire",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Motor Drive",
             "moveset": [
@@ -718,6 +797,7 @@
           },
           {
             "name": "Tangrowth",
+            "level": "--",
             "item": "Grass Gem",
             "ability": "Regenerator",
             "moveset": ["Power Whip", "Reflect", "Sleep Powder", "Morning Sun"],
@@ -725,6 +805,7 @@
           },
           {
             "name": "Raticate",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Hustle",
             "moveset": ["Sucker Punch", "U-Turn", "Double-Edge", "Wild Charge"],
@@ -732,6 +813,7 @@
           },
           {
             "name": "Rotom-Fan",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Levitate",
             "moveset": [
@@ -744,6 +826,7 @@
           },
           {
             "name": "Lanturn",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Water Absorb",
             "moveset": [
@@ -756,6 +839,7 @@
           },
           {
             "name": "Raichu",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": [
@@ -767,12 +851,13 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
           {
             "name": "Raichu",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": ["Surf", "Thunder", "Focus Blast", "Grass Knot"],
@@ -780,6 +865,7 @@
           },
           {
             "name": "Politoed",
+            "level": "--",
             "item": "Damp Rock",
             "ability": "Drizzle",
             "moveset": ["Hydro Pump", "Ice Beam", "Lovely Kiss", "Protect"],
@@ -787,6 +873,7 @@
           },
           {
             "name": "Porygon-Z",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Analytic",
             "moveset": ["Ice Beam", "Thunder", "Tri Attack", "Recover"],
@@ -794,6 +881,7 @@
           },
           {
             "name": "Lanturn",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Water Absorb",
             "moveset": ["Ice Beam", "Hydro Pump", "Thunder", "Thunder Wave"],
@@ -801,6 +889,7 @@
           },
           {
             "name": "Ampharos",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Static",
             "moveset": [
@@ -813,6 +902,7 @@
           },
           {
             "name": "Jolteon",
+            "level": "--",
             "item": "Air Balloon",
             "ability": "Volt Absorb",
             "moveset": [
@@ -824,7 +914,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -838,6 +928,7 @@
         "pokemons": [
           {
             "name": "Whimsicott",
+            "level": "--",
             "item": "Focus Sash",
             "ability": "Prankster",
             "moveset": ["U-Turn", "Stun Spore", "Helping Hand", "Tailwind"],
@@ -845,6 +936,7 @@
           },
           {
             "name": "Dragonite",
+            "level": "--",
             "item": "Choice Band",
             "ability": "Multiscale",
             "moveset": [
@@ -857,6 +949,7 @@
           },
           {
             "name": "Tangrowth",
+            "level": "--",
             "item": "Occa Berry",
             "ability": "Regenerator",
             "moveset": [
@@ -869,6 +962,7 @@
           },
           {
             "name": "Abomasnow",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Soundproof",
             "moveset": [
@@ -881,6 +975,7 @@
           },
           {
             "name": "Dewgong",
+            "level": "--",
             "item": "Chesto Berry",
             "ability": "Thick Fat",
             "moveset": ["Fake Out", "Aqua Tail", "Ice Beam", "Rest"],
@@ -888,6 +983,7 @@
           },
           {
             "name": "Vileplume",
+            "level": "--",
             "item": "Yache Berry",
             "ability": "Effect Spore",
             "moveset": [
@@ -899,7 +995,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -982,12 +1078,13 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
           {
             "name": "Ninetales",
+            "level": "--",
             "item": "Heat Rock",
             "ability": "Drought",
             "moveset": [
@@ -1000,6 +1097,7 @@
           },
           {
             "name": "Victreebel",
+            "level": "--",
             "item": "Choice Specs",
             "ability": "Chlorophyll",
             "moveset": [
@@ -1012,6 +1110,7 @@
           },
           {
             "name": "Blissey",
+            "level": "--",
             "item": "Leftovers",
             "ability": "Healer",
             "moveset": [
@@ -1024,6 +1123,7 @@
           },
           {
             "name": "Cherrim",
+            "level": "--",
             "item": "Occa Berry",
             "ability": "Flower Gift",
             "moveset": [
@@ -1036,6 +1136,7 @@
           },
           {
             "name": "Cradily",
+            "level": "--",
             "item": "Sitrus Berry",
             "ability": "Storm Drain",
             "moveset": ["Stone Edge", "Solar Beam", "Barrier", "Synthesis"],
@@ -1043,6 +1144,7 @@
           },
           {
             "name": "Vileplume",
+            "level": "--",
             "item": "Life Orb",
             "ability": "Chlorophyll",
             "moveset": [
@@ -1054,12 +1156,13 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
           {
             "name": "Ninetales",
+            "level": "--",
             "item": "Heat Rock",
             "ability": "Drought",
             "moveset": [
@@ -1131,7 +1234,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -1209,7 +1312,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -1290,7 +1393,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -1353,7 +1456,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -1421,7 +1524,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -1494,7 +1597,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -1562,7 +1665,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -1628,7 +1731,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -1691,7 +1794,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -1754,7 +1857,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -1827,7 +1930,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -1880,7 +1983,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -1966,7 +2069,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -2044,7 +2147,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -2117,7 +2220,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -2195,7 +2298,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -2268,7 +2371,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -2329,7 +2432,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -2382,7 +2485,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -2435,7 +2538,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -2488,7 +2591,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -2541,7 +2644,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -2602,7 +2705,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -2655,7 +2758,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -2708,7 +2811,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -2761,7 +2864,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -2814,7 +2917,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -2875,7 +2978,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -2928,7 +3031,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -2981,7 +3084,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -3034,7 +3137,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -3087,7 +3190,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -3148,7 +3251,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -3201,7 +3304,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -3254,7 +3357,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -3307,7 +3410,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -3360,7 +3463,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -3421,7 +3524,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -3474,7 +3577,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -3527,7 +3630,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -3580,7 +3683,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -3633,7 +3736,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -3694,7 +3797,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -3747,7 +3850,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -3800,7 +3903,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -3853,7 +3956,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -3906,7 +4009,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -3967,7 +4070,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -4020,7 +4123,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -4073,7 +4176,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -4126,7 +4229,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -4179,7 +4282,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -4240,7 +4343,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -4293,7 +4396,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -4346,7 +4449,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -4399,7 +4502,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -4452,7 +4555,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -4518,7 +4621,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -4576,7 +4679,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -4644,7 +4747,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -4712,7 +4815,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -4780,7 +4883,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -4851,7 +4954,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -4904,7 +5007,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -4977,7 +5080,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -5045,7 +5148,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -5113,7 +5216,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -5194,7 +5297,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -5277,7 +5380,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -5345,7 +5448,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -5418,7 +5521,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -5481,7 +5584,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -5562,7 +5665,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -5630,7 +5733,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -5703,7 +5806,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -5776,7 +5879,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -5848,7 +5951,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -5909,7 +6012,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -5967,7 +6070,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -6027,7 +6130,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -6090,7 +6193,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -6156,7 +6259,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -6233,7 +6336,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -6298,7 +6401,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -6367,7 +6470,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -6426,7 +6529,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -6490,7 +6593,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -6556,7 +6659,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -6609,7 +6712,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -6672,7 +6775,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -6735,7 +6838,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -6803,7 +6906,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -6864,7 +6967,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -6927,7 +7030,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -6985,7 +7088,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -7048,7 +7151,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -7101,7 +7204,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -7172,7 +7275,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -7230,7 +7333,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -7293,7 +7396,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -7356,7 +7459,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -7414,7 +7517,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -7475,7 +7578,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -7528,7 +7631,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -7581,7 +7684,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -7634,7 +7737,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -7687,7 +7790,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -7748,7 +7851,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -7801,7 +7904,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -7854,7 +7957,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -7907,7 +8010,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -7960,7 +8063,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -8021,7 +8124,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -8074,7 +8177,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -8127,7 +8230,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -8180,7 +8283,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -8233,7 +8336,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -8294,7 +8397,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -8347,7 +8450,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -8400,7 +8503,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -8453,7 +8556,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -8506,7 +8609,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -8567,7 +8670,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -8620,7 +8723,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -8673,7 +8776,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -8726,7 +8829,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -8779,7 +8882,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -8840,7 +8943,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -8893,7 +8996,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -8946,7 +9049,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -8999,7 +9102,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -9052,7 +9155,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -9113,7 +9216,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -9166,7 +9269,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -9219,7 +9322,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -9272,7 +9375,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -9325,7 +9428,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -9401,7 +9504,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -9469,7 +9572,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -9537,7 +9640,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -9610,7 +9713,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -9678,7 +9781,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -9769,7 +9872,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -9842,7 +9945,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -9905,7 +10008,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -9973,7 +10076,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -10046,7 +10149,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -10112,7 +10215,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -10165,7 +10268,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -10228,7 +10331,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -10281,7 +10384,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -10344,7 +10447,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -10410,7 +10513,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -10478,7 +10581,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -10541,7 +10644,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -10599,7 +10702,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -10667,7 +10770,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -10733,7 +10836,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -10791,7 +10894,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -10859,7 +10962,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -10927,7 +11030,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -10990,7 +11093,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -11076,7 +11179,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -11149,7 +11252,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -11217,7 +11320,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -11280,7 +11383,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -11348,7 +11451,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -11409,7 +11512,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -11472,7 +11575,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -11530,7 +11633,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -11598,7 +11701,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -11666,7 +11769,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -11732,7 +11835,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -11790,7 +11893,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -11848,7 +11951,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -11906,7 +12009,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -11964,7 +12067,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -12045,7 +12148,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -12113,7 +12216,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -12181,7 +12284,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -12254,7 +12357,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -12317,7 +12420,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   },
@@ -12388,7 +12491,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 1
+        "variationId": 1
       },
       {
         "pokemons": [
@@ -12461,7 +12564,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 2
+        "variationId": 2
       },
       {
         "pokemons": [
@@ -12524,7 +12627,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 3
+        "variationId": 3
       },
       {
         "pokemons": [
@@ -12592,7 +12695,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 4
+        "variationId": 4
       },
       {
         "pokemons": [
@@ -12665,7 +12768,7 @@
             "pokemonid": 6
           }
         ],
-        "variationid": 5
+        "variationId": 5
       }
     ]
   }

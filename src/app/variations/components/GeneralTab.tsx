@@ -4,7 +4,6 @@ import '../../styles/PokemonVariationStyles.css';
 import pokemonData from '../../data/PokemonDictionary';
 import { useState } from 'react';
 import getItemColor from '../../utils/ColorDefiner';
-import { gymPokemon } from '../../types/types';
 
 type GeneralTabProps = {
   navItems: string;
@@ -37,7 +36,6 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
   };
 
   const handleMouseEnter = (
-    event: React.MouseEvent,
     moveset: string[],
     pokemonElement: HTMLElement,
   ) => {
@@ -76,7 +74,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
               onClick={() => handleGymClick(gym.id)}
               className={`rounded px-4 py-2 hover:bg-gray-700`}
             >
-              {gym.gym}
+              {filteredGyms.indexOf(gym) + 1}. {gym.gym}
             </li>
           ))}
         </ol>
@@ -94,7 +92,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
               <div className="mt-4 flex flex-col items-center">
                 {gym.variations.map((variation) => (
                   <div
-                    key={variation.variationid}
+                    key={variation.variationId}
                     className="variation-container mb-4 w-full p-1 sm:w-1/2 md:w-1/3 lg:w-1/4"
                   >
                     {variation.pokemons.map((pokemon) => (
@@ -103,7 +101,6 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
                         className="pokemon-container bg-black-100 mb-1 rounded-lg px-1 py-0.5 shadow"
                         onMouseEnter={(event) =>
                           handleMouseEnter(
-                            event,
                             pokemon.moveset,
                             event.currentTarget,
                           )

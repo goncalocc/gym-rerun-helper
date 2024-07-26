@@ -6,7 +6,6 @@ import ViewTeamsPreRenderData from './components/ViewTeamsPreRenderData';
 const ViewTeamsPage: React.FC = () => {
     return (
         <main>
-            {/* <Navbar /> */}
             <ViewTeamsPreRenderData />
         </main>
     );
