@@ -386,7 +386,7 @@
           "defense": 0,
           "hp": 10,
           "specialAttack": 252,
-          "specialDefense": 6,
+          "specialDefense": 0,
           "speed": 248
         },
         "ivs": {

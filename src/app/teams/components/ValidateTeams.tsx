@@ -107,7 +107,7 @@ export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
         newErrors[arrayName].push({
           pokemon: data.indexOf(input),
           field: `move-${index}`,
-          message: `Move does not exist. Error at entry #${arrayName === 'team' ? data.indexOf(input) + 1 : data.indexOf(input) + 1 + data.length}`,
+          message: `Move does not exist (${move}). Error at entry #${arrayName === 'team' ? data.indexOf(input) + 1 : data.indexOf(input) + 1 + data.length}`,
         });
       }
     });

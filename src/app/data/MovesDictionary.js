@@ -524,6 +524,7 @@ const movesData = [
   'Snarl',
   'Snatch',
   'Snore',
+  'Snowscape',
   'Soak',
   'Soft-Boiled',
   'Solar Beam',

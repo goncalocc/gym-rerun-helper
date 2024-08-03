@@ -3,19 +3,6 @@ import { Teams, Team, SetTeamsData } from '../../types/types';
 import { validateTeams } from '@/app/teams/components/ValidateTeams';
 import { NotificationParams } from '../../teams/components/ViewTeams';
 
-const fetchLocalStorageTeams = (): Teams[] | null => {
-  try {
-    const data = localStorage.getItem('gymRerunTeam');
-    if (!data) {
-      throw new Error('Data not found in localStorage');
-    }
-    return JSON.parse(data);
-  } catch (error: any) {
-    console.error('Error fetching data from localStorage:', error.message);
-    return null;
-  }
-};
-
 const parseTeams = (textareaValue: string): Teams[] => {
   try {
     const teams: Teams[] = [];
@@ -33,6 +20,7 @@ const parseTeams = (textareaValue: string): Teams[] => {
       if (lines.length > 0) {
         const details = lines.slice(1);
         const obj: Teams = {
+          teamid: '',
           teamname: '',
           team: [],
           subteam: [],
@@ -43,7 +31,11 @@ const parseTeams = (textareaValue: string): Teams[] => {
         details.forEach((field) => {
           if (field.startsWith('Team Name:')) {
             obj.teamname = field.split(':')[1].trim();
-          } else if (field === 'Team:' || field === 'Subteam:') {
+          }
+          if (field.startsWith('Team Id:')) {
+            obj.teamid = field.split(':')[1].trim();
+          }
+          else if (field === 'Team:' || field === 'Subteam:') {
             if (currentPokemon && currentSection) {
               obj[currentSection].push(currentPokemon);
             }
@@ -55,6 +47,7 @@ const parseTeams = (textareaValue: string): Teams[] => {
             }
             currentPokemon = {
               pokemon: field.split(':')[1].trim(),
+              nickname: '',
               ability: '',
               nature: '',
               item: '',
@@ -136,8 +129,12 @@ interface BackupRestoreTeamsProps {
   setTeamsData: SetTeamsData;
 }
 
-
-const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({ setNotification, handleClose, teamsData, setTeamsData }) => {
+const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({
+  setNotification,
+  handleClose,
+  teamsData,
+  setTeamsData,
+}) => {
   const [formattedText, setFormattedText] = useState<string>(''); //all teams object in string
 
   useEffect(() => {
@@ -150,12 +147,12 @@ const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({ setNotification
       };
 
       // Format the data for display
-      // Format the data for display
       const text = teamsData
         .map((team, index) => {
           // Convert each team object to a formatted string
           const teamInfo = [
             `Team Name: ${team.teamname}`,
+            `Team Id: ${team.teamid}`,
             `Team: ${team.team
               .map(
                 (t) => `
@@ -168,9 +165,10 @@ const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({ setNotification
   Moveset: ${t.moveset.join(', ')}`,
               )
               .join('\n')}`,
-            `Subteam: ${team.subteam
-              .map(
-                (t) => `
+            team.subteam &&
+              `Subteam: ${team.subteam
+                .map(
+                  (t) => `
   Pokemon: ${t.pokemon}
   Ability: ${t.ability}
   Nature: ${t.nature}
@@ -178,8 +176,8 @@ const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({ setNotification
   EVs: ${formatStats(t.evs)}
   IVs: ${formatStats(t.ivs)}
   Moveset: ${t.moveset.join(', ')}`,
-              )
-              .join('\n')}`,
+                )
+                .join('\n')}`,
           ].join('\n\n');
 
           return `Team ${index + 1}:\n${teamInfo}`;
@@ -206,7 +204,7 @@ const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({ setNotification
         type: 'success',
         visible: true,
       });
-  
+
       setTimeout(() => {
         setNotification({ message: '', type: '', visible: false });
       }, 3000);
