@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 
 export type Teams = {
-  teamid: string;
-  teamname: string;
+  teamId: string;
+  teamName: string;
   team: Team[];
   subteam: Team[];
 };
@@ -66,14 +66,15 @@ export type gymPokemon = {
 
 //for the Gym Routes
 export type Routes = {
-  teamid: string;
-  routename: string;
-  routeid: string;
+  teamId: string;
+  routeName: string;
+  routeId: string;
   route: Route[];
 }
 
 export type Route = {
   gym: string;
+  id: number;
   region: string;
   type: string;
   observations: string;

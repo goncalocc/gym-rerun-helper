@@ -79,7 +79,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
   };
 
   const filteredRoutes = routesData.filter(
-    (routes) => routes.teamid === teamData.teamid,
+    (routes) => routes.teamId === teamData.teamId,
   );
 
   return (
@@ -101,10 +101,10 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
                   key={index}
                   href={{
                     pathname: '/routes',
-                    query: { idProps: route.routeid },
+                    query: { idProps: route.routeId },
                   }}
                 >
-                    {route.routename}
+                    {route.routeName}
                 </Link>
               ))}
             </div>

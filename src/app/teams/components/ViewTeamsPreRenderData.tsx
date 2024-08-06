@@ -5,7 +5,7 @@ import { Teams, Team, Routes } from '../../types/types';
 export type HandleTeamsUpdate = (
   updatedTeam: Team[],
   updatedSubteam: Team[],
-  updatedTeamname: string,
+  updatedTeamName: string,
   indexUpdatedTeam: number,
   newTeams: Teams[] | null,
 ) => void;
@@ -56,7 +56,7 @@ const ViewTeamsPreRenderData: React.FC = () => {
   const handleTeamsUpdate: HandleTeamsUpdate = (
     updatedTeam,
     updatedSubteam,
-    updatedTeamname,
+    updatedTeamName,
     indexUpdatedTeam,
     newTeams,
   ) => {
@@ -83,7 +83,7 @@ const ViewTeamsPreRenderData: React.FC = () => {
         ...updatedTeams[indexUpdatedTeam],
         team: updatedTeam,
         subteam: updatedSubteam,
-        teamname: updatedTeamname,
+        teamName: updatedTeamName,
       };
       console.log('updatedTeams: ', updatedTeams);
       // Return the updated state

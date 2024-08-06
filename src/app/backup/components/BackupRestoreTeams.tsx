@@ -20,8 +20,8 @@ const parseTeams = (textareaValue: string): Teams[] => {
       if (lines.length > 0) {
         const details = lines.slice(1);
         const obj: Teams = {
-          teamid: '',
-          teamname: '',
+          teamId: '',
+          teamName: '',
           team: [],
           subteam: [],
         };
@@ -30,10 +30,10 @@ const parseTeams = (textareaValue: string): Teams[] => {
 
         details.forEach((field) => {
           if (field.startsWith('Team Name:')) {
-            obj.teamname = field.split(':')[1].trim();
+            obj.teamName = field.split(':')[1].trim();
           }
           if (field.startsWith('Team Id:')) {
-            obj.teamid = field.split(':')[1].trim();
+            obj.teamId = field.split(':')[1].trim();
           }
           else if (field === 'Team:' || field === 'Subteam:') {
             if (currentPokemon && currentSection) {
@@ -151,8 +151,8 @@ const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({
         .map((team, index) => {
           // Convert each team object to a formatted string
           const teamInfo = [
-            `Team Name: ${team.teamname}`,
-            `Team Id: ${team.teamid}`,
+            `Team Name: ${team.teamName}`,
+            `Team Id: ${team.teamId}`,
             `Team: ${team.team
               .map(
                 (t) => `

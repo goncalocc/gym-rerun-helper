@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FormEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import ViewTeamEditMember from './ViewTeamEditMember';
 import { validateTeams } from './ValidateTeams';
 import deleteMember from './DeleteMember';
@@ -63,7 +63,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
   handleTeamsUpdate: handleTeamsUpdate,
   setNotification: setNotification,
 }) => {
-  const [teamName, setTeamName] = useState<string>(props.teamname);
+  const [teamName, setTeamName] = useState<string>(props.teamName);
   const [teamData, setTeamData] = useState<Team[]>(props.team);
   const [subteamData, setSubteamData] = useState<Team[]>(props.subteam);
   const [selectedTeam, setSelectedTeam] = useState<number[]>([]);
@@ -225,8 +225,8 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
               type="text"
               value={teamName}
               style={{ width: '160px', height: '35px' }}
-              name="teamname"
-              id="teamname"
+              name="teamName"
+              id="teamName"
               onChange={(e) => onTitleChange({ teamIndex }, e)}
               autoComplete="off"
             />

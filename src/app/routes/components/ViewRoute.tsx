@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import ViewRouteEditMain from './ViewRouteEditMain';
 import { Routes, Route, Gym, Variation, Leads } from '../../types/types';
 import gymsJson from '../../data/gym-variations.json';
 import Svg from '@/app/utils/Svg';
@@ -59,6 +60,8 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const [editMode, setEditMode] = useState<boolean>(false);
+  const [assignedRoute, setAssignedRoute] = useState<Routes | undefined>(undefined);
   const [tooltip, setTooltip] = useState<TooltipProps>({
     visible: false,
     x: 0,
@@ -77,13 +80,10 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
     const localStorageRoutes = fetchLocalStorageRoutes();
     if (localStorageRoutes) {
       setRoutesData(localStorageRoutes);
+      setAssignedRoute(localStorageRoutes.find((route) => route.routeId === idProps));
     }
     setIsLoading(false);
   }, []);
-
-  const assignedRoute: Routes | undefined = routesData.find(
-    (route) => route.routeid === idProps,
-  );
 
   const getPokemonNumber = (pokemonName: string): string => {
     const pokemon = pokemonData.find((p) => p.pokemon === pokemonName);
@@ -151,36 +151,42 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   const handleScroll = (route: FilteredGym[], direction: ScrollDirection) => {
     let closestIndex = 0;
     let minDistance = Infinity;
-  
+
     const { current: elements } = elementsRef;
     const viewportCenter = window.innerHeight / 2;
-  
+
     for (let index = 0; index < elements.length; index++) {
       const element = elements[index];
       if (element !== null) {
         const elementTop = element.getBoundingClientRect().top;
         const distance = Math.abs(elementTop - viewportCenter);
-  
+
         if (
-          (direction === 'next' && elementTop > viewportCenter && distance < minDistance) ||
-          (direction === 'previous' && elementTop < viewportCenter && distance < minDistance)
+          (direction === 'next' &&
+            elementTop > viewportCenter &&
+            distance < minDistance) ||
+          (direction === 'previous' &&
+            elementTop < viewportCenter &&
+            distance < minDistance)
         ) {
           closestIndex = index;
           minDistance = distance;
         }
       }
     }
-  
+
     // Helper function to wrap index correctly
-    const wrapIndex = (index: number, length: number) => (index + length) % length;
-  
+    const wrapIndex = (index: number, length: number) =>
+      (index + length) % length;
+
     // Calculate new index based on the direction
-    const newIndex = direction === 'next'
-      ? wrapIndex(closestIndex, route.length)
-      : wrapIndex(closestIndex - 1, route.length);
-  
+    const newIndex =
+      direction === 'next'
+        ? wrapIndex(closestIndex, route.length)
+        : wrapIndex(closestIndex - 1, route.length);
+
     setCurrentIndex(newIndex);
-  
+
     return newIndex;
   };
 
@@ -195,7 +201,7 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
       const rect = nextElement.getBoundingClientRect();
       const scrollX = window.scrollX;
       const scrollY = window.scrollY;
-      const tooltipPos = Math.max(nextIndex - 1, 0); 
+      const tooltipPos = Math.max(nextIndex - 1, 0);
       if (
         route[tooltipPos].swapItems ||
         route[tooltipPos].heal ||
@@ -303,27 +309,62 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
         )?.swapTeams ?? false,
     }));
 
+  const closeEdit: () => void = () => {
+    setEditMode(false);
+  };
+
+  const handleClickEdit: () => void = () => {
+    setEditMode(true);
+  };
+
   return (
-    <div className="variations-container flex w-full p-4">
+    <div className="variations-container flex p-4">
       {/* Sidebar for Gyms */}
-      <BookmarksRoute gymsByRegion={gymsByRegion} />
-      {/* Main Content Area */}
-      <div className="main-container flex-row">
-        <div className="text-center text-lg">
-          Route Name: {assignedRoute.routename}
+      <div className="z-2 sticky top-4 h-[calc(100vh)] w-1/6 overflow-y-auto pr-4">
+        <div className="flex flex-row space-x-4 p-2">
+          <button
+            className=" rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
+            onClick={() => handleClickEdit()}
+          >
+            Edit
+          </button>
+          <button
+            className="rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
+            onClick={() => handleNextGym(filteredGymsVariations, 'next')}
+          >
+            Delete
+          </button>
         </div>
-        <div className="h-1/6 flex-1">
+        <BookmarksRoute gymsByRegion={gymsByRegion} />
+      </div>
+      {editMode ? (
+        <>
+          <ViewRouteEditMain
+            assignedRoute={assignedRoute}
+            setAssignedRoute={setAssignedRoute}
+            onClose={closeEdit}
+          />
+        </>
+      ) : (
+        <></>
+      )}
+      {/* Main Content Area */}
+      <div className="main-container flex flex-1 flex-col">
+        <div className="text-center text-lg">
+          Route Name: {assignedRoute.routeName}
+        </div>
+        <div className="flex-1">
           {filteredGymsVariations.map((gym, index) => (
             <div
               key={index}
               id={gym.id?.toString()}
-              className="mb-10"
+              className="mb-52"
               ref={(el) => {
                 elementsRef.current[index] = el;
               }}
             >
               <div className="gym-container rounded-lg bg-gray-900 p-3 shadow">
-                <div className="mb-3 flex flex-row justify-center text-xl">
+                <div className="flex flex-row justify-center text-xl">
                   <button
                     className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-700 text-lg text-white"
                     onMouseEnter={(event) =>
@@ -350,11 +391,11 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
                             key={pokemon.pokemonid}
                             className="pokemon-container bg-black-100 mb-1 rounded-lg px-1 py-0.5 shadow"
                           >
-                            <div className="mb-2 flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-gray-300">
+                            <div className="mb-2 flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-gray-300">
                               <Svg
                                 key={pokemon.pokemonid}
                                 name={getPokemonNumber(pokemon.name)}
-                                size={40}
+                                size={50}
                                 color="brown"
                               />
                             </div>
@@ -380,9 +421,13 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
                   ))}
                 </div>
               </div>
-              <div className="flex flex-row fixed bottom-4 left-1/2 -translate-x-1/2">
+            </div>
+          ))}
+          {/* Buttons Container */}
+          <div className="buttons-container z-2 fixed bottom-4 flex w-[calc(83.3333%-2rem)] justify-center">
+            <div className="buttons-wrapper flex space-x-4">
               <button
-                className="-translate-x-1/2 transform rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
+                className="rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
                 onClick={() =>
                   handleNextGym(filteredGymsVariations, 'previous')
                 }
@@ -390,16 +435,13 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
                 Previous
               </button>
               <button
-                className="-translate-x-1/2 transform rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
-                onClick={() =>
-                  handleNextGym(filteredGymsVariations, 'next')
-                }
+                className="rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
+                onClick={() => handleNextGym(filteredGymsVariations, 'next')}
               >
                 Next
               </button>
-              </div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

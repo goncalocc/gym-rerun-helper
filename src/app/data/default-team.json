@@ -1,7 +1,7 @@
 [
   {
-    "teamid": "01",
-    "teamname": "default team",
+    "teamId": "01",
+    "teamName": "default team",
     "team": [
       {
         "pokemon": "Blastoise",
@@ -150,8 +150,8 @@
     ],
     "subteam": []
   },
-  { "teamid": "02",
-    "teamname": "default team2",
+  { "teamId": "02",
+    "teamName": "default team2",
     "team": [
       {
         "pokemon": "Hydreigon",
@@ -300,8 +300,8 @@
     ]
   },
   {
-    "teamid": "03",
-    "teamname": "default team 3",
+    "teamId": "03",
+    "teamName": "default team 3",
     "team": [
       {
         "pokemon": "Hydreigon",

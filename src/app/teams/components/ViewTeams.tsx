@@ -83,7 +83,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
             key={index}
             className="mt-12 flex flex-col items-center space-y-4"
           >
-            <div className="text-center">{team.teamname}</div>
+            <div className="text-center">{team.teamName}</div>
             <div className="flex flex-col items-center">
               <div className="mb-4 flex justify-center">
                 <button

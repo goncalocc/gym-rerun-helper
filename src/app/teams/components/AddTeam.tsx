@@ -20,8 +20,8 @@ export const AddTeam: React.FC<AddTeamProps> = ({
   };
 
   const newTeam = {
-    teamid: generateUniqueId(),
-    teamname: `Team #${teamsData.length + 1}`,
+    teamId: generateUniqueId(),
+    teamName: `Team #${teamsData.length + 1}`,
     team: [
       {
         pokemon: 'Abra',
