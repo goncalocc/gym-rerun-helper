@@ -8,13 +8,163 @@
   --background-end-rgb: 0, 0, 0;
 }
 
-/* @media (prefers-color-scheme: light) {
-  :root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 255, 255, 255;
-    --background-end-rgb: 255, 255, 255;
-  } */
 
+
+.button-container {
+  @apply flex flex-col;
+}
+
+.button {
+  @apply rounded py-2 text-center text-white shadow-lg transition duration-200;
+}
+
+.edit-button {
+  @apply bg-blue-500 hover:bg-blue-600;
+}
+
+.delete-button {
+  @apply bg-red-500 hover:bg-red-600;
+}
+
+.toggle-button-container {
+  @apply fixed left-4 top-4 z-50;
+}
+
+.toggle-button {
+  @apply z-50 cursor-pointer rounded bg-gray-700 p-2 text-white shadow-lg;
+}
+
+@media (min-width: 767px) {
+  .sidebar {
+    @apply sticky fixed;
+  }
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    @apply fixed;
+    padding-top: 2rem;
+  }
+
+  .toggle-button-container {
+    @apply fixed z-50 block;
+    top: 0.5rem;
+    left: 1rem;
+  }
+
+  .toggle-button {
+    @apply cursor-pointer rounded bg-gray-700 p-2 text-white shadow-lg;
+  }
+
+  .button-container {
+    @apply mt-9 flex-row space-x-2;
+  }
+
+  .button {
+    height: 36px;
+    font-size: 9px;
+    line-height: 36px;
+    padding: 0 8px;
+  }
+}
+
+/* Base styles for the bookmarks */
+.bookmarks-container ol {
+  @apply rounded-lg bg-gray-800 p-2;
+}
+
+.bookmarks-container li {
+  @apply rounded px-4 py-2 hover:bg-gray-700;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+  .bookmarks-container li {
+    @apply px-2 py-1 text-xs; /* Smaller text and padding for smaller screens */
+  }
+
+  .bookmarks-container ol li ol {
+    @apply pl-2; /* Adjust padding for nested lists */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .bookmarks-container li {
+    @apply px-3 py-1.5 text-sm; /* Medium text and padding for tablets */
+  }
+
+  .bookmarks-container ol li ol {
+    @apply pl-3; /* Adjust padding for nested lists */
+  }
+}
+
+@media (min-width: 1025px) {
+  .bookmarks-container li {
+    @apply px-4 py-2 text-base; /* Default text size for larger screens */
+  }
+
+  .bookmarks-container ol li ol {
+    @apply pl-4; /* Default padding for nested lists */
+  }
+}
+
+/* Main Content */
+.title-center {
+  @apply text-lg font-semibold; /* Default size and weight */
+}
+
+.gym-container {
+  @apply mb-4 rounded-lg bg-gray-900 p-3; /* Default padding and margin */
+}
+
+.gym-container p {
+  @apply text-center text-base; /* Centered text with a default size */
+}
+
+.button-info {
+  @apply mr-1 flex h-6 w-6 items-center justify-center rounded-full bg-blue-700 p-3 text-white; /* Default button size */
+}
+
+.margin-end {
+  @apply mb-12; /* Adjust the bottom margin for default screen sizes */
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+  .title-center {
+    @apply text-base; /* Smaller text size for mobile */
+  }
+
+  .gym-container {
+    @apply mb-6 p-2; /* Less padding and margin for mobile */
+  }
+
+  .gym-container p {
+    @apply text-sm; /* Smaller text for mobile */
+  }
+
+  .button-info {
+    @apply mr-1 h-4 w-4 p-1; /* Smaller button size for mobile */
+  }
+
+  .margin-end {
+    @apply mb-8; /* Reduced bottom margin for mobile */
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .gym-container {
+    @apply mb-8 p-3; /* Medium padding and margin for tablets */
+  }
+
+  .button-info {
+    @apply mr-1 h-5 w-5 p-2; /* Medium button size for tablets */
+  }
+
+  .margin-end {
+    @apply mb-10; /* Adjusted bottom margin for tablets */
+  }
+}
 
 body {
   color: rgb(var(--foreground-rgb));

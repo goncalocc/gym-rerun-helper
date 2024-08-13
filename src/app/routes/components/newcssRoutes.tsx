@@ -66,7 +66,6 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [assignedRoute, setAssignedRoute] = useState<Routes | undefined>(
     undefined,
   );
@@ -94,11 +93,6 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
     }
     setIsLoading(false);
   }, []);
-
-  const handleToggleSidebar = () => {
-    console.log('test');
-    setIsSidebarVisible(!isSidebarVisible);
-  };
 
   const handleMouseEnter = (
     pokemonElement: HTMLElement,
@@ -328,99 +322,24 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   };
 
   return (
-    <div className="variations-container flex">
-      <div className="toggle-button-container md:hidden">
-        <button className="toggle-button" onClick={() => handleToggleSidebar()}>
-          ☰
+    <div className="sidebar">
+      <div className="button-container">
+        <button
+          className="button edit-button"
+          onClick={() => handleClickEdit()}
+        >
+          Edit
+        </button>
+        <button
+          className="button delete-button"
+          onClick={() => handleNextGym(filteredGymsVariations, 'next')}
+        >
+          Delete
         </button>
       </div>
-
-      <div
-        className={`sidebar left-0 top-0 flex h-screen flex-col space-y-4 bg-gray-800 p-4 text-white md:block md:w-1/5 lg:w-1/6 ${isSidebarVisible ? 'block' : 'hidden'}`}
-      >
-        <div className="button-container">
-          <button
-            className="button edit-button"
-            onClick={() => handleClickEdit()}
-          >
-            Edit
-          </button>
-          <button
-            className="button delete-button"
-            onClick={() => handleNextGym(filteredGymsVariations, 'next')}
-          >
-            Delete
-          </button>
-        </div>
-        <BookmarksRoute gymsByRegion={gymsByRegion} />
-      </div>
-      {editMode ? (
-        <>
-          <ViewRouteEditMain
-            assignedRoute={assignedRoute}
-            setAssignedRoute={setAssignedRoute}
-            onClose={closeEdit}
-            routeWithVariations={filteredGymsVariations}
-          />
-        </>
-      ) : (
-        <></>
-      )}
-      {/* Main Content Area */}
-      <div className="main-container flex flex-1 flex-col">
-        <div className="text-center title-center">Route Name: {assignedRoute.routeName}</div>
-        <div className="flex-1 p-3">
-          {filteredGymsVariations.map((gym, index) => (
-            <div
-              key={index}
-              id={gym.id?.toString()}
-              className="margin-end"
-              ref={(el) => {
-                elementsRef.current[index] = el;
-              }}
-            >
-              <div className="gym-container rounded-lg bg-gray-900 p-3">
-                <div className="flex flex-row items-center justify-center">
-                  <button
-                    className="button-info rounded-lg"
-                    onMouseEnter={(event) =>
-                      handleMouseEnter(event.currentTarget, index)
-                    }
-                    onMouseLeave={handleMouseLeave}
-                  >
-                    ℹ️
-                  </button>
-                  <p className="flex flex-row items-center justify-center">
-                    {gym.gym} - {gym.type}
-                  </p>
-                </div>
-                <TooltipRoute index={index} tooltip={tooltip} />
-              </div>
-            </div>
-          ))}
-          {/* Buttons Container */}
-          <div className="buttons-container z-2 fixed bottom-4 flex w-[calc(83.3333%-2rem)] justify-center">
-            <div className="buttons-wrapper flex space-x-4">
-              <button
-                className="rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
-                onClick={() =>
-                  handleNextGym(filteredGymsVariations, 'previous')
-                }
-              >
-                Previous
-              </button>
-              <button
-                className="rounded bg-blue-500 px-4 py-2 text-white shadow-lg transition hover:bg-blue-600"
-                onClick={() => handleNextGym(filteredGymsVariations, 'next')}
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BookmarksRoute gymsByRegion={gymsByRegion} />
     </div>
   );
 };
 
-export default ViewRoute;
+export default VidewRoute;

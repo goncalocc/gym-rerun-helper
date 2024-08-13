@@ -11,18 +11,18 @@ export interface ActionsRouteProps {
 
 const ActionsRoute: React.FC<ActionsRouteProps> = ({leads, variation}) => {
     return(
-        <div className="text-box ml-4 w-[40rem] flex-shrink-0 rounded-lg bg-gray-800 p-2 text-white shadow">
+        <div className="text-box ml-4 w-full sm:w-[30rem] md:w-[35rem] lg:w-[40rem] flex-shrink-0 rounded-lg bg-gray-800 p-2 text-white shadow">
         {leads
           ?.filter(
             (lead) =>
               lead.variationId === variation.variationId,
           )
           .map((lead) => (
-            <div className="flex flex-row items-center space-x-4" key={lead.variationId}>
-              <div className="flex">
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-2 sm:space-y-0" key={lead.variationId}>
+              <div className="flex flex-wrap justify-center sm:justify-start">
                 {lead.pokemon
                   .slice(0, 2)
-                  .map((member, index) => {
+                  .map((member) => {
                     // Split the name and take the first part
                     const [nameOnly, nickname] =
                       member.split(' (');
@@ -50,7 +50,7 @@ const ActionsRoute: React.FC<ActionsRouteProps> = ({leads, variation}) => {
                 </span>
               )}
               {lead.pokemon.length > 2 && (
-                <div className="flex">
+                <div className="flex flex-wrap justify-center sm:justify-start">
                   {lead.pokemon
                     .slice(2, lead.pokemon.length)
                     .map((member, index) => {
@@ -83,7 +83,7 @@ const ActionsRoute: React.FC<ActionsRouteProps> = ({leads, variation}) => {
               lead.variationId === variation.variationId,
           )
           .map((lead) => (
-            <p key={lead.variationId}>{lead.attacks}</p>
+            <p key={lead.variationId} className="mt-2 text-sm sm:text-base">{lead.attacks}</p>
           ))}
       </div>
     );

@@ -66,7 +66,6 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [assignedRoute, setAssignedRoute] = useState<Routes | undefined>(
     undefined,
   );
@@ -94,11 +93,6 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
     }
     setIsLoading(false);
   }, []);
-
-  const handleToggleSidebar = () => {
-    console.log('test');
-    setIsSidebarVisible(!isSidebarVisible);
-  };
 
   const handleMouseEnter = (
     pokemonElement: HTMLElement,
@@ -328,25 +322,18 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   };
 
   return (
-    <div className="variations-container flex">
-      <div className="toggle-button-container md:hidden">
-        <button className="toggle-button" onClick={() => handleToggleSidebar()}>
-          ☰
-        </button>
-      </div>
-
-      <div
-        className={`sidebar left-0 top-0 flex h-screen flex-col space-y-4 bg-gray-800 p-4 text-white md:block md:w-1/5 lg:w-1/6 ${isSidebarVisible ? 'block' : 'hidden'}`}
-      >
-        <div className="button-container">
+    <div className="variations-container flex p-4">
+      {/* Sidebar for Gyms */}
+      <div className="z-2 sticky top-4 mb-4 h-[50vh] w-[90vw] min-w-[100px] max-w-[22vw] overflow-y-auto pr-4 lg:mb-0 lg:h-[100vh] lg:w-[15vw]">
+        <div className="flex flex-row flex-wrap p-2">
           <button
-            className="button edit-button"
+            className="mr-2 flex-grow rounded bg-blue-500 text-white shadow-lg transition hover:bg-blue-600 lg:px-4 lg:py-2"
             onClick={() => handleClickEdit()}
           >
             Edit
           </button>
           <button
-            className="button delete-button"
+            className="mr-2 flex-grow rounded bg-red-500 text-white shadow-lg transition hover:bg-red-600 lg:px-4 lg:py-2"
             onClick={() => handleNextGym(filteredGymsVariations, 'next')}
           >
             Delete
@@ -354,6 +341,7 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
         </div>
         <BookmarksRoute gymsByRegion={gymsByRegion} />
       </div>
+
       {editMode ? (
         <>
           <ViewRouteEditMain
@@ -368,21 +356,23 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
       )}
       {/* Main Content Area */}
       <div className="main-container flex flex-1 flex-col">
-        <div className="text-center title-center">Route Name: {assignedRoute.routeName}</div>
-        <div className="flex-1 p-3">
+        <div className="text-center md-text-base lg:text-lg">
+          Route Name: {assignedRoute.routeName}
+        </div>
+        <div className="flex-1 lg:p-3">
           {filteredGymsVariations.map((gym, index) => (
             <div
               key={index}
               id={gym.id?.toString()}
-              className="margin-end"
+              className="mb-52"
               ref={(el) => {
                 elementsRef.current[index] = el;
               }}
             >
-              <div className="gym-container rounded-lg bg-gray-900 p-3">
-                <div className="flex flex-row items-center justify-center">
+              <div className="gym-container min-w-[70vw] max-w-[95vw] lg:min-w-[20vw] lg:max-w-full rounded-lg bg-gray-900 p-3 shadow-md sm:min-w-[400px]">
+                <div className="flex flex-row justify-center items-center text-[4vw] sm:text-[3.5vw] md:text-[3vw] lg:text-xl">
                   <button
-                    className="button-info rounded-lg"
+                    className="flex h-[8vw] w-[8vw] sm:h-[6vw] sm:w-[6vw] md:h-[5vw] md:w-[5vw] lg:h-6 lg:w-6 items-center justify-center note bg-blue-700 text-[3.5vw] sm:text-[3vw] md:text-[2.5vw] lg:text-lg text-white"
                     onMouseEnter={(event) =>
                       handleMouseEnter(event.currentTarget, index)
                     }
@@ -390,11 +380,52 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
                   >
                     ℹ️
                   </button>
-                  <p className="flex flex-row items-center justify-center">
+                  <p className="flex flex-row justify-center items-center md:text-[4vw] lg:text-[1vw] lg:ml-2">
                     {gym.gym} - {gym.type}
                   </p>
                 </div>
                 <TooltipRoute index={index} tooltip={tooltip} />
+                <div className="mt-4 flex flex-col items-center">
+                  {gym.variations?.map((variation) => (
+                    <div
+                      key={variation.variationId}
+                      className="variation-container mb-4 w-full p-2 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5"
+                    >
+                      <div className="flex items-center">
+                        {variation.pokemons.map((pokemon) => (
+                          <div
+                            key={pokemon.pokemonid}
+                            className="pokemon-container bg-gray-900 mb-2 rounded-lg p-2 shadow-sm w-full flex flex-col items-center"
+                          >
+                            <div className="mb-2 flex lg:h-16 md:h-11 sm-6 lg:w-16 md:w-11 sm:w-6 items-center justify-center overflow-hidden rounded-full bg-gray-300">
+                              <Svg
+                                key={pokemon.pokemonid}
+                                name={getPokemonNumber(pokemon.name)}
+                                size="3rem"
+                                color="brown"
+                              />
+                            </div>
+                            <span className="pokemon-stats sm-8 md:w-18 lg:w-28 bg-white text-sm">
+                              {pokemon.name}
+                            </span>
+                            <span
+                              className={`pokemon-stats ${getItemColor(pokemon.ability ? pokemon.ability : '--')} sm-8 md:w-18 lg:w-28 text-xs`}
+                            >
+                              {pokemon.ability ? pokemon.ability : '--'}
+                            </span>
+                            <span
+                              className={`pokemon-stats ${getItemColor(pokemon.item ? pokemon.item : '--')} sm-8 md:w-18 lg:w-28 text-xs`}
+                            >
+                              {pokemon.item ? pokemon.item : '--'}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                      {/* Action Content Area */}
+                      <ActionsRoute leads={gym.leads} variation={variation} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           ))}
@@ -423,4 +454,4 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   );
 };
 
-export default ViewRoute;
+export default ViewRodute;
