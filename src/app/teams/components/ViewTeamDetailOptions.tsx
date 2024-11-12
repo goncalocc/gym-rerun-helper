@@ -104,7 +104,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
                     query: { idProps: route.routeId },
                   }}
                 >
-                    {route.routeName}
+                  {route.routeName}
                 </Link>
               ))}
             </div>

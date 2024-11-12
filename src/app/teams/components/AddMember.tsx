@@ -34,7 +34,7 @@ const AddMember = ({ teamData, setTeamData }: AddMemberProps) => {
 
   const handleAddMember = () => {
     setTeamData((prevData) => {
-      const currentTeam = [...prevData ];
+      const currentTeam = [...prevData];
       currentTeam.push(newMember);
       console.log('Adding member ', currentTeam);
       return currentTeam;
@@ -43,9 +43,11 @@ const AddMember = ({ teamData, setTeamData }: AddMemberProps) => {
 
   return (
     <div>
-      {teamData && teamData.length <6 ?
-      <button onClick={handleAddMember}>+</button>
-      : <></>}
+      {teamData && teamData.length < 6 ? (
+        <button onClick={handleAddMember}>+</button>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

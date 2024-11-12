@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MainView } from '@/app/home/MainView';
 import { Selection } from '@/app/home/Selection';
 import jsonTeams from './data/default-team.json';
@@ -19,7 +19,7 @@ const Home: React.FC = () => {
     localStorage.setItem('gymRerunRoutes', JSON.stringify(jsonRoutes));
   };
 
-  const loadRoutesFromLocalStorage = () => {
+  const loadRoutesFromLocalStorage = useCallback(() => {
     const storedRoutes = localStorage.getItem('gymRerunRoutes');
     if (storedRoutes) {
       try {
@@ -31,9 +31,9 @@ const Home: React.FC = () => {
     } else {
       createRoutesToLocalStorage();
     }
-  };
+  }, []);
 
-  const loadTeamsFromLocalStorage = () => {
+  const loadTeamsFromLocalStorage = useCallback(() => {
     const storedTeams = localStorage.getItem('gymRerunTeam');
     if (storedTeams) {
       try {
@@ -45,18 +45,18 @@ const Home: React.FC = () => {
     } else {
       createTeamToLocalStorage();
     }
-  };
+  }, []);
 
   useEffect(() => {
     loadTeamsFromLocalStorage();
     loadRoutesFromLocalStorage();
-  }, []);
+  }, [loadTeamsFromLocalStorage, loadRoutesFromLocalStorage]);
 
   return (
     <main className="flex flex-col items-center">
-        <h1>Gym Rerun-&gt;</h1>
-        <Selection />
-        <MainView />
+      <h1>Gym Rerun-&gt;</h1>
+      <Selection />
+      <MainView />
     </main>
   );
 };

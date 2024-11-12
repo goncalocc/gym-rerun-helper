@@ -1,7 +1,7 @@
 export interface Pokemon {
-    pokemon: string;
-    number: string;
-  }
+  pokemon: string;
+  number: string;
+}
 
 const pokemonData: Pokemon[] = [
   { pokemon: 'Bulbasaur', number: '1' },

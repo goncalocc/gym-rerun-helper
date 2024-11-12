@@ -96,8 +96,8 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                     <Icon
                       key={index}
                       name={members.pokemon.toLowerCase()}
-                      size={70}
-                      color="brown"
+                      width={60}
+                      height={60}
                     />
                   ))}
                 </button>
@@ -112,7 +112,13 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                     })
                   }
                 >
-                  <Svg key={index} name="trash-grey" size={40} color="brown" />
+                  <Svg
+                    key={index}
+                    name="trash-grey"
+                    height={40}
+                    width={40}
+                    color="brown"
+                  />
                 </button>
               </div>
               {selectedTeam === index && (

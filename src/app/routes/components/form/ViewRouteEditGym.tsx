@@ -1,27 +1,78 @@
-import { Leads, Route } from '@/app/types/types';
+import { Gym, Leads, Route } from '@/app/types/types';
 import { FilteredGym } from '../ViewRoute';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent } from 'react';
 import { OnFormChange } from '@/app/routes/components/ViewRouteEditMain';
+import RouteVariationPokemon from '../RouteVariationPokemon';
+import { NewErrorsLayout } from '../validateRoutes';
+import gymsJson from '../../../data/gym-variations.json';
 
 export interface ViewRouteEditGymProps {
   routeGym: Route;
   routeWithVariations: FilteredGym[];
   onFormChange: OnFormChange;
+  errorData: NewErrorsLayout[];
 }
 
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   routeGym: routeGym,
   routeWithVariations: routeVariations,
   onFormChange: onFormChange,
+  errorData: errorData,
 }) => {
-  const filteredGym = routeVariations.find((gym) => gym.id === routeGym.id);
+  const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
+  // const filteredGymsVariations: FilteredGym[] = gyms.map((gym: Gym) => ({
+  //   gym: gym.gym,
+  //   type: gym.gymtype,
+  //   region: gym.region ?? 'Unknown',
+  //   variations: gym.variations,
+  //   id: gym.id,
+  //   channelTP:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.channelTP ?? false,
+  //   heal:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.heal ?? false,
+  //   leads:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.leads ?? [],
+  //   observations:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.observations ?? '',
+  //   provisionalHeal:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.provisionalHeal ?? false,
+  //   swapItems:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.swapItems ?? '',
+  //   swapTeams:
+  //     routeVariations.find(
+  //       (routeVariation: FilteredGym) =>
+  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
+  //     )?.swapTeams ?? false,
+  // }));
+  const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
   const stringToBoolean = (value: string): boolean => {
     return value === 'true';
   };
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>, id: number) => {
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+    id: number,
+  ) => {
     const { name, value, type } = event.target;
 
     if (type === 'radio' && name === 'heal') {
@@ -52,73 +103,85 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     onFormChange({ name: name as keyof Route, value: processedValue, id });
     // handleEnableButton();
   };
+
+  const hasError = (gym: string, index: number): boolean => {
+    if (
+      errorData &&
+      errorData.some(
+        (element) => element.index === index && element.gym === gym,
+      )
+    ) {
+      return true;
+    } else return false;
+  };
+
   return (
-    <form className="rounded-lg p-8">
-      <div className="rounded-lg bg-gray-600 p-3 shadow">
-        <div className="flex flex-col items-start">
+    <form className="rounded-lg">
+      <div className="rounded-lg bg-gray-600 shadow">
+        <div className="flex flex-col">
           {filteredGym?.variations?.map((variation, index) => {
+            {
+              /* Shows the variation of the teams of the gym leaders */
+            }
             const lead = routeGym.leads.find(
               (element: Leads) => element.variationId === variation.variationId,
             );
             return (
               <div
                 key={variation.variationId}
-                className={`variation-container mb-6 w-full ${index !== 0 ? 'border-t-4 border-gray-300' : ''}`}
+                className={`leads-variants my-2 w-full ${index !== 0 ? 'border-t-4 border-gray-300' : ''}`}
               >
-                <div className="mt-6 flex w-full flex-row items-center">
+                <div className="my-4 flex w-full flex-row items-center">
                   {variation.pokemons.map((pokemon) => (
                     <div
                       key={pokemon.pokemonid}
-                      className="pokemon-container rounded-lg px-1 py-0.5"
+                      className="flex w-full flex-col items-center rounded-lg 2xl:mx-6"
                     >
-                      <div className="flex h-[10vw] max-h-[80px] w-[10vw] max-w-[80px] items-center justify-center overflow-hidden rounded-full bg-gray-300 mb-2">
+                      <div className="image-container flex items-center justify-center overflow-hidden rounded-full bg-gray-300">
                         <Svg
                           key={pokemon.pokemonid}
                           name={getPokemonNumber(pokemon.name)}
-                          size="3rem"
+                          width={50}
+                          height={50}
                           color="brown"
                         />
                       </div>
-                      <span className="pokemon-stats w-28 bg-white text-sm">
-                        {pokemon.name}
-                      </span>
                     </div>
                   ))}
-                  <div className="actions-container mb-4 w-full flex-1 space-y-2">
-                    <div className="lead-container flex w-full flex-grow flex-row items-center  md:space-x-2">
-                      <label
-                        htmlFor="lead"
-                        className="mb-2 w-24 text-right font-bold"
-                      >
-                        Lead:
-                      </label>
-                      <input
-                        id="pokemon"
-                        name={`pokemon.${variation.variationId-1}`}
-                        type="text"
-                        value={lead ? lead.pokemon.join(' ') : ''}
-                        className="h-6 w-full flex-grow rounded border p-2 text-sm text-black"
-                        onChange={(e) => handleChange(e, routeGym.id)}
-                        autoComplete="off"
-
-                      />
-                    </div>
-                    <div className="attacks-container flex flex-col md:flex-row md:items-center md:space-x-2">
-                      <label
-                        htmlFor="attacks"
-                        className="mb-2 w-24 text-right font-bold"
-                      >
-                        Attacks:
-                      </label>
-                      <textarea
-                        id="attacks"
-                        name={`attacks.${variation.variationId-1}`}
-                        value={lead ? lead.attacks : ''}
-                        className="h-24 w-full flex-grow rounded border p-2 text-sm text-black"
-                        onChange={(e) => handleChange(e, routeGym.id)}
-                        autoComplete="off"
-                      />
-                    </div>
+                </div>
+                <div className="mb-2 w-full">
+                  <div className="flex w-full flex-grow flex-col items-center md:mt-4 md:flex-row">
+                    <label
+                      htmlFor="lead"
+                      className="mb-2 text-center font-bold md:mr-2 md:w-[8vh] md:text-right"
+                    >
+                      Lead:
+                    </label>
+                    <input
+                      id="pokemon"
+                      name={`pokemon.${variation.variationId - 1}`}
+                      type="text"
+                      value={lead ? lead.pokemon.join(' ') : ''}
+                      className={`mx-2 h-[5vh] w-full rounded border ${hasError(routeGym.gym, variation.variationId) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-xs text-black md:h-[4vh] md:text-sm`}
+                      onChange={(e) => handleChange(e, routeGym.id)}
+                      autoComplete="off"
+                    />
+                  </div>
+                  <div className="mt-4 flex w-full flex-col items-center md:flex-row">
+                    <label
+                      htmlFor="attacks"
+                      className="mb-2 text-center font-bold md:mr-2 md:w-[8vh] md:text-right"
+                    >
+                      Attacks:
+                    </label>
+                    <textarea
+                      id="attacks"
+                      name={`attacks.${variation.variationId - 1}`}
+                      value={lead ? lead.attacks : ''}
+                      className="mx-2 h-[14vh] w-full rounded border p-2 text-xs text-black md:h-[8vh] md:text-sm"
+                      onChange={(e) => handleChange(e, routeGym.id)}
+                      autoComplete="off"
+                    />
                   </div>
                 </div>
                 {/* Action Content Area */}
@@ -126,26 +189,34 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
             );
           })}
         </div>
-        <div className="mt-6">
-          <label className="mb-2 font-bold">Next steps:</label>
-          <div className="flex flex-col space-y-2">
+        <div className="p-4">
+          <div className="mb-4">
+            <label className="space-y-4 text-base font-bold md:text-lg">
+              Next steps:
+            </label>
+          </div>
+          <div className="flex flex-col space-y-4">
             <div className="flex flex-row">
-              <label className="mr-2 w-[10%] font-bold">Swap Items:</label>
+              <label className="mr-2 w-[20%] justify-center text-xs font-bold md:text-sm">
+                Swap Items:
+              </label>
               <input
                 id="swapItems"
                 name="swapItems"
                 type="text"
                 value={routeGym.swapItems}
-                className="h-6 w-1/2 rounded border text-sm text-black"
+                className="h-[2.5vh] rounded border p-2 text-xs text-black md:w-1/2 md:text-sm"
                 onChange={(e) => handleChange(e, routeGym.id)}
                 autoComplete="off"
               />
             </div>
             <div className="flex flex-row">
-              <label className="mr-2 w-[10%] font-bold">Swap Teams:</label>
+              <label className="mr-2 w-[20%] text-xs font-bold md:text-sm">
+                Swap Teams:
+              </label>
               <label
                 htmlFor="yes-swapTeams"
-                className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="text-xs font-medium  text-gray-900 md:text-sm dark:text-gray-300"
               >
                 Yes
               </label>
@@ -160,7 +231,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               />
               <label
                 htmlFor="no-swapTeams"
-                className="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="ms-4 text-xs font-medium  text-gray-900 md:text-sm dark:text-gray-300"
               >
                 No
               </label>
@@ -175,10 +246,12 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               />
             </div>
             <div className="flex flex-row">
-              <label className="mr-2 w-[10%] font-bold">Change Channel:</label>
+              <label className=" mr-2 w-[20%] text-xs font-bold md:text-sm">
+                Change Channel:
+              </label>
               <label
                 htmlFor="changeChannel"
-                className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="text-xs font-medium  text-gray-900 md:text-sm dark:text-gray-300"
               >
                 Yes
               </label>
@@ -193,7 +266,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               />
               <label
                 htmlFor="no-changeChannel"
-                className="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="ms-4 text-xs font-medium text-gray-900 md:text-sm dark:text-gray-300"
               >
                 No
               </label>
@@ -209,10 +282,12 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               {/* <div>{routeGym.channelTP ? 'Yes' : 'No'}</div> */}
             </div>
             <div className="flex flex-row">
-              <label className="mr-2 w-[10%] font-bold">Heal:</label>
+              <label className="mr-2 w-[20%] text-xs font-bold md:text-sm">
+                Heal:
+              </label>
               <label
                 htmlFor="heal"
-                className="text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="text-xs font-medium text-gray-900 md:text-sm dark:text-gray-300"
               >
                 Yes
               </label>
@@ -227,7 +302,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               />
               <label
                 htmlFor="no-heal"
-                className="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="ms-4 text-xs font-medium text-gray-900 md:text-sm dark:text-gray-300"
               >
                 No
               </label>
@@ -242,7 +317,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               />
               <label
                 htmlFor="ifneeded-heal"
-                className="ms-4 text-sm font-medium text-gray-900 dark:text-gray-300"
+                className="ml-2 text-xs font-medium text-gray-900 md:ms-4 md:text-sm dark:text-gray-300"
               >
                 If needed
               </label>

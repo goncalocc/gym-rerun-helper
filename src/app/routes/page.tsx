@@ -1,17 +1,15 @@
-"use client";
+'use client';
 
 import { useSearchParams } from 'next/navigation';
 import ViewRoute from './components/ViewRoute';
 
 const RoutesPage: React.FC = () => {
-  const searchParams = useSearchParams()
- 
-  const idProps = searchParams.get('idProps')
+  const searchParams = useSearchParams();
+
+  const idProps = searchParams.get('idProps');
 
   return (
-    <main>
-      {idProps ? <ViewRoute idProps={idProps} /> : <p>Loading...</p>}
-    </main>
+    <main>{idProps ? <ViewRoute idProps={idProps} /> : <p>Loading...</p>}</main>
   );
 };
 

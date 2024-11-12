@@ -8,8 +8,7 @@
   --background-end-rgb: 0, 0, 0;
 }
 
-
-
+/* Button Styles */
 .button-container {
   @apply flex flex-col;
 }
@@ -26,6 +25,7 @@
   @apply bg-red-500 hover:bg-red-600;
 }
 
+/* Toggle Button Styles */
 .toggle-button-container {
   @apply fixed left-4 top-4 z-50;
 }
@@ -34,9 +34,19 @@
   @apply z-50 cursor-pointer rounded bg-gray-700 p-2 text-white shadow-lg;
 }
 
+/* Sidebar Styles */
 @media (min-width: 767px) {
   .sidebar {
-    @apply sticky fixed;
+    @apply sticky;
+  }
+
+  .edit-button,
+  .delete-button {
+    @apply my-2 w-1/2;
+  }
+
+  .button-container {
+    @apply items-center;
   }
 }
 
@@ -68,7 +78,7 @@
   }
 }
 
-/* Base styles for the bookmarks */
+/* Bookmarks Styles */
 .bookmarks-container ol {
   @apply rounded-lg bg-gray-800 p-2;
 }
@@ -77,7 +87,7 @@
   @apply rounded px-4 py-2 hover:bg-gray-700;
 }
 
-/* Responsive styles */
+/* Responsive Bookmarks Styles */
 @media (max-width: 767px) {
   .bookmarks-container li {
     @apply px-2 py-1 text-xs; /* Smaller text and padding for smaller screens */
@@ -108,7 +118,7 @@
   }
 }
 
-/* Main Content */
+/* Main Content Styles */
 .title-center {
   @apply text-lg font-semibold; /* Default size and weight */
 }
@@ -125,11 +135,7 @@
   @apply mr-1 flex h-6 w-6 items-center justify-center rounded-full bg-blue-700 p-3 text-white; /* Default button size */
 }
 
-.margin-end {
-  @apply mb-12; /* Adjust the bottom margin for default screen sizes */
-}
-
-/* Responsive styles */
+/* Responsive Main Content Styles */
 @media (max-width: 767px) {
   .title-center {
     @apply text-base; /* Smaller text size for mobile */
@@ -157,12 +163,123 @@
     @apply mb-8 p-3; /* Medium padding and margin for tablets */
   }
 
+  .title-center {
+    @apply text-lg; /* Smaller text size for mobile */
+  }
+
+  .gym-container p {
+    @apply text-base; /* Smaller text for medium */
+  }
+
   .button-info {
     @apply mr-1 h-5 w-5 p-2; /* Medium button size for tablets */
   }
 
   .margin-end {
     @apply mb-10; /* Adjusted bottom margin for tablets */
+  }
+}
+
+@media (min-width: 1025px) {
+  .gym-container {
+    @apply mb-10 p-5; /* Medium padding and margin for tablets */
+  }
+
+  .gym-container p {
+    @apply text-xl; /* Smaller text for medium */
+  }
+
+  .title-center {
+    @apply text-xl; /* Smaller text size for mobile */
+  }
+
+  .button-info {
+    @apply mr-1 h-5 w-5 p-2; /* Medium button size for tablets */
+  }
+
+  .margin-end {
+    @apply mb-40; /* Adjusted bottom margin for tablets */
+  }
+}
+
+/* Leads Variants */
+@media (max-width: 1024px) {
+  .leads-variants {
+    @apply flex flex-col;
+  }
+}
+
+@media (min-width: 1024px) {
+  .leads-variants {
+    @apply flex flex-row;
+  }
+}
+
+/* Image and SVG Styles */
+.pokemon-container {
+  @apply mx-0;
+}
+
+/* Responsive Image Container Styles */
+@media (max-width: 639px) {
+  .image-container {
+    @apply h-7 w-7; /* Smaller size for mobile */
+  }
+
+  .pokemon-stats {
+    @apply w-12;
+  }
+}
+
+@media ((min-width: 640px) and (max-width: 767px)) {
+  .image-container {
+    @apply h-12 w-12; /* Smaller size for mobile */
+  }
+
+  .pokemon-stats {
+    @apply w-20;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .image-container {
+    @apply h-14 w-14; /* Medium size for tablets */
+  }
+
+  .pokemon-stats {
+    @apply w-20;
+  }
+}
+
+@media (min-width: 1025px) {
+  .image-container {
+    @apply h-14 w-14; /* Default size for larger screens */
+  }
+
+  .pokemon-stats {
+    @apply w-24;
+  }
+}
+
+.pokemon-stats {
+  @apply text-center text-[6px] sm:text-[8px] md:text-[10px] lg:text-[12px];
+}
+
+.text-box {
+  @apply text-center text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px];
+}
+
+/* Previous and Next Buttons */
+@media (min-width: 767px) {
+  .nextprevious-container {
+    @apply fixed bottom-4 flex w-[calc(83.3333%-2rem)] justify-center;
+  }
+}
+
+@media (max-width: 767px) {
+  .nextprevious-container {
+    @apply fixed bottom-4 flex w-full items-center justify-center;
+    padding-left: calc((100vw - 100%) / 2);
   }
 }
 

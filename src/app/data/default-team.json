@@ -150,7 +150,8 @@
     ],
     "subteam": []
   },
-  { "teamId": "02",
+  {
+    "teamId": "02",
     "teamName": "default team2",
     "team": [
       {

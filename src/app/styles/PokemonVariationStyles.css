@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color:  rgb(193, 199, 212);
+  background-color: rgb(193, 199, 212);
 }
 
 .pokemon-img {
@@ -44,7 +44,6 @@
   white-space: nowrap;
   border-radius: 0.25rem; /* equivalent to rounded */
 }
-
 
 .text-sm {
   margin-top: 1px;

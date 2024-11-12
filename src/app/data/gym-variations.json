@@ -3561,7 +3561,7 @@
             "pokemonid": 4
           },
           {
-              "name": "Sandslash",
+            "name": "Sandslash",
             "level": "",
             "item": "",
             "ability": "",
@@ -9581,7 +9581,12 @@
             "level": "82",
             "item": "Occa Berry",
             "ability": "Contrary",
-            "moveset": ["Leaf Storm", "Dragon Pulse", "Hidden Power (Fire)", "Glare"],
+            "moveset": [
+              "Leaf Storm",
+              "Dragon Pulse",
+              "Hidden Power (Fire)",
+              "Glare"
+            ],
             "pokemonid": 1
           },
           {
@@ -9589,12 +9594,7 @@
             "level": "81",
             "item": "Coba Berry",
             "ability": "Effect Spore",
-            "moveset": [
-              "Giga Drain",
-              "Foul Play",
-              "Spore",
-              "Rage Powder"
-            ],
+            "moveset": ["Giga Drain", "Foul Play", "Spore", "Rage Powder"],
             "pokemonid": 2
           },
           {
@@ -9623,12 +9623,7 @@
             "level": "80",
             "item": "",
             "ability": "Levitate",
-            "moveset": [
-              "Power Whip",
-              "Crunch",
-              "Return",
-              "Sleep Powder"
-            ],
+            "moveset": ["Power Whip", "Crunch", "Return", "Sleep Powder"],
             "pokemonid": 5
           },
           {
@@ -10992,12 +10987,7 @@
             "level": "82",
             "item": "Toxic Orb",
             "ability": "Poison Heal",
-            "moveset": [
-              "Dig",
-              "U-Turn",
-              "Stone Edge",
-              "Roost"
-            ],
+            "moveset": ["Dig", "U-Turn", "Stone Edge", "Roost"],
             "pokemonid": 3
           },
           {
@@ -11005,12 +10995,7 @@
             "level": "84",
             "item": "Choice Scarf",
             "ability": "Hustle",
-            "moveset": [
-              "Stone Edge",
-              "Iron Head",
-              "Superpower",
-              "X-Scissor"
-            ],
+            "moveset": ["Stone Edge", "Iron Head", "Superpower", "X-Scissor"],
             "pokemonid": 4
           },
           {

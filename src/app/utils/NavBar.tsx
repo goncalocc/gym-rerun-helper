@@ -1,10 +1,10 @@
-type navItems = {
+type NavItem = {
   id: number;
   text: string;
 };
 
 type NavBarProps = {
-  navItems: navItems[];
+  navItems: NavItem[];
   onTabChange: (tabIndex: number) => void;
 };
 

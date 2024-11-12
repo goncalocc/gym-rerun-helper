@@ -16,7 +16,7 @@ const deleteTeam = ({
   index,
   handleTeamsUpdate,
   setNotification,
-}: DeleteTeamProps)  => {
+}: DeleteTeamProps) => {
   const confirmWindow = window.confirm(
     'Are you sure you want to delete this team?',
   );
@@ -33,14 +33,20 @@ const deleteTeam = ({
       const defaultNewTeam: Team[] = [];
       const defaultNewSubteam: Team[] = [];
       const defaultIndexUpdatedTeam = -1;
-      const defaultTeamName = 'placeholder string'
-      handleTeamsUpdate(defaultNewTeam, defaultNewSubteam, defaultTeamName, defaultIndexUpdatedTeam, currentTeams);
+      const defaultTeamName = 'placeholder string';
+      handleTeamsUpdate(
+        defaultNewTeam,
+        defaultNewSubteam,
+        defaultTeamName,
+        defaultIndexUpdatedTeam,
+        currentTeams,
+      );
       setNotification({
         message: 'Team deleted successfully',
         type: 'success',
         visible: true,
       });
-  
+
       setTimeout(() => {
         setNotification({ message: '', type: '', visible: false });
       }, 3000);

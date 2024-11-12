@@ -77,7 +77,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
     if (isSaved) {
       closeEdit();
     }
-  }, [isSaved, errorData]);
+  }, [isSaved, errorData, closeEdit]);
 
   const handleMemberDetails = ({
     selectedMembers,
@@ -260,7 +260,8 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                     <Svg
                       key={index}
                       name="trash-grey"
-                      size={40}
+                      width={40}
+                      height={40}
                       color="brown"
                     />
                   </button>
@@ -316,7 +317,8 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                       <Svg
                         key={index}
                         name="trash-grey"
-                        size={40}
+                        width={40}
+                        height={40}
                         color="brown"
                       />
                     </button>

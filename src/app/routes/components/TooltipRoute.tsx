@@ -1,18 +1,25 @@
+import { MouseEventHandler } from 'react';
 import { TooltipProps } from './ViewRoute';
 
 export interface TooltipRouteProps {
   tooltip: TooltipProps;
   index: number;
+  handleMouseLeave: MouseEventHandler<HTMLDivElement>;
 }
 
-const TooltipRoute: React.FC<TooltipRouteProps> = ({ tooltip, index }) => {
+const TooltipRoute: React.FC<TooltipRouteProps> = ({
+  tooltip,
+  index,
+  handleMouseLeave,
+}) => {
   return (
     <div>
       {tooltip.visible && tooltip.index === index && (
         <div
           id="tooltip"
-          className="absolute z-50 whitespace-nowrap rounded bg-gray-800 p-2 text-white"
+          className="absolute z-40 whitespace-nowrap rounded bg-gray-800 p-2 text-white"
           style={{ top: tooltip.y, left: tooltip.x }}
+          onClick={handleMouseLeave}
         >
           <div>
             <strong>Steps before entering this Gym:</strong>

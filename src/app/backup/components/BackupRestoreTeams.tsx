@@ -34,8 +34,7 @@ const parseTeams = (textareaValue: string): Teams[] => {
           }
           if (field.startsWith('Team Id:')) {
             obj.teamId = field.split(':')[1].trim();
-          }
-          else if (field === 'Team:' || field === 'Subteam:') {
+          } else if (field === 'Team:' || field === 'Subteam:') {
             if (currentPokemon && currentSection) {
               obj[currentSection].push(currentPokemon);
             }
@@ -187,7 +186,7 @@ const BackupRestoreTeams: React.FC<BackupRestoreTeamsProps> = ({
         ); // Add separators between teams
       setFormattedText(text);
     }
-  }, []);
+  }, [teamsData]);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setFormattedText(event.target.value);

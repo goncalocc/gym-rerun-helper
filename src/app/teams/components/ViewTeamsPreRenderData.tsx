@@ -62,7 +62,7 @@ const ViewTeamsPreRenderData: React.FC = () => {
   ) => {
     setTeamsData((prevTeams) => {
       if (newTeams) {
-        console.log('updatedTeams: ', newTeams);
+        console.log('updatedTeams (newTeams): ', newTeams);
         // Return the updated state
         localStorage.setItem('gymRerunTeam', JSON.stringify(newTeams));
         return newTeams;

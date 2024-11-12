@@ -1,8 +1,8 @@
 import { Routes, Route, Leads } from '@/app/types/types';
-import { FilteredGym } from './ViewRoute';
+import { FilteredGym, HandleRoutesUpdate } from './ViewRoute';
+import { NewErrorsLayout, validateRoutes } from './validateRoutes';
 import Svg from '@/app/utils/Svg';
 import { SetStateAction, useEffect, useState } from 'react';
-// import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import {
   DragDropContext,
   Droppable,
@@ -10,12 +10,18 @@ import {
   DropResult,
 } from '@hello-pangea/dnd';
 import ViewRouteEditGym from './form/ViewRouteEditGym';
+import { NotificationParams } from '@/app/teams/components/ViewTeams';
+import ALL_GYMS from '../../data/gym-variations.json';
+import AddGym from './AddGym';
+import deleteGym from './DeleteGym';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
   setAssignedRoute: React.Dispatch<SetStateAction<Routes | undefined>>;
   onClose: () => void;
   routeWithVariations: FilteredGym[];
+  setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
+  handleRoutesUpdate: HandleRoutesUpdate;
 }
 
 export type OnFormChangeProps<K extends keyof Route> = {
@@ -33,18 +39,35 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   setAssignedRoute: setAssignedRoute,
   onClose: closeEdit,
   routeWithVariations: routeWithVariations,
+  handleRoutesUpdate: handleRoutesUpdate,
+  setNotification: setNotification,
 }) => {
   const [propsRoute, setPropsRoute] = useState<Routes | undefined>(() =>
     assignedRoute ? JSON.parse(JSON.stringify(assignedRoute)) : undefined,
   );
   const [selectedGyms, setSelectedGyms] = useState<number[]>([]);
+  const [errorData, setErrorData] = useState<NewErrorsLayout[]>([]);
+  const [isSaved, setIsSaved] = useState<boolean>(false);
+  const [openNewGyms, setOpenNewGyms] = useState<boolean>(false);
+  const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+  const missingGyms = ALL_GYMS.filter(
+    (gym) => !propsRoute?.route.some((route) => route.gym === gym.gym),
+  );
 
   useEffect(() => {
+    if (isSaved) {
+      closeEdit();
+    }
     // Ensure that when assignedRoute changes, propsRoute is updated with a new copy.
     if (assignedRoute) {
       setPropsRoute(JSON.parse(JSON.stringify(assignedRoute)));
     }
-  }, [assignedRoute]);
+  }, [assignedRoute, isSaved]);
+
+  const handleEnableSaveButton = () => {
+    setIsDisabled(false);
+  };
 
   const handleGymDetails = ({
     selectedGyms,
@@ -60,6 +83,10 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     } else {
       setSelectedGyms([...selectedGyms, id]);
     }
+  };
+
+  const handleNewGymsOpen = () => {
+    setOpenNewGyms(!openNewGyms);
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -98,14 +125,14 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
 
         if (subfield) {
           const arrayIndex = parseInt(subfield);
-          if (
-            arrayIndex >=0 &&
-            field in updatedGym.leads[arrayIndex]
-          ) {
+          if (arrayIndex >= 0 && field in updatedGym.leads[arrayIndex]) {
             if (field === 'pokemon' && typeof value === 'string') {
-              (updatedGym.leads[arrayIndex][field] as string[]) = value.split(' ');
+              (updatedGym.leads[arrayIndex][field] as string[]) =
+                value.split(' ');
             } else {
-              (updatedGym.leads[arrayIndex][field as keyof Leads] as Leads[keyof Leads]) = value as Leads[keyof Leads];
+              (updatedGym.leads[arrayIndex][
+                field as keyof Leads
+              ] as Leads[keyof Leads]) = value as Leads[keyof Leads];
             }
           }
         } else {
@@ -121,20 +148,75 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
         route: updatedRoute.route ?? [],
       };
     });
+    handleEnableSaveButton();
+  };
+
+  const submitForm = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+    try {
+      // First, perform validations
+      if (propsRoute) {
+        // Collect errors from all gyms
+        const allErrors: NewErrorsLayout[] = [];
+
+        for (let i = 0; i < propsRoute.route.length; i++) {
+          // Validate each gym and accumulate errors
+          const errors = validateRoutes({
+            gymName: propsRoute.route[i].gym,
+            leads: propsRoute.route[i].leads,
+          });
+
+          if (errors.length > 0) {
+            allErrors.push(...errors);
+          }
+        }
+
+        // Check if any errors were collected
+        if (allErrors.length > 0) {
+          // Handle validation errors by displaying all messages
+          const errorMessage = allErrors
+            .map((error) => error.message)
+            .join('\n');
+          alert(errorMessage);
+          setErrorData((prevState) => [...prevState, ...allErrors]);
+        } else {
+          // Only update routes if no errors are found
+          handleRoutesUpdate(propsRoute);
+
+          setNotification({
+            message: 'Route edited successfully',
+            type: 'success',
+            visible: true,
+          });
+
+          setTimeout(() => {
+            setNotification({ message: '', type: '', visible: false });
+          }, 3000);
+
+          setIsSaved(true);
+        }
+      }
+    } catch (error: any) {
+      // Handle any unexpected errors during execution
+      alert('An unexpected error occurred: ' + error.message);
+      // Optional: log or handle other unexpected states
+    }
   };
 
   return (
-    <div className="fixed inset-0 z-10 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative mx-auto my-4 h-full max-h-[95%] w-full max-w-[85%] overflow-auto rounded-lg bg-gray-900 p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="relative my-4 h-full max-h-[95%] w-full max-w-[85%] overflow-auto rounded-lg bg-gray-900 p-8">
         <button
-          className="absolute right-2 top-2 text-xl text-gray-700 hover:text-gray-900"
+          className="absolute right-2 top-2 text-2xl text-gray-700 hover:text-gray-900 sm:text-xl"
           onClick={closeEdit}
         >
           &times;
         </button>
         <div className="flex flex-col items-center">
-          <div className="mb-4 w-80 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-700">
-            name: {propsRoute?.routeName}
+          <div className="mb-4 w-[99%] w-full rounded bg-blue-500 px-4 py-2 text-center text-base text-white hover:bg-blue-700 md:w-3/5 md:text-lg lg:w-6/12 lg:text-xl xl:w-2/5 2xl:w-[30%]">
+            {propsRoute?.routeName}
           </div>
           <div className="map-container w-full">
             <DragDropContext onDragEnd={onDragEnd}>
@@ -143,8 +225,15 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                   <ul
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className="w-full"
+                    className=""
                   >
+                    <AddGym
+                      openNewGyms={openNewGyms}
+                      setOpenNewGyms={setOpenNewGyms}
+                      propsRoute={propsRoute}
+                      setPropsRoute={setPropsRoute}
+                      handleEnableSaveButton={handleEnableSaveButton}
+                    ></AddGym>
                     {propsRoute?.route.map((route, index) => (
                       <Draggable
                         key={route.id}
@@ -167,24 +256,37 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                                     id: route.id,
                                   })
                                 }
-                                className="w-56 rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-700"
+                                className="w-[65%] rounded bg-gray-500 px-4 py-2 text-center text-sm text-white hover:bg-gray-800 md:w-[45%] md:text-base lg:w-[45%] lg:text-lg xl:w-[20%] 2xl:w-[15%]"
                               >
                                 {route.gym}
                               </div>
-                              <button>
+                              <button
+                                className=""
+                                onClick={() =>
+                                  deleteGym({
+                                    propsRoute: propsRoute,
+                                    setPropsRoute: setPropsRoute,
+                                    id: route.id,
+                                    handleEnableSaveButton:
+                                      handleEnableSaveButton,
+                                  })
+                                }
+                              >
                                 <Svg
                                   name="trash-grey"
-                                  size="2rem"
+                                  width={40}
+                                  height={40}
                                   color="brown"
                                 />
                               </button>
                             </div>
-                            <div className="">
+                            <div className="mb-8">
                               {selectedGyms?.includes(route.id) && (
                                 <ViewRouteEditGym
                                   routeGym={route}
                                   routeWithVariations={routeWithVariations}
                                   onFormChange={onFormChange}
+                                  errorData={errorData}
                                 />
                               )}
                             </div>
@@ -198,6 +300,24 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
               </Droppable>
             </DragDropContext>
           </div>
+        </div>
+      </div>
+      <div className="fixed bottom-7 z-10 flex w-full items-center justify-center">
+        <div className="flex space-x-4">
+          <button
+            className={`flex items-center justify-center rounded-lg px-4 py-2 text-sm text-white transition focus:outline-none focus:ring-2 focus:ring-blue-300 sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg
+            ${isDisabled ? 'cursor-not-allowed bg-gray-400' : 'bg-blue-500 hover:bg-blue-600'}`}
+            onClick={submitForm}
+            disabled={isDisabled}
+          >
+            Save
+          </button>
+          <button
+            className="flex items-center justify-center rounded-lg bg-red-500 px-4 py-2 text-sm text-white transition hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300 sm:px-6 sm:py-3 sm:text-base md:px-8 md:py-4 md:text-lg"
+            onClick={closeEdit}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     </div>

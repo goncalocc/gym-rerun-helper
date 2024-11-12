@@ -46,7 +46,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
   setTeamData: setTeamData,
 }) => {
   const dictionaries: Record<DictionaryKeys, string[]> = {
-    pokemon: pokemonData.map(p=>p.pokemon),
+    pokemon: pokemonData.map((p) => p.pokemon),
     item: itemsData,
     move: movesData,
     ability: abilitiesData,
@@ -126,7 +126,13 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
           optionName.toLowerCase().indexOf(value.toLowerCase()) > -1,
       );
       //Validations that don't require Dictionary to help fill
-    } else if (!(name.startsWith('evs') || name.startsWith('ivs') || name.startsWith('nickname'))) {
+    } else if (
+      !(
+        name.startsWith('evs') ||
+        name.startsWith('ivs') ||
+        name.startsWith('nickname')
+      )
+    ) {
       const dictKey = name as DictionaryKeys;
       (filteredItems = dictionaries[dictKey].filter(
         (optionName) =>
@@ -307,7 +313,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
         </div>
       </div>
       <div className="mb-2 grid grid-cols-2">
-      <div className="flex items-center">
+        <div className="flex items-center">
           <label htmlFor="item" className="mr-4 w-28 text-right">
             Item:
           </label>
@@ -370,7 +376,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
         </div>
       </div>
       <div className="mb-4 grid grid-cols-2 gap-4">
-      <div className="flex items-center">
+        <div className="flex items-center">
           <label htmlFor="ability" className="mr-4 w-28 text-right">
             Ability:
           </label>

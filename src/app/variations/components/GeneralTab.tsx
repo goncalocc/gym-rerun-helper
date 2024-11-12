@@ -35,10 +35,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
     }
   };
 
-  const handleMouseEnter = (
-    moveset: string[],
-    pokemonElement: HTMLElement,
-  ) => {
+  const handleMouseEnter = (moveset: string[], pokemonElement: HTMLElement) => {
     const rect = pokemonElement.getBoundingClientRect();
 
     const scrollX = window.scrollX;
@@ -66,7 +63,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
   return (
     <div className="variations-container flex p-4">
       {/* Sidebar for Gyms */}
-      <div className="sticky top-16 z-10 -mt-16 h-[calc(100vh-5rem)] w-1/5 overflow-y-auto pr-4">
+      <div className="sticky top-[87px] z-10 -mt-16 h-[calc(100vh-5rem)] w-1/5 overflow-y-auto pr-4">
         <ol className="rounded-lg bg-gray-800 p-2">
           {filteredGyms.map((gym) => (
             <li
@@ -100,10 +97,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
                         key={pokemon.pokemonid}
                         className="pokemon-container bg-black-100 mb-1 rounded-lg px-1 py-0.5 shadow"
                         onMouseEnter={(event) =>
-                          handleMouseEnter(
-                            pokemon.moveset,
-                            event.currentTarget,
-                          )
+                          handleMouseEnter(pokemon.moveset, event.currentTarget)
                         }
                         onMouseLeave={handleMouseLeave}
                       >
@@ -111,7 +105,8 @@ export const GeneralTab: React.FC<GeneralTabProps> = (props) => {
                           <Svg
                             key={pokemon.pokemonid}
                             name={getPokemonNumber(pokemon.name)}
-                            size={80}
+                            width={70}
+                            height={70}
                             color="brown"
                           />
                         </div>

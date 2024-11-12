@@ -3079,7 +3079,8 @@
         "channelTP": false
       },
       {
-        "gym": "Mauville",
+        "gym": "Mauville City",
+        "id": 18,
         "region": "Hoenn",
         "type": "Electric",
         "observations": "",
@@ -3122,7 +3123,8 @@
         "channelTP": false
       },
       {
-        "gym": "Lavaridge",
+        "gym": "Lavaridge Town",
+        "id": 19,
         "region": "Hoenn",
         "type": "Fire",
         "observations": "",
@@ -3165,7 +3167,8 @@
         "channelTP": false
       },
       {
-        "gym": "Dewford",
+        "gym": "Dewford Town",
+        "id": 17,
         "region": "Hoenn",
         "type": "Fighting",
         "observations": "",
@@ -3208,7 +3211,8 @@
         "channelTP": false
       },
       {
-        "gym": "Fortree",
+        "gym": "Fortree City",
+        "id": 21,
         "region": "Hoenn",
         "type": "Flying",
         "observations": "",
@@ -4670,7 +4674,8 @@
         "channelTP": false
       },
       {
-        "gym": "Mauville",
+        "gym": "Mauville City",
+        "id": 18,
         "region": "Hoenn",
         "type": "Electric",
         "observations": "",
@@ -4713,7 +4718,8 @@
         "channelTP": false
       },
       {
-        "gym": "Lavaridge",
+        "gym": "Lavaridge Town",
+        "id": 19,
         "region": "Hoenn",
         "type": "Fire",
         "observations": "",
@@ -4756,7 +4762,8 @@
         "channelTP": false
       },
       {
-        "gym": "Dewford",
+        "gym": "Dewford Town",
+        "id": 17,
         "region": "Hoenn",
         "type": "Fighting",
         "observations": "",
@@ -4799,7 +4806,8 @@
         "channelTP": false
       },
       {
-        "gym": "Fortree",
+        "gym": "Fortree City",
+        "id": 21,
         "region": "Hoenn",
         "type": "Flying",
         "observations": "",
@@ -9573,7 +9581,8 @@
         "channelTP": false
       },
       {
-        "gym": "Petalburg City City",
+        "gym": "Petalburg City",
+        "id": 20,
         "region": "Hoenn",
         "type": "Normal",
         "observations": "",
@@ -11107,7 +11116,8 @@
         "channelTP": false
       },
       {
-        "gym": "Petalburg City City",
+        "gym": "Petalburg City",
+        "id": 20,
         "region": "Hoenn",
         "type": "Normal",
         "observations": "",
@@ -11635,6 +11645,7 @@
         "channelTP": false
       },
       {
+        "gym": "Fuschia City",
         "id": 5,
         "region": "Kanto",
         "type": "Poison",

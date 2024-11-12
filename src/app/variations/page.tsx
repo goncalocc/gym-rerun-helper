@@ -4,12 +4,12 @@ import React, { useState } from 'react';
 import Navbar from '../utils/NavBar';
 import GeneralTab from './components/GeneralTab';
 
-type navItems = {
+type NavItem = {
   id: number;
   text: string;
 };
 
-export const ViewGyms: React.FC = () => {
+const ViewGyms: React.FC = () => {
   const navItems = [
     { id: 1, text: 'Kanto' },
     { id: 2, text: 'Johto' },
@@ -18,7 +18,7 @@ export const ViewGyms: React.FC = () => {
     { id: 5, text: 'Unova' },
   ];
 
-  const [selectedTab, setSelectedTab] = useState<navItems>(navItems[0]);
+  const [selectedTab, setSelectedTab] = useState<NavItem>(navItems[0]);
 
   const handleRenderSwitch = (tabIndex: number) => {
     setSelectedTab(navItems[tabIndex]);

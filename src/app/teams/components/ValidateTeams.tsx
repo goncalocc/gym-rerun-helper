@@ -28,7 +28,10 @@ interface dictionaryLayout {
   [key: number | string]: string;
 }
 
-export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
+export const validateTeams = ({
+  teamData,
+  subteamData,
+}: ValidateTeamsProps) => {
   const dictionary: dictionaryLayout = {
     0: 'hp',
     1: 'attack',
@@ -83,7 +86,7 @@ export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
     }
   };
 
-  const validateIvs = ({data, input, arrayName}: ValidateStats) => {
+  const validateIvs = ({ data, input, arrayName }: ValidateStats) => {
     Object.keys(dictionary).forEach((key) => {
       const attributeName = dictionary[key];
       if (input.ivs.hasOwnProperty(attributeName)) {
@@ -101,7 +104,7 @@ export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
     });
   };
 
-  const validateMoveset = ({data, input, arrayName}: ValidateStats) => {
+  const validateMoveset = ({ data, input, arrayName }: ValidateStats) => {
     input.moveset.forEach((move, index) => {
       if (!movesData.some((element) => element === move || move === '')) {
         newErrors[arrayName].push({
@@ -115,7 +118,7 @@ export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
 
   for (const [key, value] of Object.entries(data)) {
     value.forEach((input: Team, index: number) => {
-      const pokemonNames = pokemonData.map(p=>p.pokemon);
+      const pokemonNames = pokemonData.map((p) => p.pokemon);
       if (!pokemonNames.some((element) => element === input.pokemon)) {
         newErrors[key].push({
           pokemon: index,
@@ -158,7 +161,7 @@ export const validateTeams = ({teamData, subteamData} : ValidateTeamsProps) => {
       }
       validateEvs({ data: value, input: input, arrayName: key });
       validateIvs({ data: value, input: input, arrayName: key });
-      validateMoveset({ data: value, input: input, arrayName: key })
+      validateMoveset({ data: value, input: input, arrayName: key });
     });
   }
 
