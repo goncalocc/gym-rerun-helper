@@ -132,7 +132,7 @@
 }
 
 .button-info {
-  @apply mr-1 flex h-6 w-6 items-center justify-center rounded-full bg-blue-700 p-3 text-white; /* Default button size */
+  @apply mr-1 flex h-6 w-6 items-center justify-center p-3 text-white; /* Default button size */
 }
 
 /* Responsive Main Content Styles */
@@ -253,7 +253,7 @@
 
 @media (min-width: 1025px) {
   .image-container {
-    @apply h-14 w-14; /* Default size for larger screens */
+    @apply h-20 w-20; /* Default size for larger screens */
   }
 
   .pokemon-stats {

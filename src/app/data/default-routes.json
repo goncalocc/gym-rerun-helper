@@ -9192,31 +9192,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Blastoise (BR)", "Typhlosion"],
+            "pokemon": ["Blastoise(BR)", "Typhlosion"],
             "attacks": "",
             "isOrderMandatory": true,
             "variationId": 1
           },
           {
-            "pokemon": ["Blastoise (BR)", "Typhlosion"],
+            "pokemon": ["Blastoise(BR)", "Typhlosion"],
             "attacks": "",
             "isOrderMandatory": true,
             "variationId": 2
           },
           {
-            "pokemon": ["Blastoise (BR)", "Typhlosion"],
+            "pokemon": ["Blastoise(BR)", "Typhlosion"],
             "attacks": "",
             "isOrderMandatory": true,
             "variationId": 3
           },
           {
-            "pokemon": ["Blastoise (BR)", "Typhlosion"],
+            "pokemon": ["Blastoise(BR)", "Typhlosion"],
             "attacks": "",
             "isOrderMandatory": true,
             "variationId": 4
           },
           {
-            "pokemon": ["Blastoise (BR)", "Typhlosion"],
+            "pokemon": ["Blastoise(BR)", "Typhlosion"],
             "attacks": "",
             "isOrderMandatory": true,
             "variationId": 5
@@ -9236,31 +9236,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Incinerate",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Incinerate",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Incinerate",
             "isOrderMandatory": false,
             "variationId": 5
@@ -9412,31 +9412,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 5
@@ -9456,31 +9456,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 5
@@ -9544,31 +9544,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 5
@@ -9597,8 +9597,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Rain Dance into Blastoise BR + Blastoise BW",
             "isOrderMandatory": false,
@@ -9614,8 +9614,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
             "isOrderMandatory": false,
@@ -9625,8 +9625,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Rain Dance into Blastoise BR + Blastoise BW",
             "isOrderMandatory": false,
@@ -9647,7 +9647,7 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Weezing", "Hydreigon", "Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Weezing", "Hydreigon", "Typhlosion", "Blastoise(BR)"],
             "attacks": "Explosion + Surf into Typhlosion + Blastoise (BR)",
             "isOrderMandatory": false,
             "variationId": 1
@@ -9656,8 +9656,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
             "isOrderMandatory": false,
@@ -9667,21 +9667,21 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Weezing", "Hydreigon", "Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Weezing", "Hydreigon", "Typhlosion", "Blastoise(BR)"],
             "attacks": "Explosion + Surf into Typhlosion + Blastoise (BR)",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Weezing", "Hydreigon", "Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Weezing", "Hydreigon", "Typhlosion", "Blastoise(BR)"],
             "attacks": "Explosion + Surf into Typhlosion + Blastoise (BR)",
             "isOrderMandatory": false,
             "variationId": 5
@@ -9792,8 +9792,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Tailwind into double Water Spout",
             "isOrderMandatory": false,
@@ -9803,8 +9803,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Tailwind into Rain Dance + Water Spout",
             "isOrderMandatory": false,
@@ -9814,8 +9814,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -9825,8 +9825,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -9836,8 +9836,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -9861,8 +9861,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -9872,8 +9872,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Rain dance + Water Spout",
             "isOrderMandatory": false,
@@ -9883,8 +9883,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -9894,8 +9894,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -9905,8 +9905,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into double Water Spout",
             "isOrderMandatory": false,
@@ -10062,8 +10062,8 @@
             "pokemon": [
               "Typhlosion",
               "Togekiss",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Eruption + Signal Beam",
             "isOrderMandatory": true,
@@ -10073,8 +10073,8 @@
             "pokemon": [
               "Typhlosion",
               "Togekiss",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Eruption + Hyper Voice",
             "isOrderMandatory": true,
@@ -10084,8 +10084,8 @@
             "pokemon": [
               "Typhlosion",
               "Togekiss",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Eruption + Signal Beam",
             "isOrderMandatory": true,
@@ -10095,8 +10095,8 @@
             "pokemon": [
               "Typhlosion",
               "Togekiss",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Eruption + Psychic (target Tentacruel)",
             "isOrderMandatory": true,
@@ -10106,8 +10106,8 @@
             "pokemon": [
               "Typhlosion",
               "Togekiss",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Eruption + Hyper Voice",
             "isOrderMandatory": true,
@@ -10137,8 +10137,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
             "isOrderMandatory": false,
@@ -10148,8 +10148,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
             "isOrderMandatory": false,
@@ -10159,8 +10159,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
             "isOrderMandatory": false,
@@ -10319,31 +10319,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Typhlosion", "Blastoise (BR)"],
+            "pokemon": ["Typhlosion", "Blastoise(BR)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 5
@@ -10363,31 +10363,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Blastoise (BR)", "Togekiss"],
+            "pokemon": ["Blastoise(BR)", "Togekiss"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 5
@@ -10407,31 +10407,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance + Water Spout",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance + Water Spout",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance + Water Spout",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance + Water Spout",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Weezing", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Blastoise(BW)"],
             "attacks": "Assurance + Water Spout",
             "isOrderMandatory": false,
             "variationId": 5
@@ -10478,8 +10478,8 @@
             "pokemon": [
               "Weezing",
               "Hydreigon",
-              "Blastoise (BR)",
-              "Blastoise (BW)"
+              "Blastoise(BR)",
+              "Blastoise(BW)"
             ],
             "attacks": "Explosion + Tailwind into Snowscape + Blizzard into Water Spout + Blizzard",
             "isOrderMandatory": false,
@@ -10500,31 +10500,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Blastoise (BR)", "Blastoise (BW)"],
+            "pokemon": ["Blastoise(BR)", "Blastoise(BW)"],
             "attacks": "",
             "isOrderMandatory": false,
             "variationId": 5
@@ -10632,31 +10632,31 @@
         "observations": "",
         "leads": [
           {
-            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise(BW)"],
             "attacks": "Explosion + Rain Dance into Togekiss + Blastoise (BW)",
             "isOrderMandatory": false,
             "variationId": 1
           },
           {
-            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise(BW)"],
             "attacks": "Explosion + Rain Dance into Togekiss + Blastoise (BW)",
             "isOrderMandatory": false,
             "variationId": 2
           },
           {
-            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise(BW)"],
             "attacks": "Explosion + Rain Dance into Togekiss + Blastoise (BW)",
             "isOrderMandatory": false,
             "variationId": 3
           },
           {
-            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise(BW)"],
             "attacks": "Explosion + Rain Dance into Togekiss + Blastoise (BW)",
             "isOrderMandatory": false,
             "variationId": 4
           },
           {
-            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise (BW)"],
+            "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise(BW)"],
             "attacks": "Explosion + Rain Dance into Togekiss + Blastoise (BW)",
             "isOrderMandatory": false,
             "variationId": 5
@@ -11500,7 +11500,7 @@
           },
           {
             "pokemon": ["Weezing", "Hydreigon", "Togekiss", "Blastoise"],
-            "attacks": "Explosion + Surf into Blastoise (BR) + Blastoise (BW)",
+            "attacks": "Explosion + Surf into Togekiss + Blastoise",
             "isOrderMandatory": false,
             "variationId": 5
           }

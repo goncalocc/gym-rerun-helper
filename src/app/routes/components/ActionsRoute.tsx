@@ -21,7 +21,7 @@ const ActionsRoute: React.FC<ActionsRouteProps> = ({ leads, variation }) => {
             <div className="flex">
               {lead.pokemon.slice(0, 2).map((member, index) => {
                 // Split the name and take the first part
-                const [nameOnly, nickname] = member.split(' (');
+                const [nameOnly, nickname] = member.split('(');
                 return (
                   <React.Fragment key={`${lead.variationId}-${index}`}>
                     <div className="">
@@ -42,7 +42,7 @@ const ActionsRoute: React.FC<ActionsRouteProps> = ({ leads, variation }) => {
                 {lead.pokemon
                   .slice(2, lead.pokemon.length)
                   .map((member, index) => {
-                    const [nameOnly, nickname] = member.split(' (');
+                    const [nameOnly, nickname] = member.split('(');
                     return (
                       <React.Fragment key={`${lead.variationId}-${index}`}>
                         <div className="">

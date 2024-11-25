@@ -1,7 +1,7 @@
 import RouteVariationPokemon from './RouteVariationPokemon';
 import React, { useEffect, useRef, useState } from 'react';
 import ViewRouteEditMain from './ViewRouteEditMain';
-import { Routes, Route, Gym, Variation, Leads } from '../../types/types';
+import { Routes, Route, Gym, Variation, Leads, Teams } from '../../types/types';
 import gymsJson from '../../data/gym-variations.json';
 import '../../styles/PokemonVariationStyles.css';
 import pokemonData from '@/app/data/PokemonDictionary';
@@ -67,15 +67,15 @@ type ScrollDirection = 'next' | 'previous';
 
 const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
   const [routesData, setRoutesData] = useState<Routes[]>([]);
+  const [teamsData, setTeamsData] = useState<Teams[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentIndex, setCurrentIndex] = useState(0);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [isTooltipShowing, setIsTooltipShowing] = useState(false);
-  const [assignedRoute, setAssignedRoute] = useState<Routes | undefined>(
-    undefined,
-  );
+  const [assignedRoute, setAssignedRoute] = useState<Routes>();
+  const [assignedTeam, setAssignedTeam] = useState<Teams>();
   const [notification, setNotification] = useState<NotificationParams>({
     message: '',
     type: '',
@@ -97,11 +97,24 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
 
   useEffect(() => {
     const localStorageRoutes = fetchLocalStorageRoutes();
+    const localStorageTeams = fetchLocalStorageTeams();
     if (localStorageRoutes) {
       setRoutesData(localStorageRoutes);
-      setAssignedRoute(
-        localStorageRoutes.find((route) => route.routeId === idProps),
+      const foundRoute = localStorageRoutes.find(
+        (route) => route.routeId === idProps,
       );
+      setAssignedRoute(foundRoute);
+
+      if (foundRoute && localStorageTeams) {
+        setTeamsData(localStorageTeams);
+
+        const foundTeam = localStorageTeams.find(
+          (team) => team.teamId === foundRoute.teamId,
+        );
+        if (foundTeam) {
+          setAssignedTeam(foundTeam);
+        }
+      }
     }
     setIsLoading(false);
   }, [idProps]);
@@ -303,6 +316,19 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
     }
   };
 
+  const fetchLocalStorageTeams = (): Teams[] | null => {
+    try {
+      const data = localStorage.getItem('gymRerunTeam');
+      if (!data) {
+        throw new Error('Teams not found in localStorage');
+      }
+      return JSON.parse(data);
+    } catch (error: any) {
+      console.error('Error fetching Teams from localStorage:', error.message);
+      return null;
+    }
+  };
+
   const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
 
   // Group gyms by region only if assignedRoute is defined
@@ -452,10 +478,11 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
         </div>
         <BookmarksRoute gymsByRegion={gymsByRegion} />
       </div>
-      {editMode ? (
+      {editMode && assignedTeam ? (
         <>
           <ViewRouteEditMain
             assignedRoute={assignedRoute}
+            assignedTeam={assignedTeam}
             setAssignedRoute={setAssignedRoute}
             onClose={closeEdit}
             routeWithVariations={filteredGymsVariations}

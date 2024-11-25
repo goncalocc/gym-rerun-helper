@@ -1,79 +1,219 @@
-import { Gym, Leads, Route } from '@/app/types/types';
+import { Gym, Leads, Route, Teams } from '@/app/types/types';
 import { FilteredGym } from '../ViewRoute';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { OnFormChange } from '@/app/routes/components/ViewRouteEditMain';
 import RouteVariationPokemon from '../RouteVariationPokemon';
 import { NewErrorsLayout } from '../validateRoutes';
 import gymsJson from '../../../data/gym-variations.json';
+import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
+import { State } from '@/app/teams/components/ViewTeamEditMember';
 
 export interface ViewRouteEditGymProps {
   routeGym: Route;
   routeWithVariations: FilteredGym[];
+  assignedTeam: Teams;
   onFormChange: OnFormChange;
   errorData: NewErrorsLayout[];
+  // routeTeam: String[];
 }
 
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   routeGym: routeGym,
   routeWithVariations: routeVariations,
+  assignedTeam: assignedTeam,
   onFormChange: onFormChange,
   errorData: errorData,
 }) => {
   const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
-  // const filteredGymsVariations: FilteredGym[] = gyms.map((gym: Gym) => ({
-  //   gym: gym.gym,
-  //   type: gym.gymtype,
-  //   region: gym.region ?? 'Unknown',
-  //   variations: gym.variations,
-  //   id: gym.id,
-  //   channelTP:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.channelTP ?? false,
-  //   heal:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.heal ?? false,
-  //   leads:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.leads ?? [],
-  //   observations:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.observations ?? '',
-  //   provisionalHeal:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.provisionalHeal ?? false,
-  //   swapItems:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.swapItems ?? '',
-  //   swapTeams:
-  //     routeVariations.find(
-  //       (routeVariation: FilteredGym) =>
-  //         routeVariation.gym === gym.gym && routeVariation.id === gym.id,
-  //     )?.swapTeams ?? false,
-  // }));
   const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
+
+  const [state, setState] = useState<State>({
+    activeItem: 0,
+    filteredItems: [],
+    displayItems: false,
+    inputName: '',
+  });
+
+  const itemRefs = useRef<(HTMLLIElement | null)[]>(
+    Array(state.filteredItems.length).fill(null),
+  );
+
   const stringToBoolean = (value: string): boolean => {
     return value === 'true';
+  };
+
+  const handleClickSuggestion = (
+    event: React.MouseEvent<HTMLLIElement>,
+    id: number,
+    inputElement: HTMLInputElement | null,
+  ): void => {
+    const value = event.currentTarget.innerText;
+
+    if (inputElement) {
+      const inputLead = inputElement.value;
+
+      const cursorPosition = inputElement.selectionStart ?? inputLead.length;
+
+      const prefix = inputLead.slice(0, cursorPosition);
+      const sufix = inputLead.slice(cursorPosition, inputLead.length);
+      const prefixWords = prefix.split(' ');
+      const sufixWords = sufix.split(' ');
+      const wordIndex = prefixWords.length - 1;
+      let inputArray: String[] = [];
+      if (sufix === '') {
+        inputArray = prefixWords;
+      } else {
+        inputArray = prefixWords.concat(sufixWords);
+      }
+
+      inputArray[wordIndex] = value;
+
+      const newValue = inputArray.join(' ').trim();
+
+      setState((prevState) => ({
+        activeItem: 0,
+        filteredItems: [],
+        inputName: prevState.inputName,
+        displayItems: false,
+      }));
+      onFormChange({
+        name: state.inputName as keyof Route,
+        value: newValue,
+        id,
+      });
+    } else {
+      setState((prevState) => ({
+        activeItem: 0,
+        filteredItems: [],
+        inputName: prevState.inputName,
+        displayItems: false,
+      }));
+
+      onFormChange({ name: state.inputName as keyof Route, value: value, id });
+    }
+  };
+
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    id: number,
+    inputElement: HTMLInputElement | null,
+  ) => {
+    const { name, value: currentInputValue } = e.currentTarget;
+    const { activeItem, filteredItems } = state;
+
+    if (e.key === 'Enter') {
+      // if press "enter" key
+      if (inputElement) {
+        const inputLead = inputElement.value;
+
+        const cursorPosition = inputElement.selectionStart ?? inputLead.length;
+
+        const prefix = inputLead.slice(0, cursorPosition);
+        const sufix = inputLead.slice(cursorPosition, inputLead.length);
+        const prefixWords = prefix.split(' ');
+        const sufixWords = sufix.split(' ');
+        const wordIndex = prefixWords.length - 1;
+        let inputArray: String[] = [];
+        if (sufix === '') {
+          inputArray = prefixWords;
+        } else {
+          inputArray = prefixWords.concat(sufixWords);
+        }
+
+        inputArray[wordIndex] = filteredItems[activeItem];
+
+        const newValue = inputArray.join(' ').trim();
+
+        setState((prevState) => ({
+          activeItem: 0,
+          filteredItems: [],
+          inputName: prevState.inputName,
+          displayItems: false,
+        }));
+
+        onFormChange({
+          name: state.inputName as keyof Route,
+          value: newValue,
+          id,
+        });
+      } else {
+        setState((prevState) => ({
+          ...prevState,
+          activeItem: 0,
+          filteredItems: [],
+          displayItems: false,
+          inputName: name,
+        }));
+
+        onFormChange({
+          name: name as keyof Route,
+          value: currentInputValue,
+          id,
+        });
+      }
+    } else if (e.key === 'Esc') {
+      // if press "esc" key
+      setState((prevState) => ({
+        ...prevState,
+        activeItem: 0,
+        filteredItems: [],
+        displayItems: false,
+      }));
+    } else if (e.key === 'ArrowUp') {
+      //if press up arrow key
+      e.preventDefault();
+      if (activeItem === 0) {
+        return;
+      }
+      setState((prevState) => ({
+        ...prevState,
+        activeItem: prevState.activeItem - 1,
+        filteredItems: prevState.filteredItems,
+        displayItems: true,
+      }));
+    } else if (e.key === 'ArrowDown') {
+      //if press down arrow key
+      e.preventDefault();
+      if (
+        (filteredItems && activeItem === filteredItems.length - 1) ||
+        activeItem >= 9
+      ) {
+        return;
+      }
+      setState((prevState) => ({
+        ...prevState,
+        activeItem: prevState.activeItem + 1,
+        filteredItems: prevState.filteredItems,
+        displayItems: true,
+      }));
+    }
+  };
+
+  const handleBlurSuggestion = (
+    event: React.FocusEvent<HTMLInputElement>,
+    id: number,
+  ) => {
+    const { name, value } = event.target;
+    const trimmedValue = value.trim();
+
+    setState((prevState) => ({
+      ...prevState,
+      activeItem: 0,
+      filteredItems: [],
+      displayItems: false,
+    }));
+
+    onFormChange({ name: name as keyof Route, value: value, id });
   };
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
     id: number,
   ) => {
-    const { name, value, type } = event.target;
+    const { name, value, type, selectionStart } = event.target;
+    let filteredItems: string[] = [];
 
     if (type === 'radio' && name === 'heal') {
       const mappings: Record<
@@ -100,8 +240,88 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
 
     // For other input types or fields
     const processedValue = type === 'radio' ? stringToBoolean(value) : value;
+    if (name.includes('pokemon')) {
+      filteredItems = getSuggestionList(value, selectionStart ?? 0);
+      setState((prevState) => ({
+        ...prevState,
+        activeItem: 0,
+        filteredItems,
+        displayItems: true,
+        inputName: name,
+      }));
+    }
     onFormChange({ name: name as keyof Route, value: processedValue, id });
-    // handleEnableButton();
+  };
+
+  //in the future change teamUsed .team to a variable to it can read between ['team'] and ['subteam']
+  const getSuggestionList = (value: string, position: number) => {
+    let fragment = '';
+    const teamUsed = assignedTeam.team.map((member) => {
+      if (member.nickname && member.nickname.trim() !== '') {
+        return `${member.pokemon}(${member.nickname})`;
+      } else {
+        return member.pokemon;
+      }
+    });
+
+    const missingElements = teamUsed.filter(
+      (element) => !value.includes(element),
+    );
+    if (position !== null) {
+      fragment = getFragment(value, position);
+    }
+
+    console.log(fragment);
+    const matchingSuggestions = missingElements.filter((element) =>
+      [...fragment].every((char) =>
+        element.toLowerCase().includes(char.toLowerCase()),
+      ),
+    );
+
+    return matchingSuggestions;
+  };
+
+  const getFragment = (text: string, position: number): string => {
+    let start = position;
+
+    // Expand to the left to find the start of the word
+    while (start > 0 && /[\w()]/.test(text[start - 1])) {
+      start -= 1;
+    }
+    // Expand to the right to find the end of the word
+    // while (end < text.length && /\w/.test(text[end])) {
+    //   end += 1;
+    // }
+    return text.slice(start, position);
+  };
+
+  const splitByPokemonNames = (
+    input: string[],
+    validNames: string[],
+  ): string[] => {
+    const result: string[] = [];
+    for (let item of input) {
+      let temp = item;
+      let foundMatch = false;
+
+      for (const name of validNames) {
+        if (temp.includes(name)) {
+          foundMatch = true;
+
+          const splitIndex = temp.indexOf(name);
+          if (splitIndex > 0) {
+            result.push(temp.slice(0, splitIndex).toLowerCase());
+          }
+          result.push(name.toLowerCase());
+          temp = temp.slice(splitIndex + name.length);
+        }
+      }
+
+      if (!foundMatch || temp.length > 0) {
+        result.push(temp.toLowerCase());
+      }
+    }
+    return result;
   };
 
   const hasError = (gym: string, index: number): boolean => {
@@ -150,7 +370,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                   ))}
                 </div>
                 <div className="mb-2 w-full">
-                  <div className="flex w-full flex-grow flex-col items-center md:mt-4 md:flex-row">
+                  <div className="relative flex flex-grow flex-col items-center md:mt-4 md:flex-row">
                     <label
                       htmlFor="lead"
                       className="mb-2 text-center font-bold md:mr-2 md:w-[8vh] md:text-right"
@@ -158,14 +378,42 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       Lead:
                     </label>
                     <input
-                      id="pokemon"
+                      id={`pokemon.${variation.variationId - 1}`}
                       name={`pokemon.${variation.variationId - 1}`}
                       type="text"
                       value={lead ? lead.pokemon.join(' ') : ''}
                       className={`mx-2 h-[5vh] w-full rounded border ${hasError(routeGym.gym, variation.variationId) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-xs text-black md:h-[4vh] md:text-sm`}
                       onChange={(e) => handleChange(e, routeGym.id)}
                       autoComplete="off"
+                      onBlur={(e) => handleBlurSuggestion(e, routeGym.id)}
+                      onKeyDown={(e) => {
+                        const inputElement = document.getElementById(
+                          `pokemon.${variation.variationId - 1}`,
+                        ) as HTMLInputElement;
+                        handleKeyDown(e, routeGym.id, inputElement);
+                      }}
                     />
+                    {state.displayItems &&
+                    state.inputName ===
+                      `pokemon.${variation.variationId - 1}` &&
+                    lead!.pokemon.join(' ') &&
+                    state.filteredItems.length ? (
+                      <div className="absolute left-20 top-full z-40 w-fit border border-gray-300 bg-white text-black shadow-md">
+                        <SuggestionBox
+                          filteredItems={state.filteredItems}
+                          itemRefs={itemRefs}
+                          activeItem={state.activeItem}
+                          handleClick={(e) => {
+                            const inputElement = document.getElementById(
+                              `pokemon.${variation.variationId - 1}`,
+                            ) as HTMLInputElement;
+                            handleClickSuggestion(e, routeGym.id, inputElement);
+                          }}
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                   <div className="mt-4 flex w-full flex-col items-center md:flex-row">
                     <label
@@ -279,7 +527,6 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                 checked={!routeGym.channelTP}
                 onChange={(e) => handleChange(e, routeGym.id)}
               />
-              {/* <div>{routeGym.channelTP ? 'Yes' : 'No'}</div> */}
             </div>
             <div className="flex flex-row">
               <label className="mr-2 w-[20%] text-xs font-bold md:text-sm">

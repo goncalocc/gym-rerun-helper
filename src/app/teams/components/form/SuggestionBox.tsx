@@ -14,7 +14,8 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({
   handleClick,
 }) => {
   return (
-    <div className="absolute left-0 top-full z-10 mt-1 max-h-52 w-fit overflow-y-auto border border-gray-300 bg-white text-black shadow-md">
+    // <div className="absolute left-0 top-full z-50 mt-1 w-fit border border-gray-300 bg-white text-black shadow-md">
+    <div className="">
       <ul className="m-0 list-none p-0">
         {filteredItems.slice(0, 10).map((optionName, index) => (
           <li

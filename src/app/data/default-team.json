@@ -156,7 +156,7 @@
     "team": [
       {
         "pokemon": "Hydreigon",
-        "nickname": "H1",
+        "nickname": "",
         "ability": "Levitate",
         "nature": "Modest",
         "item": "Choice Scarf",
@@ -180,7 +180,7 @@
       },
       {
         "pokemon": "Typhlosion",
-        "nickname": "TY",
+        "nickname": "",
         "ability": "Blaze",
         "nature": "Modest",
         "item": "Choice Specs",
@@ -204,7 +204,7 @@
       },
       {
         "pokemon": "Weezing",
-        "nickname": "WZ",
+        "nickname": "",
         "ability": "Neutralizing Gas",
         "nature": "Adamant",
         "item": "Choice Band",
@@ -252,7 +252,7 @@
       },
       {
         "pokemon": "Togekiss",
-        "nickname": "TO",
+        "nickname": "",
         "ability": "Hustle",
         "nature": "Modest",
         "item": "Choice Specs",
@@ -306,7 +306,7 @@
     "team": [
       {
         "pokemon": "Hydreigon",
-        "nickname": "H1",
+        "nickname": "",
         "ability": "Levitate",
         "nature": "Modest",
         "item": "Choice Scarf",
@@ -330,7 +330,7 @@
       },
       {
         "pokemon": "Typhlosion",
-        "nickname": "TY",
+        "nickname": "",
         "ability": "Blaze",
         "nature": "Modest",
         "item": "Choice Specs",
@@ -354,7 +354,7 @@
       },
       {
         "pokemon": "Weezing",
-        "nickname": "WZ",
+        "nickname": "",
         "ability": "Neutralizing Gas",
         "nature": "Adamant",
         "item": "Choice Band",
@@ -378,7 +378,7 @@
       },
       {
         "pokemon": "Vanilluxe",
-        "nickname": "VA",
+        "nickname": "",
         "ability": "Snow Warning",
         "nature": "Timid",
         "item": "Choice Scarf",
@@ -402,7 +402,7 @@
       },
       {
         "pokemon": "Togekiss",
-        "nickname": "TO",
+        "nickname": "",
         "ability": "Hustle",
         "nature": "Modest",
         "item": "Choice Specs",
@@ -426,7 +426,7 @@
       },
       {
         "pokemon": "Blastoise",
-        "nickname": "BW",
+        "nickname": "",
         "ability": "Torrent",
         "nature": "Modest",
         "item": "Choice Scarf",

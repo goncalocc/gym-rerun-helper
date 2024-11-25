@@ -1,4 +1,4 @@
-import { Routes, Route, Leads } from '@/app/types/types';
+import { Routes, Route, Leads, Teams } from '@/app/types/types';
 import { FilteredGym, HandleRoutesUpdate } from './ViewRoute';
 import { NewErrorsLayout, validateRoutes } from './validateRoutes';
 import Svg from '@/app/utils/Svg';
@@ -17,6 +17,7 @@ import deleteGym from './DeleteGym';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
+  assignedTeam: Teams;
   setAssignedRoute: React.Dispatch<SetStateAction<Routes | undefined>>;
   onClose: () => void;
   routeWithVariations: FilteredGym[];
@@ -36,6 +37,7 @@ export type OnFormChange = <K extends keyof Route>(
 
 const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   assignedRoute: assignedRoute,
+  assignedTeam: assignedTeam,
   setAssignedRoute: setAssignedRoute,
   onClose: closeEdit,
   routeWithVariations: routeWithVariations,
@@ -206,7 +208,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative my-4 h-full max-h-[95%] w-full max-w-[85%] overflow-auto rounded-lg bg-gray-900 p-8">
         <button
           className="absolute right-2 top-2 text-2xl text-gray-700 hover:text-gray-900 sm:text-xl"
@@ -285,6 +287,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                                 <ViewRouteEditGym
                                   routeGym={route}
                                   routeWithVariations={routeWithVariations}
+                                  assignedTeam={assignedTeam}
                                   onFormChange={onFormChange}
                                   errorData={errorData}
                                 />

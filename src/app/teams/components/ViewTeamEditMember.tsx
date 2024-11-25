@@ -27,7 +27,7 @@ interface ViewTeamEditMemberProps {
   setTeamData: React.Dispatch<React.SetStateAction<Team[]>>;
 }
 
-interface State {
+export interface State {
   activeItem: number;
   filteredItems: string[];
   displayItems: boolean;
@@ -199,7 +199,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
         filteredItems: [],
         displayItems: false,
       }));
-    } else if (e.keyCode === 38) {
+    } else if (e.key === 'ArrowUp') {
       //if press up arrow key
       e.preventDefault();
       if (activeItem === 0) {
@@ -211,7 +211,7 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
         filteredItems: prevState.filteredItems,
         displayItems: true,
       }));
-    } else if (e.keyCode === 40) {
+    } else if (e.key === 'ArrowDown') {
       //if press down arrow key
       e.preventDefault();
       if (
@@ -284,12 +284,14 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
             state.inputName === 'pokemon' &&
             props.pokemon.length &&
             state.filteredItems.length ? (
-              <SuggestionBox
-                filteredItems={state.filteredItems}
-                itemRefs={itemRefs}
-                activeItem={state.activeItem}
-                handleClick={handleClick}
-              />
+              <div className="absolute left-0 top-full z-50 mt-1 w-fit border border-gray-300 bg-white text-black shadow-md">
+                <SuggestionBox
+                  filteredItems={state.filteredItems}
+                  itemRefs={itemRefs}
+                  activeItem={state.activeItem}
+                  handleClick={handleClick}
+                />
+              </div>
             ) : null}
           </div>
         </div>
@@ -335,12 +337,14 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
             state.inputName === 'item' &&
             props.item.length &&
             state.filteredItems.length ? (
-              <SuggestionBox
-                filteredItems={state.filteredItems}
-                itemRefs={itemRefs}
-                activeItem={state.activeItem}
-                handleClick={handleClick}
-              />
+              <div className="absolute left-0 top-full z-50 mt-1 w-fit border border-gray-300 bg-white text-black shadow-md">
+                <SuggestionBox
+                  filteredItems={state.filteredItems}
+                  itemRefs={itemRefs}
+                  activeItem={state.activeItem}
+                  handleClick={handleClick}
+                />
+              </div>
             ) : null}
           </div>
         </div>
@@ -365,12 +369,14 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
             state.inputName === 'nature' &&
             props.nature.length &&
             state.filteredItems.length ? (
-              <SuggestionBox
-                filteredItems={state.filteredItems}
-                itemRefs={itemRefs}
-                activeItem={state.activeItem}
-                handleClick={handleClick}
-              />
+              <div className="absolute left-0 top-full z-50 mt-1 w-fit border border-gray-300 bg-white text-black shadow-md">
+                <SuggestionBox
+                  filteredItems={state.filteredItems}
+                  itemRefs={itemRefs}
+                  activeItem={state.activeItem}
+                  handleClick={handleClick}
+                />
+              </div>
             ) : null}
           </div>
         </div>
@@ -397,12 +403,14 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
             state.inputName === 'ability' &&
             props.ability.length &&
             state.filteredItems.length ? (
-              <SuggestionBox
-                filteredItems={state.filteredItems}
-                itemRefs={itemRefs}
-                activeItem={state.activeItem}
-                handleClick={handleClick}
-              />
+              <div className="absolute left-0 top-full z-50 mt-1 w-fit border border-gray-300 bg-white text-black shadow-md">
+                <SuggestionBox
+                  filteredItems={state.filteredItems}
+                  itemRefs={itemRefs}
+                  activeItem={state.activeItem}
+                  handleClick={handleClick}
+                />
+              </div>
             ) : null}
           </div>
         </div>
@@ -477,12 +485,14 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
                   state.inputName === `moveset.${moveIndex}` &&
                   move.length &&
                   state.filteredItems.length ? (
-                    <SuggestionBox
-                      filteredItems={state.filteredItems}
-                      itemRefs={itemRefs}
-                      activeItem={state.activeItem}
-                      handleClick={handleClick}
-                    />
+                    <div className="absolute left-0 top-full z-50 mt-1 w-fit border border-gray-300 bg-white text-black shadow-md">
+                      <SuggestionBox
+                        filteredItems={state.filteredItems}
+                        itemRefs={itemRefs}
+                        activeItem={state.activeItem}
+                        handleClick={handleClick}
+                      />
+                    </div>
                   ) : null}
                 </div>
               </div>
