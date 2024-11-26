@@ -296,14 +296,14 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
           </div>
         </div>
         <div className="flex items-center">
-          <label htmlFor="item" className="mr-4 w-28 text-right">
+          <label htmlFor="nickname" className="mr-4 w-28 text-right">
             Nickname:
           </label>
           <div className="relative">
             <input
               type="text"
               value={props.nickname}
-              className={`rounded border p-2 text-center text-black`}
+              className={`rounded border ${hasError('nickname', pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
               style={{ width: '80%', height: '35px' }}
               name="nickname"
               onChange={(e) => handleChange(e)}

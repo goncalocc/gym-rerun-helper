@@ -5,7 +5,7 @@ import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useRef, useState } from 'react';
 import { OnFormChange } from '@/app/routes/components/ViewRouteEditMain';
 import RouteVariationPokemon from '../RouteVariationPokemon';
-import { NewErrorsLayout } from '../validateRoutes';
+import { NewErrorsLayout } from '../ValidateRoutes';
 import gymsJson from '../../../data/gym-variations.json';
 import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
 import { State } from '@/app/teams/components/ViewTeamEditMember';
@@ -293,35 +293,6 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     //   end += 1;
     // }
     return text.slice(start, position);
-  };
-
-  const splitByPokemonNames = (
-    input: string[],
-    validNames: string[],
-  ): string[] => {
-    const result: string[] = [];
-    for (let item of input) {
-      let temp = item;
-      let foundMatch = false;
-
-      for (const name of validNames) {
-        if (temp.includes(name)) {
-          foundMatch = true;
-
-          const splitIndex = temp.indexOf(name);
-          if (splitIndex > 0) {
-            result.push(temp.slice(0, splitIndex).toLowerCase());
-          }
-          result.push(name.toLowerCase());
-          temp = temp.slice(splitIndex + name.length);
-        }
-      }
-
-      if (!foundMatch || temp.length > 0) {
-        result.push(temp.toLowerCase());
-      }
-    }
-    return result;
   };
 
   const hasError = (gym: string, index: number): boolean => {

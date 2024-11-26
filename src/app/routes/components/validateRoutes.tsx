@@ -1,9 +1,9 @@
-import pokemonData from '@/app/data/PokemonDictionary';
-import { Leads } from '@/app/types/types';
+import { Leads, Teams } from '@/app/types/types';
 
 interface ValidateRouteProps {
   gymName: string;
   leads: Leads[];
+  assignedTeam: Teams;
 }
 
 export interface NewErrorsLayout {
@@ -12,17 +12,29 @@ export interface NewErrorsLayout {
   message: string;
 }
 
-export const validateRoutes = ({ gymName, leads }: ValidateRouteProps) => {
-  const pokemonNames = pokemonData.map((p) => p.pokemon);
+export const validateRoutes = ({
+  gymName,
+  leads,
+  assignedTeam,
+}: ValidateRouteProps) => {
+  const teamNames = assignedTeam.team.map(
+    (element: { pokemon: string; nickname: string }) =>
+      element.nickname
+        ? `${element.pokemon}(${element.nickname})`
+        : element.pokemon,
+  );
+
+  console.log('teamnames: ' + teamNames);
+
   const newErrors: NewErrorsLayout[] = [];
 
   leads.forEach((lead, index) => {
     const allNamesValid = lead.pokemon.every((pokemon) =>
-      pokemonNames.includes(pokemon),
+      teamNames.includes(pokemon),
     );
     if (!allNamesValid) {
       console.log(
-        `Error in ${gymName} Gym. Lead ${index + 1}: Some Pokémon names are invalid.`,
+        `Error in ${gymName} Gym. Lead ${index + 1}: Some Pokémon names are not on your team.`,
       );
       newErrors.push({
         gym: gymName,

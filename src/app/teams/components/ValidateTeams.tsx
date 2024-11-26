@@ -3,7 +3,7 @@ import itemsData from '../../data/ItemsDictionary';
 import movesData from '../../data/MovesDictionary';
 import abilitiesData from '../../data/AbilityDictionary';
 import naturesData from '../../data/NatureDictionary';
-import { Teams, Team } from '../../types/types';
+import { Team } from '../../types/types';
 
 interface ValidateTeamsProps {
   teamData: Team[];
@@ -13,6 +13,18 @@ interface ValidateTeamsProps {
 interface ValidateStats {
   data: Team[];
   input: Team;
+  arrayName: string;
+}
+
+interface ValidateNicks {
+  data: Team[];
+  occurrences: Map<
+    string,
+    {
+      indices: number[];
+      count: number;
+    }
+  >;
   arrayName: string;
 }
 
@@ -48,6 +60,52 @@ export const validateTeams = ({
   const data = {
     team: teamData,
     subteam: subteamData,
+  };
+
+  const trackTeamOccurrences = ({
+    occurrences,
+    input,
+    index,
+  }: {
+    occurrences: Map<
+      string,
+      {
+        indices: number[];
+        count: number;
+      }
+    >;
+    input: Team;
+    index: number;
+  }) => {
+    //track Pokémon occurrences for duplicate checks
+    if (!occurrences.has(input.pokemon)) {
+      occurrences.set(input.pokemon, { indices: [index], count: 1 });
+    } else {
+      const entry = occurrences.get(input.pokemon)!;
+      entry.indices.push(index);
+      entry.count += 1;
+    }
+  };
+
+  const validateNicknameDuplicates = ({
+    data,
+    occurrences,
+    arrayName,
+  }: ValidateNicks) => {
+    occurrences.forEach((entry, pokemon) => {
+      if (entry.count > 1) {
+        entry.indices.forEach((index) => {
+          const { nickname } = data[index];
+          if (!nickname || nickname.trim() === '') {
+            newErrors[arrayName].push({
+              pokemon: index,
+              field: 'nickname',
+              message: `Duplicate Pokémon "${pokemon}" detected. Nickname is required for entry #${arrayName === 'team' ? index + 1 : index + 1 + teamData.length}.`,
+            });
+          }
+        });
+      }
+    });
   };
 
   const validateEvs = ({ data, input, arrayName }: ValidateStats) => {
@@ -117,6 +175,10 @@ export const validateTeams = ({
   };
 
   for (const [key, value] of Object.entries(data)) {
+    const pokemonOccurrences = new Map<
+      string,
+      { indices: number[]; count: number }
+    >();
     value.forEach((input: Team, index: number) => {
       const pokemonNames = pokemonData.map((p) => p.pokemon);
       if (!pokemonNames.some((element) => element === input.pokemon)) {
@@ -162,6 +224,17 @@ export const validateTeams = ({
       validateEvs({ data: value, input: input, arrayName: key });
       validateIvs({ data: value, input: input, arrayName: key });
       validateMoveset({ data: value, input: input, arrayName: key });
+      trackTeamOccurrences({
+        occurrences: pokemonOccurrences,
+        input,
+        index,
+      });
+    });
+    //Validate nicknames for duplicates
+    validateNicknameDuplicates({
+      data: value,
+      occurrences: pokemonOccurrences,
+      arrayName: key,
     });
   }
 

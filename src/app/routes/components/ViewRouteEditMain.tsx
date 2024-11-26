@@ -1,6 +1,6 @@
 import { Routes, Route, Leads, Teams } from '@/app/types/types';
 import { FilteredGym, HandleRoutesUpdate } from './ViewRoute';
-import { NewErrorsLayout, validateRoutes } from './validateRoutes';
+import { NewErrorsLayout, validateRoutes } from './ValidateRoutes';
 import Svg from '@/app/utils/Svg';
 import { SetStateAction, useEffect, useState } from 'react';
 import {
@@ -168,6 +168,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
           const errors = validateRoutes({
             gymName: propsRoute.route[i].gym,
             leads: propsRoute.route[i].leads,
+            assignedTeam: assignedTeam,
           });
 
           if (errors.length > 0) {

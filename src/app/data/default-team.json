@@ -298,7 +298,8 @@
         },
         "moveset": ["Water Spout", "Helping Hand", "Blizzard", ""]
       }
-    ]
+    ],
+    "subteam": []
   },
   {
     "teamId": "03",
