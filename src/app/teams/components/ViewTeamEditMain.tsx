@@ -341,9 +341,9 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
           <div className="mb-4 flex justify-center space-x-4">
             <AddMember teamData={subteamData} setTeamData={setSubteamData} />
           </div>
-          <div className="mb-4 flex justify-center space-x-4">
+          <div className="fixed bottom-14 left-0 right-0 flex items-center justify-center">
             <button
-              className={`rounded px-4 py-2 font-semibold text-white 
+              className={`items-center justify-center rounded px-4 py-2 font-semibold text-white 
         ${isDisabled ? 'cursor-not-allowed bg-gray-400' : 'bg-blue-500 hover:bg-blue-700'}`}
               disabled={isDisabled}
               onClick={submitForm}

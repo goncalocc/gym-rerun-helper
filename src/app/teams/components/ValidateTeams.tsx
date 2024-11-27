@@ -188,6 +188,15 @@ export const validateTeams = ({
           message: `Pokemon does not exist. Error at entry #${key === 'team' ? index + 1 : index + 1 + teamData.length}`,
         });
       }
+      if (input.nickname.length > 0) {
+        if (!/^[a-zA-Z0-9]+$/.test(input.nickname)) {
+          newErrors[key].push({
+            pokemon: index,
+            field: 'nickname',
+            message: `Nickname must consist of alphanumeric characters (letters and numbers) only. Error at entry #${key === 'team' ? index + 1 : index + 1 + teamData.length}`,
+          });
+        }
+      }
       if (
         !naturesData.some(
           (element) => element === input.nature || input.nature === '',
