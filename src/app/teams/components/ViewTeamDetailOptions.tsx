@@ -11,7 +11,7 @@ interface ViewTeamDetailOptionsProps {
   clonedTeam: Teams;
   externalSetTeamsData: SetTeamsData;
   handleTeamsUpdate: HandleTeamsUpdate;
-  setSelectedTeam: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedTeam: React.Dispatch<React.SetStateAction<string | null>>;
   setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 }
 
@@ -101,7 +101,9 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
                   key={index}
                   href={{
                     pathname: '/routes',
-                    query: { idProps: route.routeId },
+                    query: {
+                      idProps: route.routeId,
+                    },
                   }}
                 >
                   {route.routeName}

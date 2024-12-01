@@ -12,7 +12,7 @@ interface ViewTeamDetailsProps {
   teams: Teams[];
   routes: Routes[];
   handleTeamsUpdate: HandleTeamsUpdate;
-  setSelectedTeam: React.Dispatch<React.SetStateAction<number | null>>;
+  setSelectedTeam: React.Dispatch<React.SetStateAction<string | null>>;
   setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
 }
 

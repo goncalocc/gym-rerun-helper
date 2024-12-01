@@ -186,7 +186,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
           setErrorData((prevState) => [...prevState, ...allErrors]);
         } else {
           // Only update routes if no errors are found
-          handleRoutesUpdate(propsRoute);
+          handleRoutesUpdate(propsRoute, false);
 
           setNotification({
             message: 'Route edited successfully',

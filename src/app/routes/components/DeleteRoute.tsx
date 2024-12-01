@@ -1,53 +1,37 @@
-import { NotificationParams } from '@/app/teams/components/ViewTeams';
-import { Routes } from '@/app/types/types';
+import { Routes, Teams } from '@/app/types/types';
+import { HandleRoutesUpdate } from './ViewRoute';
+import { useRouter } from 'next/navigation';
 
 type DeleteRouteProps = {
-  routeId: string;
-  setRoutesData: React.Dispatch<React.SetStateAction<Routes[]>>;
-  routesData: Routes[];
-  setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
+  handleRoutesUpdate: HandleRoutesUpdate;
+  assignedRoute: Routes;
+  router: ReturnType<typeof useRouter>;
+  assignedTeam: Teams | undefined;
 };
 
 const deleteRoute = ({
-  routeId,
-  setRoutesData,
-  routesData,
-  setNotification,
+  handleRoutesUpdate,
+  assignedRoute,
+  router,
+  assignedTeam,
 }: DeleteRouteProps) => {
   const confirmWindow = window.confirm(
-    'Are you sure you want to delete this team?',
+    'Are you sure you want to delete this Route?',
   );
 
   if (confirmWindow) {
-    const currentRoutes = [...routesData];
-    if (currentRoutes.length > 1) {
-      currentRoutes.filter((route) => route.routeId !== routeId);
+    handleRoutesUpdate(assignedRoute, true);
+    console.log('array with deleted Route: ', assignedRoute);
 
-      setRoutesData(() => {
-        console.log('array with deleted team: ', currentRoutes);
-        return [...currentRoutes]; // Correctly return the new array without adding prevData
-      });
-      //   const defaultNewTeam: Team[] = [];
-      //   const defaultNewSubteam: Team[] = [];
-      //   const defaultIndexUpdatedTeam = -1;
-      //   const defaultTeamName = 'placeholder string';
-      //   handleTeamsUpdate(
-      //     defaultNewTeam,
-      //     defaultNewSubteam,
-      //     defaultTeamName,
-      //     defaultIndexUpdatedTeam,
-      //     currentTeams,
-      //   );
-      setNotification({
-        message: 'Team deleted successfully',
+    const queryString = new URLSearchParams({
+      notification: JSON.stringify({
+        message: 'Route deleted successfully',
         type: 'success',
         visible: true,
-      });
-
-      setTimeout(() => {
-        setNotification({ message: '', type: '', visible: false });
-      }, 3000);
-    }
+      }),
+      selectedTeam: assignedTeam ? assignedTeam.teamId : '',
+    }).toString();
+    router.push(`/teams?${queryString}`);
   }
 };
 

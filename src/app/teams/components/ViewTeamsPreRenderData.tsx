@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import ViewTeams from './ViewTeams';
+import ViewTeams, { NotificationParams } from './ViewTeams';
 import { Teams, Team, Routes } from '../../types/types';
+
+interface ViewTeamPreRenderDataProps {
+  notification: NotificationParams;
+  selectedTeam: string | null;
+}
 
 export type HandleTeamsUpdate = (
   updatedTeam: Team[],
@@ -36,7 +41,10 @@ const fetchLocalStorageRoutes = (): Routes[] | null => {
   }
 };
 
-const ViewTeamsPreRenderData: React.FC = () => {
+const ViewTeamsPreRenderData: React.FC<ViewTeamPreRenderDataProps> = ({
+  notification: notification,
+  selectedTeam: selectedTeam,
+}) => {
   const [teamsData, setTeamsData] = useState<Teams[]>([]);
   const [routesData, setRoutesData] = useState<Routes[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -104,6 +112,8 @@ const ViewTeamsPreRenderData: React.FC = () => {
         localStorageRoutes={routesData}
         setRoutesData={setRoutesData}
         handleTeamsUpdate={handleTeamsUpdate}
+        notification={notification}
+        selectedTeam={selectedTeam}
       />
     </main>
   );

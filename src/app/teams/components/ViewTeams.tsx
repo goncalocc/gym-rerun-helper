@@ -1,5 +1,5 @@
 import Icon from '../../utils/Icon';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ViewTeamDetails from './ViewTeamDetails';
 import Svg from '@/app/utils/Svg';
 import deleteTeam from './DeleteTeam';
@@ -15,6 +15,8 @@ interface ViewTeamsProps {
   localStorageRoutes: Routes[];
   setRoutesData: SetRoutesData;
   handleTeamsUpdate: HandleTeamsUpdate;
+  notification: NotificationParams;
+  selectedTeam: string | null;
 }
 
 export interface NotificationParams {
@@ -29,17 +31,32 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
   localStorageRoutes: routesData,
   setRoutesData: externalSetRoutesData,
   handleTeamsUpdate,
+  notification: propsNotification,
+  selectedTeam: propsSelectedTeam,
 }) => {
   const [notification, setNotification] = useState<NotificationParams>({
     message: '',
     type: '',
     visible: false,
   });
-  const [selectedTeam, setSelectedTeam] = useState<number | null>(null);
+  const [selectedTeam, setSelectedTeam] = useState<string | null>(null);
   const [showBackupRestore, setShowBackupRestore] = useState<boolean>(false);
 
-  const handleClickDetails = (index: number) => {
-    setSelectedTeam(selectedTeam === index ? null : index);
+  useEffect(() => {
+    if (propsNotification) {
+      setNotification(propsNotification);
+    }
+  }, [propsNotification]);
+
+  // Update selectedTeam state when propsSelectedTeam changes
+  useEffect(() => {
+    if (propsSelectedTeam) {
+      setSelectedTeam(propsSelectedTeam);
+    }
+  }, [propsSelectedTeam]);
+
+  const handleClickDetails = (id: string) => {
+    setSelectedTeam(selectedTeam === id ? null : id);
   };
 
   if (!Array.isArray(teamsData) || teamsData.length === 0) {
@@ -90,7 +107,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                   className="flex items-center justify-center rounded-md border border-transparent bg-blue-600 
                     px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 
                     focus:ring-blue-500 focus:ring-offset-2"
-                  onClick={() => handleClickDetails(index)}
+                  onClick={() => handleClickDetails(team.teamId)}
                 >
                   {team.team.map((members, index) => (
                     <Icon
@@ -121,7 +138,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                   />
                 </button>
               </div>
-              {selectedTeam === index && (
+              {selectedTeam === team.teamId && (
                 <ViewTeamDetails
                   team={team}
                   index={index}

@@ -12,9 +12,11 @@ import TooltipRoute from './TooltipRoute';
 import { NotificationParams } from '@/app/teams/components/ViewTeams';
 import NotificationBar from '@/app/utils/NotificationBar';
 import deleteRoute from './DeleteRoute';
+import { useRouter } from 'next/navigation';
 
 export interface ViewRouteProps {
   idProps: string;
+  router: ReturnType<typeof useRouter>;
 }
 
 interface RouteWithId extends Route {
@@ -56,7 +58,10 @@ export interface TooltipProps {
   index: number | null;
 }
 
-export type HandleRoutesUpdate = (updatedRoute: Routes) => void;
+export type HandleRoutesUpdate = (
+  updatedRoute: Routes,
+  isDeleted: boolean,
+) => void;
 
 export const getPokemonNumber = (pokemonName: string): string => {
   const pokemon = pokemonData.find((p) => p.pokemon === pokemonName);
@@ -65,7 +70,7 @@ export const getPokemonNumber = (pokemonName: string): string => {
 
 type ScrollDirection = 'next' | 'previous';
 
-const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
+const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
   const [routesData, setRoutesData] = useState<Routes[]>([]);
   const [teamsData, setTeamsData] = useState<Teams[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -113,6 +118,8 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
         );
         if (foundTeam) {
           setAssignedTeam(foundTeam);
+        } else {
+          throw new Error('Assigned team is not found');
         }
       }
     }
@@ -419,20 +426,33 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
     setEditMode(true);
   };
 
-  const handleRoutesUpdate: HandleRoutesUpdate = (updatedRoute) => {
+  const handleRoutesUpdate: HandleRoutesUpdate = (updatedRoute, isDelete) => {
     setRoutesData((prevData) => {
-      const updatedRoutes = prevData.map((route) =>
-        route.routeId === updatedRoute.routeId
-          ? { ...route, ...updatedRoute } // Spread updatedRoute to update the fields correctly
-          : route,
-      );
+      let updatedRoutes;
+      if (isDelete) {
+        updatedRoutes = prevData.filter(
+          (route) => route.routeId !== updatedRoute.routeId,
+        );
+      } else {
+        updatedRoutes = prevData.map((route) =>
+          route.routeId === updatedRoute.routeId
+            ? { ...route, ...updatedRoute } // Spread updatedRoute to update the fields correctly
+            : route,
+        );
+      }
       localStorage.setItem('gymRerunRoutes', JSON.stringify(updatedRoutes));
       return updatedRoutes;
     });
-    setAssignedRoute((prevData) => ({
-      ...prevData,
-      ...updatedRoute,
-    }));
+    if (isDelete) {
+      setAssignedRoute((prevData) =>
+        prevData?.routeId === updatedRoute.routeId ? undefined : prevData,
+      );
+    } else {
+      setAssignedRoute((prevData) => ({
+        ...prevData,
+        ...updatedRoute,
+      }));
+    }
   };
 
   return (
@@ -466,10 +486,10 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps }) => {
             className="button delete-button"
             onClick={() =>
               deleteRoute({
-                routeId: assignedRoute.routeId,
-                setRoutesData,
-                routesData,
-                setNotification,
+                handleRoutesUpdate,
+                assignedRoute,
+                router,
+                assignedTeam,
               })
             }
           >
