@@ -9,7 +9,7 @@ type DeleteRouteProps = {
   assignedTeam: Teams | undefined;
 };
 
-const deleteRoute = ({
+const deleteRoute = async ({
   handleRoutesUpdate,
   assignedRoute,
   router,
@@ -21,17 +21,23 @@ const deleteRoute = ({
 
   if (confirmWindow) {
     handleRoutesUpdate(assignedRoute, true);
-    console.log('array with deleted Route: ', assignedRoute);
+    console.log('Array with deleted Route: ', assignedRoute);
 
-    const queryString = new URLSearchParams({
-      notification: JSON.stringify({
+    const data = {
+      notification: {
         message: 'Route deleted successfully',
         type: 'success',
         visible: true,
-      }),
+      },
       selectedTeam: assignedTeam ? assignedTeam.teamId : '',
-    }).toString();
-    router.push(`/teams?${queryString}`);
+    };
+
+    // Store the data in localStorage directly
+    localStorage.setItem('notification', JSON.stringify(data.notification));
+    localStorage.setItem('selectedTeam', data.selectedTeam);
+
+    // Optionally, redirect to another page
+    router.push('/teams');
   }
 };
 
