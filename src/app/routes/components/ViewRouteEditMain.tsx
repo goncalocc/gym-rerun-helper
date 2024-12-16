@@ -14,6 +14,7 @@ import { NotificationParams } from '@/app/teams/components/ViewTeams';
 import ALL_GYMS from '../../data/gym-variations.json';
 import AddGym from './AddGym';
 import deleteGym from './DeleteGym';
+import HamburgerMenu from '@/app/utils/HamburgerMenu';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
@@ -44,18 +45,26 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   handleRoutesUpdate: handleRoutesUpdate,
   setNotification: setNotification,
 }) => {
-  const [propsRoute, setPropsRoute] = useState<Routes | undefined>(() =>
+  const [propsRoute, setPropsRoute] = useState<Routes>(() =>
     assignedRoute ? JSON.parse(JSON.stringify(assignedRoute)) : undefined,
   );
-  const [selectedGyms, setSelectedGyms] = useState<number[]>([]);
+  const [selectedGym, setSelectedGym] = useState<number | null>(null);
   const [errorData, setErrorData] = useState<NewErrorsLayout[]>([]);
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [openNewGyms, setOpenNewGyms] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
 
   const missingGyms = ALL_GYMS.filter(
     (gym) => !propsRoute?.route.some((route) => route.gym === gym.gym),
   );
+
+  const currentGym = propsRoute?.route.find((gym) => gym.id === selectedGym);
 
   useEffect(() => {
     if (isSaved) {
@@ -71,24 +80,24 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     setIsDisabled(false);
   };
 
-  const handleGymDetails = ({
-    selectedGyms,
-    setSelectedGyms,
-    id,
-  }: {
-    selectedGyms: number[];
-    setSelectedGyms: (members: number[]) => void;
-    id: number;
-  }) => {
-    if (selectedGyms.includes(id)) {
-      setSelectedGyms(selectedGyms.filter((selectedId) => selectedId !== id));
-    } else {
-      setSelectedGyms([...selectedGyms, id]);
-    }
+  const handleToggleGymsbar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
   };
 
-  const handleNewGymsOpen = () => {
-    setOpenNewGyms(!openNewGyms);
+  const handleGymDetails = ({
+    selectedGym,
+    setSelectedGym,
+    id,
+  }: {
+    selectedGym: number | null;
+    setSelectedGym: (id: number | null) => void;
+    id: number;
+  }) => {
+    if (selectedGym === id) {
+      setSelectedGym(null);
+    } else {
+      setSelectedGym(id);
+    }
   };
 
   const onDragEnd = (result: DropResult) => {
@@ -202,9 +211,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
         }
       }
     } catch (error: any) {
-      // Handle any unexpected errors during execution
       alert('An unexpected error occurred: ' + error.message);
-      // Optional: log or handle other unexpected states
     }
   };
 
@@ -217,26 +224,24 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
         >
           &times;
         </button>
-        <div className="flex flex-col items-center">
-          <div className="mb-4 w-[99%] w-full rounded bg-blue-500 px-4 py-2 text-center text-base text-white hover:bg-blue-700 md:w-3/5 md:text-lg lg:w-6/12 lg:text-xl xl:w-2/5 2xl:w-[30%]">
-            {propsRoute?.routeName}
-          </div>
-          <div className="map-container w-full">
+        <div className="flex w-full">
+          {/* Sidebar */}
+          <div className="mt-[3%] flex-[0.15] border-r border-gray-300 p-4">
+            <AddGym
+              openNewGyms={openNewGyms}
+              setOpenNewGyms={setOpenNewGyms}
+              propsRoute={propsRoute}
+              setPropsRoute={setPropsRoute}
+              handleEnableSaveButton={handleEnableSaveButton}
+            ></AddGym>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="routes">
                 {(provided) => (
                   <ul
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className=""
+                    className="space-y-4"
                   >
-                    <AddGym
-                      openNewGyms={openNewGyms}
-                      setOpenNewGyms={setOpenNewGyms}
-                      propsRoute={propsRoute}
-                      setPropsRoute={setPropsRoute}
-                      handleEnableSaveButton={handleEnableSaveButton}
-                    ></AddGym>
                     {propsRoute?.route.map((route, index) => (
                       <Draggable
                         key={route.id}
@@ -244,56 +249,42 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                         index={index}
                       >
                         {(provided) => (
-                          <div className="">
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            className="flex items-center justify-between"
+                          >
                             <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                              className="mb-4 flex justify-center"
+                              onClick={() =>
+                                handleGymDetails({
+                                  selectedGym: selectedGym!,
+                                  setSelectedGym: setSelectedGym,
+                                  id: route.id,
+                                })
+                              }
+                              className="w-full rounded bg-gray-500 px-2 py-1 text-center text-sm text-white hover:bg-gray-800"
                             >
-                              <div
-                                onClick={() =>
-                                  handleGymDetails({
-                                    selectedGyms: selectedGyms!,
-                                    setSelectedGyms: setSelectedGyms,
-                                    id: route.id,
-                                  })
-                                }
-                                className="w-[65%] rounded bg-gray-500 px-4 py-2 text-center text-sm text-white hover:bg-gray-800 md:w-[45%] md:text-base lg:w-[45%] lg:text-lg xl:w-[20%] 2xl:w-[15%]"
-                              >
-                                {route.gym}
-                              </div>
-                              <button
-                                className=""
-                                onClick={() =>
-                                  deleteGym({
-                                    propsRoute: propsRoute,
-                                    setPropsRoute: setPropsRoute,
-                                    id: route.id,
-                                    handleEnableSaveButton:
-                                      handleEnableSaveButton,
-                                  })
-                                }
-                              >
-                                <Svg
-                                  name="trash-grey"
-                                  width={40}
-                                  height={40}
-                                  color="brown"
-                                />
-                              </button>
+                              {route.gym}
                             </div>
-                            <div className="mb-8">
-                              {selectedGyms?.includes(route.id) && (
-                                <ViewRouteEditGym
-                                  routeGym={route}
-                                  routeWithVariations={routeWithVariations}
-                                  assignedTeam={assignedTeam}
-                                  onFormChange={onFormChange}
-                                  errorData={errorData}
-                                />
-                              )}
-                            </div>
+                            <button
+                              onClick={() =>
+                                deleteGym({
+                                  propsRoute: propsRoute,
+                                  setPropsRoute: setPropsRoute,
+                                  id: route.id,
+                                  handleEnableSaveButton:
+                                    handleEnableSaveButton,
+                                })
+                              }
+                            >
+                              <Svg
+                                name="trash-grey"
+                                width={30}
+                                height={30}
+                                color="brown"
+                              />
+                            </button>
                           </div>
                         )}
                       </Draggable>
@@ -303,6 +294,55 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                 )}
               </Droppable>
             </DragDropContext>
+          </div>
+
+          {/* Main Content (Title and Details) */}
+          <div className="flex-[0.85] p-4">
+            {/* Title Section */}
+            <div className="flex flex-col items-center">
+              <div className="mb-4 w-[99%] w-full rounded bg-blue-500 px-4 py-2 text-center text-base text-white hover:bg-blue-700 md:w-3/5 md:text-lg lg:w-6/12 lg:text-xl xl:w-2/5 2xl:w-[30%]">
+                {propsRoute?.routeName}
+              </div>
+            </div>
+            {currentGym?.gym && (
+              <div className="relative mb-4 flex w-full items-center justify-center">
+                <div className="mb-2 w-[80%] rounded px-2 py-1 text-center text-white sm:w-[55%] md:w-[35%] lg:w-[25%] xl:w-[20%]">
+                  {currentGym.gym}
+                </div>
+
+                <div className="absolute right-0 flex items-center space-x-2">
+                  <input
+                    id="autofill-checkbox"
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-7 lg:w-7"
+                    checked={isChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                  <label
+                    className="text-sm text-gray-700"
+                    htmlFor="autofill-checkbox"
+                  >
+                    Autofill all variations
+                  </label>
+                </div>
+              </div>
+            )}
+            {/* Details Section */}
+            <div className="relative flex flex-col">
+              {selectedGym &&
+                propsRoute.route.find((r) => r.id === selectedGym) && (
+                  <ViewRouteEditGym
+                    routeGym={
+                      propsRoute.route.find((r) => r.id === selectedGym)!
+                    }
+                    routeWithVariations={routeWithVariations}
+                    assignedTeam={assignedTeam}
+                    onFormChange={onFormChange}
+                    errorData={errorData}
+                    isChecked={isChecked}
+                  />
+                )}
+            </div>
           </div>
         </div>
       </div>

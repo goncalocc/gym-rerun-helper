@@ -16,7 +16,7 @@ export interface ViewRouteEditGymProps {
   assignedTeam: Teams;
   onFormChange: OnFormChange;
   errorData: NewErrorsLayout[];
-  // routeTeam: String[];
+  isChecked: boolean;
 }
 
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
@@ -25,6 +25,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   assignedTeam: assignedTeam,
   onFormChange: onFormChange,
   errorData: errorData,
+  isChecked: isChecked,
 }) => {
   const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
   const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
@@ -47,31 +48,40 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   const handleClickSuggestion = (
     event: React.MouseEvent<HTMLLIElement>,
     id: number,
-    inputElement: HTMLInputElement | null,
+    inputElement: HTMLInputElement,
   ): void => {
     const value = event.currentTarget.innerText;
 
-    if (inputElement) {
-      const inputLead = inputElement.value;
+    const inputLead = inputElement.value;
 
-      const cursorPosition = inputElement.selectionStart ?? inputLead.length;
+    const cursorPosition = inputElement.selectionStart ?? inputLead.length;
 
-      const prefix = inputLead.slice(0, cursorPosition);
-      const sufix = inputLead.slice(cursorPosition, inputLead.length);
-      const prefixWords = prefix.split(' ');
-      const sufixWords = sufix.split(' ');
-      const wordIndex = prefixWords.length - 1;
-      let inputArray: String[] = [];
-      if (sufix === '') {
-        inputArray = prefixWords;
-      } else {
-        inputArray = prefixWords.concat(sufixWords);
+    const prefix = inputLead.slice(0, cursorPosition);
+    const sufix = inputLead.slice(cursorPosition, inputLead.length);
+    const prefixWords = prefix.split(' ');
+    const sufixWords = sufix.split(' ');
+    const wordIndex = prefixWords.length - 1;
+    let inputArray: String[] = [];
+    if (sufix === '') {
+      inputArray = prefixWords;
+    } else {
+      inputArray = prefixWords.concat(sufixWords);
+    }
+
+    inputArray[wordIndex] = value;
+
+    const newValue = inputArray.join(' ').trim();
+
+    if (isChecked) {
+      for (let i = 0; i < filteredGym!.variations.length; i++) {
+        const generalName = state.inputName.split('.')[0];
+        onFormChange({
+          name: `${generalName}.${i}` as keyof Route,
+          value: newValue,
+          id,
+        });
       }
-
-      inputArray[wordIndex] = value;
-
-      const newValue = inputArray.join(' ').trim();
-
+    } else {
       setState((prevState) => ({
         activeItem: 0,
         filteredItems: [],
@@ -83,15 +93,6 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
         value: newValue,
         id,
       });
-    } else {
-      setState((prevState) => ({
-        activeItem: 0,
-        filteredItems: [],
-        inputName: prevState.inputName,
-        displayItems: false,
-      }));
-
-      onFormChange({ name: state.inputName as keyof Route, value: value, id });
     }
   };
 
@@ -213,6 +214,8 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     id: number,
   ) => {
     const { name, value, type, selectionStart } = event.target;
+    // For other input types or fields
+    const processedValue = type === 'radio' ? stringToBoolean(value) : value;
     let filteredItems: string[] = [];
 
     if (type === 'radio' && name === 'heal') {
@@ -238,8 +241,6 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
       return; // Exit early since the form change has been handled
     }
 
-    // For other input types or fields
-    const processedValue = type === 'radio' ? stringToBoolean(value) : value;
     if (name.includes('pokemon')) {
       filteredItems = getSuggestionList(value, selectionStart ?? 0);
       setState((prevState) => ({
@@ -250,7 +251,19 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
         inputName: name,
       }));
     }
-    onFormChange({ name: name as keyof Route, value: processedValue, id });
+
+    if ((name.includes('pokemon') || name.includes('attacks')) && isChecked) {
+      for (let i = 0; i < filteredGym!.variations.length; i++) {
+        const generalName = name.split('.')[0];
+        onFormChange({
+          name: `${generalName}.${i}` as keyof Route,
+          value: processedValue,
+          id,
+        });
+      }
+    } else {
+      onFormChange({ name: name as keyof Route, value: processedValue, id });
+    }
   };
 
   //in the future change teamUsed .team to a variable to it can read between ['team'] and ['subteam']
@@ -270,8 +283,6 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     if (position !== null) {
       fragment = getFragment(value, position);
     }
-
-    console.log(fragment);
     const matchingSuggestions = missingElements.filter((element) =>
       [...fragment].every((char) =>
         element.toLowerCase().includes(char.toLowerCase()),
@@ -341,10 +352,10 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                   ))}
                 </div>
                 <div className="mb-2 w-full">
-                  <div className="relative flex flex-grow flex-col items-center md:mt-4 md:flex-row">
+                  <div className="relative flex w-full flex-col items-start md:mt-4 md:flex-row md:justify-start">
                     <label
                       htmlFor="lead"
-                      className="mb-2 text-center font-bold md:mr-2 md:w-[8vh] md:text-right"
+                      className="mb-2 text-center font-bold md:mr-4 md:w-[8vh] md:text-right"
                     >
                       Lead:
                     </label>
@@ -353,7 +364,11 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       name={`pokemon.${variation.variationId - 1}`}
                       type="text"
                       value={lead ? lead.pokemon.join(' ') : ''}
-                      className={`mx-2 h-[5vh] w-full rounded border ${hasError(routeGym.gym, variation.variationId) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-xs text-black md:h-[4vh] md:text-sm`}
+                      className={`mx-2 h-[5vh] w-[80%] rounded border ${
+                        hasError(routeGym.gym, variation.variationId)
+                          ? 'border-2 border-red-600'
+                          : 'border-gray-300'
+                      } p-2 text-xs text-black md:h-[4vh] md:text-sm`}
                       onChange={(e) => handleChange(e, routeGym.id)}
                       autoComplete="off"
                       onBlur={(e) => handleBlurSuggestion(e, routeGym.id)}
@@ -369,7 +384,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       `pokemon.${variation.variationId - 1}` &&
                     lead!.pokemon.join(' ') &&
                     state.filteredItems.length ? (
-                      <div className="absolute left-20 top-full z-40 w-fit border border-gray-300 bg-white text-black shadow-md">
+                      <div className="absolute left-24 top-full z-40 border border-gray-300 bg-red-500 text-black shadow-md">
                         <SuggestionBox
                           filteredItems={state.filteredItems}
                           itemRefs={itemRefs}
@@ -386,10 +401,10 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       <></>
                     )}
                   </div>
-                  <div className="mt-4 flex w-full flex-col items-center md:flex-row">
+                  <div className="mt-4 flex w-full flex-col items-start md:flex-row md:justify-start">
                     <label
                       htmlFor="attacks"
-                      className="mb-2 text-center font-bold md:mr-2 md:w-[8vh] md:text-right"
+                      className="mb-2 text-center font-bold md:mr-4 md:w-[8vh] md:text-right"
                     >
                       Attacks:
                     </label>
@@ -397,7 +412,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       id="attacks"
                       name={`attacks.${variation.variationId - 1}`}
                       value={lead ? lead.attacks : ''}
-                      className="mx-2 h-[14vh] w-full rounded border p-2 text-xs text-black md:h-[8vh] md:text-sm"
+                      className="mx-2 h-[14vh] w-[80%] rounded border p-2 text-xs text-black md:h-[10vh] md:text-sm"
                       onChange={(e) => handleChange(e, routeGym.id)}
                       autoComplete="off"
                     />

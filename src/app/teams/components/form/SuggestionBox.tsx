@@ -22,7 +22,7 @@ const SuggestionBox: React.FC<SuggestionBoxProps> = ({
             ref={(el) => {
               if (el && itemRefs.current) itemRefs.current[index] = el; // Ensure itemRefs.current and el are not null
             }}
-            className={`cursor-pointer px-4 py-2 ${activeItem === index ? 'bg-gray-200' : 'bg-white'} hover:bg-gray-100`}
+            className={`cursor-pointer px-4 py-2 ${activeItem === index ? 'bg-gray-200' : 'bg-white'} hover:bg-gray-400`}
             key={optionName}
             onMouseDown={handleClick}
           >

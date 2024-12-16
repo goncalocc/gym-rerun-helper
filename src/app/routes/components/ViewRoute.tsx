@@ -13,6 +13,7 @@ import { NotificationParams } from '@/app/teams/components/ViewTeams';
 import NotificationBar from '@/app/utils/NotificationBar';
 import deleteRoute from './DeleteRoute';
 import { useRouter } from 'next/navigation';
+import HamburgerMenu from '@/app/utils/HamburgerMenu';
 
 export interface ViewRouteProps {
   idProps: string;
@@ -77,8 +78,8 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const elementsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [editMode, setEditMode] = useState<boolean>(false);
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
-  const [isTooltipShowing, setIsTooltipShowing] = useState(false);
+  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
+  const [isTooltipShowing, setIsTooltipShowing] = useState<boolean>(false);
   const [assignedRoute, setAssignedRoute] = useState<Routes>();
   const [assignedTeam, setAssignedTeam] = useState<Teams>();
   const [notification, setNotification] = useState<NotificationParams>({
@@ -467,11 +468,8 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
         )}
       </div>
       <div className="toggle-button-container md:hidden">
-        <button className="toggle-button" onClick={() => handleToggleSidebar()}>
-          ☰
-        </button>
+        <HamburgerMenu handleToggleSidebar={handleToggleSidebar} />
       </div>
-
       <div
         className={`sidebar left-0 top-0 flex h-screen flex-col space-y-4 bg-gray-800 p-4 text-white md:block md:w-1/5 lg:w-[17%] xl:w-[20%] 2xl:w-[15%] ${isSidebarVisible ? 'block' : 'hidden'}`}
       >

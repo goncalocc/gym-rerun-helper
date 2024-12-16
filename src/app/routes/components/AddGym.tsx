@@ -5,8 +5,8 @@ import ALL_GYMS from '../../data/gym-variations.json';
 interface AddGymProps {
   openNewGyms: boolean;
   setOpenNewGyms: React.Dispatch<React.SetStateAction<boolean>>;
-  propsRoute: Routes | undefined;
-  setPropsRoute: React.Dispatch<React.SetStateAction<Routes | undefined>>;
+  propsRoute: Routes;
+  setPropsRoute: React.Dispatch<React.SetStateAction<Routes>>;
   handleEnableSaveButton: () => void;
 }
 
@@ -92,21 +92,15 @@ const AddGym = ({
         return !propsRoute?.route.some((routeGym) => routeGym.id === gym.id);
       });
 
-      setPropsRoute((prevData) => {
-        if (!prevData) return undefined;
-        return {
-          ...prevData,
-          route: [...prevData.route, ...multipleGymsNeeded],
-        };
-      });
+      setPropsRoute((prevData) => ({
+        ...prevData,
+        route: [...prevData.route, ...multipleGymsNeeded],
+      }));
     } else {
-      setPropsRoute((prevData) => {
-        if (!prevData) return undefined;
-        return {
-          ...prevData,
-          route: [...prevData.route, mergedGymInfo],
-        };
-      });
+      setPropsRoute((prevData) => ({
+        ...prevData,
+        route: [...prevData.route, mergedGymInfo],
+      }));
     }
     handleEnableSaveButton();
   };

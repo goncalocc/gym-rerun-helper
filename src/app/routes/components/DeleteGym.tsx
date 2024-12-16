@@ -2,7 +2,7 @@ import { Routes } from '../../types/types';
 
 interface DeleteGymProps {
   propsRoute: Routes;
-  setPropsRoute: React.Dispatch<React.SetStateAction<Routes | undefined>>;
+  setPropsRoute: React.Dispatch<React.SetStateAction<Routes>>;
   id: number;
   handleEnableSaveButton: () => void;
 }
