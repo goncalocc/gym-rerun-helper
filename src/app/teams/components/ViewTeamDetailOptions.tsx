@@ -3,6 +3,7 @@ import { Teams, Team, SetTeamsData, Routes } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
 import Link from 'next/link';
+import AddRoute from '@/app/routes/components/AddRoute';
 
 interface ViewTeamDetailOptionsProps {
   handleClick: () => void;
@@ -50,7 +51,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
     currentTeams.push(teamData);
     externalSetTeamsData((prevData) => {
       const newArray = [...prevData, teamData];
-      console.log('Adding team ', newArray);
+      console.log('Duplicating team ', newArray);
       return newArray;
     });
     // Default placeholder values to satisfy the function signature
@@ -85,7 +86,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
   return (
     <main>
       <div className="mb-4 flex justify-center">
-        <div className="relative inline-block text-center">
+        <div className="relative inline-block space-x-2 text-center">
           <button
             onClick={toggleDropdown}
             className="rounded bg-gray-500 px-4 py-2 text-white hover:bg-gray-700"
@@ -111,6 +112,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
               ))}
             </div>
           )}
+          <AddRoute teamId={teamData.teamId} teamRoutes={filteredRoutes} />
         </div>
       </div>
       <div className="mb-4 flex justify-center space-x-4">
@@ -131,7 +133,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
             })
           }
         >
-          Copy Team
+          Duplicate Team
         </button>
       </div>
     </main>

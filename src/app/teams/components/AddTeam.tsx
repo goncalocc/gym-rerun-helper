@@ -1,6 +1,7 @@
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { Teams, Team, SetTeamsData } from '../../types/types';
 import { NotificationParams } from './ViewTeams';
+import generateUniqueId from '@/app/utils/GenerateId';
 
 interface AddTeamProps {
   teamsData: Teams[];
@@ -15,10 +16,6 @@ export const AddTeam: React.FC<AddTeamProps> = ({
   handleTeamsUpdate,
   setNotification,
 }) => {
-  const generateUniqueId = () => {
-    return Date.now() + Math.random().toString(36).substring(2);
-  };
-
   const newTeam = {
     teamId: generateUniqueId(),
     teamName: `Team #${teamsData.length + 1}`,
