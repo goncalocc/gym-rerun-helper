@@ -93,7 +93,7 @@ const AddGym = ({
         document.removeEventListener('mousedown', handleClickOutside);
       };
     }
-  }, []);
+  }, [openNewGyms]);
 
   const handleAddGym = (
     gym: string,
