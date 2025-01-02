@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Route, Routes } from '../../types/types';
 import ALL_GYMS from '../../data/gym-variations.json';
 
@@ -71,9 +71,29 @@ const AddGym = ({
     channelTP: false,
   });
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
   const handleNewGymsOpen = () => {
     setOpenNewGyms(!openNewGyms);
   };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      dropdownRef.current &&
+      !dropdownRef.current.contains(event.target as Node)
+    ) {
+      setOpenNewGyms(false);
+    }
+  };
+
+  useEffect(() => {
+    if (openNewGyms) {
+      document.addEventListener('mousedown', handleClickOutside);
+      return () => {
+        document.removeEventListener('mousedown', handleClickOutside);
+      };
+    }
+  }, []);
 
   const handleAddGym = (
     gym: string,
@@ -106,7 +126,7 @@ const AddGym = ({
   };
 
   return (
-    <div className="relative mb-5 flex flex-col items-center">
+    <div className="relative mb-5 flex flex-col items-center" ref={dropdownRef}>
       <button
         className="
             lg:h-15

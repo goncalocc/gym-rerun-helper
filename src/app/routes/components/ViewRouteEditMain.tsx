@@ -132,7 +132,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
 
       const [field, subfield] = name.split('.');
       if (routeIndex !== undefined && routeIndex !== -1) {
-        const updatedGym = { ...updatedRoute.route![routeIndex] };
+        const updatedGym = structuredClone(updatedRoute.route![routeIndex]);
 
         if (subfield) {
           const arrayIndex = parseInt(subfield);
