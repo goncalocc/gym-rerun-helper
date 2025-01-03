@@ -54,10 +54,10 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const [openNewGyms, setOpenNewGyms] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isAutofillChecked, setIsAutofillChecked] = useState(false);
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
+  const handleAutofillCheckbox = () => {
+    setIsAutofillChecked(!isAutofillChecked);
   };
 
   const missingGyms = ALL_GYMS.filter(
@@ -315,8 +315,8 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                     id="autofill-checkbox"
                     type="checkbox"
                     className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 sm:h-5 sm:w-5 md:h-6 md:w-6 lg:h-7 lg:w-7"
-                    checked={isChecked}
-                    onChange={handleCheckboxChange}
+                    checked={isAutofillChecked}
+                    onChange={handleAutofillCheckbox}
                   />
                   <label
                     className="text-sm text-gray-700"
@@ -339,7 +339,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                     assignedTeam={assignedTeam}
                     onFormChange={onFormChange}
                     errorData={errorData}
-                    isChecked={isChecked}
+                    isAutofillChecked={isAutofillChecked}
                   />
                 )}
             </div>

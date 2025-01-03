@@ -16,7 +16,7 @@ export interface ViewRouteEditGymProps {
   assignedTeam: Teams;
   onFormChange: OnFormChange;
   errorData: NewErrorsLayout[];
-  isChecked: boolean;
+  isAutofillChecked: boolean;
 }
 
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
@@ -25,7 +25,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   assignedTeam: assignedTeam,
   onFormChange: onFormChange,
   errorData: errorData,
-  isChecked: isChecked,
+  isAutofillChecked: isAutofillChecked,
 }) => {
   const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
   const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
@@ -72,7 +72,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
 
     const newValue = inputArray.join(' ').trim();
 
-    if (isChecked) {
+    if (isAutofillChecked) {
       for (let i = 0; i < filteredGym!.variations.length; i++) {
         const generalName = state.inputName.split('.')[0];
         onFormChange({
@@ -215,9 +215,10 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   ) => {
     const { name, value, type, selectionStart } = event.target;
     // For other input types or fields
-    const processedValue = type === 'radio' ? stringToBoolean(value) : value;
     let filteredItems: string[] = [];
+    const processedValue = type === 'radio' ? stringToBoolean(value) : value;
 
+    // Form change for radio buttons
     if (type === 'radio' && name === 'heal') {
       const mappings: Record<
         string,
@@ -241,6 +242,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
       return; // Exit early since the form change has been handled
     }
 
+    // Handling suggestions for 'pokemon'
     if (name.includes('pokemon')) {
       filteredItems = getSuggestionList(value, selectionStart ?? 0);
       setState((prevState) => ({
@@ -252,7 +254,11 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
       }));
     }
 
-    if ((name.includes('pokemon') || name.includes('attacks')) && isChecked) {
+    // Form change for Lead and Attacks when Autofill is on
+    if (
+      (name.includes('pokemon') || name.includes('attacks')) &&
+      isAutofillChecked
+    ) {
       for (let i = 0; i < filteredGym!.variations.length; i++) {
         const generalName = name.split('.')[0];
         onFormChange({
@@ -264,6 +270,14 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     } else {
       onFormChange({ name: name as keyof Route, value: processedValue, id });
     }
+  };
+
+  const handleCheckboxChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    id: number,
+  ) => {
+    const { name, checked } = event.target;
+    onFormChange({ name: name as keyof Route, value: checked, id });
   };
 
   //in the future change teamUsed .team to a variable to it can read between ['team'] and ['subteam']
@@ -352,6 +366,19 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                   ))}
                 </div>
                 <div className="mb-2 w-full">
+                  <div className="flex flex-col space-y-2 md:ml-24 md:mt-4 md:flex-row md:items-center md:justify-start md:space-x-2 md:space-y-0">
+                    <input
+                      id={`isOrderMandatory.${variation.variationId - 1}`}
+                      type="checkbox"
+                      name={`isOrderMandatory.${variation.variationId - 1}`}
+                      className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 sm:h-3 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5"
+                      checked={lead?.isOrderMandatory}
+                      onChange={(e) => handleCheckboxChange(e, routeGym.id)}
+                    />
+                    <label className="text-sm" htmlFor="order-checkbox">
+                      Order is mandatory
+                    </label>
+                  </div>
                   <div className="relative flex w-full flex-col items-start md:mt-4 md:flex-row md:justify-start">
                     <label
                       htmlFor="lead"

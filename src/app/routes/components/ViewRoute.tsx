@@ -102,30 +102,46 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
   });
 
   useEffect(() => {
-    const localStorageRoutes = fetchLocalStorageRoutes();
-    const localStorageTeams = fetchLocalStorageTeams();
-    if (localStorageRoutes) {
-      setRoutesData(localStorageRoutes);
-      const foundRoute = localStorageRoutes.find(
-        (route) => route.routeId === idProps,
-      );
-      setAssignedRoute(foundRoute);
-
-      if (foundRoute && localStorageTeams) {
-        setTeamsData(localStorageTeams);
-
-        const foundTeam = localStorageTeams.find(
-          (team) => team.teamId === foundRoute.teamId,
+    const fetchData = () => {
+      const localStorageRoutes = fetchLocalStorageRoutes();
+      const localStorageTeams = fetchLocalStorageTeams();
+      if (localStorageRoutes) {
+        setRoutesData(localStorageRoutes);
+        const foundRoute = localStorageRoutes.find(
+          (route) => route.routeId === idProps,
         );
-        if (foundTeam) {
-          setAssignedTeam(foundTeam);
-        } else {
-          throw new Error('Assigned team is not found');
+        setAssignedRoute(foundRoute);
+
+        if (foundRoute && localStorageTeams) {
+          setTeamsData(localStorageTeams);
+
+          const foundTeam = localStorageTeams.find(
+            (team) => team.teamId === foundRoute.teamId,
+          );
+          if (foundTeam) {
+            setAssignedTeam(foundTeam);
+          } else {
+            throw new Error('Assigned team is not found');
+          }
         }
       }
-    }
-    setIsLoading(false);
+      setIsLoading(false);
+    };
+
+    fetchData();
   }, [idProps]);
+
+  useEffect(() => {
+    if (editMode) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    return () => {
+      document.body.classList.remove('overflow-hidden'); // Cleanup
+    };
+  }, [editMode]);
 
   const closeNotification = () => {
     setNotification({ message: '', type: '', visible: false });

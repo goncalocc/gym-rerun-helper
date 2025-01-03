@@ -31,6 +31,11 @@ const ActionsRoute: React.FC<ActionsRouteProps> = ({ leads, variation }) => {
                         height={60}
                         nickname={nickname ? nickname.replace(')', '') : ''}
                       />
+                      {lead.isOrderMandatory ? (
+                        <div>{index + 1} slot</div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                   </React.Fragment>
                 );
