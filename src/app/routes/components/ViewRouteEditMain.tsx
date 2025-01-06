@@ -1,5 +1,5 @@
 import { Routes, Route, Leads, Teams } from '@/app/types/types';
-import { FilteredGym, HandleRoutesUpdate } from './ViewRoute';
+import { FilteredGym } from './ViewRoute';
 import { NewErrorsLayout, validateRoutes } from './ValidateRoutes';
 import Svg from '@/app/utils/Svg';
 import { SetStateAction, useEffect, useState } from 'react';
@@ -14,16 +14,16 @@ import { NotificationParams } from '@/app/teams/components/ViewTeams';
 import ALL_GYMS from '../../data/gym-variations.json';
 import AddGym from './AddGym';
 import deleteGym from './DeleteGym';
-import HamburgerMenu from '@/app/utils/HamburgerMenu';
+import handleRoutesUpdate from './HandleRoutesUpdate';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
   assignedTeam: Teams;
   setAssignedRoute: React.Dispatch<SetStateAction<Routes | undefined>>;
+  setRoutesData: React.Dispatch<SetStateAction<Routes[]>>;
   onClose: () => void;
   routeWithVariations: FilteredGym[];
   setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
-  handleRoutesUpdate: HandleRoutesUpdate;
 }
 
 export type OnFormChangeProps<K extends keyof Route> = {
@@ -40,9 +40,9 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   assignedRoute: assignedRoute,
   assignedTeam: assignedTeam,
   setAssignedRoute: setAssignedRoute,
+  setRoutesData: setRoutesData,
   onClose: closeEdit,
   routeWithVariations: routeWithVariations,
-  handleRoutesUpdate: handleRoutesUpdate,
   setNotification: setNotification,
 }) => {
   const [propsRoute, setPropsRoute] = useState<Routes>(() =>
@@ -78,10 +78,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
 
   const handleEnableSaveButton = () => {
     setIsDisabled(false);
-  };
-
-  const handleToggleGymsbar = () => {
-    setIsSidebarVisible(!isSidebarVisible);
   };
 
   const handleGymDetails = ({
@@ -195,7 +191,12 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
           setErrorData((prevState) => [...prevState, ...allErrors]);
         } else {
           // Only update routes if no errors are found
-          handleRoutesUpdate(propsRoute, false);
+          handleRoutesUpdate({
+            updatedRoute: propsRoute,
+            isDelete: false,
+            setRoutesData,
+            setAssignedRoute,
+          });
 
           setNotification({
             message: 'Route edited successfully',

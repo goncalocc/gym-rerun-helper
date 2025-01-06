@@ -59,11 +59,6 @@ export interface TooltipProps {
   index: number | null;
 }
 
-export type HandleRoutesUpdate = (
-  updatedRoute: Routes,
-  isDeleted: boolean,
-) => void;
-
 export const getPokemonNumber = (pokemonName: string): string => {
   const pokemon = pokemonData.find((p) => p.pokemon === pokemonName);
   return pokemon ? pokemon.number : '0';
@@ -443,35 +438,6 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
     setEditMode(true);
   };
 
-  const handleRoutesUpdate: HandleRoutesUpdate = (updatedRoute, isDelete) => {
-    setRoutesData((prevData) => {
-      let updatedRoutes;
-      if (isDelete) {
-        updatedRoutes = prevData.filter(
-          (route) => route.routeId !== updatedRoute.routeId,
-        );
-      } else {
-        updatedRoutes = prevData.map((route) =>
-          route.routeId === updatedRoute.routeId
-            ? { ...route, ...updatedRoute } // Spread updatedRoute to update the fields correctly
-            : route,
-        );
-      }
-      localStorage.setItem('gymRerunRoutes', JSON.stringify(updatedRoutes));
-      return updatedRoutes;
-    });
-    if (isDelete) {
-      setAssignedRoute((prevData) =>
-        prevData?.routeId === updatedRoute.routeId ? undefined : prevData,
-      );
-    } else {
-      setAssignedRoute((prevData) => ({
-        ...prevData,
-        ...updatedRoute,
-      }));
-    }
-  };
-
   return (
     <div className="screen-container flex">
       <div className="relative">
@@ -500,8 +466,9 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
             className="button delete-button"
             onClick={() =>
               deleteRoute({
-                handleRoutesUpdate,
+                setRoutesData,
                 assignedRoute,
+                setAssignedRoute,
                 router,
                 assignedTeam,
               })
@@ -518,10 +485,10 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
             assignedRoute={assignedRoute}
             assignedTeam={assignedTeam}
             setAssignedRoute={setAssignedRoute}
+            setRoutesData={setRoutesData}
             onClose={closeEdit}
             routeWithVariations={filteredGymsVariations}
             setNotification={setNotification}
-            handleRoutesUpdate={handleRoutesUpdate}
           />
         </>
       ) : (

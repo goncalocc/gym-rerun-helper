@@ -122,8 +122,10 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                   onClick={() =>
                     deleteTeam({
                       teamsData,
+                      routesData,
                       setTeamsData: externalSetTeamsData,
-                      index,
+                      setRoutesData: externalSetRoutesData,
+                      deletedTeamId: team.teamId,
                       handleTeamsUpdate,
                       setNotification,
                     })

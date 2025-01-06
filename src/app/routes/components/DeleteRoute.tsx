@@ -1,17 +1,20 @@
 import { Routes, Teams } from '@/app/types/types';
-import { HandleRoutesUpdate } from './ViewRoute';
 import { useRouter } from 'next/navigation';
+import { SetStateAction } from 'react';
+import handleRoutesUpdate from './HandleRoutesUpdate';
 
 type DeleteRouteProps = {
-  handleRoutesUpdate: HandleRoutesUpdate;
+  setRoutesData: React.Dispatch<SetStateAction<Routes[]>>;
   assignedRoute: Routes;
+  setAssignedRoute: React.Dispatch<SetStateAction<Routes | undefined>>;
   router: ReturnType<typeof useRouter>;
   assignedTeam: Teams | undefined;
 };
 
 const deleteRoute = async ({
-  handleRoutesUpdate,
+  setRoutesData,
   assignedRoute,
+  setAssignedRoute,
   router,
   assignedTeam,
 }: DeleteRouteProps) => {
@@ -20,7 +23,12 @@ const deleteRoute = async ({
   );
 
   if (confirmWindow) {
-    handleRoutesUpdate(assignedRoute, true);
+    handleRoutesUpdate({
+      updatedRoute: assignedRoute,
+      isDelete: true,
+      setRoutesData,
+      setAssignedRoute,
+    });
     console.log('Array with deleted Route: ', assignedRoute);
 
     const data = {
@@ -32,11 +40,9 @@ const deleteRoute = async ({
       selectedTeam: assignedTeam ? assignedTeam.teamId : '',
     };
 
-    // Store the data in localStorage directly
     localStorage.setItem('notification', JSON.stringify(data.notification));
     localStorage.setItem('selectedTeam', data.selectedTeam);
 
-    // Optionally, redirect to another page
     router.push('/teams');
   }
 };
