@@ -146,6 +146,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                   index={index}
                   teams={teamsData}
                   routes={routesData}
+                  setRoutesData={externalSetRoutesData}
                   handleTeamsUpdate={handleTeamsUpdate}
                   setSelectedTeam={setSelectedTeam}
                   setNotification={setNotification}

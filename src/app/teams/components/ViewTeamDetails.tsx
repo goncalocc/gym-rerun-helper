@@ -11,6 +11,7 @@ interface ViewTeamDetailsProps {
   index: number;
   teams: Teams[];
   routes: Routes[];
+  setRoutesData: React.Dispatch<React.SetStateAction<Routes[]>>;
   handleTeamsUpdate: HandleTeamsUpdate;
   setSelectedTeam: React.Dispatch<React.SetStateAction<string | null>>;
   setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
@@ -21,6 +22,7 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
   index: index,
   teams: teams,
   routes: routes,
+  setRoutesData: setRoutesData,
   handleTeamsUpdate: handleTeamsUpdate,
   setSelectedTeam: setSelectedTeam,
   setNotification: setNotification,
@@ -54,6 +56,7 @@ const ViewTeamDetails: React.FC<ViewTeamDetailsProps> = ({
             handleClick={handleClickEdit}
             teamsData={teams}
             routesData={routes}
+            setRoutesData={setRoutesData}
             clonedTeam={team}
             externalSetTeamsData={setTeamsData}
             handleTeamsUpdate={handleTeamsUpdate}

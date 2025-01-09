@@ -51,7 +51,7 @@ const deleteTeam = ({
       }
 
       setRoutesData(() => {
-        console.log('Routes that will bes: ', updatedRoutes);
+        console.log('Routes that will be deleted: ', updatedRoutes);
         return [...updatedRoutes];
       });
 

@@ -4,11 +4,13 @@ import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
 import Link from 'next/link';
 import AddRoute from '@/app/routes/components/AddRoute';
+import generateUniqueId from '@/app/utils/GenerateId';
 
 interface ViewTeamDetailOptionsProps {
   handleClick: () => void;
   teamsData: Teams[];
   routesData: Routes[];
+  setRoutesData: React.Dispatch<React.SetStateAction<Routes[]>>;
   clonedTeam: Teams;
   externalSetTeamsData: SetTeamsData;
   handleTeamsUpdate: HandleTeamsUpdate;
@@ -25,10 +27,15 @@ interface HandleDuplicateTeamParams {
   }): void;
 }
 
+interface HandleCopiedTeamRoutesParams {
+  (params: { routesData: Routes[]; targetId: string; newId: string }): void;
+}
+
 const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
   handleClick: handleClickEdit,
   teamsData: teamsData,
   routesData: routesData,
+  setRoutesData: setRoutesData,
   clonedTeam: teamData,
   externalSetTeamsData: setTeamsData,
   handleTeamsUpdate: handleTeamsUpdate,
@@ -41,6 +48,30 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
     setIsDropdownOpen(!isDropdownOpen);
   };
 
+  const handleCopiedTeamRoutes: HandleCopiedTeamRoutesParams = ({
+    routesData,
+    targetId,
+    newId,
+  }) => {
+    const matchingRoutes = routesData.filter(
+      (route) => route.teamId === targetId,
+    );
+    const copiedRoutes: Routes[] = matchingRoutes.map((route) => ({
+      ...route,
+      teamId: newId,
+      routeId: generateUniqueId(),
+    }));
+
+    // for (const route of copiedRoutes) {
+
+    // } //gcgc change this~
+    setRoutesData((prevRoutes) => {
+      const updatedRoutes = [...prevRoutes, ...copiedRoutes];
+      localStorage.setItem('gymRerunRoutes', JSON.stringify(updatedRoutes));
+      return updatedRoutes;
+    });
+  };
+
   const handleDuplicateTeam: HandleDuplicateTeamParams = ({
     teamsData,
     externalSetTeamsData,
@@ -48,9 +79,11 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
     teamData,
   }) => {
     const currentTeams = [...teamsData];
-    currentTeams.push(teamData);
+    const newTeam = { ...teamData };
+    newTeam.teamId = generateUniqueId();
+    currentTeams.push(newTeam);
     externalSetTeamsData((prevData) => {
-      const newArray = [...prevData, teamData];
+      const newArray = [...prevData, newTeam];
       console.log('Duplicating team ', newArray);
       return newArray;
     });
@@ -66,6 +99,11 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
       defaultIndexUpdatedTeam,
       currentTeams,
     );
+    handleCopiedTeamRoutes({
+      routesData,
+      targetId: teamData.teamId,
+      newId: newTeam.teamId,
+    });
     setSelectedTeam(null);
 
     setNotification({
