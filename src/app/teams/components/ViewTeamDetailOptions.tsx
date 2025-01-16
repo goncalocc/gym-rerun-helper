@@ -62,9 +62,6 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
       routeId: generateUniqueId(),
     }));
 
-    // for (const route of copiedRoutes) {
-
-    // } //gcgc change this~
     setRoutesData((prevRoutes) => {
       const updatedRoutes = [...prevRoutes, ...copiedRoutes];
       localStorage.setItem('gymRerunRoutes', JSON.stringify(updatedRoutes));

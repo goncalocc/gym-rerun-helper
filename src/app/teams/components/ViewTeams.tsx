@@ -92,6 +92,8 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
             setNotification={setNotification}
             handleClose={() => setShowBackupRestore(false)}
             teamsData={teamsData}
+            routesData={routesData}
+            setRoutesData={externalSetRoutesData}
             setTeamsData={externalSetTeamsData}
           />
         )}
