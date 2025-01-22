@@ -28,9 +28,9 @@ const Icon: React.FC<IconProps> = React.memo(
           className="object-contain"
           style={{ width: '50px', height: '50px' }}
         />
-        {nickname && (
+        {/* {nickname && (
           <span className="ml-2 text-xs text-gray-700">{nickname}</span>
-        )}
+        )} */}
       </div>
     );
   },

@@ -134,7 +134,6 @@ const parseTeams = (textareaValue: string): ParsedTeams => {
       }
     });
 
-    // Parse routes section if it exists todo gcgc change this incomplete
     if (routesText) {
       const routeSections = routesText
         .split(
