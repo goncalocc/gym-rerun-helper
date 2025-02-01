@@ -1,66 +1,55 @@
-import { MouseEventHandler } from 'react';
-import { TooltipProps } from './ViewRoute';
+import { FilteredGym } from './ViewRoute';
 
 export interface TooltipRouteProps {
-  tooltip: TooltipProps;
-  index: number;
-  handleMouseLeave: MouseEventHandler<HTMLDivElement>;
+  gym: FilteredGym;
 }
 
-const TooltipRoute: React.FC<TooltipRouteProps> = ({
-  tooltip,
-  index,
-  handleMouseLeave,
-}) => {
+const TooltipRoute: React.FC<TooltipRouteProps> = ({ gym }) => {
   return (
     <div>
-      {tooltip.visible && tooltip.index === index && (
-        <div
-          id="tooltip"
-          className="absolute z-40 whitespace-nowrap rounded bg-gray-800 p-2 text-white"
-          style={{ top: tooltip.y, left: tooltip.x }}
-          onClick={handleMouseLeave}
-        >
+      <div
+        id="tooltip"
+        className="w-full rounded-lg bg-purple-950 text-white shadow"
+      >
+        <div>
+          <strong>Steps before entering this Gym:</strong>
           <div>
-            <strong>Steps before entering this Gym:</strong>
-            <p>
-              {tooltip.content.swapItems && (
-                <>
-                  <strong>Change Items: </strong> {tooltip.content.swapItems}
-                </>
-              )}
-            </p>
-            <p>
-              {tooltip.content.channelTP && (
-                <>
-                  <strong>Change channel </strong> to leave the gym
-                </>
-              )}
-            </p>
-            <p>
-              {tooltip.content.swapTeams && (
-                <>
-                  <strong>Change Teams </strong>{' '}
-                </>
-              )}
-            </p>
-            <p>
-              {tooltip.content.heal && (
-                <>
-                  <strong>Heal: </strong> is necessary
-                </>
-              )}
-            </p>
-            <p>
-              {tooltip.content.provisionalHeal && (
-                <>
-                  <strong>Heal: </strong> if needed
-                </>
-              )}
-            </p>
+            {gym.swapItems && (
+              <>
+                <strong>Change Items: </strong> {gym.swapItems}
+              </>
+            )}
+          </div>
+          <div>
+            {gym.channelTP && (
+              <>
+                <strong>Change channel </strong> to leave the gym
+              </>
+            )}
+          </div>
+          <div>
+            {gym.swapTeams && (
+              <>
+                <strong>Change Teams </strong>{' '}
+              </>
+            )}
+          </div>
+          <div>
+            {gym.heal && (
+              <>
+                <strong>Heal: </strong> is necessary
+              </>
+            )}
+          </div>
+          <div>
+            {gym.provisionalHeal && (
+              <>
+                <strong>Heal: </strong> if needed
+              </>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

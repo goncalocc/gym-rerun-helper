@@ -510,33 +510,25 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
               }}
             >
               <div className="gym-container rounded-lg bg-gray-900">
-                <div className="flex flex-row justify-center">
-                  <button
-                    className="button-info rounded-lg"
-                    onClick={() => handleInfoClick(index)}
-                  >
-                    ℹ️
-                  </button>
-                  <p className="flex flex-row items-center justify-center">
+                <div className="flex flex-row items-center justify-between">
+                  <p className="w-[55%] justify-center">
                     {gym.gym} - {gym.type}
                   </p>
+                  <div className="w-[45%]">
+                    <TooltipRoute gym={gym} />
+                  </div>
                 </div>
-                <TooltipRoute
-                  index={index}
-                  tooltip={tooltip}
-                  handleMouseLeave={handleMouseLeave}
-                />
                 <div className="flex flex-col">
                   {gym.variations?.map((variation) => (
                     <div
                       key={variation.variationId}
-                      className="leads-variants my-2 w-full"
+                      className="leads-variants my-2"
                     >
-                      <div className="flex flex-row">
+                      <div className="flex w-[55%] flex-row">
                         {variation.pokemons.map((pokemon) => (
                           <div
                             key={pokemon.pokemonid}
-                            className="my-2 flex w-full flex-col items-center 2xl:mx-6"
+                            className="my-2 flex flex-col items-center 2xl:mx-6"
                           >
                             <RouteVariationPokemon
                               getPokemonNumber={getPokemonNumber}
@@ -556,8 +548,10 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
                           </div>
                         ))}
                       </div>
-                      {/* Action Content Area */}
-                      <ActionsRoute leads={gym.leads} variation={variation} />
+                      <div className="w-full rounded-lg bg-gray-800 text-white shadow">
+                        {/* Action Content Area */}
+                        <ActionsRoute leads={gym.leads} variation={variation} />
+                      </div>
                     </div>
                   ))}
                 </div>

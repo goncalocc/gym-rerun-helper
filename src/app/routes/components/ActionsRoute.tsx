@@ -10,7 +10,7 @@ export interface ActionsRouteProps {
 
 const ActionsRoute: React.FC<ActionsRouteProps> = ({ leads, variation }) => {
   return (
-    <div className="w-full rounded-lg bg-gray-800 text-white shadow">
+    <div>
       {leads
         ?.filter((lead) => lead.variationId === variation.variationId)
         .map((lead) => (
