@@ -5,7 +5,7 @@ import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useRef, useState } from 'react';
 import { OnFormChange } from '@/app/routes/components/ViewRouteEditMain';
 import RouteVariationPokemon from '../RouteVariationPokemon';
-import { NewErrorsLayout } from '../ValidateRoutes';
+import { NewErrorsLayout } from '../validateRoutes';
 import gymsJson from '../../../data/gym-variations.json';
 import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
 import { State } from '@/app/teams/components/ViewTeamEditMember';

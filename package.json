@@ -15,7 +15,8 @@
     "next-compose-plugins": "^2.2.1",
     "next-optimized-images": "^2.6.2",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-dropzone": "^14.3.5"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",

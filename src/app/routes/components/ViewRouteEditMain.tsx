@@ -1,6 +1,6 @@
 import { Routes, Route, Leads, Teams } from '@/app/types/types';
 import { FilteredGym } from './ViewRoute';
-import { NewErrorsLayout, validateRoutes } from './ValidateRoutes';
+import { NewErrorsLayout, validateRoutes } from './validateRoutes';
 import Svg from '@/app/utils/Svg';
 import { SetStateAction, useEffect, useState } from 'react';
 import {
@@ -280,7 +280,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                               }
                             >
                               <Svg
-                                name="trash-grey"
+                                name="/objects/trash-grey"
                                 width={30}
                                 height={30}
                                 color="brown"

@@ -259,7 +259,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                   >
                     <Svg
                       key={index}
-                      name="trash-grey"
+                      name="/objects/trash-grey"
                       width={40}
                       height={40}
                       color="brown"
@@ -316,7 +316,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                     >
                       <Svg
                         key={index}
-                        name="trash-grey"
+                        name="/objects/trash-grey"
                         width={40}
                         height={40}
                         color="brown"

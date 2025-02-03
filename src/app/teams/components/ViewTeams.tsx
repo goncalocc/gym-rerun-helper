@@ -135,7 +135,7 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                 >
                   <Svg
                     key={index}
-                    name="trash-grey"
+                    name="/objects/trash-grey"
                     height={40}
                     width={40}
                     color="brown"
