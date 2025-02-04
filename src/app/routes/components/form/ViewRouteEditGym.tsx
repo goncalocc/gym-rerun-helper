@@ -4,15 +4,14 @@ import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useRef, useState } from 'react';
 import { OnFormChange } from '@/app/routes/components/ViewRouteEditMain';
-import RouteVariationPokemon from '../RouteVariationPokemon';
 import { NewErrorsLayout } from '../validateRoutes';
 import gymsJson from '../../../data/gym-variations.json';
 import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
 import { State } from '@/app/teams/components/ViewTeamEditMember';
+import SortSuggestionList from '@/app/utils/SortSuggestionList';
 
 export interface ViewRouteEditGymProps {
   routeGym: Route;
-  routeWithVariations: FilteredGym[];
   assignedTeam: Teams;
   onFormChange: OnFormChange;
   errorData: NewErrorsLayout[];
@@ -21,7 +20,6 @@ export interface ViewRouteEditGymProps {
 
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   routeGym: routeGym,
-  routeWithVariations: routeVariations,
   assignedTeam: assignedTeam,
   onFormChange: onFormChange,
   errorData: errorData,
@@ -303,7 +301,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
       ),
     );
 
-    return matchingSuggestions;
+    return SortSuggestionList(matchingSuggestions, fragment);
   };
 
   const getFragment = (text: string, position: number): string => {

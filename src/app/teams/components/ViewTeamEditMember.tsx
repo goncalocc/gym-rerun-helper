@@ -16,6 +16,7 @@ import EvsForm from './form/EvsForms';
 import IvsForm from './form/IvsForm';
 import { OnFormChange, ErrorData } from './ViewTeamEditMain';
 import { Team } from '../../types/types';
+import SortSuggestionList from '@/app/utils/SortSuggestionList';
 
 interface ViewTeamEditMemberProps {
   index: number;
@@ -116,16 +117,17 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    const letter = value.toLowerCase();
 
     //Filter the suggestions while changing the form
     let filteredItems: string[] = [];
     if (name.startsWith('moveset')) {
       //for the 4 moves of a pokemon
-      filteredItems = dictionaries['move'].filter(
-        (optionName) =>
-          optionName.toLowerCase().indexOf(value.toLowerCase()) > -1,
+      filteredItems = dictionaries['move'].filter((optionName) =>
+        optionName.toLowerCase().includes(letter),
       );
-      //Validations that don't require Dictionary to help fill
+
+      filteredItems = SortSuggestionList(filteredItems, letter);
     } else if (
       !(
         name.startsWith('evs') ||
@@ -134,10 +136,11 @@ const ViewTeamEditMember: React.FC<ViewTeamEditMemberProps> = ({
       )
     ) {
       const dictKey = name as DictionaryKeys;
-      (filteredItems = dictionaries[dictKey].filter(
-        (optionName) =>
-          optionName.toLowerCase().indexOf(value.toLowerCase()) > -1,
-      )) || [];
+      filteredItems = dictionaries[dictKey].filter((optionName) =>
+        optionName.toLowerCase().includes(letter),
+      );
+
+      filteredItems = SortSuggestionList(filteredItems, letter);
     }
 
     setState((prevState) => ({
