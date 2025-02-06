@@ -55,7 +55,7 @@ const Home: React.FC = () => {
   return (
     <main className="flex flex-col items-center">
       <h1>Gym Rerun-&gt;</h1>
-      <Selection />
+      <Selection teamsData={teams} routesData={routes} />
       <MainView />
     </main>
   );

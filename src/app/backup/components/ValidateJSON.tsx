@@ -1,7 +1,7 @@
 import {
   NewErrorsLayout,
   validateRoutes,
-} from '@/app/routes/components/validateRoutes';
+} from '@/app/routes/[routeId]/components/validateRoutes';
 import { validateTeams } from '@/app/teams/components/ValidateTeams';
 import { Routes, Teams } from '@/app/types/types';
 

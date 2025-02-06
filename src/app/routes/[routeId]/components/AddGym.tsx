@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { Route, Routes } from '../../types/types';
-import ALL_GYMS from '../../data/gym-variations.json';
+import { Route, Routes } from '../../../types/types';
+import ALL_GYMS from '../../../data/gym-variations.json';
 
 interface AddGymProps {
   openNewGyms: boolean;

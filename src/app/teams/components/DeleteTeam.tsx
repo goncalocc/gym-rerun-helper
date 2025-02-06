@@ -1,7 +1,7 @@
 import { Teams, Team, Routes } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
-import handleRoutesUpdate from '../../routes/components/HandleRoutesUpdate';
+import handleRoutesUpdate from '../../routes/[routeId]/components/HandleRoutesUpdate';
 
 type DeleteTeamProps = {
   teamsData: Teams[];

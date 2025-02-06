@@ -3,7 +3,7 @@ import { Teams, Team, SetTeamsData, Routes } from '../../types/types';
 import { HandleTeamsUpdate } from './ViewTeamsPreRenderData';
 import { NotificationParams } from './ViewTeams';
 import Link from 'next/link';
-import AddRoute from '@/app/routes/components/AddRoute';
+import AddRoute from '@/app/routes/[routeId]/components/AddRoute';
 import generateUniqueId from '@/app/utils/GenerateId';
 
 interface ViewTeamDetailOptionsProps {
@@ -135,12 +135,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
                 <Link
                   className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
                   key={index}
-                  href={{
-                    pathname: '/routes',
-                    query: {
-                      idProps: route.routeId,
-                    },
-                  }}
+                  href={`/routes/${route.routeId}`}
                 >
                   {route.routeName}
                 </Link>

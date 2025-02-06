@@ -1,14 +1,37 @@
-import { useState } from 'react';
+import { Dispatch, useState } from 'react';
+import { Teams } from '../types/types';
 
-export const TeamSelection: React.FC = () => {
-  const teams = ['Team 4', 'Team 2', 'Team 3'];
+type TeamSelectionProps = {
+  teamsData: Teams[]; // Define your actual type for teamsData
+  state: {
+    selectedTeam: string | null;
+    selectedTeamId: string | null;
+    selectedRoute: string | null;
+    selectedRouteId: string | null;
+  };
+  setState: React.Dispatch<
+    React.SetStateAction<{
+      selectedTeam: string | null;
+      selectedTeamId: string | null;
+      selectedRoute: string | null;
+      selectedRouteId: string | null;
+    }>
+  >;
+};
 
-  const [selectedTeam, setSelectedTeam] = useState<string>('Choose Team');
-
+export const TeamSelection: React.FC<TeamSelectionProps> = ({
+  teamsData,
+  state,
+  setState,
+}) => {
   const [open, setOpen] = useState<boolean>(false);
 
-  const handleTeamChange = (team: string) => {
-    setSelectedTeam(team);
+  const handleTeamChange = (team: string | null, teamId: string | null) => {
+    setState((prev) => ({
+      ...prev,
+      selectedTeam: team,
+      selectedTeamId: teamId,
+    }));
     setOpen(false);
   };
 
@@ -26,7 +49,7 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
         onClick={handleTeamOpen}
       >
-        {selectedTeam}
+        {state.selectedTeam ? state.selectedTeam : 'Choose Team'}
         <svg
           className="ms-3 h-2.5 w-2.5"
           aria-hidden="true"
@@ -43,12 +66,14 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           />
         </svg>
       </button>
-
       {open ? (
         <ul className="menu">
-          {teams.map((team, index) => (
-            <li key={index} onClick={() => handleTeamChange(team)}>
-              {team}
+          {teamsData.map((team, index) => (
+            <li
+              key={index}
+              onClick={() => handleTeamChange(team.teamName, team.teamId)}
+            >
+              {team.teamName}
             </li>
           ))}
         </ul>

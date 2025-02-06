@@ -1,11 +1,10 @@
 import { Gym, Leads, Route, Teams } from '@/app/types/types';
-import { FilteredGym } from '../ViewRoute';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useRef, useState } from 'react';
-import { OnFormChange } from '@/app/routes/components/ViewRouteEditMain';
+import { OnFormChange } from '@/app/routes/[routeId]/components/ViewRouteEditMain';
 import { NewErrorsLayout } from '../validateRoutes';
-import gymsJson from '../../../data/gym-variations.json';
+import gymsJson from '../../../../data/gym-variations.json';
 import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
 import { State } from '@/app/teams/components/ViewTeamEditMember';
 import SortSuggestionList from '@/app/utils/SortSuggestionList';

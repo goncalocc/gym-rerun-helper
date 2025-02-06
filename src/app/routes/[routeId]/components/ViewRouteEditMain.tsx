@@ -11,7 +11,7 @@ import {
 } from '@hello-pangea/dnd';
 import ViewRouteEditGym from './form/ViewRouteEditGym';
 import { NotificationParams } from '@/app/teams/components/ViewTeams';
-import ALL_GYMS from '../../data/gym-variations.json';
+import ALL_GYMS from '../../../data/gym-variations.json';
 import AddGym from './AddGym';
 import deleteGym from './DeleteGym';
 import handleRoutesUpdate from './HandleRoutesUpdate';
@@ -336,7 +336,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                     routeGym={
                       propsRoute.route.find((r) => r.id === selectedGym)!
                     }
-                    routeWithVariations={routeWithVariations}
                     assignedTeam={assignedTeam}
                     onFormChange={onFormChange}
                     errorData={errorData}
