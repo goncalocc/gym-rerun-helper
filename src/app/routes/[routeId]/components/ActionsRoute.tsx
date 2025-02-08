@@ -1,5 +1,4 @@
 import React from 'react';
-import { FilteredGym } from './ViewRoute';
 import Icon from '@/app/utils/Icon';
 import { Variation, Leads } from '@/app/types/types';
 

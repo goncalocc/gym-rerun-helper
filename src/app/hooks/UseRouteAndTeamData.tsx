@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Gym, Leads, Route, Routes, Teams, Variation } from '../types/types';
 import gymsJson from '../data/gym-variations.json';
 
@@ -31,6 +31,8 @@ const useRouteAndTeamData = (idProps: string) => {
   const [assignedRoute, setAssignedRoute] = useState<Routes>();
   const [assignedTeam, setAssignedTeam] = useState<Teams>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [currentGym, setCurrentGym] = useState<Route | undefined>(undefined);
+  const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
     const fetchData = () => {
@@ -61,6 +63,39 @@ const useRouteAndTeamData = (idProps: string) => {
 
     fetchData();
   }, [idProps]);
+
+  useEffect(() => {
+    if (!assignedRoute?.route || assignedRoute.route.length === 0) return;
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.6,
+    };
+
+    observerRef.current = new IntersectionObserver((entries) => {
+      const visibleGym = entries.find((entry) => entry.isIntersecting);
+      if (visibleGym) {
+        const gymObject = assignedRoute.route.find(
+          (gym) => gym.id.toString() === visibleGym.target.id,
+        );
+        const currentIndex = assignedRoute.route.findIndex(
+          (r) => r.id === gymObject?.id,
+        );
+        const nextGymName = assignedRoute.route[currentIndex + 1];
+        setCurrentGym(nextGymName);
+      }
+    }, options);
+
+    assignedRoute.route.forEach(({ id }) => {
+      const element = document.getElementById(id.toString());
+      if (element) observerRef.current?.observe(element);
+    });
+
+    return () => {
+      observerRef.current?.disconnect();
+    };
+  }, [assignedRoute]);
 
   const fetchLocalStorageRoutes = (): Routes[] | null => {
     try {
@@ -141,6 +176,7 @@ const useRouteAndTeamData = (idProps: string) => {
     isLoading,
     setRoutesData,
     setAssignedRoute,
+    currentGym,
   };
 };
 

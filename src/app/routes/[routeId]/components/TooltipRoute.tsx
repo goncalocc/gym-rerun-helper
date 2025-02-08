@@ -17,7 +17,7 @@ const TooltipRoute: React.FC<TooltipRouteProps> = ({ gym }) => {
           className="w-full rounded-lg bg-purple-950 text-white shadow"
         >
           <div>
-            <strong>Steps before entering this Gym:</strong>
+            <strong>Steps after completing this Gym:</strong>
             <div>
               {gym.swapItems && (
                 <>
