@@ -1,5 +1,4 @@
 import { Routes, Route, Leads, Teams } from '@/app/types/types';
-import { FilteredGym } from './ViewRoute';
 import { NewErrorsLayout, validateRoutes } from './validateRoutes';
 import Svg from '@/app/utils/Svg';
 import { SetStateAction, useEffect, useState } from 'react';
@@ -15,6 +14,7 @@ import ALL_GYMS from '../../../data/gym-variations.json';
 import AddGym from './AddGym';
 import deleteGym from './DeleteGym';
 import handleRoutesUpdate from './HandleRoutesUpdate';
+import { FilteredGym } from '@/app/hooks/UseRouteAndTeamData';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
@@ -42,7 +42,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   setAssignedRoute: setAssignedRoute,
   setRoutesData: setRoutesData,
   onClose: closeEdit,
-  routeWithVariations: routeWithVariations,
   setNotification: setNotification,
 }) => {
   const [propsRoute, setPropsRoute] = useState<Routes>(() =>
@@ -53,8 +52,8 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [openNewGyms, setOpenNewGyms] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
-  const [isSidebarVisible, setIsSidebarVisible] = useState<boolean>(false);
   const [isAutofillChecked, setIsAutofillChecked] = useState(false);
+  const [title, setTitle] = useState(propsRoute.routeName);
 
   const handleAutofillCheckbox = () => {
     setIsAutofillChecked(!isAutofillChecked);
@@ -110,6 +109,14 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
 
     setPropsRoute(updatedRoute);
     // setAssignedRoute(updatedRoute);
+  };
+
+  const handleRouteNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPropsRoute((prev) => ({
+      ...prev!,
+      routeName: e.target.value,
+    }));
+    handleEnableSaveButton(); // Ensure save button is enabled
   };
 
   const onFormChange = <K extends keyof Route>({
@@ -301,9 +308,13 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
           <div className="flex-[0.85] p-4">
             {/* Title Section */}
             <div className="flex flex-col items-center">
-              <div className="mb-4 w-[99%] w-full rounded bg-blue-500 px-4 py-2 text-center text-base text-white hover:bg-blue-700 md:w-3/5 md:text-lg lg:w-6/12 lg:text-xl xl:w-2/5 2xl:w-[30%]">
-                {propsRoute?.routeName}
-              </div>
+              <input
+                type="text"
+                value={propsRoute?.routeName || ''}
+                onChange={handleRouteNameChange}
+                className="w-full rounded border px-4 py-2 text-black"
+                placeholder="Enter your Route Title"
+              />
             </div>
             {currentGym?.gym && (
               <div className="relative mb-4 flex w-full items-center justify-center">

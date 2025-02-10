@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { FilteredGym } from './UseRouteAndTeamData';
 
-type ScrollDirection = 'next' | 'previous';
+export type ScrollDirection = 'next' | 'previous';
 
 const useHandleScroll = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
