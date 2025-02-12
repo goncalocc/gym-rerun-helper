@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
-import { Gym, Leads, Route, Routes, Teams, Variation } from '../types/types';
+import {
+  Gym,
+  Leads,
+  Route,
+  Routes,
+  SwapItem,
+  Teams,
+  Variation,
+} from '../types/types';
 import gymsJson from '../data/gym-variations.json';
 
 interface RouteWithId extends Route {
@@ -19,7 +27,7 @@ export interface FilteredGym {
   observations: string;
   provisionalHeal: boolean;
   region: string;
-  swapItems: string;
+  swapItems: SwapItem[];
   swapTeams: boolean;
   type: string;
   variations?: Variation[];
@@ -131,7 +139,9 @@ const useRouteAndTeamData = (idProps: string) => {
         if (!acc[gym.region]) {
           acc[gym.region] = [];
         }
-        const matchedGym = gyms.find((gymJson) => gymJson.gym === gym.gym);
+        const matchedGym = gyms.find(
+          (gymJson) => gymJson.gym === gym.gym && gymJson.id === gym.id,
+        );
         if (matchedGym) {
           acc[gym.region].push({
             ...gym,
@@ -161,7 +171,7 @@ const useRouteAndTeamData = (idProps: string) => {
         leads: matchedGym.leads ?? [],
         observations: matchedGym.observations ?? '',
         provisionalHeal: matchedGym.provisionalHeal ?? false,
-        swapItems: matchedGym.swapItems ?? '',
+        swapItems: matchedGym.swapItems ?? [],
         swapTeams: matchedGym.swapTeams ?? false,
       };
     }) || [];

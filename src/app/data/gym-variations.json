@@ -9433,7 +9433,7 @@
     ]
   },
   {
-    "gym": "Striaton City",
+    "gym": "Striaton City (Grass)",
     "gymtype": "Grass",
     "id": 32,
     "region": "Unova",
@@ -9781,7 +9781,7 @@
     ]
   },
   {
-    "gym": "Striaton City",
+    "gym": "Striaton City (Fire)",
     "gymtype": "Fire",
     "id": 33,
     "region": "Unova",
@@ -10149,7 +10149,7 @@
     ]
   },
   {
-    "gym": "Striaton City",
+    "gym": "Striaton City (Water)",
     "gymtype": "Water",
     "id": 34,
     "region": "Unova",

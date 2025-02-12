@@ -14,7 +14,7 @@ import ALL_GYMS from '../../../data/gym-variations.json';
 import AddGym from './AddGym';
 import deleteGym from './DeleteGym';
 import handleRoutesUpdate from './HandleRoutesUpdate';
-import { FilteredGym } from '@/app/hooks/UseRouteAndTeamData';
+import { FilteredGym, GymsByRegion } from '@/app/hooks/UseRouteAndTeamData';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
@@ -24,6 +24,7 @@ export interface ViewRouteEditMainProps {
   onClose: () => void;
   routeWithVariations: FilteredGym[];
   setNotification: React.Dispatch<React.SetStateAction<NotificationParams>>;
+  gymsByRegion: GymsByRegion;
 }
 
 export type OnFormChangeProps<K extends keyof Route> = {
@@ -43,6 +44,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   setRoutesData: setRoutesData,
   onClose: closeEdit,
   setNotification: setNotification,
+  gymsByRegion: gymsByRegion,
 }) => {
   const [propsRoute, setPropsRoute] = useState<Routes>(() =>
     assignedRoute ? JSON.parse(JSON.stringify(assignedRoute)) : undefined,
@@ -54,14 +56,21 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [isAutofillChecked, setIsAutofillChecked] = useState(false);
   const [title, setTitle] = useState(propsRoute.routeName);
+  const [localGymsByRegion, setLocalGymsByRegion] =
+    useState<GymsByRegion>(gymsByRegion);
 
   const handleAutofillCheckbox = () => {
     setIsAutofillChecked(!isAutofillChecked);
   };
 
-  const missingGyms = ALL_GYMS.filter(
-    (gym) => !propsRoute?.route.some((route) => route.gym === gym.gym),
-  );
+  useEffect(() => {
+    const updatedRoute = Object.values(localGymsByRegion).flat();
+
+    setPropsRoute((prevPropsRoute) => ({
+      ...prevPropsRoute,
+      route: updatedRoute,
+    }));
+  }, [localGymsByRegion]);
 
   const currentGym = propsRoute?.route.find((gym) => gym.id === selectedGym);
 
@@ -93,22 +102,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     } else {
       setSelectedGym(id);
     }
-  };
-
-  const onDragEnd = (result: DropResult) => {
-    if (!result.destination) return;
-
-    const reorderedRoute = Array.from(propsRoute?.route || []);
-    const [removed] = reorderedRoute.splice(result.source.index, 1);
-    reorderedRoute.splice(result.destination.index, 0, removed);
-
-    const updatedRoute = {
-      ...propsRoute,
-      route: reorderedRoute,
-    } as Routes;
-
-    setPropsRoute(updatedRoute);
-    // setAssignedRoute(updatedRoute);
   };
 
   const handleRouteNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -223,6 +216,53 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     }
   };
 
+  const onDragEnd = (result: DropResult) => {
+    const { source, destination, type } = result;
+    if (!destination) return;
+
+    let updatedGymsByRegion = { ...localGymsByRegion };
+
+    // Moving an entire region
+    if (type === 'region') {
+      const regionKeys = Object.keys(updatedGymsByRegion);
+      const [movedRegion] = regionKeys.splice(source.index, 1);
+      regionKeys.splice(destination.index, 0, movedRegion);
+
+      const newOrder = regionKeys.reduce((acc, region) => {
+        acc[region] = updatedGymsByRegion[region];
+        return acc;
+      }, {} as GymsByRegion);
+
+      setLocalGymsByRegion(newOrder);
+      return;
+    }
+
+    // Moving gyms within or between regions
+    if (type === 'gym') {
+      const sourceRegion = source.droppableId;
+      const destRegion = destination.droppableId;
+
+      const sourceGyms = [...updatedGymsByRegion[sourceRegion]];
+      const destGyms =
+        sourceRegion === destRegion
+          ? sourceGyms
+          : [...(updatedGymsByRegion[destRegion] || [])];
+
+      const [movedGym] = sourceGyms.splice(source.index, 1);
+      movedGym.region = destRegion; // Update the region reference
+      destGyms.splice(destination.index, 0, movedGym);
+
+      updatedGymsByRegion = {
+        ...updatedGymsByRegion,
+        [sourceRegion]: sourceGyms,
+        [destRegion]: destGyms,
+      };
+
+      setLocalGymsByRegion(updatedGymsByRegion);
+      handleEnableSaveButton();
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative my-4 h-full max-h-[95%] w-full max-w-[85%] overflow-auto rounded-lg bg-gray-900 p-8">
@@ -241,64 +281,108 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
               propsRoute={propsRoute}
               setPropsRoute={setPropsRoute}
               handleEnableSaveButton={handleEnableSaveButton}
+              setLocalGymsByRegion={setLocalGymsByRegion}
             ></AddGym>
             <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="routes">
+              <Droppable droppableId="regions" type="region">
                 {(provided) => (
-                  <ul
+                  <div
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    className="space-y-4"
+                    className="space-y-6"
                   >
-                    {propsRoute?.route.map((route, index) => (
-                      <Draggable
-                        key={route.id}
-                        draggableId={route.id.toString()}
-                        index={index}
-                      >
-                        {(provided) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-                            className="flex items-center justify-between"
-                          >
+                    {Object.entries(localGymsByRegion).map(
+                      ([region, gyms], regionIndex) => (
+                        <Draggable
+                          key={`region-${region}`}
+                          draggableId={`region-${region}`}
+                          index={regionIndex}
+                        >
+                          {(provided) => (
                             <div
-                              onClick={() =>
-                                handleGymDetails({
-                                  selectedGym: selectedGym!,
-                                  setSelectedGym: setSelectedGym,
-                                  id: route.id,
-                                })
-                              }
-                              className="w-full rounded bg-gray-500 px-2 py-1 text-center text-sm text-white hover:bg-gray-800"
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              className="rounded-md bg-gray-300 p-4"
                             >
-                              {route.gym}
+                              {/* Region Header (Draggable) */}
+                              <div className="flex items-center justify-between">
+                                <h2
+                                  className="text-lg font-bold"
+                                  {...provided.dragHandleProps}
+                                >
+                                  {region}
+                                </h2>
+                              </div>
+
+                              {/* Droppable Gyms Inside Region */}
+                              <Droppable droppableId={region} type="gym">
+                                {(provided) => (
+                                  <ul
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                    className="mt-2 space-y-2"
+                                  >
+                                    {gyms.map((gym, gymIndex) => (
+                                      <Draggable
+                                        key={`${region}-${gym.id}`}
+                                        draggableId={`${region}-${gym.id}`}
+                                        index={gymIndex}
+                                      >
+                                        {(provided) => (
+                                          <div
+                                            className="flex flex-row"
+                                            ref={provided.innerRef}
+                                            {...provided.draggableProps}
+                                          >
+                                            <li
+                                              {...provided.dragHandleProps}
+                                              className={`w-full rounded px-2 py-1 text-center text-white ${selectedGym === gym.id ? 'bg-gray-700' : 'bg-gray-500'} hover:bg-gray-700`}
+                                              onClick={() =>
+                                                handleGymDetails({
+                                                  selectedGym: selectedGym!,
+                                                  setSelectedGym:
+                                                    setSelectedGym,
+                                                  id: gym.id,
+                                                })
+                                              }
+                                            >
+                                              {gym.gym}
+                                            </li>
+                                            <button
+                                              onClick={() =>
+                                                deleteGym({
+                                                  propsRoute: propsRoute,
+                                                  setPropsRoute: setPropsRoute,
+                                                  id: gym.id,
+                                                  handleEnableSaveButton:
+                                                    handleEnableSaveButton,
+                                                  setLocalGymsByRegion:
+                                                    setLocalGymsByRegion,
+                                                })
+                                              }
+                                            >
+                                              <Svg
+                                                name="/objects/trash-grey"
+                                                width={30}
+                                                height={30}
+                                                color="brown"
+                                              />
+                                            </button>
+                                          </div>
+                                        )}
+                                      </Draggable>
+                                    ))}
+                                    {provided.placeholder}
+                                  </ul>
+                                )}
+                              </Droppable>
                             </div>
-                            <button
-                              onClick={() =>
-                                deleteGym({
-                                  propsRoute: propsRoute,
-                                  setPropsRoute: setPropsRoute,
-                                  id: route.id,
-                                  handleEnableSaveButton:
-                                    handleEnableSaveButton,
-                                })
-                              }
-                            >
-                              <Svg
-                                name="/objects/trash-grey"
-                                width={30}
-                                height={30}
-                                color="brown"
-                              />
-                            </button>
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
+                          )}
+                        </Draggable>
+                      ),
+                    )}
                     {provided.placeholder}
-                  </ul>
+                  </div>
                 )}
               </Droppable>
             </DragDropContext>

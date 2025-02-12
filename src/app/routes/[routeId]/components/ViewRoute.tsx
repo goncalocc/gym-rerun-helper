@@ -83,6 +83,7 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
             onClose={closeEdit}
             routeWithVariations={filteredGymsVariations}
             setNotification={setNotification}
+            gymsByRegion={gymsByRegion}
           />
         </>
       ) : (

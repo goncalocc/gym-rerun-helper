@@ -79,11 +79,16 @@ export type Route = {
   type: string;
   observations: string;
   leads: Leads[];
-  swapItems: string;
+  swapItems: SwapItem[];
   heal: boolean;
   provisionalHeal: boolean;
   swapTeams: boolean;
   channelTP: boolean;
+};
+
+export type SwapItem = {
+  pokemon: string;
+  item: string;
 };
 
 export type Leads = {

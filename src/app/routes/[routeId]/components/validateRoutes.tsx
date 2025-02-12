@@ -24,8 +24,6 @@ export const validateRoutes = ({
         : element.pokemon,
   );
 
-  console.log('teamnames: ' + teamNames);
-
   const newErrors: NewErrorsLayout[] = [];
 
   leads.forEach((lead, index) => {

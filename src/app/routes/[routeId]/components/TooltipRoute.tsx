@@ -19,9 +19,13 @@ const TooltipRoute: React.FC<TooltipRouteProps> = ({ gym }) => {
           <div>
             <strong>Steps after completing this Gym:</strong>
             <div>
-              {gym.swapItems && (
+              {gym.swapItems && gym.swapItems.length > 0 && (
                 <>
-                  <strong>Change Items: </strong> {gym.swapItems}
+                  <strong>Change Items: </strong>
+                  {gym.swapItems
+                    .map((swap) => `Change ${swap.pokemon} to ${swap.item}`)
+                    .join('. ')}
+                  .
                 </>
               )}
             </div>

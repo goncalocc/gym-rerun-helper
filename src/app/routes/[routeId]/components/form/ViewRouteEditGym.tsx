@@ -1,4 +1,4 @@
-import { Gym, Leads, Route, Teams } from '@/app/types/types';
+import { Gym, Leads, Route, SwapItem, Teams } from '@/app/types/types';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useRef, useState } from 'react';
@@ -8,6 +8,7 @@ import gymsJson from '../../../../data/gym-variations.json';
 import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
 import { State } from '@/app/teams/components/ViewTeamEditMember';
 import SortSuggestionList from '@/app/utils/SortSuggestionList';
+import itemsData from '../../../../data/ItemsDictionary';
 
 export interface ViewRouteEditGymProps {
   routeGym: Route;
@@ -24,8 +25,8 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   errorData: errorData,
   isAutofillChecked: isAutofillChecked,
 }) => {
-  const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
   const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
+  const [swapItems, setSwapItems] = useState<SwapItem[]>(routeGym.swapItems);
 
   const [state, setState] = useState<State>({
     activeItem: 0,
@@ -40,6 +41,25 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
 
   const stringToBoolean = (value: string): boolean => {
     return value === 'true';
+  };
+
+  const addSwapItem = () => {
+    if (swapItems.length < 4) {
+      setSwapItems((prev) => [...prev, { pokemon: '', item: '' }]);
+    }
+  };
+
+  const removeSwapItem = (index: number, id: number) => {
+    setSwapItems((prev) => {
+      const updatedSwapItems = prev.filter((_, i) => i !== index);
+      onFormChange({
+        name: 'swapItems' as keyof Route,
+        value: updatedSwapItems,
+        id,
+      });
+
+      return updatedSwapItems;
+    });
   };
 
   const handleClickSuggestion = (
@@ -269,6 +289,44 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     }
   };
 
+  const handlePokemonChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number,
+    id: number,
+  ) => {
+    const fieldName = e.target.name;
+    const pokemonName = e.target.value;
+    const updatedSwapItems = [...swapItems];
+    updatedSwapItems[index].pokemon = pokemonName;
+    const processedValue = updatedSwapItems.filter(
+      (item) => item.pokemon !== '' || item.item !== '',
+    );
+    onFormChange({
+      name: fieldName as keyof Route,
+      value: processedValue,
+      id,
+    });
+  };
+
+  const handleItemChange = (
+    e: React.ChangeEvent<HTMLSelectElement>,
+    index: number,
+    id: number,
+  ) => {
+    const fieldName = e.target.name;
+    const itemName = e.target.value;
+    const updatedSwapItems = [...swapItems];
+    updatedSwapItems[index].item = itemName;
+    const processedValue = updatedSwapItems.filter(
+      (item) => item.pokemon !== '' || item.item !== '',
+    );
+    onFormChange({
+      name: fieldName as keyof Route,
+      value: processedValue,
+      id,
+    });
+  };
+
   const handleCheckboxChange = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
@@ -458,15 +516,59 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
               <label className="mr-2 w-[20%] justify-center text-xs font-bold md:text-sm">
                 Swap Items:
               </label>
-              <input
-                id="swapItems"
-                name="swapItems"
-                type="text"
-                value={routeGym.swapItems}
-                className="h-[2.5vh] rounded border p-2 text-xs text-black md:w-1/2 md:text-sm"
-                onChange={(e) => handleChange(e, routeGym.id)}
-                autoComplete="off"
-              />
+              {swapItems.map((swapItem, index) => (
+                <div key={index} className="mr-6 flex items-center">
+                  {/* Pokémon Selection */}
+                  <select
+                    id={`pokemonSelect-${index}`}
+                    name="swapItems"
+                    value={swapItem.pokemon}
+                    onChange={(e) => handlePokemonChange(e, index, routeGym.id)}
+                    className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Select Pokémon</option>
+                    {assignedTeam.team.map((pokemon, pokemonIndex) => (
+                      <option key={pokemonIndex} value={pokemon.pokemon}>
+                        {pokemon.pokemon}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* Item Selection */}
+                  <select
+                    id={`itemSelect-${index}`}
+                    name="swapItems"
+                    value={swapItem.item}
+                    onChange={(e) => handleItemChange(e, index, routeGym.id)}
+                    className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Select Item</option>
+                    {itemsData.map((item, itemIndex) => (
+                      <option key={itemIndex} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    type="button"
+                    onClick={() => removeSwapItem(index, routeGym.id)}
+                    className="ml-2 rounded bg-red-500 p-1 text-sm text-white transition duration-200 hover:bg-red-600"
+                  >
+                    ✖
+                  </button>
+                </div>
+              ))}
+              {/* Button to Add More Pairs */}
+              <div className="">
+                <button
+                  type="button"
+                  onClick={addSwapItem}
+                  className="rounded bg-blue-500 p-2 text-sm text-white transition duration-200 hover:bg-blue-600"
+                  disabled={swapItems.length >= 4}
+                >
+                  +
+                </button>
+              </div>
             </div>
             <div className="flex flex-row">
               <label className="mr-2 w-[20%] text-xs font-bold md:text-sm">

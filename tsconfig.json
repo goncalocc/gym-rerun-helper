@@ -113,7 +113,8 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
-    "src"
+    "src",
+    "scripts"
   ],
   "exclude": ["node_modules"]
 }

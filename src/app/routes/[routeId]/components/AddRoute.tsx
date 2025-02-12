@@ -26,7 +26,7 @@ export const AddRoute: React.FC<AddRouteProps> = ({ teamId, teamRoutes }) => {
       return updatedRoutes;
     });
 
-    router.push(`/routes?idProps=${newRoute.routeId}`);
+    router.push(`/routes/${newRoute.routeId}`);
   };
 
   return (

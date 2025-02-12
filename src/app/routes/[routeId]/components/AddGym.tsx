@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Route, Routes } from '../../../types/types';
 import ALL_GYMS from '../../../data/gym-variations.json';
+import { GymsByRegion } from '@/app/hooks/UseRouteAndTeamData';
 
 interface AddGymProps {
   openNewGyms: boolean;
@@ -8,6 +9,7 @@ interface AddGymProps {
   propsRoute: Routes;
   setPropsRoute: React.Dispatch<React.SetStateAction<Routes>>;
   handleEnableSaveButton: () => void;
+  setLocalGymsByRegion: React.Dispatch<React.SetStateAction<GymsByRegion>>;
 }
 
 const AddGym = ({
@@ -16,6 +18,7 @@ const AddGym = ({
   propsRoute,
   setPropsRoute,
   handleEnableSaveButton,
+  setLocalGymsByRegion,
 }: AddGymProps) => {
   const missingGyms = Array.from(
     new Set(
@@ -29,6 +32,17 @@ const AddGym = ({
   )
     .map((gymName) => ALL_GYMS.find((gym) => gym.gym === gymName))
     .filter((gym): gym is NonNullable<typeof gym> => gym !== undefined);
+
+  const gymsByRegion = missingGyms.reduce<Record<string, typeof missingGyms>>(
+    (acc, gym) => {
+      if (!acc[gym.region]) {
+        acc[gym.region] = [];
+      }
+      acc[gym.region].push(gym);
+      return acc;
+    },
+    {},
+  );
 
   const [newGym] = useState({
     observations: '',
@@ -64,7 +78,7 @@ const AddGym = ({
         variationId: 5,
       },
     ],
-    swapItems: '',
+    swapItems: [],
     heal: false,
     provisionalHeal: false,
     swapTeams: false,
@@ -102,26 +116,16 @@ const AddGym = ({
     region: string,
   ) => {
     const mergedGymInfo: Route = { gym, type, id, region, ...newGym };
-    if (gym === 'Striaton City') {
-      const multipleLeaders = [
-        { gym, type: 'Grass', id: id, region, ...newGym },
-        { gym, type: 'Fire', id: id + 1, region, ...newGym },
-        { gym, type: 'Water', id: id + 2, region, ...newGym },
-      ];
-      const multipleGymsNeeded = multipleLeaders.filter((gym) => {
-        return !propsRoute?.route.some((routeGym) => routeGym.id === gym.id);
-      });
-
-      setPropsRoute((prevData) => ({
-        ...prevData,
-        route: [...prevData.route, ...multipleGymsNeeded],
-      }));
-    } else {
-      setPropsRoute((prevData) => ({
-        ...prevData,
-        route: [...prevData.route, mergedGymInfo],
-      }));
-    }
+    setPropsRoute((prevData) => ({
+      ...prevData,
+      route: [...prevData.route, mergedGymInfo],
+    }));
+    setLocalGymsByRegion((prevGymsByRegion) => ({
+      ...prevGymsByRegion,
+      [region]: prevGymsByRegion[region]
+        ? [...prevGymsByRegion[region], mergedGymInfo]
+        : [mergedGymInfo],
+    }));
     handleEnableSaveButton();
   };
 
@@ -146,16 +150,25 @@ const AddGym = ({
       </button>
       {openNewGyms && missingGyms.length > 0 && (
         <div className="absolute top-full mt-3 w-40 rounded-lg bg-white p-2 shadow-lg">
-          <ul className="space-y-2">
-            {missingGyms.map((gym) => (
-              <li
-                key={gym.gym}
-                className="flex items-center justify-between rounded p-2 text-black hover:bg-gray-100"
-                onClick={() =>
-                  handleAddGym(gym.gym, gym.gymtype, gym.id, gym.region)
-                }
-              >
-                {gym.gym}
+          <ul className="space-y-3">
+            {Object.entries(gymsByRegion).map(([region, gyms]) => (
+              <li key={region}>
+                <span className="block px-2 py-1 text-sm font-bold text-gray-700">
+                  {region}
+                </span>
+                <ul className="space-y-1 pl-4">
+                  {gyms.map((gym) => (
+                    <li
+                      key={gym.gym}
+                      className="cursor-pointer rounded p-2 text-black hover:bg-gray-100"
+                      onClick={() =>
+                        handleAddGym(gym.gym, gym.gymtype, gym.id, gym.region)
+                      }
+                    >
+                      {gym.gym}
+                    </li>
+                  ))}
+                </ul>
               </li>
             ))}
           </ul>

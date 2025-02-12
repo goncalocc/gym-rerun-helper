@@ -1,6 +1,5 @@
-import { Route } from '@/app/types/types';
 import { useState } from 'react';
-import { GymsByRegion } from './ViewRoute';
+import { GymsByRegion } from '@/app/hooks/UseRouteAndTeamData';
 
 export interface BookmarksRouteProps {
   gymsByRegion: GymsByRegion;
