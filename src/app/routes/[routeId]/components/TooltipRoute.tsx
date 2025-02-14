@@ -7,7 +7,7 @@ export interface TooltipRouteProps {
 const TooltipRoute: React.FC<TooltipRouteProps> = ({ gym }) => {
   return (
     <div>
-      {(gym?.swapItems ||
+      {(gym?.swapItems.length ||
         gym?.channelTP ||
         gym?.swapTeams ||
         gym?.heal ||

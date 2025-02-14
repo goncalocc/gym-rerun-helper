@@ -1,20 +1,12 @@
 import { Routes, Route, Leads, Teams } from '@/app/types/types';
 import { NewErrorsLayout, validateRoutes } from './validateRoutes';
-import Svg from '@/app/utils/Svg';
 import { SetStateAction, useEffect, useState } from 'react';
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from '@hello-pangea/dnd';
 import ViewRouteEditGym from './form/ViewRouteEditGym';
 import { NotificationParams } from '@/app/teams/components/ViewTeams';
-import ALL_GYMS from '../../../data/gym-variations.json';
 import AddGym from './AddGym';
-import deleteGym from './DeleteGym';
 import handleRoutesUpdate from './HandleRoutesUpdate';
 import { FilteredGym, GymsByRegion } from '@/app/hooks/UseRouteAndTeamData';
+import ViewRouteEditGymList from './form/ViewRouteEditGymList';
 
 export interface ViewRouteEditMainProps {
   assignedRoute: Routes;
@@ -55,7 +47,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const [openNewGyms, setOpenNewGyms] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
   const [isAutofillChecked, setIsAutofillChecked] = useState(false);
-  const [title, setTitle] = useState(propsRoute.routeName);
   const [localGymsByRegion, setLocalGymsByRegion] =
     useState<GymsByRegion>(gymsByRegion);
 
@@ -78,7 +69,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     if (isSaved) {
       closeEdit();
     }
-    // Ensure that when assignedRoute changes, propsRoute is updated with a new copy.
     if (assignedRoute) {
       setPropsRoute(JSON.parse(JSON.stringify(assignedRoute)));
     }
@@ -88,28 +78,12 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     setIsDisabled(false);
   };
 
-  const handleGymDetails = ({
-    selectedGym,
-    setSelectedGym,
-    id,
-  }: {
-    selectedGym: number | null;
-    setSelectedGym: (id: number | null) => void;
-    id: number;
-  }) => {
-    if (selectedGym === id) {
-      setSelectedGym(null);
-    } else {
-      setSelectedGym(id);
-    }
-  };
-
   const handleRouteNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPropsRoute((prev) => ({
       ...prev!,
       routeName: e.target.value,
     }));
-    handleEnableSaveButton(); // Ensure save button is enabled
+    handleEnableSaveButton();
   };
 
   const onFormChange = <K extends keyof Route>({
@@ -121,7 +95,6 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
       if (!prevData) return prevData;
       const updatedRoute = { ...prevData };
 
-      // update the right gym
       const routeIndex = updatedRoute.route?.findIndex(
         (route) => route.id === id,
       );
@@ -133,14 +106,9 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
         if (subfield) {
           const arrayIndex = parseInt(subfield);
           if (arrayIndex >= 0 && field in updatedGym.leads[arrayIndex]) {
-            if (field === 'pokemon' && typeof value === 'string') {
-              (updatedGym.leads[arrayIndex][field] as string[]) =
-                value.split(' ');
-            } else {
-              (updatedGym.leads[arrayIndex][
-                field as keyof Leads
-              ] as Leads[keyof Leads]) = value as Leads[keyof Leads];
-            }
+            (updatedGym.leads[arrayIndex][
+              field as keyof Leads
+            ] as Leads[keyof Leads]) = value as Leads[keyof Leads];
           }
         } else {
           updatedGym[name] = value;
@@ -149,9 +117,9 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
       }
       return {
         ...updatedRoute,
-        teamId: updatedRoute.teamId ?? '', // Ensure teamId is always a string
-        routeName: updatedRoute.routeName ?? '', // Ensure routeName is always a string
-        routeId: updatedRoute.routeId ?? '', // Ensure routeId is always a string
+        teamId: updatedRoute.teamId ?? '',
+        routeName: updatedRoute.routeName ?? '',
+        routeId: updatedRoute.routeId ?? '',
         route: updatedRoute.route ?? [],
       };
     });
@@ -163,13 +131,10 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   ) => {
     event.preventDefault();
     try {
-      // First, perform validations
       if (propsRoute) {
-        // Collect errors from all gyms
         const allErrors: NewErrorsLayout[] = [];
 
         for (let i = 0; i < propsRoute.route.length; i++) {
-          // Validate each gym and accumulate errors
           const errors = validateRoutes({
             gymName: propsRoute.route[i].gym,
             leads: propsRoute.route[i].leads,
@@ -181,16 +146,13 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
           }
         }
 
-        // Check if any errors were collected
         if (allErrors.length > 0) {
-          // Handle validation errors by displaying all messages
           const errorMessage = allErrors
             .map((error) => error.message)
             .join('\n');
           alert(errorMessage);
           setErrorData((prevState) => [...prevState, ...allErrors]);
         } else {
-          // Only update routes if no errors are found
           handleRoutesUpdate({
             updatedRoute: propsRoute,
             isDelete: false,
@@ -216,56 +178,9 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     }
   };
 
-  const onDragEnd = (result: DropResult) => {
-    const { source, destination, type } = result;
-    if (!destination) return;
-
-    let updatedGymsByRegion = { ...localGymsByRegion };
-
-    // Moving an entire region
-    if (type === 'region') {
-      const regionKeys = Object.keys(updatedGymsByRegion);
-      const [movedRegion] = regionKeys.splice(source.index, 1);
-      regionKeys.splice(destination.index, 0, movedRegion);
-
-      const newOrder = regionKeys.reduce((acc, region) => {
-        acc[region] = updatedGymsByRegion[region];
-        return acc;
-      }, {} as GymsByRegion);
-
-      setLocalGymsByRegion(newOrder);
-      return;
-    }
-
-    // Moving gyms within or between regions
-    if (type === 'gym') {
-      const sourceRegion = source.droppableId;
-      const destRegion = destination.droppableId;
-
-      const sourceGyms = [...updatedGymsByRegion[sourceRegion]];
-      const destGyms =
-        sourceRegion === destRegion
-          ? sourceGyms
-          : [...(updatedGymsByRegion[destRegion] || [])];
-
-      const [movedGym] = sourceGyms.splice(source.index, 1);
-      movedGym.region = destRegion; // Update the region reference
-      destGyms.splice(destination.index, 0, movedGym);
-
-      updatedGymsByRegion = {
-        ...updatedGymsByRegion,
-        [sourceRegion]: sourceGyms,
-        [destRegion]: destGyms,
-      };
-
-      setLocalGymsByRegion(updatedGymsByRegion);
-      handleEnableSaveButton();
-    }
-  };
-
   return (
     <div className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative my-4 h-full max-h-[95%] w-full max-w-[85%] overflow-auto rounded-lg bg-gray-900 p-8">
+      <div className="relative my-4 h-full max-h-[95%] w-full max-w-[95%] overflow-auto rounded-lg bg-gray-900 p-8">
         <button
           className="absolute right-2 top-2 text-2xl text-gray-700 hover:text-gray-900 sm:text-xl"
           onClick={closeEdit}
@@ -282,113 +197,19 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
               setPropsRoute={setPropsRoute}
               handleEnableSaveButton={handleEnableSaveButton}
               setLocalGymsByRegion={setLocalGymsByRegion}
-            ></AddGym>
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="regions" type="region">
-                {(provided) => (
-                  <div
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                    className="space-y-6"
-                  >
-                    {Object.entries(localGymsByRegion).map(
-                      ([region, gyms], regionIndex) => (
-                        <Draggable
-                          key={`region-${region}`}
-                          draggableId={`region-${region}`}
-                          index={regionIndex}
-                        >
-                          {(provided) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              className="rounded-md bg-gray-300 p-4"
-                            >
-                              {/* Region Header (Draggable) */}
-                              <div className="flex items-center justify-between">
-                                <h2
-                                  className="text-lg font-bold"
-                                  {...provided.dragHandleProps}
-                                >
-                                  {region}
-                                </h2>
-                              </div>
-
-                              {/* Droppable Gyms Inside Region */}
-                              <Droppable droppableId={region} type="gym">
-                                {(provided) => (
-                                  <ul
-                                    ref={provided.innerRef}
-                                    {...provided.droppableProps}
-                                    className="mt-2 space-y-2"
-                                  >
-                                    {gyms.map((gym, gymIndex) => (
-                                      <Draggable
-                                        key={`${region}-${gym.id}`}
-                                        draggableId={`${region}-${gym.id}`}
-                                        index={gymIndex}
-                                      >
-                                        {(provided) => (
-                                          <div
-                                            className="flex flex-row"
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                          >
-                                            <li
-                                              {...provided.dragHandleProps}
-                                              className={`w-full rounded px-2 py-1 text-center text-white ${selectedGym === gym.id ? 'bg-gray-700' : 'bg-gray-500'} hover:bg-gray-700`}
-                                              onClick={() =>
-                                                handleGymDetails({
-                                                  selectedGym: selectedGym!,
-                                                  setSelectedGym:
-                                                    setSelectedGym,
-                                                  id: gym.id,
-                                                })
-                                              }
-                                            >
-                                              {gym.gym}
-                                            </li>
-                                            <button
-                                              onClick={() =>
-                                                deleteGym({
-                                                  propsRoute: propsRoute,
-                                                  setPropsRoute: setPropsRoute,
-                                                  id: gym.id,
-                                                  handleEnableSaveButton:
-                                                    handleEnableSaveButton,
-                                                  setLocalGymsByRegion:
-                                                    setLocalGymsByRegion,
-                                                })
-                                              }
-                                            >
-                                              <Svg
-                                                name="/objects/trash-grey"
-                                                width={30}
-                                                height={30}
-                                                color="brown"
-                                              />
-                                            </button>
-                                          </div>
-                                        )}
-                                      </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                  </ul>
-                                )}
-                              </Droppable>
-                            </div>
-                          )}
-                        </Draggable>
-                      ),
-                    )}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
+            />
+            <ViewRouteEditGymList
+              localGymsByRegion={localGymsByRegion}
+              setLocalGymsByRegion={setLocalGymsByRegion}
+              handleEnableSaveButton={handleEnableSaveButton}
+              selectedGym={selectedGym}
+              setSelectedGym={setSelectedGym}
+              propsRoute={propsRoute}
+              setPropsRoute={setPropsRoute}
+            />
           </div>
 
-          {/* Main Content (Title and Details) */}
+          {/* Main Content */}
           <div className="flex-[0.85] p-4">
             {/* Title Section */}
             <div className="flex flex-col items-center">
@@ -435,6 +256,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
                     onFormChange={onFormChange}
                     errorData={errorData}
                     isAutofillChecked={isAutofillChecked}
+                    handleEnableSaveButton={handleEnableSaveButton}
                   />
                 )}
             </div>

@@ -1,14 +1,17 @@
 import { Gym, Leads, Route, SwapItem, Teams } from '@/app/types/types';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { OnFormChange } from '@/app/routes/[routeId]/components/ViewRouteEditMain';
 import { NewErrorsLayout } from '../validateRoutes';
 import gymsJson from '../../../../data/gym-variations.json';
-import SuggestionBox from '@/app/teams/components/form/SuggestionBox';
-import { State } from '@/app/teams/components/ViewTeamEditMember';
-import SortSuggestionList from '@/app/utils/SortSuggestionList';
 import itemsData from '../../../../data/ItemsDictionary';
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from '@hello-pangea/dnd';
 
 export interface ViewRouteEditGymProps {
   routeGym: Route;
@@ -16,29 +19,20 @@ export interface ViewRouteEditGymProps {
   onFormChange: OnFormChange;
   errorData: NewErrorsLayout[];
   isAutofillChecked: boolean;
+  handleEnableSaveButton: () => void;
 }
 
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
-  routeGym: routeGym,
-  assignedTeam: assignedTeam,
-  onFormChange: onFormChange,
-  errorData: errorData,
-  isAutofillChecked: isAutofillChecked,
+  routeGym,
+  assignedTeam,
+  onFormChange,
+  errorData,
+  isAutofillChecked,
+  handleEnableSaveButton,
 }) => {
   const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
   const [swapItems, setSwapItems] = useState<SwapItem[]>(routeGym.swapItems);
-
-  const [state, setState] = useState<State>({
-    activeItem: 0,
-    filteredItems: [],
-    displayItems: false,
-    inputName: '',
-  });
-
-  const itemRefs = useRef<(HTMLLIElement | null)[]>(
-    Array(state.filteredItems.length).fill(null),
-  );
-
+  const [showDropdown, setShowDropdown] = useState<number | null>(null);
   const stringToBoolean = (value: string): boolean => {
     return value === 'true';
   };
@@ -62,180 +56,13 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     });
   };
 
-  const handleClickSuggestion = (
-    event: React.MouseEvent<HTMLLIElement>,
-    id: number,
-    inputElement: HTMLInputElement,
-  ): void => {
-    const value = event.currentTarget.innerText;
-
-    const inputLead = inputElement.value;
-
-    const cursorPosition = inputElement.selectionStart ?? inputLead.length;
-
-    const prefix = inputLead.slice(0, cursorPosition);
-    const sufix = inputLead.slice(cursorPosition, inputLead.length);
-    const prefixWords = prefix.split(' ');
-    const sufixWords = sufix.split(' ');
-    const wordIndex = prefixWords.length - 1;
-    let inputArray: String[] = [];
-    if (sufix === '') {
-      inputArray = prefixWords;
-    } else {
-      inputArray = prefixWords.concat(sufixWords);
-    }
-
-    inputArray[wordIndex] = value;
-
-    const newValue = inputArray.join(' ').trim();
-
-    if (isAutofillChecked) {
-      for (let i = 0; i < filteredGym!.variations.length; i++) {
-        const generalName = state.inputName.split('.')[0];
-        onFormChange({
-          name: `${generalName}.${i}` as keyof Route,
-          value: newValue,
-          id,
-        });
-      }
-    } else {
-      setState((prevState) => ({
-        activeItem: 0,
-        filteredItems: [],
-        inputName: prevState.inputName,
-        displayItems: false,
-      }));
-      onFormChange({
-        name: state.inputName as keyof Route,
-        value: newValue,
-        id,
-      });
-    }
-  };
-
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    id: number,
-    inputElement: HTMLInputElement | null,
-  ) => {
-    const { name, value: currentInputValue } = e.currentTarget;
-    const { activeItem, filteredItems } = state;
-
-    if (e.key === 'Enter') {
-      // if press "enter" key
-      if (inputElement) {
-        const inputLead = inputElement.value;
-
-        const cursorPosition = inputElement.selectionStart ?? inputLead.length;
-
-        const prefix = inputLead.slice(0, cursorPosition);
-        const sufix = inputLead.slice(cursorPosition, inputLead.length);
-        const prefixWords = prefix.split(' ');
-        const sufixWords = sufix.split(' ');
-        const wordIndex = prefixWords.length - 1;
-        let inputArray: String[] = [];
-        if (sufix === '') {
-          inputArray = prefixWords;
-        } else {
-          inputArray = prefixWords.concat(sufixWords);
-        }
-
-        inputArray[wordIndex] = filteredItems[activeItem];
-
-        const newValue = inputArray.join(' ').trim();
-
-        setState((prevState) => ({
-          activeItem: 0,
-          filteredItems: [],
-          inputName: prevState.inputName,
-          displayItems: false,
-        }));
-
-        onFormChange({
-          name: state.inputName as keyof Route,
-          value: newValue,
-          id,
-        });
-      } else {
-        setState((prevState) => ({
-          ...prevState,
-          activeItem: 0,
-          filteredItems: [],
-          displayItems: false,
-          inputName: name,
-        }));
-
-        onFormChange({
-          name: name as keyof Route,
-          value: currentInputValue,
-          id,
-        });
-      }
-    } else if (e.key === 'Esc') {
-      // if press "esc" key
-      setState((prevState) => ({
-        ...prevState,
-        activeItem: 0,
-        filteredItems: [],
-        displayItems: false,
-      }));
-    } else if (e.key === 'ArrowUp') {
-      //if press up arrow key
-      e.preventDefault();
-      if (activeItem === 0) {
-        return;
-      }
-      setState((prevState) => ({
-        ...prevState,
-        activeItem: prevState.activeItem - 1,
-        filteredItems: prevState.filteredItems,
-        displayItems: true,
-      }));
-    } else if (e.key === 'ArrowDown') {
-      //if press down arrow key
-      e.preventDefault();
-      if (
-        (filteredItems && activeItem === filteredItems.length - 1) ||
-        activeItem >= 9
-      ) {
-        return;
-      }
-      setState((prevState) => ({
-        ...prevState,
-        activeItem: prevState.activeItem + 1,
-        filteredItems: prevState.filteredItems,
-        displayItems: true,
-      }));
-    }
-  };
-
-  const handleBlurSuggestion = (
-    event: React.FocusEvent<HTMLInputElement>,
-    id: number,
-  ) => {
-    const { name, value } = event.target;
-    const trimmedValue = value.trim();
-
-    setState((prevState) => ({
-      ...prevState,
-      activeItem: 0,
-      filteredItems: [],
-      displayItems: false,
-    }));
-
-    onFormChange({ name: name as keyof Route, value: value, id });
-  };
-
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
     id: number,
   ) => {
-    const { name, value, type, selectionStart } = event.target;
-    // For other input types or fields
-    let filteredItems: string[] = [];
+    const { name, value, type } = event.target;
     const processedValue = type === 'radio' ? stringToBoolean(value) : value;
 
-    // Form change for radio buttons
     if (type === 'radio' && name === 'heal') {
       const mappings: Record<
         string,
@@ -258,24 +85,8 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
 
       return; // Exit early since the form change has been handled
     }
-
-    // Handling suggestions for 'pokemon'
-    if (name.includes('pokemon')) {
-      filteredItems = getSuggestionList(value, selectionStart ?? 0);
-      setState((prevState) => ({
-        ...prevState,
-        activeItem: 0,
-        filteredItems,
-        displayItems: true,
-        inputName: name,
-      }));
-    }
-
     // Form change for Lead and Attacks when Autofill is on
-    if (
-      (name.includes('pokemon') || name.includes('attacks')) &&
-      isAutofillChecked
-    ) {
+    if (name.includes('attacks') && isAutofillChecked) {
       for (let i = 0; i < filteredGym!.variations.length; i++) {
         const generalName = name.split('.')[0];
         onFormChange({
@@ -289,7 +100,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     }
   };
 
-  const handlePokemonChange = (
+  const handlePkmItemSwapChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
     index: number,
     id: number,
@@ -308,7 +119,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     });
   };
 
-  const handleItemChange = (
+  const handleItemSwapChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
     index: number,
     id: number,
@@ -335,46 +146,6 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     onFormChange({ name: name as keyof Route, value: checked, id });
   };
 
-  //in the future change teamUsed .team to a variable to it can read between ['team'] and ['subteam']
-  const getSuggestionList = (value: string, position: number) => {
-    let fragment = '';
-    const teamUsed = assignedTeam.team.map((member) => {
-      if (member.nickname && member.nickname.trim() !== '') {
-        return `${member.pokemon}(${member.nickname})`;
-      } else {
-        return member.pokemon;
-      }
-    });
-
-    const missingElements = teamUsed.filter(
-      (element) => !value.includes(element),
-    );
-    if (position !== null) {
-      fragment = getFragment(value, position);
-    }
-    const matchingSuggestions = missingElements.filter((element) =>
-      [...fragment].every((char) =>
-        element.toLowerCase().includes(char.toLowerCase()),
-      ),
-    );
-
-    return SortSuggestionList(matchingSuggestions, fragment);
-  };
-
-  const getFragment = (text: string, position: number): string => {
-    let start = position;
-
-    // Expand to the left to find the start of the word
-    while (start > 0 && /[\w()]/.test(text[start - 1])) {
-      start -= 1;
-    }
-    // Expand to the right to find the end of the word
-    // while (end < text.length && /\w/.test(text[end])) {
-    //   end += 1;
-    // }
-    return text.slice(start, position);
-  };
-
   const hasError = (gym: string, index: number): boolean => {
     if (
       errorData &&
@@ -386,27 +157,146 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     } else return false;
   };
 
+  const onDragEnd = (result: DropResult, variationId: number): void => {
+    const { source, destination } = result;
+
+    if (!destination || source.index === destination.index) return;
+
+    const leadIndex = routeGym.leads.findIndex(
+      (lead) => lead.variationId === variationId,
+    );
+    if (leadIndex === -1) return;
+
+    // Clone leads array and update the pokemon list
+    const updatedLeads = [...routeGym.leads];
+
+    if (isAutofillChecked) {
+      const updatedPokemonList = [...updatedLeads[0].pokemon]; // Assuming all leads share the same list
+
+      const [reorderedItem] = updatedPokemonList.splice(source.index, 1);
+      updatedPokemonList.splice(destination.index, 0, reorderedItem);
+
+      // Update all leads
+      updatedLeads.forEach((lead, index) => {
+        updatedLeads[index] = {
+          ...lead,
+          pokemon: updatedPokemonList,
+        };
+      });
+    } else {
+      const updatedPokemonList = [...updatedLeads[leadIndex].pokemon];
+
+      const [reorderedItem] = updatedPokemonList.splice(source.index, 1);
+      updatedPokemonList.splice(destination.index, 0, reorderedItem);
+
+      updatedLeads[leadIndex] = {
+        ...updatedLeads[leadIndex],
+        pokemon: updatedPokemonList,
+      };
+    }
+    onFormChange({
+      name: 'leads',
+      value: updatedLeads,
+      id: routeGym.id,
+    });
+    handleEnableSaveButton();
+  };
+
+  // Toggle dropdown visibility
+  const toggleDropdown = (variationId: number) => {
+    setShowDropdown((prev) => (prev === variationId ? null : variationId));
+  };
+
+  // Handle Pokémon selection
+  const handlePokemonSelect = (pokemon: string, variationId: number) => {
+    const variation = routeGym.leads.find((v) => v.variationId === variationId);
+    if (!variation) return;
+
+    const currentPokemon = variation.pokemon ?? [];
+    if (currentPokemon.includes(pokemon)) return;
+    const updatedPokemonList = [...currentPokemon, pokemon];
+
+    const updatedLeads = routeGym.leads.map((lead) => {
+      if (isAutofillChecked) {
+        // Apply the updated list to all leads
+        return {
+          ...lead,
+          pokemon: updatedPokemonList,
+        };
+      } else if (lead.variationId === variationId) {
+        // Apply only to the specific lead
+        return {
+          ...lead,
+          pokemon: updatedPokemonList,
+        };
+      }
+      return lead;
+    });
+
+    onFormChange({
+      name: 'leads' as keyof Route,
+      value: updatedLeads,
+      id: routeGym.id,
+    });
+
+    setShowDropdown(null);
+  };
+
+  // Handle Pokémon removal
+  const removePokemon = (pokemonRemoved: string, variationId: number) => {
+    const variation = routeGym.leads.find((v) => v.variationId === variationId);
+    if (!variation) return;
+
+    const currentPokemon = variation.pokemon ?? [];
+
+    const updatedPokemonList = currentPokemon.filter(
+      (p) => p !== pokemonRemoved,
+    );
+
+    const updatedLeads = routeGym.leads.map((lead) => {
+      if (isAutofillChecked) {
+        // Apply the updated list to all leads
+        return {
+          ...lead,
+          pokemon: updatedPokemonList,
+        };
+      } else if (lead.variationId === variationId) {
+        // Apply only to the specific lead
+        return {
+          ...lead,
+          pokemon: updatedPokemonList,
+        };
+      }
+      return lead;
+    });
+
+    onFormChange({
+      name: 'leads' as keyof Route,
+      value: updatedLeads,
+      id: routeGym.id,
+    });
+  };
+
   return (
     <form className="rounded-lg">
       <div className="rounded-lg bg-gray-600 shadow">
         <div className="flex flex-col">
           {filteredGym?.variations?.map((variation, index) => {
-            {
-              /* Shows the variation of the teams of the gym leaders */
-            }
             const lead = routeGym.leads.find(
               (element: Leads) => element.variationId === variation.variationId,
             );
             return (
               <div
                 key={variation.variationId}
-                className={`leads-variants my-2 w-full ${index !== 0 ? 'border-t-4 border-gray-300' : ''}`}
+                className={`leads-variants my-2 w-full ${
+                  index !== 0 ? 'border-t-4 border-gray-300' : ''
+                }`}
               >
-                <div className="my-4 flex w-full flex-row items-center">
+                <div className="my-4 flex flex-row items-center">
                   {variation.pokemons.map((pokemon) => (
                     <div
                       key={pokemon.pokemonid}
-                      className="flex w-full flex-col items-center rounded-lg 2xl:mx-6"
+                      className="flex w-full flex-col items-center rounded-lg 2xl:mx-4"
                     >
                       <div className="image-container flex items-center justify-center overflow-hidden rounded-full bg-gray-300">
                         <Svg
@@ -421,6 +311,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                   ))}
                 </div>
                 <div className="mb-2 w-full">
+                  {/* Order Mandatory Checkbox */}
                   <div className="flex flex-col space-y-2 md:ml-24 md:mt-4 md:flex-row md:items-center md:justify-start md:space-x-2 md:space-y-0">
                     <input
                       id={`isOrderMandatory.${variation.variationId - 1}`}
@@ -434,59 +325,128 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       Order is mandatory
                     </label>
                   </div>
+
                   <div className="relative flex w-full flex-col items-start md:mt-4 md:flex-row md:justify-start">
-                    <label
-                      htmlFor="lead"
-                      className="mb-2 text-center font-bold md:mr-4 md:w-[8vh] md:text-right"
-                    >
+                    <label className="mb-2 text-center font-bold md:mr-2 md:w-[8vh] md:text-right">
                       Lead:
                     </label>
-                    <input
-                      id={`pokemon.${variation.variationId - 1}`}
-                      name={`pokemon.${variation.variationId - 1}`}
-                      type="text"
-                      value={lead ? lead.pokemon.join(' ') : ''}
-                      className={`mx-2 h-[5vh] w-[80%] rounded border ${
-                        hasError(routeGym.gym, variation.variationId)
-                          ? 'border-2 border-red-600'
-                          : 'border-gray-300'
-                      } p-2 text-xs text-black md:h-[4vh] md:text-sm`}
-                      onChange={(e) => handleChange(e, routeGym.id)}
-                      autoComplete="off"
-                      onBlur={(e) => handleBlurSuggestion(e, routeGym.id)}
-                      onKeyDown={(e) => {
-                        const inputElement = document.getElementById(
-                          `pokemon.${variation.variationId - 1}`,
-                        ) as HTMLInputElement;
-                        handleKeyDown(e, routeGym.id, inputElement);
-                      }}
-                    />
-                    {state.displayItems &&
-                    state.inputName ===
-                      `pokemon.${variation.variationId - 1}` &&
-                    lead!.pokemon.join(' ') &&
-                    state.filteredItems.length ? (
-                      <div className="absolute left-24 top-full z-40 border border-gray-300 bg-red-500 text-black shadow-md">
-                        <SuggestionBox
-                          filteredItems={state.filteredItems}
-                          itemRefs={itemRefs}
-                          activeItem={state.activeItem}
-                          handleClick={(e) => {
-                            const inputElement = document.getElementById(
-                              `pokemon.${variation.variationId - 1}`,
-                            ) as HTMLInputElement;
-                            handleClickSuggestion(e, routeGym.id, inputElement);
-                          }}
-                        />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
+
+                    {/* Pokémon Display */}
+                    <div className="flex w-full max-w-full flex-row items-center space-x-2 rounded-md border p-2">
+                      {lead && lead.pokemon.length > 0 ? (
+                        <DragDropContext
+                          onDragEnd={(result) =>
+                            onDragEnd(result, variation.variationId)
+                          }
+                        >
+                          <Droppable
+                            droppableId={`droppable-${variation.variationId}`}
+                            direction="horizontal"
+                          >
+                            {(provided) => (
+                              <div
+                                className="flex flex-row space-x-2"
+                                {...provided.droppableProps}
+                                ref={provided.innerRef}
+                              >
+                                {lead.pokemon.map((poke, pokeIndex) => (
+                                  <Draggable
+                                    key={poke}
+                                    draggableId={`draggable-${poke}`}
+                                    index={pokeIndex}
+                                  >
+                                    {(provided) => (
+                                      <div
+                                        className="flex items-center space-x-1 rounded bg-gray-200 px-2 py-1 text-xs font-semibold text-black"
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                      >
+                                        {/* Draggable Handle */}
+                                        <div {...provided.dragHandleProps}>
+                                          {poke}
+                                        </div>
+
+                                        {/* Remove button outside of draggable area */}
+                                        <button
+                                          className="ml-1 text-red-500 hover:text-red-700"
+                                          onClick={(e) => {
+                                            e.preventDefault(); // Prevents form submission
+                                            removePokemon(
+                                              poke,
+                                              variation.variationId,
+                                            );
+                                          }}
+                                        >
+                                          ✕
+                                        </button>
+                                      </div>
+                                    )}
+                                  </Draggable>
+                                ))}
+                                {provided.placeholder}
+                              </div>
+                            )}
+                          </Droppable>
+                        </DragDropContext>
+                      ) : (
+                        <span className="text-xs text-gray-500">
+                          No Pokémon selected
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      type="button"
+                      className="ml-2 h-[5vh] rounded bg-blue-500 px-3 text-white hover:bg-blue-700"
+                      onClick={() => toggleDropdown(variation.variationId)}
+                    >
+                      +
+                    </button>
+
+                    {showDropdown === variation.variationId &&
+                      (() => {
+                        const availableMembers = assignedTeam.team.filter(
+                          (pokemon) => {
+                            return pokemon.nickname
+                              ? !lead?.pokemon.includes(
+                                  pokemon.pokemon + `(${pokemon.nickname})`,
+                                )
+                              : !lead?.pokemon.includes(pokemon.pokemon);
+                          },
+                        );
+
+                        return (
+                          <div className="absolute left-24 top-full z-40 w-40 border border-gray-300 bg-white text-black shadow-md">
+                            {availableMembers.map((pokemon, index) => (
+                              <div
+                                key={index}
+                                className="cursor-pointer p-2 hover:bg-gray-200"
+                                onClick={() =>
+                                  handlePokemonSelect(
+                                    (() => {
+                                      return pokemon.nickname
+                                        ? `${pokemon.pokemon}(${pokemon.nickname})`
+                                        : pokemon.pokemon;
+                                    })(),
+                                    variation.variationId,
+                                  )
+                                }
+                              >
+                                {pokemon.nickname
+                                  ? `${pokemon.pokemon}(${pokemon.nickname})`
+                                  : pokemon.pokemon}
+                              </div>
+                            ))}
+                          </div>
+                        );
+                      })()}
                   </div>
+
+                  {/* Attacks Section */}
                   <div className="mt-4 flex w-full flex-col items-start md:flex-row md:justify-start">
                     <label
                       htmlFor="attacks"
-                      className="mb-2 text-center font-bold md:mr-4 md:w-[8vh] md:text-right"
+                      className="mb-2 text-center font-bold md:text-right"
                     >
                       Attacks:
                     </label>
@@ -494,17 +454,17 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       id="attacks"
                       name={`attacks.${variation.variationId - 1}`}
                       value={lead ? lead.attacks : ''}
-                      className="mx-2 h-[14vh] w-[80%] rounded border p-2 text-xs text-black md:h-[10vh] md:text-sm"
+                      className="mx-2 h-[14vh] w-full rounded border p-2 text-xs text-black md:h-[10vh] md:text-sm"
                       onChange={(e) => handleChange(e, routeGym.id)}
                       autoComplete="off"
                     />
                   </div>
                 </div>
-                {/* Action Content Area */}
               </div>
             );
           })}
         </div>
+        {/* Next Steps Content */}
         <div className="p-4">
           <div className="mb-4">
             <label className="space-y-4 text-base font-bold md:text-lg">
@@ -523,7 +483,9 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                     id={`pokemonSelect-${index}`}
                     name="swapItems"
                     value={swapItem.pokemon}
-                    onChange={(e) => handlePokemonChange(e, index, routeGym.id)}
+                    onChange={(e) =>
+                      handlePkmItemSwapChange(e, index, routeGym.id)
+                    }
                     className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select Pokémon</option>
@@ -539,7 +501,9 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                     id={`itemSelect-${index}`}
                     name="swapItems"
                     value={swapItem.item}
-                    onChange={(e) => handleItemChange(e, index, routeGym.id)}
+                    onChange={(e) =>
+                      handleItemSwapChange(e, index, routeGym.id)
+                    }
                     className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
                   >
                     <option value="">Select Item</option>
