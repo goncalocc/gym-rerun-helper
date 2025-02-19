@@ -1,29 +1,40 @@
+import { PokemonItemsRoute } from '@/app/hooks/UseRouteAndTeamData';
 import { Route, Teams } from '@/app/types/types';
 import Icon from '@/app/utils/Icon';
 
 interface LeadSummaryProps {
   currentGym: Route | undefined;
+  nextGym: Route | undefined;
   assignedTeam: Teams | undefined;
+  leadItems: PokemonItemsRoute;
 }
 
 const LeadSummary: React.FC<LeadSummaryProps> = ({
   currentGym,
+  nextGym,
   assignedTeam,
+  leadItems,
 }) => {
+  let team = assignedTeam?.team.map(({ pokemon, nickname, item }) => ({
+    pokemon,
+    nickname,
+    item,
+  }));
+
   return (
     <>
-      <div>Next Lead in {currentGym?.gym} Gym:</div>
+      <div>Next Lead in {nextGym?.gym} Gym:</div>
       <div className="flex flex-row items-center space-x-4">
-        {currentGym?.leads[0].pokemon.slice(0, 2).map((entries, index) => {
+        {nextGym?.leads[0].pokemon.slice(0, 2).map((entries, index) => {
           const [nameOnly, nickname] = entries.split('(');
-          const pokemonItem = assignedTeam?.team.find((member) => {
+          const pokemonItem = leadItems.team?.find((member) => {
             if (typeof nickname === 'string') {
               return (
                 member.nickname === nickname.replace(/\)$/, '') &&
-                member.pokemon === nameOnly
+                member.pokemon === nameOnly.trim()
               );
             }
-            return member.pokemon === nameOnly;
+            return member.pokemon === nameOnly.trim();
           });
           return (
             <div key={index} className="flex flex-col items-center 2xl:mx-6">

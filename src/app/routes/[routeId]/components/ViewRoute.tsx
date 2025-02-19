@@ -28,6 +28,7 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
     assignedTeam,
     gymsByRegion,
     filteredGymsVariations,
+    routesData,
     setRoutesData,
     setAssignedRoute,
     isLoading,
@@ -65,6 +66,7 @@ const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {
       </div>
       <RouteSideBar
         handleClickEdit={handleClickEdit}
+        routesData={routesData}
         setRoutesData={setRoutesData}
         assignedRoute={assignedRoute}
         setAssignedRoute={setAssignedRoute}

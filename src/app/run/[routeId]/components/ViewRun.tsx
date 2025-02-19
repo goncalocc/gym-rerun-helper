@@ -15,9 +15,13 @@ const ViewRun: React.FC<{ idProps: string }> = ({ idProps }) => {
     filteredGymsVariations,
     isLoading,
     currentGym,
+    nextGym,
+    pokemonItemsRoute,
   } = useRouteAndTeamData(idProps);
   const { isSidebarVisible, handleToggleSidebar } = useEditModeAndSidebar();
   const { handleNextGym, elementsRef } = useHandleScroll();
+  const currentGymIndex =
+    assignedRoute?.route.findIndex((element) => element === currentGym) ?? -1;
 
   if (isLoading) return <div>Loading...</div>;
 
@@ -33,7 +37,12 @@ const ViewRun: React.FC<{ idProps: string }> = ({ idProps }) => {
       <div
         className={`sidebar left-0 top-0 flex h-screen flex-col space-y-4 bg-gray-800 p-4 text-white md:block md:w-1/5 lg:w-[17%] xl:w-[20%] 2xl:w-[15%] ${isSidebarVisible ? 'block' : 'hidden'}`}
       >
-        <LeadSummary currentGym={currentGym} assignedTeam={assignedTeam} />
+        <LeadSummary
+          currentGym={currentGym}
+          nextGym={nextGym}
+          assignedTeam={assignedTeam}
+          leadItems={pokemonItemsRoute[currentGymIndex]}
+        />
         <BookmarksRoute gymsByRegion={gymsByRegion} />
       </div>
       {/* Main Content Area */}

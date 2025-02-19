@@ -48,31 +48,31 @@ const AddGym = ({
     observations: '',
     leads: [
       {
-        pokemon: [''],
+        pokemon: [],
         attacks: '',
         isOrderMandatory: false,
         variationId: 1,
       },
       {
-        pokemon: [''],
+        pokemon: [],
         attacks: '',
         isOrderMandatory: false,
         variationId: 2,
       },
       {
-        pokemon: [''],
+        pokemon: [],
         attacks: '',
         isOrderMandatory: false,
         variationId: 3,
       },
       {
-        pokemon: [''],
+        pokemon: [],
         attacks: '',
         isOrderMandatory: false,
         variationId: 4,
       },
       {
-        pokemon: [''],
+        pokemon: [],
         attacks: '',
         isOrderMandatory: false,
         variationId: 5,

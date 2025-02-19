@@ -18,6 +18,16 @@ export interface GymsByRegion {
   [region: string]: RouteWithId[];
 }
 
+export interface LeadItem {
+  pokemon: string;
+  nickname?: string;
+  item: string;
+}
+
+export interface PokemonItemsRoute {
+  team: LeadItem[];
+}
+
 export interface FilteredGym {
   channelTP: boolean;
   gym: string;
@@ -37,9 +47,13 @@ const useRouteAndTeamData = (idProps: string) => {
   const [routesData, setRoutesData] = useState<Routes[]>([]);
   const [teamsData, setTeamsData] = useState<Teams[]>([]);
   const [assignedRoute, setAssignedRoute] = useState<Routes>();
+  const [pokemonItemsRoute, setPokemonItemsRoute] = useState<
+    PokemonItemsRoute[]
+  >([]);
   const [assignedTeam, setAssignedTeam] = useState<Teams>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [currentGym, setCurrentGym] = useState<Route | undefined>(undefined);
+  const [nextGym, setNextGym] = useState<Route | undefined>(undefined);
   const observerRef = useRef<IntersectionObserver | null>(null);
 
   useEffect(() => {
@@ -91,7 +105,9 @@ const useRouteAndTeamData = (idProps: string) => {
           (r) => r.id === gymObject?.id,
         );
         const nextGymName = assignedRoute.route[currentIndex + 1];
-        setCurrentGym(nextGymName);
+        const currentGymName = assignedRoute.route[currentIndex];
+        setNextGym(nextGymName);
+        setCurrentGym(currentGymName);
       }
     }, options);
 
@@ -104,6 +120,42 @@ const useRouteAndTeamData = (idProps: string) => {
       observerRef.current?.disconnect();
     };
   }, [assignedRoute]);
+
+  useEffect(() => {
+    if (!assignedRoute || !assignedTeam) return;
+
+    let updatedRoute: PokemonItemsRoute[] = [];
+    let currentTeamItems: LeadItem[] = assignedTeam.team.map((pokemon) => ({
+      pokemon: pokemon.pokemon,
+      nickname: pokemon.nickname,
+      item: pokemon.item,
+    }));
+    assignedRoute.route.forEach((gym) => {
+      let updatedTeam = currentTeamItems.map((pkmn) => ({ ...pkmn }));
+
+      gym.swapItems.forEach((swap) => {
+        let pokemonToUpdate = updatedTeam.find((pkmn) => {
+          // Format nickname as "Pokemon (Nickname)"
+          const formattedNickname = `${pkmn.pokemon} (${pkmn.nickname})`;
+          return (
+            pkmn.pokemon === swap.pokemon || formattedNickname === swap.pokemon
+          );
+        });
+
+        if (pokemonToUpdate) {
+          pokemonToUpdate.item = swap.item; // Update item if found
+        }
+      });
+
+      // Push the updated team for this gym
+      updatedRoute.push({ team: updatedTeam });
+
+      // Update the current tracking list for the next gym
+      currentTeamItems = updatedTeam;
+    });
+
+    setPokemonItemsRoute(updatedRoute);
+  }, [assignedRoute, assignedTeam]);
 
   const fetchLocalStorageRoutes = (): Routes[] | null => {
     try {
@@ -187,6 +239,8 @@ const useRouteAndTeamData = (idProps: string) => {
     setRoutesData,
     setAssignedRoute,
     currentGym,
+    nextGym,
+    pokemonItemsRoute,
   };
 };
 

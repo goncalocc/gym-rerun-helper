@@ -73,7 +73,10 @@ const ActionsRoute: React.FC<ActionsRouteProps> = ({ leads, variation }) => {
       {leads
         ?.filter((lead) => lead.variationId === variation.variationId)
         .map((lead) => (
-          <div key={lead.variationId} className="text-box mt-2">
+          <div
+            key={lead.variationId}
+            className="text-box mt-2 whitespace-pre-line"
+          >
             {lead.attacks}
           </div>
         ))}

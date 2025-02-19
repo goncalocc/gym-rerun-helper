@@ -9,8 +9,8 @@ interface NextStepsEditGymProps {
   routeGym: Route;
   assignedTeam: Teams;
   onFormChange: OnFormChange;
-  handleChange: <T extends HTMLInputElement | HTMLTextAreaElement>(
-    event: ChangeEvent<T>,
+  handleChange: (
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
     id: number,
   ) => void;
 }
@@ -63,21 +63,20 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
 
   const addSwapItem = () => {
     if (swapItems.length < 4) {
-      setSwapItems((prev) => [...prev, { pokemon: '', item: '' }]);
+      const updatedSwapItems = [...swapItems, { pokemon: '', item: '' }];
+      setSwapItems(updatedSwapItems);
     }
   };
 
   const removeSwapItem = (index: number, id: number) => {
-    setSwapItems((prev) => {
-      const updatedSwapItems = prev.filter((_, i) => i !== index);
-      onFormChange({
-        name: 'swapItems' as keyof Route,
-        value: updatedSwapItems,
-        id,
-      });
-
-      return updatedSwapItems;
+    const updatedSwapItems = swapItems.filter((_, i) => i !== index);
+    setSwapItems(updatedSwapItems);
+    onFormChange({
+      name: 'swapItems' as keyof Route,
+      value: updatedSwapItems,
+      id,
     });
+    return updatedSwapItems;
   };
   return (
     <div className="p-4">
