@@ -111,7 +111,12 @@ export const ViewTeams: React.FC<ViewTeamsProps> = ({
                     focus:ring-blue-500 focus:ring-offset-2"
                   onClick={() => handleClickDetails(team.teamId)}
                 >
-                  {team.team.map((members, index) => (
+                  {[
+                    ...team.team,
+                    ...Array(6 - team.team.length).fill({
+                      pokemon: 'unknown-pkmn',
+                    }),
+                  ].map((members, index) => (
                     <Icon
                       key={index}
                       name={members.pokemon.toLowerCase()}

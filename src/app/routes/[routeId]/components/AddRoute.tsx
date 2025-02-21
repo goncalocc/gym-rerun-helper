@@ -15,7 +15,7 @@ export const AddRoute: React.FC<AddRouteProps> = ({ teamId, teamRoutes }) => {
   const handleAddRoute = () => {
     const newRoute: Routes = {
       teamId: teamId,
-      routeName: `Team #${routes.length + 1}`,
+      routeName: `Route #${routes.length + 1}`,
       routeId: generateUniqueId(),
       route: [],
     };

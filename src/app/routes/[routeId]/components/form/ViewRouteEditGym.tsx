@@ -71,13 +71,27 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
       return; // Exit early since the form change has been handled
     }
     // Form change for Lead and Attacks when Autofill is on
-    if (name.includes('attacks') && isAutofillChecked) {
-      for (let i = 0; i < filteredGym!.variations.length; i++) {
-        const generalName = name.split('.')[0];
+    if (name.includes('attacks')) {
+      const baseField = name.split('[')[0];
+      const variation = parseInt(name.split('[')[1].split(']')[0]);
+      const subfield = name.split(']')[1].substring(1);
+      if (isAutofillChecked) {
+        for (let i = 0; i < 5; i++) {
+          onFormChange({
+            name: baseField as keyof Route,
+            value: processedValue,
+            id,
+            subfield: subfield as keyof Leads,
+            variation: i,
+          });
+        }
+      } else {
         onFormChange({
-          name: `${generalName}.${i}` as keyof Route,
+          name: baseField as keyof Route,
           value: processedValue,
           id,
+          subfield: subfield as keyof Leads,
+          variation,
         });
       }
     } else {
@@ -391,8 +405,8 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       Attacks:
                     </label>
                     <textarea
-                      id="attacks"
-                      name={`attacks.${variation.variationId - 1}`}
+                      id={`leads[${variation.variationId - 1}].attacks`}
+                      name={`leads[${variation.variationId - 1}].attacks`}
                       value={lead ? lead.attacks : ''}
                       className="mx-2 h-[14vh] w-full rounded border p-2 text-xs text-black md:h-[10vh] md:text-sm"
                       onChange={(e) => handleChange(e, routeGym.id)}

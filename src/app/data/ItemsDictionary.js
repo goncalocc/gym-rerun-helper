@@ -2,6 +2,7 @@ const itemsData = [
   'Aguav Berry',
   'Air Balloon',
   'Assault Vest',
+  'Black Glasses',
   'Bright Powder',
   'Choice Band',
   'Choice Scarf',

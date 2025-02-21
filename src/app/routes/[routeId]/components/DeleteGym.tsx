@@ -10,16 +10,19 @@ interface DeleteGymProps {
 }
 
 const deleteGym = ({
-  propsRoute,
   setPropsRoute,
   id,
   handleEnableSaveButton,
   setLocalGymsByRegion,
 }: DeleteGymProps): void => {
-  const updatedRoute = propsRoute.route.filter((member) => member.id !== id);
-  setPropsRoute({
-    ...propsRoute,
-    route: updatedRoute,
+  setPropsRoute((prevState) => {
+    if (!prevState) return prevState;
+
+    const updatedRoute = prevState.route.filter((member) => member.id !== id);
+    return {
+      ...prevState,
+      route: updatedRoute,
+    };
   });
 
   setLocalGymsByRegion((prevGymsByRegion) => {
@@ -36,7 +39,6 @@ const deleteGym = ({
 
     return newGymsByRegion;
   });
-
   handleEnableSaveButton();
 };
 

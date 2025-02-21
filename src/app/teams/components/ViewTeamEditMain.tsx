@@ -254,6 +254,8 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                         index,
                         handleEnableButton,
                         isSubteam: false,
+                        setIndexUpdatedTeam,
+                        teamIndex,
                       })
                     }
                   >
@@ -311,6 +313,8 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
                           index,
                           handleEnableButton,
                           isSubteam: false,
+                          setIndexUpdatedTeam,
+                          teamIndex,
                         })
                       }
                     >

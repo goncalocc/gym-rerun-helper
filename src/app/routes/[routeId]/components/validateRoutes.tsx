@@ -1,14 +1,15 @@
-import { Leads, Teams } from '@/app/types/types';
+import { Leads, SwapItem, Teams } from '@/app/types/types';
 
 interface ValidateRouteProps {
   gymName: string;
   leads: Leads[];
   assignedTeam: Teams;
+  itemChanges: SwapItem[];
 }
 
 export interface NewErrorsLayout {
   gym: string;
-  index: number;
+  index?: number;
   message: string;
 }
 
@@ -16,6 +17,7 @@ export const validateRoutes = ({
   gymName,
   leads,
   assignedTeam,
+  itemChanges,
 }: ValidateRouteProps) => {
   const teamNames = assignedTeam.team.map(
     (element: { pokemon: string; nickname: string }) =>
@@ -27,9 +29,9 @@ export const validateRoutes = ({
   const newErrors: NewErrorsLayout[] = [];
 
   leads.forEach((lead, index) => {
-    const allNamesValid = lead.pokemon.every((pokemon) =>
-      teamNames.includes(pokemon),
-    );
+    const allNamesValid =
+      lead.pokemon.length > 0 &&
+      lead.pokemon.every((pokemon) => teamNames.includes(pokemon));
     if (!allNamesValid) {
       console.log(
         `Error in ${gymName} Gym. Lead ${index + 1}: Some Pokémon names are not on your team.`,
@@ -37,10 +39,25 @@ export const validateRoutes = ({
       newErrors.push({
         gym: gymName,
         index: index + 1,
-        message: `Error in ${gymName} Gym. Lead ${index + 1}: Some Pokémon names are invalid.`,
+        message: `Error in ${gymName} Gym. Lead ${index + 1}: Some Pokémon names are not on your team.`,
       });
     }
   });
+
+  const hasInvalidSwap = itemChanges.some((value) =>
+    Object.values(value).some(
+      (value) => value === '' || value === null || value === undefined,
+    ),
+  );
+  if (hasInvalidSwap) {
+    console.log(
+      `Error in ${gymName} Gym. Please fill the incomplete Item Swaps.`,
+    );
+    newErrors.push({
+      gym: gymName,
+      message: `Error in ${gymName} Gym. Please fill the incomplete Item Swaps.`,
+    });
+  }
 
   return newErrors;
 };

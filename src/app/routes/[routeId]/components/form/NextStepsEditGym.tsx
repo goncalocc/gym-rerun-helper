@@ -23,58 +23,42 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
   onFormChange,
   handleChange,
 }) => {
-  const handlePkmItemSwapChange = (
-    e: React.ChangeEvent<HTMLSelectElement>,
-    index: number,
-    id: number,
-  ) => {
-    const fieldName = e.target.name;
-    const pokemonName = e.target.value;
-    const updatedSwapItems = [...swapItems];
-    updatedSwapItems[index].pokemon = pokemonName;
-    const processedValue = updatedSwapItems.filter(
-      (item) => item.pokemon !== '' || item.item !== '',
-    );
-    onFormChange({
-      name: fieldName as keyof Route,
-      value: processedValue,
-      id,
-    });
-  };
-
   const handleItemSwapChange = (
     e: React.ChangeEvent<HTMLSelectElement>,
-    index: number,
     id: number,
   ) => {
     const fieldName = e.target.name;
-    const itemName = e.target.value;
-    const updatedSwapItems = [...swapItems];
-    updatedSwapItems[index].item = itemName;
-    const processedValue = updatedSwapItems.filter(
-      (item) => item.pokemon !== '' || item.item !== '',
-    );
+    const valueName = e.target.value;
+    const [baseField, variation, subfield] = fieldName.split('.');
+    const variationIndex = parseInt(variation);
     onFormChange({
-      name: fieldName as keyof Route,
-      value: processedValue,
+      name: baseField as keyof Route,
+      value: valueName,
       id,
+      subfield: subfield as keyof SwapItem,
+      variation: variationIndex,
     });
   };
 
-  const addSwapItem = () => {
+  const handleAddSwapItem = (routeId: number) => {
     if (swapItems.length < 4) {
       const updatedSwapItems = [...swapItems, { pokemon: '', item: '' }];
-      setSwapItems(updatedSwapItems);
+      onFormChange({
+        name: 'swapItems' as keyof Route,
+        value: updatedSwapItems,
+        id: routeId,
+        variation: swapItems.length + 1,
+      });
     }
   };
 
   const removeSwapItem = (index: number, id: number) => {
     const updatedSwapItems = swapItems.filter((_, i) => i !== index);
-    setSwapItems(updatedSwapItems);
     onFormChange({
       name: 'swapItems' as keyof Route,
       value: updatedSwapItems,
       id,
+      variation: index,
     });
     return updatedSwapItems;
   };
@@ -90,14 +74,25 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
           <label className="mr-2 w-[20%] justify-center text-xs font-bold md:text-sm">
             Swap Items:
           </label>
+          <div className="">
+            <button
+              type="button"
+              onClick={() => handleAddSwapItem(routeGym.id)}
+              className="rounded bg-blue-500 p-2 text-sm text-white transition duration-200 hover:bg-blue-600"
+              disabled={swapItems.length >= 4}
+            >
+              +
+            </button>
+          </div>
           {swapItems.map((swapItem, index) => (
-            <div key={index} className="mr-6 flex items-center">
+            <div key={index} className="mx-4 flex items-center">
               {/* Pokémon Selection */}
               <select
+                key={`pokemonSelect-${index}`}
                 id={`pokemonSelect-${index}`}
-                name="swapItems"
+                name={`swapItems.${index}.pokemon`}
                 value={swapItem.pokemon}
-                onChange={(e) => handlePkmItemSwapChange(e, index, routeGym.id)}
+                onChange={(e) => handleItemSwapChange(e, routeGym.id)}
                 className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Pokémon</option>
@@ -110,10 +105,11 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
 
               {/* Item Selection */}
               <select
+                key={`itemSelect-${index}`}
                 id={`itemSelect-${index}`}
-                name="swapItems"
+                name={`swapItems.${index}.item`}
                 value={swapItem.item}
-                onChange={(e) => handleItemSwapChange(e, index, routeGym.id)}
+                onChange={(e) => handleItemSwapChange(e, routeGym.id)}
                 className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Item</option>
@@ -126,23 +122,13 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
               <button
                 type="button"
                 onClick={() => removeSwapItem(index, routeGym.id)}
-                className="ml-2 rounded bg-red-500 p-1 text-sm text-white transition duration-200 hover:bg-red-600"
+                className="rounded bg-red-500 p-1 text-sm text-white transition duration-200 hover:bg-red-600"
               >
                 ✖
               </button>
             </div>
           ))}
           {/* Button to Add More Pairs */}
-          <div className="">
-            <button
-              type="button"
-              onClick={addSwapItem}
-              className="rounded bg-blue-500 p-2 text-sm text-white transition duration-200 hover:bg-blue-600"
-              disabled={swapItems.length >= 4}
-            >
-              +
-            </button>
-          </div>
         </div>
         <div className="flex flex-row">
           <label className="mr-2 w-[20%] text-xs font-bold md:text-sm">

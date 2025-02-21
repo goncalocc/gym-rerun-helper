@@ -1,6 +1,6 @@
-import { Routes, Route, Leads, Teams } from '@/app/types/types';
+import { Routes, Route, Leads, Teams, SwapItem } from '@/app/types/types';
 import { NewErrorsLayout, validateRoutes } from './validateRoutes';
-import { SetStateAction, useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useMemo, useState } from 'react';
 import ViewRouteEditGym from './form/ViewRouteEditGym';
 import { NotificationParams } from '@/app/teams/components/ViewTeams';
 import AddGym from './AddGym';
@@ -21,6 +21,8 @@ export interface ViewRouteEditMainProps {
 
 export type OnFormChangeProps<K extends keyof Route> = {
   name: K;
+  subfield?: keyof Leads | keyof SwapItem;
+  variation?: number;
   value: Route[K];
   id: number;
 };
@@ -50,18 +52,11 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const [localGymsByRegion, setLocalGymsByRegion] =
     useState<GymsByRegion>(gymsByRegion);
 
+  const routeGym = propsRoute.route.find((r) => r.id === selectedGym) ?? null;
+
   const handleAutofillCheckbox = () => {
     setIsAutofillChecked(!isAutofillChecked);
   };
-
-  useEffect(() => {
-    const updatedRoute = Object.values(localGymsByRegion).flat();
-
-    setPropsRoute((prevPropsRoute) => ({
-      ...prevPropsRoute,
-      route: updatedRoute,
-    }));
-  }, [localGymsByRegion]);
 
   const currentGym = propsRoute?.route.find((gym) => gym.id === selectedGym);
 
@@ -86,42 +81,59 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     handleEnableSaveButton();
   };
 
+  const trimSwapItems = (route: Routes): Routes => {
+    return {
+      ...route,
+      route: route.route.map((r) => ({
+        ...r,
+        swapItems: r.swapItems.filter(
+          (swapItem) =>
+            swapItem.pokemon.trim() !== '' || swapItem.item.trim() !== '',
+        ),
+      })),
+    };
+  };
+
   const onFormChange = <K extends keyof Route>({
     name,
+    subfield,
     value,
     id,
-  }: OnFormChangeProps<K>) => {
+    variation,
+  }: OnFormChangeProps<K> & {
+    variation?: number;
+    subfield?: keyof Leads | keyof SwapItem;
+  }) => {
+    // Add subfield type constraint
     setPropsRoute((prevData) => {
       if (!prevData) return prevData;
-      const updatedRoute = { ...prevData };
 
-      const routeIndex = updatedRoute.route?.findIndex(
-        (route) => route.id === id,
-      );
+      const updatedRoute = structuredClone(prevData); // Deep copy the state
 
-      const [field, subfield] = name.split('.');
-      if (routeIndex !== undefined && routeIndex !== -1) {
-        const updatedGym = structuredClone(updatedRoute.route![routeIndex]);
+      // Find the specific gym by ID
+      const gymIndex = updatedRoute.route.findIndex((route) => route.id === id);
+      if (gymIndex === -1) return updatedRoute;
 
-        if (subfield) {
-          const arrayIndex = parseInt(subfield);
-          if (arrayIndex >= 0 && field in updatedGym.leads[arrayIndex]) {
-            (updatedGym.leads[arrayIndex][
-              field as keyof Leads
-            ] as Leads[keyof Leads]) = value as Leads[keyof Leads];
+      const updatedGym = updatedRoute.route![gymIndex];
+
+      // Handle top-level fields
+      if (!subfield) {
+        updatedGym[name] = value;
+      } else {
+        // Handle nested fields like 'leads[0].attacks'
+        if (name === 'leads' && updatedGym.leads) {
+          if (variation !== undefined && updatedGym.leads[variation]) {
+            updatedGym.leads[variation].attacks = value as string;
           }
-        } else {
-          updatedGym[name] = value;
+        } else if (name === 'swapItems' && updatedGym.swapItems) {
+          if (variation !== undefined && updatedGym.swapItems) {
+            updatedGym.swapItems[variation][subfield as keyof SwapItem] =
+              value as string;
+          }
         }
-        updatedRoute.route![routeIndex] = updatedGym;
       }
-      return {
-        ...updatedRoute,
-        teamId: updatedRoute.teamId ?? '',
-        routeName: updatedRoute.routeName ?? '',
-        routeId: updatedRoute.routeId ?? '',
-        route: updatedRoute.route ?? [],
-      };
+      updatedRoute.route![gymIndex] = updatedGym;
+      return updatedRoute;
     });
     handleEnableSaveButton();
   };
@@ -130,48 +142,48 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   ) => {
     event.preventDefault();
+    if (!propsRoute) return;
+    const updatedRoute = trimSwapItems(propsRoute);
+    setPropsRoute(updatedRoute);
     try {
-      if (propsRoute) {
-        const allErrors: NewErrorsLayout[] = [];
+      const allErrors: NewErrorsLayout[] = [];
 
-        for (let i = 0; i < propsRoute.route.length; i++) {
-          const errors = validateRoutes({
-            gymName: propsRoute.route[i].gym,
-            leads: propsRoute.route[i].leads,
-            assignedTeam: assignedTeam,
-          });
+      for (let i = 0; i < propsRoute.route.length; i++) {
+        const errors = validateRoutes({
+          gymName: updatedRoute.route[i].gym,
+          leads: updatedRoute.route[i].leads,
+          assignedTeam: assignedTeam,
+          itemChanges: updatedRoute.route[i].swapItems,
+        });
 
-          if (errors.length > 0) {
-            allErrors.push(...errors);
-          }
+        if (errors.length > 0) {
+          allErrors.push(...errors);
         }
+      }
 
-        if (allErrors.length > 0) {
-          const errorMessage = allErrors
-            .map((error) => error.message)
-            .join('\n');
-          alert(errorMessage);
-          setErrorData((prevState) => [...prevState, ...allErrors]);
-        } else {
-          handleRoutesUpdate({
-            updatedRoute: propsRoute,
-            isDelete: false,
-            setRoutesData,
-            setAssignedRoute,
-          });
+      if (allErrors.length > 0) {
+        const errorMessage = allErrors.map((error) => error.message).join('\n');
+        alert(errorMessage);
+        setErrorData((prevState) => [...prevState, ...allErrors]);
+      } else {
+        handleRoutesUpdate({
+          updatedRoute: updatedRoute,
+          isDelete: false,
+          setRoutesData,
+          setAssignedRoute,
+        });
 
-          setNotification({
-            message: 'Route edited successfully',
-            type: 'success',
-            visible: true,
-          });
+        setNotification({
+          message: 'Route edited successfully',
+          type: 'success',
+          visible: true,
+        });
 
-          setTimeout(() => {
-            setNotification({ message: '', type: '', visible: false });
-          }, 3000);
+        setTimeout(() => {
+          setNotification({ message: '', type: '', visible: false });
+        }, 3000);
 
-          setIsSaved(true);
-        }
+        setIsSaved(true);
       }
     } catch (error: any) {
       alert('An unexpected error occurred: ' + error.message);
@@ -246,19 +258,16 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
             )}
             {/* Details Section */}
             <div className="relative flex flex-col">
-              {selectedGym &&
-                propsRoute.route.find((r) => r.id === selectedGym) && (
-                  <ViewRouteEditGym
-                    routeGym={
-                      propsRoute.route.find((r) => r.id === selectedGym)!
-                    }
-                    assignedTeam={assignedTeam}
-                    onFormChange={onFormChange}
-                    errorData={errorData}
-                    isAutofillChecked={isAutofillChecked}
-                    handleEnableSaveButton={handleEnableSaveButton}
-                  />
-                )}
+              {routeGym && (
+                <ViewRouteEditGym
+                  routeGym={routeGym}
+                  assignedTeam={assignedTeam}
+                  onFormChange={onFormChange}
+                  errorData={errorData}
+                  isAutofillChecked={isAutofillChecked}
+                  handleEnableSaveButton={handleEnableSaveButton}
+                />
+              )}
             </div>
           </div>
         </div>

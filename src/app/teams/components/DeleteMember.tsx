@@ -5,6 +5,8 @@ interface DeleteMemberProps {
   index: number;
   handleEnableButton: () => void;
   isSubteam: boolean;
+  setIndexUpdatedTeam: React.Dispatch<React.SetStateAction<number>>;
+  teamIndex: number;
 }
 
 const deleteMember = ({
@@ -12,6 +14,8 @@ const deleteMember = ({
   index,
   handleEnableButton,
   isSubteam,
+  setIndexUpdatedTeam,
+  teamIndex,
 }: DeleteMemberProps): void => {
   setTeamData((prevData) => {
     const currentTeam = [...prevData];
@@ -23,6 +27,7 @@ const deleteMember = ({
     }
     return prevData;
   });
+  setIndexUpdatedTeam(teamIndex);
 };
 
 export default deleteMember;

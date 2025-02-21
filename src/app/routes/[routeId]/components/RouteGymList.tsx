@@ -49,7 +49,7 @@ const RouteGymList: React.FC<RouteGymListProps> = ({
                     {variation.pokemons.map((pokemon) => (
                       <div
                         key={pokemon.pokemonid}
-                        className="my-2 flex flex-col items-center 2xl:mx-6"
+                        className="my-2 flex flex-col items-center justify-center 2xl:mx-6"
                       >
                         <RouteVariationPokemon
                           getPokemonNumber={getPokemonNumber}
