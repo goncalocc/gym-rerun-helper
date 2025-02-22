@@ -5,11 +5,11 @@ import { useState } from 'react';
 
 interface AddRouteProps {
   teamId: string;
-  teamRoutes: Routes[];
+  routesData: Routes[];
 }
 
-export const AddRoute: React.FC<AddRouteProps> = ({ teamId, teamRoutes }) => {
-  const [routes, setRoutes] = useState<Routes[]>(teamRoutes);
+export const AddRoute: React.FC<AddRouteProps> = ({ teamId, routesData }) => {
+  const [routes, setRoutes] = useState<Routes[]>(routesData);
   const router = useRouter();
 
   const handleAddRoute = () => {

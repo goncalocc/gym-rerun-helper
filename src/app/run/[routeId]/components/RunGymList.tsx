@@ -1,10 +1,11 @@
 import { FilteredGym } from '@/app/hooks/UseRouteAndTeamData';
-import { MutableRefObject, useState } from 'react';
+import { MutableRefObject, useEffect, useState } from 'react';
 import TooltipRoute from '@/app/routes/[routeId]/components/TooltipRoute';
 import RouteVariationPokemon from '@/app/routes/[routeId]/components/RouteVariationPokemon';
 import { getPokemonNumber } from '@/app/routes/[routeId]/components/ViewRoute';
 import getItemColor from '@/app/utils/ColorDefiner';
 import ActionsRoute from '@/app/routes/[routeId]/components/ActionsRoute';
+import ObservationsBar from '@/app/routes/[routeId]/components/ObservationsBar';
 
 interface RunGymListProps {
   filteredGymsVariations: FilteredGym[];
@@ -18,6 +19,24 @@ const RunGymList: React.FC<RunGymListProps> = ({
   const [selectedVariations, setSelectedVariations] = useState<
     Map<number, number | null>
   >(new Map());
+  const [disableHover, setDisableHover] = useState(false);
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      const screenHeight = window.innerHeight;
+      const cursorY = event.clientY;
+      if (screenHeight - cursorY < 80) {
+        setDisableHover(true);
+      } else {
+        setDisableHover(false);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   const handleClickVariation = (gymIndex: number, variationId: number) => {
     setSelectedVariations((prev) => {
@@ -44,11 +63,14 @@ const RunGymList: React.FC<RunGymListProps> = ({
           }}
         >
           <div className="gym-container rounded-lg bg-gray-900">
-            <div className="flex flex-row items-center justify-between">
-              <p className="w-[55%] justify-center">
-                {gym.gym} - {gym.type}
-              </p>
-              <div className="w-[45%]">
+            <p className="justify-center">
+              {gym.gym} - {gym.type}
+            </p>
+            <div className="flex w-full items-stretch space-x-4">
+              <div className="w-[54%]">
+                <ObservationsBar observations={gym.observations} />
+              </div>
+              <div className="w-[46%]">
                 <TooltipRoute gym={gym} />
               </div>
             </div>
@@ -122,7 +144,9 @@ const RunGymList: React.FC<RunGymListProps> = ({
                     onClick={() =>
                       handleClickVariation(gymIndex, variation.variationId)
                     }
-                    className={`leads-variants my-2 cursor-pointer rounded-lg shadow transition-transform hover:scale-105 ${
+                    className={`leads-variants my-2 cursor-pointer rounded-lg shadow transition-transform ${
+                      disableHover ? '' : 'hover:scale-105'
+                    } ${
                       index % 2 === 0
                         ? 'bg-gray-800 text-white'
                         : 'bg-gray-600 text-gray-200'
@@ -141,14 +165,14 @@ const RunGymList: React.FC<RunGymListProps> = ({
                             pokemonKey={pokemon.pokemonid}
                           />
                           <span
-                            className={`pokemon-stats ${getItemColor(pokemon.ability ?? '--')}`}
+                            className={`pokemon-stats ${getItemColor(pokemon.ability?.trim() || '--')}`}
                           >
-                            {pokemon.ability ?? '--'}
+                            {pokemon.ability?.trim() || '--'}
                           </span>
                           <span
-                            className={`pokemon-stats text-center ${getItemColor(pokemon.item ?? '--')}`}
+                            className={`pokemon-stats text-center ${getItemColor(pokemon.item?.trim() || '--')}`}
                           >
-                            {pokemon.item ?? '--'}
+                            {pokemon.item?.trim() || '--'}
                           </span>
                         </div>
                       ))}

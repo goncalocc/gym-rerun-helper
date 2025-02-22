@@ -408,7 +408,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       id={`leads[${variation.variationId - 1}].attacks`}
                       name={`leads[${variation.variationId - 1}].attacks`}
                       value={lead ? lead.attacks : ''}
-                      className="mx-2 h-[14vh] w-full rounded border p-2 text-xs text-black md:h-[10vh] md:text-sm"
+                      className="mx-2 h-[14vh] w-full resize-none rounded border p-2 text-xs text-black md:h-[10vh] md:text-sm"
                       onChange={(e) => handleChange(e, routeGym.id)}
                       autoComplete="off"
                     />
@@ -418,10 +418,23 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
             );
           })}
         </div>
+        <div className="flex flex-col p-4">
+          <label htmlFor="observations" className="mb-2 text-lg font-semibold">
+            Observations:
+          </label>
+          <textarea
+            id="observations"
+            name="observations"
+            value={routeGym.observations}
+            className="h-16 w-full resize-none rounded-lg border border-gray-300 p-3 text-xs text-black shadow-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-500 md:text-sm"
+            onChange={(e) => handleChange(e, routeGym.id)}
+            autoComplete="off"
+            placeholder="Enter your observations here..."
+          />
+        </div>
         {/* Next Steps Content */}
         <NextStepsEditGym
           swapItems={swapItems}
-          setSwapItems={setSwapItems}
           routeGym={routeGym}
           assignedTeam={assignedTeam}
           onFormChange={onFormChange}

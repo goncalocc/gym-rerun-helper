@@ -5,6 +5,7 @@ import RouteVariationPokemon from './RouteVariationPokemon';
 import { getPokemonNumber } from './ViewRoute';
 import getItemColor from '@/app/utils/ColorDefiner';
 import ActionsRoute from './ActionsRoute';
+import ObservationsBar from './ObservationsBar';
 
 interface RouteGymListProps {
   filteredGymsVariations: FilteredGym[];
@@ -27,11 +28,14 @@ const RouteGymList: React.FC<RouteGymListProps> = ({
           }}
         >
           <div className="gym-container rounded-lg bg-gray-900">
-            <div className="flex flex-row items-center justify-between">
-              <p className="w-[55%] justify-center">
-                {gym.gym} - {gym.type}
-              </p>
-              <div className="w-[45%]">
+            <p className="justify-center">
+              {gym.gym} - {gym.type}
+            </p>
+            <div className="flex w-full items-stretch space-x-4">
+              <div className="w-[54%]">
+                <ObservationsBar observations={gym.observations} />
+              </div>
+              <div className="w-[46%]">
                 <TooltipRoute gym={gym} />
               </div>
             </div>

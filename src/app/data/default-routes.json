@@ -9,7 +9,7 @@
         "id": 19,
         "region": "Hoenn",
         "type": "Fire",
-        "observations": "",
+        "observations": "Testing observations property",
         "leads": [
           {
             "pokemon": ["Blastoise", "Togekiss"],
@@ -3960,7 +3960,7 @@
   {
     "teamId": "01",
     "routeName": "VETERAN ROUTE",
-    "routeId": "17400589013046xxh82j57pk",
+    "routeId": "4",
     "route": [
       {
         "gym": "Lavaridge Town",

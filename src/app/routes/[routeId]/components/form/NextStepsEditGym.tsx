@@ -5,7 +5,6 @@ import { ChangeEvent } from 'react';
 
 interface NextStepsEditGymProps {
   swapItems: SwapItem[];
-  setSwapItems: React.Dispatch<React.SetStateAction<SwapItem[]>>;
   routeGym: Route;
   assignedTeam: Teams;
   onFormChange: OnFormChange;
@@ -17,7 +16,6 @@ interface NextStepsEditGymProps {
 
 const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
   swapItems,
-  setSwapItems,
   routeGym,
   assignedTeam,
   onFormChange,

@@ -142,7 +142,7 @@ const ViewTeamDetailOptions: React.FC<ViewTeamDetailOptionsProps> = ({
               ))}
             </div>
           )}
-          <AddRoute teamId={teamData.teamId} teamRoutes={filteredRoutes} />
+          <AddRoute teamId={teamData.teamId} routesData={routesData} />
         </div>
       </div>
       <div className="mb-4 flex justify-center space-x-4">
