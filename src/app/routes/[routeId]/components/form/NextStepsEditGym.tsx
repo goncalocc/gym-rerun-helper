@@ -73,6 +73,7 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
             Swap Items:
           </label>
           <div className="">
+            {/* Button to Add More Pairs */}
             <button
               type="button"
               onClick={() => handleAddSwapItem(routeGym.id)}
@@ -126,7 +127,6 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
               </button>
             </div>
           ))}
-          {/* Button to Add More Pairs */}
         </div>
         <div className="flex flex-row">
           <label className="mr-2 w-[20%] text-xs font-bold md:text-sm">
@@ -247,6 +247,17 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
             checked={routeGym.provisionalHeal && !routeGym.heal}
             onChange={(e) => handleChange(e, routeGym.id)}
           />
+          {routeGym.provisionalHeal && (
+            <input
+              type="text"
+              value={routeGym.provisionalHealObs}
+              name="provisionalHealObs"
+              placeholder="Specify condition"
+              className="ml-2 w-[50%] rounded border p-1 text-xs text-black md:text-sm"
+              onChange={(e) => handleChange(e, routeGym.id)}
+              autoComplete="off"
+            />
+          )}
         </div>
       </div>
     </div>

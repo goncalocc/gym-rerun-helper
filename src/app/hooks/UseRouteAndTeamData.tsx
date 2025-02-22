@@ -36,6 +36,7 @@ export interface FilteredGym {
   leads: Leads[];
   observations: string;
   provisionalHeal: boolean;
+  provisionalHealObs: string;
   region: string;
   swapItems: SwapItem[];
   swapTeams: boolean;
@@ -223,6 +224,7 @@ const useRouteAndTeamData = (idProps: string) => {
         leads: matchedGym.leads ?? [],
         observations: matchedGym.observations ?? '',
         provisionalHeal: matchedGym.provisionalHeal ?? false,
+        provisionalHealObs: matchedGym.provisionalHealObs ?? '',
         swapItems: matchedGym.swapItems ?? [],
         swapTeams: matchedGym.swapTeams ?? false,
       };

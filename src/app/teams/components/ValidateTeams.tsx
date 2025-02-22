@@ -109,14 +109,12 @@ export const validateTeams = ({
   };
 
   const validateEvs = ({ data, input, arrayName }: ValidateStats) => {
+    Object.keys(input.evs).forEach((key) => {
+      let parsedValue = parseInt(String(input.evs[key]), 10);
+      input.evs[key] = isNaN(parsedValue) ? 0 : parsedValue;
+    });
     const sumValues = Object.values(input.evs).reduce(
-      (accumulator, currentValue) => {
-        const parsedValue = parseInt(String(currentValue), 10);
-        if (isNaN(parsedValue)) {
-          return accumulator;
-        }
-        return accumulator + parsedValue;
-      },
+      (accumulator, currentValue) => accumulator + currentValue,
       0,
     );
     if (sumValues > 510) {

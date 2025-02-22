@@ -32,6 +32,7 @@ const EvsForm: React.FC<EvsFormProps> = ({
         onChange={(e) => handleChange(e)}
         onBlur={handleBlur}
         id={nameId}
+        autoComplete="off"
       />
       <p></p>
     </div>

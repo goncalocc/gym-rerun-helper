@@ -3,14 +3,12 @@ import { Route, Teams } from '@/app/types/types';
 import Icon from '@/app/utils/Icon';
 
 interface LeadSummaryProps {
-  currentGym: Route | undefined;
   nextGym: Route | undefined;
   assignedTeam: Teams | undefined;
   leadItems: PokemonItemsRoute;
 }
 
 const LeadSummary: React.FC<LeadSummaryProps> = ({
-  currentGym,
   nextGym,
   assignedTeam,
   leadItems,

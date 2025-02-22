@@ -51,11 +51,11 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     if (type === 'radio' && name === 'heal') {
       const mappings: Record<
         string,
-        { heal: boolean; provisionalHeal: boolean }
+        { heal: boolean; provisionalHeal: boolean; provisionalHealObs?: string }
       > = {
         ifneeded: { heal: false, provisionalHeal: true },
-        yes: { heal: true, provisionalHeal: false },
-        no: { heal: false, provisionalHeal: false },
+        yes: { heal: true, provisionalHeal: false, provisionalHealObs: '' },
+        no: { heal: false, provisionalHeal: false, provisionalHealObs: '' },
       };
 
       const selectedOption = mappings[value];
@@ -64,6 +64,11 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
         onFormChange({
           name: 'provisionalHeal',
           value: selectedOption.provisionalHeal,
+          id,
+        });
+        onFormChange({
+          name: 'provisionalHealObs',
+          value: selectedOption.provisionalHealObs ?? '',
           id,
         });
       }

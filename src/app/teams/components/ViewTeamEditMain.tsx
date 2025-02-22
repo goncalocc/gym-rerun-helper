@@ -145,9 +145,8 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
       } else if (subfield) {
         const mainField = field as TeamField;
         if (mainField === 'evs' || mainField === 'ivs') {
-          // Type assertion to make TypeScript happy
           const nestedObject = updatedMember[mainField] as EVs | IVs;
-          const parsedValue = isNaN(parseInt(value)) ? 0 : parseInt(value);
+          const parsedValue = isNaN(parseInt(value)) ? value : parseInt(value);
           nestedObject[subfield as NestedField] = parsedValue as any;
           updatedMember[mainField] = nestedObject;
         } else {

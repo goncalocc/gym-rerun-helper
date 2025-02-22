@@ -38,7 +38,6 @@ const ViewRun: React.FC<{ idProps: string }> = ({ idProps }) => {
         className={`sidebar left-0 top-0 flex h-screen flex-col space-y-4 bg-gray-800 p-4 text-white md:block md:w-1/5 lg:w-[17%] xl:w-[20%] 2xl:w-[15%] ${isSidebarVisible ? 'block' : 'hidden'}`}
       >
         <LeadSummary
-          currentGym={currentGym}
           nextGym={nextGym}
           assignedTeam={assignedTeam}
           leadItems={pokemonItemsRoute[currentGymIndex]}

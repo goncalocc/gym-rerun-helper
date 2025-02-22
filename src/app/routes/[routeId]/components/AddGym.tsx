@@ -81,6 +81,7 @@ const AddGym = ({
     swapItems: [],
     heal: false,
     provisionalHeal: false,
+    provisionalHealObs: '',
     swapTeams: false,
     channelTP: false,
   });

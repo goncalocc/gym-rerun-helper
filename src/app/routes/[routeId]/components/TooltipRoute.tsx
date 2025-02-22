@@ -53,7 +53,7 @@ const TooltipRoute: React.FC<TooltipRouteProps> = ({ gym }) => {
             <div>
               {gym.provisionalHeal && (
                 <>
-                  <strong>Heal: </strong> if needed
+                  <strong>Heal: </strong> if needed. {gym.provisionalHealObs}
                 </>
               )}
             </div>

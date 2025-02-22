@@ -82,6 +82,7 @@ export type Route = {
   swapItems: SwapItem[];
   heal: boolean;
   provisionalHeal: boolean;
+  provisionalHealObs: string;
   swapTeams: boolean;
   channelTP: boolean;
 };
