@@ -1,4 +1,4 @@
-import { Gym, Leads, Route, SwapItem, Teams } from '@/app/types/types';
+import { Gym, Leads, Route, SwapItem, Team, Teams } from '@/app/types/types';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -364,15 +364,21 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
 
                     {showDropdown === variation.variationId &&
                       (() => {
-                        const availableMembers = assignedTeam.team.filter(
-                          (pokemon) => {
-                            return pokemon.nickname
-                              ? !lead?.pokemon.includes(
-                                  pokemon.pokemon + `(${pokemon.nickname})`,
-                                )
-                              : !lead?.pokemon.includes(pokemon.pokemon);
-                          },
-                        );
+                        const leadPokemonSet = new Set(lead?.pokemon || []); // O(m)
+
+                        const filterAvailable = (list: Team[]) =>
+                          list.filter((pokemon) => {
+                            const pokemonName = pokemon.nickname
+                              ? `${pokemon.pokemon}(${pokemon.nickname})`
+                              : pokemon.pokemon;
+
+                            return !leadPokemonSet.has(pokemonName); // O(1) lookup
+                          });
+
+                        const availableMembers = [
+                          ...filterAvailable(assignedTeam.team),
+                          ...filterAvailable(assignedTeam.subteam),
+                        ];
 
                         return (
                           <div className="absolute left-24 top-full z-40 w-40 border border-gray-300 bg-white text-black shadow-md">

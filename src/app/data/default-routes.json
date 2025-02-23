@@ -9,7 +9,7 @@
         "id": 19,
         "region": "Hoenn",
         "type": "Fire",
-        "observations": "Testing observations property",
+        "observations": "",
         "leads": [
           {
             "pokemon": ["Blastoise", "Togekiss"],
@@ -45,6 +45,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -89,6 +90,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -133,6 +135,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -177,6 +180,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -221,6 +225,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -265,6 +270,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -309,6 +315,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -353,6 +360,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -397,6 +405,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -441,6 +450,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -485,6 +495,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -529,6 +540,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -573,6 +585,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -617,6 +630,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -661,6 +675,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -705,6 +720,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -749,6 +765,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -793,6 +810,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -836,6 +854,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -886,6 +905,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -930,6 +950,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -974,6 +995,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1018,6 +1040,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1062,6 +1085,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1113,6 +1137,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1157,6 +1182,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1201,6 +1227,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1245,6 +1272,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1289,6 +1317,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       }
@@ -1340,6 +1369,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1384,6 +1414,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1428,6 +1459,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1472,6 +1504,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1516,6 +1549,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1560,6 +1594,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1604,6 +1639,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1648,6 +1684,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1692,6 +1729,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1736,6 +1774,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1780,6 +1819,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -1824,6 +1864,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -1868,6 +1909,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1912,6 +1954,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -1956,6 +1999,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -2000,6 +2044,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2044,6 +2089,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2088,6 +2134,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2132,6 +2179,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2175,6 +2223,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2225,6 +2274,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2269,6 +2319,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2313,6 +2364,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2357,6 +2409,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2401,6 +2454,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2445,6 +2499,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2489,6 +2544,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2533,6 +2589,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2577,6 +2634,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2621,6 +2679,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       }
@@ -2677,6 +2736,7 @@
         ],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2726,6 +2786,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2770,6 +2831,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2814,6 +2876,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2858,6 +2921,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2907,6 +2971,7 @@
         ],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -2956,6 +3021,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3000,6 +3066,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3044,6 +3111,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3088,6 +3156,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3132,6 +3201,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3176,6 +3246,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -3220,6 +3291,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3264,6 +3336,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -3308,6 +3381,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3352,6 +3426,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3401,6 +3476,7 @@
         ],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3450,6 +3526,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -3494,6 +3571,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3537,6 +3615,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3581,6 +3660,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3625,6 +3705,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3669,6 +3750,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3718,6 +3800,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3771,6 +3854,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3815,6 +3899,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3864,6 +3949,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3908,6 +3994,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -3952,6 +4039,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       }
@@ -4008,6 +4096,7 @@
         ],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4057,6 +4146,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4101,6 +4191,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4145,6 +4236,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4189,6 +4281,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4238,6 +4331,7 @@
         ],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4287,6 +4381,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4331,6 +4426,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4375,6 +4471,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4419,6 +4516,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4463,6 +4561,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4507,6 +4606,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -4551,6 +4651,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4595,6 +4696,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -4639,6 +4741,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4683,6 +4786,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4732,6 +4836,7 @@
         ],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4781,6 +4886,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -4825,6 +4931,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4868,6 +4975,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4912,6 +5020,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -4956,6 +5065,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5000,6 +5110,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5049,6 +5160,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5102,6 +5214,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5146,6 +5259,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5190,6 +5304,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5239,6 +5354,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5283,6 +5399,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       }
@@ -5334,6 +5451,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5378,6 +5496,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5427,6 +5546,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -5476,6 +5596,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5525,6 +5646,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5574,6 +5696,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5618,6 +5741,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5667,6 +5791,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5711,6 +5836,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5760,6 +5886,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5824,6 +5951,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5883,6 +6011,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5932,6 +6061,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -5981,6 +6111,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6050,6 +6181,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6124,6 +6256,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6168,6 +6301,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6212,6 +6346,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6265,6 +6400,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6343,6 +6479,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6402,6 +6539,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6446,6 +6584,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6490,6 +6629,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -6543,6 +6683,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -6587,6 +6728,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6644,6 +6786,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6688,6 +6831,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6742,6 +6886,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6786,6 +6931,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6830,6 +6976,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6874,6 +7021,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -6943,6 +7091,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       }
@@ -6994,6 +7143,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7043,6 +7193,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7092,6 +7243,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -7141,6 +7293,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7190,6 +7343,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7239,6 +7393,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7288,6 +7443,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7332,6 +7488,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7381,6 +7538,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7434,6 +7592,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7483,6 +7642,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7527,6 +7687,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7576,6 +7737,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7620,6 +7782,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7669,6 +7832,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7718,6 +7882,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -7762,6 +7927,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": true,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": true
       },
@@ -7806,6 +7972,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7850,6 +8017,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7899,6 +8067,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7943,6 +8112,7 @@
         "swapItems": [],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -7992,6 +8162,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8041,6 +8212,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8090,6 +8262,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8139,6 +8312,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8192,6 +8366,7 @@
         ],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8236,6 +8411,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8285,6 +8461,7 @@
         ],
         "heal": true,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8329,6 +8506,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8373,6 +8551,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8417,6 +8596,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       },
@@ -8461,6 +8641,7 @@
         "swapItems": [],
         "heal": false,
         "provisionalHeal": false,
+        "provisionalHealObs": "",
         "swapTeams": false,
         "channelTP": false
       }

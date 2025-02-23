@@ -126,11 +126,18 @@ const useRouteAndTeamData = (idProps: string) => {
     if (!assignedRoute || !assignedTeam) return;
 
     let updatedRoute: PokemonItemsRoute[] = [];
-    let currentTeamItems: LeadItem[] = assignedTeam.team.map((pokemon) => ({
-      pokemon: pokemon.pokemon,
-      nickname: pokemon.nickname,
-      item: pokemon.item,
-    }));
+    let currentTeamItems: LeadItem[] = [
+      ...assignedTeam.team.map((pokemon) => ({
+        pokemon: pokemon.pokemon,
+        nickname: pokemon.nickname,
+        item: pokemon.item,
+      })),
+      ...assignedTeam.subteam.map((pokemon) => ({
+        pokemon: pokemon.pokemon,
+        nickname: pokemon.nickname,
+        item: pokemon.item,
+      })),
+    ];
     assignedRoute.route.forEach((gym) => {
       let updatedTeam = currentTeamItems.map((pkmn) => ({ ...pkmn }));
 

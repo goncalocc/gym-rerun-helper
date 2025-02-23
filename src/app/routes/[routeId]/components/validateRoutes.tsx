@@ -19,12 +19,14 @@ export const validateRoutes = ({
   assignedTeam,
   itemChanges,
 }: ValidateRouteProps) => {
-  const teamNames = assignedTeam.team.map(
-    (element: { pokemon: string; nickname: string }) =>
-      element.nickname
-        ? `${element.pokemon}(${element.nickname})`
-        : element.pokemon,
-  );
+  const teamNames = [
+    ...assignedTeam.team.map(({ pokemon, nickname }) =>
+      nickname ? `${pokemon}(${nickname})` : pokemon,
+    ),
+    ...assignedTeam.subteam.map(({ pokemon, nickname }) =>
+      nickname ? `${pokemon}(${nickname})` : pokemon,
+    ),
+  ];
 
   const newErrors: NewErrorsLayout[] = [];
 

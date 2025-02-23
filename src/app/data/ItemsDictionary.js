@@ -67,7 +67,6 @@ const itemsData = [
   'BlackGlasses',
   'Mystic Water',
   'Wide Lens',
-  'Wise Glasses',
   'Zoom Lens',
 ];
 

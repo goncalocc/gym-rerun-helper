@@ -51,6 +51,7 @@ const ViewTeamDetailsInfo: React.FC<ViewTeamDetailsInfoProps> = ({
                 <li>
                   {members.pokemon} {members.item ? `@${members.item}` : ''}
                 </li>
+                <li>Nickname: {members.nickname ? members.nickname : ' '}</li>
                 <li>Ability: {members.ability ? members.ability : 'Any'}</li>
                 <li>Nature: {members.nature ? members.nature : 'Any'}</li>
                 <li>

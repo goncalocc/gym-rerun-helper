@@ -44,7 +44,7 @@ const AddGym = ({
     {},
   );
 
-  const [newGym] = useState({
+  const createNewGym = () => ({
     observations: '',
     leads: [
       {
@@ -116,6 +116,7 @@ const AddGym = ({
     id: number,
     region: string,
   ) => {
+    const newGym = createNewGym();
     const mergedGymInfo: Route = { gym, type, id, region, ...newGym };
     setPropsRoute((prevData) => ({
       ...prevData,
