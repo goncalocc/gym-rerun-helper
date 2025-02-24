@@ -22,7 +22,7 @@ const BookmarksRoute: React.FC<BookmarksRouteProps> = ({ gymsByRegion }) => {
   };
 
   return (
-    <div className="bookmarks-container">
+    <div className="bookmarks-container cursor-pointer">
       <ol className="rounded-lg bg-gray-800 p-2">
         {Object.keys(gymsByRegion).map((region, regionIndex) => (
           <li

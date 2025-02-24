@@ -31,6 +31,8 @@ export const TeamSelection: React.FC<TeamSelectionProps> = ({
       ...prev,
       selectedTeam: team,
       selectedTeamId: teamId,
+      selectedRoute: null,
+      selectedRouteId: null,
     }));
     setOpen(false);
   };
@@ -59,7 +61,6 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         >
           <path
             stroke="currentColor"
-            strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             d="m1 1 4 4 4-4"
@@ -67,9 +68,10 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         </svg>
       </button>
       {open ? (
-        <ul className="menu">
+        <ul className="absolute top-12 w-48 rounded-lg bg-white shadow-lg ring-1 ring-gray-300 dark:bg-gray-800 dark:ring-gray-600">
           {teamsData.map((team, index) => (
             <li
+              className="cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700"
               key={index}
               onClick={() => handleTeamChange(team.teamName, team.teamId)}
             >

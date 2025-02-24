@@ -73,9 +73,10 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         </svg>
       </button>
       {open ? (
-        <ul className="menu">
+        <ul className="absolute top-12 w-48 rounded-lg bg-white shadow-lg ring-1 ring-gray-300 dark:bg-gray-800 dark:ring-gray-600">
           {routesFromTeam.map((route, index) => (
             <li
+              className="cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700"
               key={index}
               onClick={() => handleRouteChange(route.routeName, route.routeId)}
             >

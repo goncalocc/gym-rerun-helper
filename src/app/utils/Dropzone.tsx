@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { Routes, Teams } from '../types/types';
 
 interface DropzoneProps {
   handleFileImport: (event: React.MouseEvent<HTMLButtonElement>) => void;
