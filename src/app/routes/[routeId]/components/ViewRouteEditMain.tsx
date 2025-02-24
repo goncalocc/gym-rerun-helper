@@ -1,6 +1,6 @@
 import { Routes, Route, Leads, Teams, SwapItem } from '@/app/types/types';
 import { NewErrorsLayout, validateRoutes } from './validateRoutes';
-import { SetStateAction, useEffect, useMemo, useState } from 'react';
+import { SetStateAction, useEffect, useRef, useState } from 'react';
 import ViewRouteEditGym from './form/ViewRouteEditGym';
 import { NotificationParams } from '@/app/teams/components/ViewTeams';
 import AddGym from './AddGym';
@@ -31,6 +31,12 @@ export type OnFormChange = <K extends keyof Route>(
   props: OnFormChangeProps<K>,
 ) => void;
 
+export interface HandleGymDetailsProps {
+  selectedGym: number | null;
+  setSelectedGym: (id: number | null) => void;
+  id: number;
+}
+
 const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   assignedRoute: assignedRoute,
   assignedTeam: assignedTeam,
@@ -48,6 +54,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const [isSaved, setIsSaved] = useState<boolean>(false);
   const [openNewGyms, setOpenNewGyms] = useState<boolean>(false);
   const [isDisabled, setIsDisabled] = useState<boolean>(true);
+  const gymContentRef = useRef<HTMLDivElement | null>(null);
   const [isAutofillChecked, setIsAutofillChecked] = useState(false);
   const [localGymsByRegion, setLocalGymsByRegion] =
     useState<GymsByRegion>(gymsByRegion);
@@ -71,6 +78,23 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
 
   const handleEnableSaveButton = () => {
     setIsDisabled(false);
+  };
+
+  const handleGymDetails = ({
+    selectedGym,
+    setSelectedGym,
+    id,
+  }: HandleGymDetailsProps) => {
+    if (selectedGym === id) {
+      setSelectedGym(null);
+    } else {
+      setSelectedGym(id);
+      if (gymContentRef.current)
+        gymContentRef.current.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+    }
   };
 
   const handleRouteNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -191,8 +215,11 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-30 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative my-4 h-full max-h-[95%] w-full max-w-[95%] overflow-auto rounded-lg bg-gray-900 p-8">
+    <div className="fixed inset-0 z-30 flex h-screen items-center justify-center overflow-auto bg-black bg-opacity-50">
+      <div
+        ref={gymContentRef}
+        className="relative my-4 h-full max-h-[95%] w-full max-w-[95%] overflow-auto rounded-lg bg-gray-900 p-8"
+      >
         <button
           className="absolute right-2 top-2 text-2xl text-gray-700 hover:text-gray-900 sm:text-xl"
           onClick={closeEdit}
@@ -218,6 +245,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
               setSelectedGym={setSelectedGym}
               propsRoute={propsRoute}
               setPropsRoute={setPropsRoute}
+              handleGymDetails={handleGymDetails}
             />
           </div>
 

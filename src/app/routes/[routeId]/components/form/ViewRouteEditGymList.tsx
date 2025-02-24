@@ -9,6 +9,7 @@ import { SetStateAction, useState } from 'react';
 import deleteGym from '../DeleteGym';
 import Svg from '@/app/utils/Svg';
 import { Routes } from '@/app/types/types';
+import { HandleGymDetailsProps } from '../ViewRouteEditMain';
 
 interface ViewRouteEditGymListProps {
   localGymsByRegion: GymsByRegion;
@@ -18,6 +19,7 @@ interface ViewRouteEditGymListProps {
   setSelectedGym: React.Dispatch<SetStateAction<number | null>>;
   propsRoute: Routes;
   setPropsRoute: React.Dispatch<React.SetStateAction<Routes>>;
+  handleGymDetails: (props: HandleGymDetailsProps) => void;
 }
 
 const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
@@ -28,6 +30,7 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
   setSelectedGym,
   propsRoute,
   setPropsRoute,
+  handleGymDetails,
 }) => {
   const [selectedRegion, setSelectedRegion] = useState<number | null>(null);
 
@@ -82,22 +85,6 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
 
   const handleClickRegion = (regionIndex: number) => {
     setSelectedRegion(selectedRegion === regionIndex ? null : regionIndex);
-  };
-
-  const handleGymDetails = ({
-    selectedGym,
-    setSelectedGym,
-    id,
-  }: {
-    selectedGym: number | null;
-    setSelectedGym: (id: number | null) => void;
-    id: number;
-  }) => {
-    if (selectedGym === id) {
-      setSelectedGym(null);
-    } else {
-      setSelectedGym(id);
-    }
   };
 
   return (

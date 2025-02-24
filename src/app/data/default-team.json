@@ -1,7 +1,7 @@
 [
   {
     "teamId": "01",
-    "teamName": "default team",
+    "teamName": "6 Pillars",
     "team": [
       {
         "pokemon": "Blastoise",
@@ -14,16 +14,16 @@
           "defense": 0,
           "hp": 0,
           "specialAttack": 252,
-          "specialDefense": 0,
+          "specialDefense": 4,
           "speed": 252
         },
         "ivs": {
-          "attack": 20,
-          "defense": 26,
-          "hp": 26,
-          "specialAttack": 31,
-          "specialDefense": 31,
-          "speed": 31
+          "attack": "X",
+          "defense": "0-25",
+          "hp": "0-25",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Water Spout", "Blizzard", "Helping Hand", "Fake Out"]
       },
@@ -34,22 +34,22 @@
         "nature": "Modest",
         "item": "Choice Specs",
         "evs": {
-          "attack": 4,
+          "attack": 0,
           "defense": 0,
           "hp": 0,
           "specialAttack": 252,
-          "specialDefense": 0,
+          "specialDefense": 4,
           "speed": 252
         },
         "ivs": {
-          "attack": 31,
-          "defense": 31,
-          "hp": 31,
-          "specialAttack": 31,
-          "specialDefense": 31,
-          "speed": 31
+          "attack": "X",
+          "defense": "10-31",
+          "hp": "10-31",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
-        "moveset": ["Eruption", "Swift", "Hidden Power (Ice)", "Helping Hand"]
+        "moveset": ["Eruption", "Swift", "Incinerate", "Helping Hand"]
       },
       {
         "pokemon": "Weezing",
@@ -60,18 +60,18 @@
         "evs": {
           "attack": 252,
           "defense": 0,
-          "hp": 4,
+          "hp": 0,
           "specialAttack": 0,
-          "specialDefense": 0,
+          "specialDefense": 4,
           "speed": 252
         },
         "ivs": {
-          "attack": 31,
-          "defense": 20,
-          "hp": 20,
-          "specialAttack": 31,
-          "specialDefense": 20,
-          "speed": 31
+          "attack": "31",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "X",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Explosion", "Assurance", "Incinerate", "Rain Dance"]
       },
@@ -84,18 +84,18 @@
         "evs": {
           "attack": 0,
           "defense": 0,
-          "hp": 4,
+          "hp": 0,
           "specialAttack": 252,
-          "specialDefense": 0,
+          "specialDefense": 4,
           "speed": 252
         },
         "ivs": {
-          "attack": 31,
-          "defense": 31,
-          "hp": 31,
-          "specialAttack": 31,
-          "specialDefense": 31,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Hyper Voice", "Helping Hand", "Fly", "Shock Wave"]
       },
@@ -107,19 +107,19 @@
         "item": "Choice Scarf",
         "evs": {
           "attack": 0,
-          "defense": 0,
-          "hp": 4,
+          "defense": 6,
+          "hp": 0,
           "specialAttack": 252,
           "specialDefense": 0,
           "speed": 252
         },
         "ivs": {
-          "attack": 20,
-          "defense": 27,
-          "hp": 27,
-          "specialAttack": 31,
-          "specialDefense": 20,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Blizzard", "Ice Beam", "", ""]
       },
@@ -134,16 +134,16 @@
           "defense": 0,
           "hp": 0,
           "specialAttack": 0,
-          "specialDefense": 24,
+          "specialDefense": 26,
           "speed": 232
         },
         "ivs": {
-          "attack": 31,
-          "defense": 9,
-          "hp": 9,
-          "specialAttack": 31,
-          "specialDefense": 25,
-          "speed": 31
+          "attack": "31",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "X",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Earthquake", "Dragon Claw", "Sunny Day", "Cut"]
       }
@@ -152,7 +152,7 @@
   },
   {
     "teamId": "02",
-    "teamName": "default team2",
+    "teamName": "Cloudburst Explosion",
     "team": [
       {
         "pokemon": "Hydreigon",
@@ -169,12 +169,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 15,
-          "defense": 14,
-          "hp": 14,
-          "specialAttack": 31,
-          "specialDefense": 10,
-          "speed": 31
+          "attack": "X",
+          "defense": "Max 14",
+          "hp": "Max 14",
+          "specialAttack": "31",
+          "specialDefense": "Low",
+          "speed": "31"
         },
         "moveset": ["Surf", "Sunny Day", "Rain Dance", "Tailwind"]
       },
@@ -193,12 +193,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 15,
-          "defense": 15,
-          "hp": 15,
-          "specialAttack": 31,
-          "specialDefense": 15,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Eruption", "Swift", "Cut", "Helping Hand"]
       },
@@ -217,12 +217,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 31,
-          "defense": 25,
-          "hp": 31,
-          "specialAttack": 15,
-          "specialDefense": 31,
-          "speed": 31
+          "attack": "31",
+          "defense": "High",
+          "hp": "31",
+          "specialAttack": "X",
+          "specialDefense": "31",
+          "speed": "31"
         },
         "moveset": ["Explosion", "Assurance", "Incinerate", "Sunny Day"]
       },
@@ -241,12 +241,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 15,
-          "defense": 13,
-          "hp": 13,
-          "specialAttack": 31,
-          "specialDefense": 15,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Water Spout", "Rain Dance", "Helping Hand", "Snowscape"]
       },
@@ -265,12 +265,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 20,
-          "defense": 27,
-          "hp": 27,
-          "specialAttack": 31,
-          "specialDefense": 20,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Hyper Voice", "Psyshock", "Signal Beam", "Psychic"]
       },
@@ -289,12 +289,12 @@
           "speed": 248
         },
         "ivs": {
-          "attack": 15,
-          "defense": 15,
-          "hp": 25,
-          "specialAttack": 31,
-          "specialDefense": 25,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "High",
+          "specialAttack": "31",
+          "specialDefense": "High",
+          "speed": "31"
         },
         "moveset": ["Water Spout", "Helping Hand", "Blizzard", ""]
       }
@@ -303,7 +303,7 @@
   },
   {
     "teamId": "03",
-    "teamName": "default team 3",
+    "teamName": "Tempest Explosion",
     "team": [
       {
         "pokemon": "Hydreigon",
@@ -320,12 +320,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 15,
-          "defense": 14,
-          "hp": 14,
-          "specialAttack": 31,
-          "specialDefense": 10,
-          "speed": 31
+          "attack": "X",
+          "defense": "Max 14",
+          "hp": "Max 14",
+          "specialAttack": "31",
+          "specialDefense": "Low",
+          "speed": "31"
         },
         "moveset": ["Surf", "Sunny Day", "Rain Dance", "Tailwind"]
       },
@@ -344,12 +344,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 15,
-          "defense": 15,
-          "hp": 15,
-          "specialAttack": 31,
-          "specialDefense": 15,
-          "speed": 31
+          "attack": "x",
+          "defense": "x",
+          "hp": "x",
+          "specialAttack": "31",
+          "specialDefense": "x",
+          "speed": "31"
         },
         "moveset": ["Eruption", "Swift", "Cut", "Helping Hand"]
       },
@@ -368,12 +368,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 31,
-          "defense": 25,
-          "hp": 31,
-          "specialAttack": 15,
-          "specialDefense": 31,
-          "speed": 31
+          "attack": "31",
+          "defense": "High",
+          "hp": "31",
+          "specialAttack": "X",
+          "specialDefense": "31",
+          "speed": "31"
         },
         "moveset": ["Explosion", "Assurance", "Incinerate", "Sunny Day"]
       },
@@ -392,12 +392,12 @@
           "speed": 248
         },
         "ivs": {
-          "attack": 15,
-          "defense": 13,
-          "hp": 13,
-          "specialAttack": 31,
-          "specialDefense": 15,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Blizzard", "Hyper Voice", "Water Pulse", "Flash Cannon"]
       },
@@ -416,12 +416,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 20,
-          "defense": 27,
-          "hp": 27,
-          "specialAttack": 31,
-          "specialDefense": 20,
-          "speed": 31
+          "attack": "X",
+          "defense": "X",
+          "hp": "X",
+          "specialAttack": "31",
+          "specialDefense": "X",
+          "speed": "31"
         },
         "moveset": ["Hyper Voice", "Psyshock", "Signal Beam", "Psychic"]
       },
@@ -440,12 +440,12 @@
           "speed": 252
         },
         "ivs": {
-          "attack": 15,
-          "defense": 14,
-          "hp": 13,
-          "specialAttack": 31,
-          "specialDefense": 25,
-          "speed": 31
+          "attack": "X",
+          "defense": "Max 14",
+          "hp": "Max 13",
+          "specialAttack": "31",
+          "specialDefense": "High",
+          "speed": "31"
         },
         "moveset": ["Water Spout", "Helping Hand", "Blizzard", ""]
       }

@@ -1,6 +1,6 @@
 interface IvsFormProps {
   title: string;
-  value: number;
+  value: string;
   nameId: string;
   pokeIndex: number;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -23,15 +23,13 @@ const IvsForm: React.FC<IvsFormProps> = ({
         <label htmlFor={nameId}>{title}</label>
       </p>
       <input
-        type="number"
+        type="text"
         value={value}
-        className={`rounded border ${hasError(`${nameId}`, pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-center text-black`}
-        style={{ width: '60px', height: '35px' }}
+        className={`rounded border ${hasError(`${nameId}`, pokeIndex) ? 'border-2 border-red-600' : 'border-gray-300'} p-2 text-black`}
+        style={{ width: '120px', height: '35px' }}
         name={nameId}
         onChange={(e) => handleChange(e)}
         onBlur={handleBlur}
-        max="31"
-        min="0"
         id={nameId}
       />
     </div>

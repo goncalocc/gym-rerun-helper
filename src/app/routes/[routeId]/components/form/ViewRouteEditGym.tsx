@@ -1,4 +1,4 @@
-import { Gym, Leads, Route, SwapItem, Team, Teams } from '@/app/types/types';
+import { Leads, Route, SwapItem, Team, Teams } from '@/app/types/types';
 import Svg from '@/app/utils/Svg';
 import { getPokemonNumber } from '../ViewRoute';
 import { ChangeEvent, useEffect, useState } from 'react';
@@ -21,14 +21,13 @@ export interface ViewRouteEditGymProps {
   isAutofillChecked: boolean;
   handleEnableSaveButton: () => void;
 }
-
 const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   routeGym,
   assignedTeam,
+  handleEnableSaveButton,
   onFormChange,
   errorData,
   isAutofillChecked,
-  handleEnableSaveButton,
 }) => {
   const filteredGym = gymsJson.find((gym) => gym.id === routeGym.id);
   const [swapItems, setSwapItems] = useState<SwapItem[]>(routeGym.swapItems);
@@ -51,7 +50,11 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
     if (type === 'radio' && name === 'heal') {
       const mappings: Record<
         string,
-        { heal: boolean; provisionalHeal: boolean; provisionalHealObs?: string }
+        {
+          heal: boolean;
+          provisionalHeal: boolean;
+          provisionalHealObs?: string;
+        }
       > = {
         ifneeded: { heal: false, provisionalHeal: true },
         yes: { heal: true, provisionalHeal: false, provisionalHealObs: '' },

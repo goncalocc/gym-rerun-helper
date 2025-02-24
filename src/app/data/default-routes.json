@@ -5407,7 +5407,7 @@
   },
   {
     "teamId": "02",
-    "routeName": "Cloudburst Explosion Version",
+    "routeName": "Cloudburst Explosion Route",
     "routeId": "5",
     "route": [
       {
@@ -7099,7 +7099,7 @@
   },
   {
     "teamId": "03",
-    "routeName": "Tempest Explosion Version",
+    "routeName": "Tempest Explosion Route",
     "routeId": "6",
     "route": [
       {

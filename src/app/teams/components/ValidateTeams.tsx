@@ -142,23 +142,23 @@ export const validateTeams = ({
     }
   };
 
-  const validateIvs = ({ data, input, arrayName }: ValidateStats) => {
-    Object.keys(dictionary).forEach((key) => {
-      const attributeName = dictionary[key];
-      if (input.ivs.hasOwnProperty(attributeName)) {
-        if (
-          (input.ivs[attributeName] > 31 || input.ivs[attributeName] < 0) &&
-          input.ivs[attributeName] !== null
-        ) {
-          newErrors[arrayName].push({
-            pokemon: data.indexOf(input),
-            field: `ivs.${attributeName}`,
-            message: `IVs must be between 0 and 31. Error at entry #${arrayName === 'team' ? data.indexOf(input) + 1 : data.indexOf(input) + 1 + data.length}`,
-          });
-        }
-      }
-    });
-  };
+  // const validateIvs = ({ data, input, arrayName }: ValidateStats) => {
+  //   Object.keys(dictionary).forEach((key) => {
+  //     const attributeName = dictionary[key];
+  //     if (input.ivs.hasOwnProperty(attributeName)) {
+  //       if (
+  //         (input.ivs[attributeName] > 31 || input.ivs[attributeName] < 0) &&
+  //         input.ivs[attributeName] !== null
+  //       ) {
+  //         newErrors[arrayName].push({
+  //           pokemon: data.indexOf(input),
+  //           field: `ivs.${attributeName}`,
+  //           message: `IVs must be between 0 and 31. Error at entry #${arrayName === 'team' ? data.indexOf(input) + 1 : data.indexOf(input) + 1 + data.length}`,
+  //         });
+  //       }
+  //     }
+  //   });
+  // };
 
   const validateMoveset = ({ data, input, arrayName }: ValidateStats) => {
     input.moveset.forEach((move, index) => {
@@ -229,7 +229,7 @@ export const validateTeams = ({
         });
       }
       validateEvs({ data: value, input: input, arrayName: key });
-      validateIvs({ data: value, input: input, arrayName: key });
+      // validateIvs({ data: value, input: input, arrayName: key });
       validateMoveset({ data: value, input: input, arrayName: key });
       trackTeamOccurrences({
         occurrences: pokemonOccurrences,

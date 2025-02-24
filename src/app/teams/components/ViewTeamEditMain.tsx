@@ -54,7 +54,7 @@ interface OnTitleChange {
 export type OnFormChange = (params: OnFormChangeProps) => void;
 
 type TeamField = keyof Team;
-type NestedField = keyof EVs | keyof IVs;
+type NestedField = keyof EVs;
 
 const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
   details: props,
@@ -144,10 +144,10 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
         updatedMember.moveset[movesetIndex] = value;
       } else if (subfield) {
         const mainField = field as TeamField;
-        if (mainField === 'evs' || mainField === 'ivs') {
-          const nestedObject = updatedMember[mainField] as EVs | IVs;
+        if (mainField === 'evs') {
+          const nestedObject = updatedMember[mainField] as EVs;
           const parsedValue = isNaN(parseInt(value)) ? value : parseInt(value);
-          nestedObject[subfield as NestedField] = parsedValue as any;
+          nestedObject[subfield as NestedField] = parsedValue as number;
           updatedMember[mainField] = nestedObject;
         } else {
           updatedMember[mainField] = {
@@ -223,7 +223,7 @@ const ViewTeamEditMain: React.FC<ViewTeamEditMainProps> = ({
               className="rounded border border-gray-300 p-2 text-center text-black"
               type="text"
               value={teamName}
-              style={{ width: '160px', height: '35px' }}
+              style={{ width: '300px', height: '35px' }}
               name="teamName"
               id="teamName"
               onChange={(e) => onTitleChange({ teamIndex }, e)}

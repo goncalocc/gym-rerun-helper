@@ -20,13 +20,13 @@ export type EVs = {
 
 // Define the IVs type
 export type IVs = {
-  [key: string]: number;
-  attack: number;
-  defense: number;
-  hp: number;
-  specialAttack: number;
-  specialDefense: number;
-  speed: number;
+  [key: string]: string;
+  attack: string;
+  defense: string;
+  hp: string;
+  specialAttack: string;
+  specialDefense: string;
+  speed: string;
 };
 
 // Define the Team type
