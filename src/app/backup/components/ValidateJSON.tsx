@@ -18,6 +18,7 @@ export const validateJSON = (teams: Teams[], routes: Routes[]) => {
         gymName: route.route[i].gym,
         leads: route.route[i].leads,
         assignedTeam: foundTeam,
+        itemChanges: route.route[i].swapItems,
       });
       if (errors.length > 0) {
         allErrors.push(...errors);

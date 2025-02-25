@@ -12,9 +12,12 @@ const Dropzone: React.FC<DropzoneProps> = ({
   file,
   setFile,
 }) => {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFile(acceptedFiles[0]); // Store the first selected file
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      setFile(acceptedFiles[0]); // Store the first selected file
+    },
+    [setFile],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

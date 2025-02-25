@@ -74,7 +74,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
     if (assignedRoute) {
       setPropsRoute(JSON.parse(JSON.stringify(assignedRoute)));
     }
-  }, [assignedRoute, isSaved]);
+  }, [assignedRoute, isSaved, closeEdit]);
 
   const handleEnableSaveButton = () => {
     setIsDisabled(false);

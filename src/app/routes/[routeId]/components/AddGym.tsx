@@ -92,23 +92,23 @@ const AddGym = ({
     setOpenNewGyms(!openNewGyms);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setOpenNewGyms(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenNewGyms(false);
+      }
+    };
+
     if (openNewGyms) {
       document.addEventListener('mousedown', handleClickOutside);
       return () => {
         document.removeEventListener('mousedown', handleClickOutside);
       };
     }
-  }, [openNewGyms]);
+  }, [openNewGyms, setOpenNewGyms]);
 
   const handleAddGym = (
     gym: string,

@@ -31,5 +31,6 @@ const Svg: React.FC<SvgProps> = React.memo(
     );
   },
 );
+Svg.displayName = 'Svg';
 
 export default Svg;
