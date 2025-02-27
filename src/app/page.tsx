@@ -13,10 +13,12 @@ const Home: React.FC = () => {
 
   const createTeamToLocalStorage = () => {
     localStorage.setItem('gymRerunTeam', JSON.stringify(jsonTeams));
+    setTeams(jsonTeams);
   };
 
   const createRoutesToLocalStorage = () => {
     localStorage.setItem('gymRerunRoutes', JSON.stringify(jsonRoutes));
+    setRoutes(jsonRoutes as Routes[]);
   };
 
   const loadRoutesFromLocalStorage = useCallback(() => {
@@ -30,6 +32,7 @@ const Home: React.FC = () => {
       }
     } else {
       createRoutesToLocalStorage();
+      setRoutes(jsonRoutes as Routes[]);
     }
   }, []);
 
@@ -44,6 +47,7 @@ const Home: React.FC = () => {
       }
     } else {
       createTeamToLocalStorage();
+      setTeams(jsonTeams);
     }
   }, []);
 
@@ -54,9 +58,16 @@ const Home: React.FC = () => {
 
   return (
     <main className="flex flex-col items-center">
-      <h1>Gym Rerun-&gt;</h1>
-      <Selection teamsData={teams} routesData={routes} />
-      <MainView />
+      {teams ? (
+        <>
+          <h1>Gym Rerun-&gt;</h1>
+
+          <Selection teamsData={teams} routesData={routes} />
+          <MainView />
+        </>
+      ) : (
+        <>Loading...</>
+      )}
     </main>
   );
 };

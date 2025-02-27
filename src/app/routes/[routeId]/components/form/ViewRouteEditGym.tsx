@@ -110,9 +110,32 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
   const handleCheckboxChange = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
+    variationId: number,
   ) => {
     const { name, checked } = event.target;
-    onFormChange({ name: name as keyof Route, value: checked, id });
+    const leadIndex = routeGym.leads.findIndex(
+      (lead) => lead.variationId === variationId,
+    );
+    if (leadIndex === -1) return;
+
+    // Clone leads array and update the pokemon list
+    const updatedLeads = [...routeGym.leads];
+
+    if (isAutofillChecked) {
+      updatedLeads.forEach((lead, index) => {
+        updatedLeads[index] = {
+          ...lead,
+          isOrderMandatory: checked,
+        };
+      });
+    } else {
+      updatedLeads[leadIndex] = {
+        ...updatedLeads[leadIndex],
+        isOrderMandatory: checked,
+      };
+    }
+
+    onFormChange({ name: 'leads', value: updatedLeads, id });
   };
 
   // const hasError = (gym: string, index: number): boolean => {
@@ -138,7 +161,7 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
 
     // Clone leads array and update the pokemon list
     const updatedLeads = [...routeGym.leads];
-    const updatedPokemonList = [...updatedLeads[leadIndex].pokemon]; // Assuming all leads share the same list
+    const updatedPokemonList = [...updatedLeads[leadIndex].pokemon];
     const [reorderedItem] = updatedPokemonList.splice(source.index, 1);
     updatedPokemonList.splice(destination.index, 0, reorderedItem);
 
@@ -281,7 +304,13 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                       name={`isOrderMandatory.${variation.variationId - 1}`}
                       className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 sm:h-3 sm:w-3 md:h-4 md:w-4 lg:h-5 lg:w-5"
                       checked={lead?.isOrderMandatory}
-                      onChange={(e) => handleCheckboxChange(e, routeGym.id)}
+                      onChange={(e) =>
+                        handleCheckboxChange(
+                          e,
+                          routeGym.id,
+                          variation.variationId,
+                        )
+                      }
                     />
                     <label className="text-sm" htmlFor="order-checkbox">
                       Order is mandatory
@@ -328,11 +357,10 @@ const ViewRouteEditGym: React.FC<ViewRouteEditGymProps> = ({
                                           {poke}
                                         </div>
 
-                                        {/* Remove button outside of draggable area */}
                                         <button
                                           className="ml-1 text-red-500 hover:text-red-700"
                                           onClick={(e) => {
-                                            e.preventDefault(); // Prevents form submission
+                                            e.preventDefault();
                                             removePokemon(
                                               poke,
                                               variation.variationId,

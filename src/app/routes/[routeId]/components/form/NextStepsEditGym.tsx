@@ -95,11 +95,16 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
                 className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Pokémon</option>
-                {assignedTeam.team.map((pokemon, pokemonIndex) => (
-                  <option key={pokemonIndex} value={pokemon.pokemon}>
-                    {pokemon.pokemon}
-                  </option>
-                ))}
+                {[...assignedTeam.team, ...assignedTeam.subteam].map(
+                  (pokemon, pokemonIndex) => (
+                    <option
+                      key={pokemonIndex}
+                      value={`${pokemon.pokemon} ${pokemon.nickname}`}
+                    >
+                      {pokemon.pokemon} {pokemon.nickname}
+                    </option>
+                  ),
+                )}
               </select>
 
               {/* Item Selection */}
@@ -112,11 +117,14 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
                 className="rounded border text-xs text-black focus:ring-2 focus:ring-blue-500"
               >
                 <option value="">Select Item</option>
-                {itemsData.map((item, itemIndex) => (
-                  <option key={itemIndex} value={item}>
-                    {item}
-                  </option>
-                ))}
+                {itemsData
+                  .slice()
+                  .sort((a, b) => a.localeCompare(b))
+                  .map((item, itemIndex) => (
+                    <option key={itemIndex} value={item}>
+                      {item}
+                    </option>
+                  ))}
               </select>
               <button
                 type="button"

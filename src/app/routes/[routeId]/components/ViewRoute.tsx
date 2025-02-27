@@ -19,7 +19,7 @@ export interface ViewRouteProps {
 
 export const getPokemonNumber = (pokemonName: string): string => {
   const pokemon = pokemonData.find((p) => p.pokemon === pokemonName);
-  return pokemon ? pokemon.number : '0';
+  return pokemon ? pokemon.number.toLowerCase() : '0';
 };
 
 const ViewRoute: React.FC<ViewRouteProps> = ({ idProps, router }) => {

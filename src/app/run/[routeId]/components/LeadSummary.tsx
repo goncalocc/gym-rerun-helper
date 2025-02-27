@@ -13,12 +13,6 @@ const LeadSummary: React.FC<LeadSummaryProps> = ({
   assignedTeam,
   leadItems,
 }) => {
-  let team = assignedTeam?.team.map(({ pokemon, nickname, item }) => ({
-    pokemon,
-    nickname,
-    item,
-  }));
-
   return (
     <>
       <div>Next Lead in {nextGym?.gym} Gym:</div>

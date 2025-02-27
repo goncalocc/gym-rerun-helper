@@ -52,6 +52,13 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
           return acc;
         }, {} as GymsByRegion);
 
+        if (selectedRegion !== null) {
+          const newSelectedRegionIndex = regionKeys.indexOf(
+            Object.keys(prevGymsByRegion)[selectedRegion],
+          );
+          setSelectedRegion(newSelectedRegionIndex);
+        }
+
         return newOrder;
       }
 

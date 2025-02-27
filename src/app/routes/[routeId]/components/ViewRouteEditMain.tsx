@@ -68,13 +68,16 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   const currentGym = propsRoute?.route.find((gym) => gym.id === selectedGym);
 
   useEffect(() => {
-    if (isSaved) {
-      closeEdit();
-    }
     if (assignedRoute) {
       setPropsRoute(JSON.parse(JSON.stringify(assignedRoute)));
     }
-  }, [assignedRoute, isSaved, closeEdit]);
+  }, [assignedRoute]);
+
+  useEffect(() => {
+    if (isSaved) {
+      closeEdit();
+    }
+  }, [isSaved, closeEdit]);
 
   const handleEnableSaveButton = () => {
     setIsDisabled(false);
@@ -215,7 +218,7 @@ const ViewRouteEditMain: React.FC<ViewRouteEditMainProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-30 flex h-screen items-center justify-center overflow-auto bg-black bg-opacity-50">
+    <div className="fixed inset-0 z-30 flex h-screen items-center justify-center bg-black bg-opacity-50">
       <div
         ref={gymContentRef}
         className="relative my-4 h-full max-h-[95%] w-full max-w-[95%] overflow-auto rounded-lg bg-gray-900 p-8"

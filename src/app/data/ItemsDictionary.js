@@ -64,7 +64,6 @@ const itemsData = [
   'Metal Coat',
   'Silver Powder',
   'Hard Stone',
-  'BlackGlasses',
   'Mystic Water',
   'Wide Lens',
   'Zoom Lens',
