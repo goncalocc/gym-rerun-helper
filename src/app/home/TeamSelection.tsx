@@ -1,4 +1,4 @@
-import { Dispatch, useState } from 'react';
+import { Dispatch, useEffect, useRef, useState } from 'react';
 import { Teams } from '../types/types';
 
 type TeamSelectionProps = {
@@ -26,6 +26,24 @@ export const TeamSelection: React.FC<TeamSelectionProps> = ({
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   const handleTeamChange = (team: string | null, teamId: string | null) => {
     setState((prev) => ({
       ...prev,
@@ -41,20 +59,19 @@ export const TeamSelection: React.FC<TeamSelectionProps> = ({
     setOpen(!open);
   };
   return (
-    <div className="flex flex-col items-center">
+    <div
+      ref={dropdownRef}
+      className="md:max-w-m relative w-full max-w-xs space-y-2 p-2 sm:max-w-sm"
+    >
+      {/* Button to Open Dropdown */}
       <button
-        id="dropdownDefaultButton"
-        data-dropdown-toggle="dropdown"
-        className="inline-flex items-center rounded-lg bg-blue-700 
-px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 
-dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
+        className="flex w-full items-center justify-between rounded-lg bg-gray-700 px-4 py-2 text-white transition-all 
+     duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
         onClick={handleTeamOpen}
       >
         {state.selectedTeam ? state.selectedTeam : 'Choose Team'}
         <svg
-          className="ms-3 h-2.5 w-2.5"
-          aria-hidden="true"
+          className="ml-2 h-4 w-4"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 10 6"
@@ -67,19 +84,22 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           />
         </svg>
       </button>
-      {open ? (
-        <ul className="absolute top-12 w-48 rounded-lg bg-white shadow-lg ring-1 ring-gray-300 dark:bg-gray-800 dark:ring-gray-600">
+
+      {/* Dropdown Menu */}
+      {open && (
+        <ul className="absolute left-0 z-10 mt-2 w-full rounded-lg bg-white shadow-md ring-1 ring-gray-300 dark:bg-gray-800 dark:ring-gray-600">
           {teamsData.map((team, index) => (
             <li
-              className="cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700"
               key={index}
+              className="cursor-pointer px-4 py-3 text-gray-700 transition-all duration-200
+          hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700"
               onClick={() => handleTeamChange(team.teamName, team.teamId)}
             >
               {team.teamName}
             </li>
           ))}
         </ul>
-      ) : null}
+      )}
     </div>
   );
 };

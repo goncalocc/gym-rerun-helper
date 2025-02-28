@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Routes } from '../types/types';
 
 type RouteSelectionProps = {
@@ -29,6 +29,23 @@ export const RouteSelection: React.FC<RouteSelectionProps> = ({
   );
 
   const [open, setOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const handleRouteChange = (route: string, routeId: string) => {
     setState((prev) => ({
@@ -44,28 +61,25 @@ export const RouteSelection: React.FC<RouteSelectionProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div
+      ref={dropdownRef}
+      className="md:max-w-m relative w-full max-w-xs space-y-2 p-2 sm:max-w-sm"
+    >
       <button
-        id="dropdownDefaultButton"
-        data-dropdown-toggle="dropdown"
-        className="inline-flex items-center rounded-lg bg-blue-700 px-5 py-2.5 
-text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 disabled:cursor-not-allowed disabled:bg-gray-400 dark:bg-blue-600 
-dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
+        className="flex w-full items-center justify-between rounded-lg bg-gray-700 px-4 py-2 text-white transition-all
+    duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
         onClick={handleRouteOpen}
         disabled={state.selectedTeam === null}
       >
         {state.selectedRoute ? state.selectedRoute : 'Choose Route'}
         <svg
-          className="ms-3 h-2.5 w-2.5"
-          aria-hidden="true"
+          className="ml-2 h-4 w-4"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 10 6"
         >
           <path
             stroke="currentColor"
-            strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth="2"
             d="m1 1 4 4 4-4"
@@ -73,10 +87,11 @@ dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         </svg>
       </button>
       {open ? (
-        <ul className="absolute top-12 w-48 rounded-lg bg-white shadow-lg ring-1 ring-gray-300 dark:bg-gray-800 dark:ring-gray-600">
+        <ul className="absolute mt-2 w-full rounded-lg bg-white shadow-md ring-1 ring-gray-300 dark:bg-gray-800 dark:ring-gray-600">
           {routesFromTeam.map((route, index) => (
             <li
-              className="cursor-pointer px-4 py-2 text-gray-700 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700"
+              className="cursor-pointer px-4 py-3 text-gray-700 transition-all duration-150 
+          hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-gray-700"
               key={index}
               onClick={() => handleRouteChange(route.routeName, route.routeId)}
             >

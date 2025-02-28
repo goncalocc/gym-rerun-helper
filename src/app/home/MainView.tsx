@@ -2,20 +2,18 @@ import Link from 'next/link';
 
 export const MainView: React.FC = () => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex w-full max-w-xs flex-col items-center space-y-4 p-6 sm:max-w-sm md:max-w-md md:max-w-md">
       <Link
         href="/teams"
         type="button"
-        className="rounded-lg bg-blue-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:outline-none 
-    focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="w-full rounded-xl bg-blue-500 p-3 font-bold text-white transition-all duration-200 hover:bg-blue-600"
       >
         Check Teams & Routes
       </Link>
       <Link
         href="/variations"
         type="button"
-        className="rounded-lg bg-blue-700 px-5 py-3 text-center text-base font-medium text-white hover:bg-blue-800 focus:outline-none 
-    focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className="w-full rounded-xl bg-yellow-500 p-3 font-bold text-black transition-all duration-200 hover:bg-yellow-600"
       >
         View All Gyms
       </Link>
