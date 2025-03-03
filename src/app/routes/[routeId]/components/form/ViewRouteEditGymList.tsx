@@ -1,4 +1,4 @@
-import { GymsByRegion } from '@/app/hooks/UseRouteAndTeamData';
+import { GymsByRegion, RouteWithId } from '@/app/hooks/UseRouteAndTeamData';
 import {
   DragDropContext,
   Draggable,
@@ -34,6 +34,68 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
 }) => {
   const [selectedRegion, setSelectedRegion] = useState<number | null>(null);
 
+  const handleGymListChange = (region: string, gyms: RouteWithId[]) => {
+    setPropsRoute((prevData) => {
+      // Create a record to store routes by region
+      const routesByRegion: GymsByRegion = {};
+      prevData.route.forEach((route: RouteWithId) => {
+        if (!routesByRegion[route.region]) {
+          routesByRegion[route.region] = [];
+        }
+      });
+
+      routesByRegion[region] = gyms;
+
+      prevData.route.forEach((route: RouteWithId) => {
+        if (route.region !== region) {
+          routesByRegion[route.region].push(route);
+        }
+      });
+
+      const regionOrder: string[] = [];
+      const updatedRoute: RouteWithId[] = [];
+
+      prevData.route.forEach((route: RouteWithId) => {
+        if (!regionOrder.includes(route.region)) {
+          regionOrder.push(route.region);
+        }
+      });
+
+      // Rebuild the route in the original region order
+      regionOrder.forEach((region: string) => {
+        updatedRoute.push(...routesByRegion[region]);
+      });
+
+      return {
+        ...prevData,
+        route: updatedRoute,
+      };
+    });
+  };
+
+  const handleRegionListChange = (regionKeys: String[]) => {
+    // Update propsRoute with the reordered regions
+    setPropsRoute((prevPropsRoute) => {
+      // Create a new array for the reordered route
+      const newRoute: RouteWithId[] = [];
+
+      // Add gyms to the new route in the order of the reordered regions
+      regionKeys.forEach((region) => {
+        // Get all gyms for this region from the current route
+        const gymsInRegion = prevPropsRoute.route.filter(
+          (gym) => gym.region === region,
+        );
+        // Add them to the new route
+        newRoute.push(...gymsInRegion);
+      });
+
+      return {
+        ...prevPropsRoute,
+        route: newRoute,
+      };
+    });
+  };
+
   const onDragEnd = (result: DropResult) => {
     const { source, destination, type } = result;
     if (!destination) return;
@@ -58,11 +120,11 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
           );
           setSelectedRegion(newSelectedRegionIndex);
         }
-
+        handleRegionListChange(regionKeys);
         return newOrder;
       }
 
-      // Moving gyms within or between regions
+      // Moving gyms within regions
       if (type === 'gym') {
         const sourceRegion = source.droppableId;
         const destRegion = destination.droppableId;
@@ -78,6 +140,8 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
 
         sourceGyms.splice(destination.index, 0, movedGym);
 
+        handleGymListChange(sourceRegion, sourceGyms);
+
         return {
           ...prevGymsByRegion,
           [sourceRegion]: sourceGyms,
@@ -86,7 +150,6 @@ const ViewRouteEditGymList: React.FC<ViewRouteEditGymListProps> = ({
 
       return prevGymsByRegion; // Fallback
     });
-
     handleEnableSaveButton();
   };
 

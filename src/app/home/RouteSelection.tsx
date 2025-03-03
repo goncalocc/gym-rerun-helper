@@ -60,18 +60,21 @@ export const RouteSelection: React.FC<RouteSelectionProps> = ({
     setOpen(!open);
   };
 
+  //        className="flex w-full items-center justify-between truncate rounded-lg bg-gray-700 px-4 py-2 text-white
+  // transition-all duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:bg-gray-700 disabled:text-gray-400"
+
   return (
-    <div
-      ref={dropdownRef}
-      className="md:max-w-m relative w-full max-w-xs space-y-2 p-2 sm:max-w-sm"
-    >
+    <div ref={dropdownRef} className="relative my-2 w-[70%]">
       <button
-        className="flex w-full items-center justify-between rounded-lg bg-gray-700 px-4 py-2 text-white transition-all
-    duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+        className="flex w-full items-center justify-between overflow-hidden text-ellipsis whitespace-nowrap rounded-lg bg-gray-700 
+  px-4 py-2 text-white transition-all duration-200 hover:bg-gray-600 
+  focus:outline-none focus:ring-2 focus:ring-gray-500 disabled:bg-gray-700 disabled:text-gray-400"
         onClick={handleRouteOpen}
         disabled={state.selectedTeam === null}
       >
-        {state.selectedRoute ? state.selectedRoute : 'Choose Route'}
+        <span className="max-w-[80%] truncate">
+          {state.selectedRoute ? state.selectedRoute : 'Choose Route'}
+        </span>
         <svg
           className="ml-2 h-4 w-4"
           xmlns="http://www.w3.org/2000/svg"

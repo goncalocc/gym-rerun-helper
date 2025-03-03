@@ -7,7 +7,9 @@
     "dev:open": "next dev & open http://localhost:3000",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@hello-pangea/dnd": "^16.6.0",
@@ -25,12 +27,8 @@
     "@types/node": "^20.14.2",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.20",
-    "eslint": "^8.57.1",
-    "eslint-config-next": "^15.1.7",
-    "eslint-config-prettier": "^10.0.1",
-    "eslint-plugin-prettier": "^5.2.3",
     "postcss": "^8",
-    "prettier": "^3.2.5",
+    "prettier": "^3.5.2",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.5",

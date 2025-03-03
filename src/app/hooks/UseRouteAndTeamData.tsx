@@ -10,7 +10,7 @@ import {
 } from '../types/types';
 import gymsJson from '../data/gym-variations.json';
 
-interface RouteWithId extends Route {
+export interface RouteWithId extends Route {
   id: number;
 }
 
@@ -193,24 +193,37 @@ const useRouteAndTeamData = (idProps: string) => {
 
   const gyms: Gym[] = gymsJson as Gym[]; // Explicitly cast gymsJson to Gym[]
 
-  // Group gyms by region only if assignedRoute is defined
-  const gymsByRegion: GymsByRegion = assignedRoute?.route
-    ? assignedRoute.route.reduce<GymsByRegion>((acc, gym) => {
-        if (!acc[gym.region]) {
-          acc[gym.region] = [];
-        }
-        const matchedGym = gyms.find(
-          (gymJson) => gymJson.gym === gym.gym && gymJson.id === gym.id,
-        );
-        if (matchedGym) {
-          acc[gym.region].push({
-            ...gym,
-            id: matchedGym.id,
-          });
-        }
-        return acc;
-      }, {})
-    : {};
+  // Group gyms by region
+  const gymsByRegion: GymsByRegion = {};
+  // Track region order
+  const regionOrder: string[] = [];
+
+  // Only process if assignedRoute exists
+  if (assignedRoute?.route) {
+    for (const gym of assignedRoute.route) {
+      if (!regionOrder.includes(gym.region)) {
+        regionOrder.push(gym.region);
+      }
+
+      // Initialize the region array if it doesn't exist
+      if (!gymsByRegion[gym.region]) {
+        gymsByRegion[gym.region] = [];
+      }
+
+      // Find the matching gym in the gyms array
+      const matchedGym = gyms.find(
+        (gymJson) => gymJson.gym === gym.gym && gymJson.id === gym.id,
+      );
+
+      // Add the gym to the appropriate region if found
+      if (matchedGym) {
+        gymsByRegion[gym.region].push({
+          ...gym,
+          id: matchedGym.id,
+        });
+      }
+    }
+  }
 
   // Filter gyms from gymsJson that are present in assignedRoute
   const filteredGymsVariations: FilteredGym[] =

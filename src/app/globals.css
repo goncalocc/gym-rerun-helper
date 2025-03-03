@@ -8,6 +8,30 @@
   --background-end-rgb: 0, 0, 0;
 }
 
+.bg-customVermilion {
+  background-color: #f44e3f;
+}
+
+.bg-customVermilionHover {
+  background-color: #d43e30;
+}
+
+.bg-customBlueMunsell {
+  background-color: #1b9aaa;
+}
+
+.bg-customBlueMunsellHover {
+  background-color: #198f9f;
+}
+
+.bg-customNaplesYellow {
+  background-color: #f4d35e;
+}
+
+.bg-customNaplesYellowHover {
+  background-color: #f2cb40;
+}
+
 /* Button Styles */
 .button-container {
   @apply flex flex-col;
