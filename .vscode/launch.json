@@ -17,7 +17,20 @@
       "name": "Launch Opera",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}",
-      "runtimeExecutable": " C:\\Users\\User\\AppData\\Local\\Programs\\Opera\\opera.exe" // Specify the path to Opera
+      "runtimeExecutable": " C:\\Users\\User\\AppData\\Local\\Programs\\Opera\\opera.exe"
+    },
+    {
+      "type": "firefox",
+      "request": "launch",
+      "name": "Launch Firefox against localhost",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}",
+      "pathMappings": [
+        {
+          "url": "webpack://_n_e/src/app",
+          "path": "${workspaceFolder}/src/app"
+        }
+      ]
     }
   ]
 }

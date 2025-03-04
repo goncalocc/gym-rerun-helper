@@ -143,11 +143,18 @@ const useRouteAndTeamData = (idProps: string) => {
 
       gym.swapItems.forEach((swap) => {
         let pokemonToUpdate = updatedTeam.find((pkmn) => {
-          // Format nickname as "Pokemon (Nickname)"
-          const formattedNickname = `${pkmn.pokemon} (${pkmn.nickname})`;
-          return (
-            pkmn.pokemon === swap.pokemon || formattedNickname === swap.pokemon
-          );
+          // Check if the Pokemon has a nickname
+          if (pkmn.nickname) {
+            // Format nickname as "Pokemon (Nickname)"
+            const formattedNickname = `${pkmn.pokemon} ${pkmn.nickname}`;
+            return (
+              pkmn.pokemon === swap.pokemon ||
+              formattedNickname === swap.pokemon
+            );
+          } else {
+            // If no nickname, just check by Pokemon species
+            return pkmn.pokemon === swap.pokemon;
+          }
         });
 
         if (pokemonToUpdate) {

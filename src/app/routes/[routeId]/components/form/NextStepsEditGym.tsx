@@ -99,9 +99,9 @@ const NextStepsEditGym: React.FC<NextStepsEditGymProps> = ({
                   (pokemon, pokemonIndex) => (
                     <option
                       key={pokemonIndex}
-                      value={`${pokemon.pokemon} ${pokemon.nickname}`}
+                      value={`${pokemon.pokemon}${pokemon.nickname ? ` ${pokemon.nickname.trim()}` : ''}`}
                     >
-                      {pokemon.pokemon} {pokemon.nickname}
+                      {`${pokemon.pokemon}${pokemon.nickname ? ` ${pokemon.nickname.trim()}` : ''}`}
                     </option>
                   ),
                 )}
